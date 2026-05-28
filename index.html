@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sinnfunk – Radio, das etwas zu sagen hat</title>
+  <meta name="description" content="Sinnfunk ist ein österreichisches Webradio für Podcasts und Meditationen – mit echtem Sendeplan, kuratierten Inhalten und garantierter Ausstrahlung." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <div class="page">
+
+    <header>
+      <a class="logo" href="index.html" aria-label="Sinnfunk Startseite">
+        <img src="image/sinnfunk_logo_ohne_schrift.svg" alt="Sinnfunk Logo" />
+        <span class="logo-name">Sinnfunk</span>
+      </a>
+      <nav aria-label="Hauptnavigation">
+        <a href="index.html">Start</a>
+        <a href="podcaster.html">Mitmachen</a>
+        <a href="kontakt.html">Kontakt</a>
+        <a href="impressum.html">Impressum</a>
+      </nav>
+    </header>
+
+    <main id="top">
+
+      <!-- Hero -->
+      <section class="hero" id="radio">
+        <div>
+          <p class="eyebrow">Österreichisches Webradio</p>
+          <h1>Radio, das etwas zu sagen hat.</h1>
+          <p class="hero-text">
+            Kein Musik-Einheitsbrei. Kein algorithmisches Chaos. Sinnfunk ist ein Webradio für Menschen, die gehört werden wollen – und für Menschen, die zuhören wollen. Mit echtem Sendeplan, kuratierten Inhalten und einer Gemeinschaft, die Tiefe schätzt.
+          </p>
+          <div class="hero-actions">
+            <a class="button" href="#player">Jetzt einschalten</a>
+            <a class="button secondary" href="podcaster.html">Podcaster werden</a>
+          </div>
+        </div>
+
+        <aside class="player-card" id="player" aria-label="Webplayer">
+          <div class="player-title">
+            <div>
+              <p class="eyebrow" style="margin-bottom: 4px;">Live hören</p>
+              <h2 style="font-size: 2rem; margin-bottom: 0;">Unser Stream</h2>
+            </div>
+            <span class="live-badge">On Air</span>
+          </div>
+
+          <audio controls preload="none">
+            <source src="STREAM-LINK-HIER-EINFUEGEN" type="audio/mpeg" />
+            Dein Browser unterstützt den Audioplayer leider nicht.
+          </audio>
+
+          <div class="now-playing" aria-live="polite">
+            <small>Jetzt läuft</small>
+            <strong id="current-title">Morgenanker – 20 Minuten Meditation</strong>
+            <span id="current-host">Sinnfunk</span>
+          </div>
+        </aside>
+      </section>
+
+      <!-- Was ist Sinnfunk -->
+      <section id="ueber-uns">
+        <div class="section-head">
+          <p class="eyebrow">Was ist Sinnfunk?</p>
+          <h2>Mehr als eine Podcast-Plattform.</h2>
+          <p>
+            Sinnfunk ist ein österreichisches Webradio für Podcasts und Meditationen. Was uns von einer gewöhnlichen Plattform unterscheidet: Deine Episode landet nicht einfach in einem digitalen Archiv, das niemand findet – sie wird zu einer festen Sendezeit ausgestrahlt. Wie echtes Radio. Geplant, angekündigt, gehört.
+          </p>
+        </div>
+
+        <div class="cards">
+          <article class="card">
+            <div class="card-icon">◌</div>
+            <h3>Meditation</h3>
+            <p>Geführte Meditationen, Atempausen und kurze Wege zurück in die eigene Mitte – sorgfältig ausgewählt und zu passenden Tageszeiten ausgestrahlt.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon">⌁</div>
+            <h3>Podcast</h3>
+            <p>Gespräche, Impulse und Gedanken, die bewegen. Auf Deutsch. Von Menschen, die etwas zu sagen haben und einen Sendeplatz verdienen.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon">✦</div>
+            <h3>Live-Sendungen</h3>
+            <p>Livegespräche mit Anrufen – direkt, echt und ungeschnitten. Ein Format, das verbindet. Demnächst auf Sinnfunk.</p>
+          </article>
+        </div>
+      </section>
+
+      <!-- Warum Sinnfunk -->
+      <section>
+        <div class="about">
+          <div
+            class="about-visual"
+            role="img"
+            aria-label="Sinnfunk Gründerinnen"
+            style="background-image: linear-gradient(rgba(83,107,80,0.15), rgba(83,107,80,0.05)), url('image/gruenderinnen.webp');"
+          ></div>
+          <div>
+            <p class="eyebrow">Warum Sinnfunk?</p>
+            <h2>Ein stiller Ort im lauten Netz.</h2>
+            <p>
+              Sinnfunk sammelt Stimmen, die Menschen begleiten, stärken und erinnern: Es darf einfach sein. Es darf menschlich bleiben. Und es darf Tiefe haben, ohne schwer zu werden.
+            </p>
+            <p style="margin-top: 16px;">
+              Wir glauben, dass gute Inhalte einen verlässlichen Sendeplatz verdienen – keinen Algorithmus, der entscheidet, wer gehört wird. Bei Sinnfunk bekommt jede Episode garantiert drei Ausstrahlungen zu echten Sendezeiten.
+            </p>
+            <div style="margin-top: 28px;">
+              <a class="button secondary" href="podcaster.html">So funktioniert es</a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- Für Hörer -->
+      <section id="programm">
+        <div class="section-head">
+          <p class="eyebrow">Für Hörer</p>
+          <h2>Einfach einschalten und loslassen.</h2>
+          <p>
+            Sinnfunk läuft wie ein richtiger Radiosender – mit einem echten Programm, das sich durch den Tag zieht. Keine Suche, kein Scrollen, kein Überwältigt-werden. Nur zuhören.
+          </p>
+        </div>
+
+        <div class="program-strip">
+          <div class="program-item">
+            <small>☀ Vormittag</small>
+            <strong>Sanfter Einstieg</strong>
+            <span>Meditationen und ruhige Impulse für den Beginn des Tages.</span>
+          </div>
+          <div class="program-item">
+            <small>◑ Nachmittag</small>
+            <strong>Gespräche & Podcasts</strong>
+            <span>Inhalte, die zum Nachdenken einladen und begleiten.</span>
+          </div>
+          <div class="program-item">
+            <small>☽ Abend</small>
+            <strong>Zur Ruhe kommen</strong>
+            <span>Tiefe Meditationen und Klang für den Ausklang des Tages.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- CTA Podcaster -->
+      <section>
+        <div style="background: rgba(83,107,80,0.1); border-radius: 36px; padding: 52px 42px; border: 1px solid rgba(83,107,80,0.18); text-align: center; max-width: 780px; margin: 0 auto;">
+          <p class="eyebrow" style="text-align: center;">Für Podcaster</p>
+          <h2 style="font-size: clamp(1.8rem, 3.5vw, 2.8rem); margin-bottom: 18px;">Deine Stimme verdient mehr als einen Algorithmus.</h2>
+          <p style="color: #55584e; font-size: 1.08rem; max-width: 580px; margin: 0 auto 28px;">
+            Bei Sinnfunk bekommt deine Episode einen festen Sendeplatz – geplant, ausgestrahlt, dreimal gehört. Nicht irgendwann. Garantiert.
+          </p>
+          <a class="button" href="podcaster.html">Jetzt Podcaster werden</a>
+        </div>
+      </section>
+
+    </main>
+
+    <footer>
+      <span>© 2026 Sinnfunk</span>
+      <span>
+        <a href="impressum.html">Impressum</a> ·
+        <a href="datenschutz.html">Datenschutz</a> ·
+        <a href="kontakt.html">Kontakt</a>
+      </span>
+    </footer>
+
+  </div>
+
+  <script>
+    const playlist = [
+      { title: "Morgenanker – Meditation zum Einstieg", host: "Sinnfunk" },
+      { title: "Geerdete Gespräche – Klar bleiben in unruhigen Zeiten", host: "Sinnfunk" },
+      { title: "Abendruhe – Atem, Körper, Stille", host: "Sinnfunk" }
+    ];
+    let currentIndex = 0;
+    const titleEl = document.getElementById("current-title");
+    const hostEl = document.getElementById("current-host");
+    function updateNowPlaying() {
+      currentIndex = (currentIndex + 1) % playlist.length;
+      titleEl.textContent = playlist[currentIndex].title;
+      hostEl.textContent = playlist[currentIndex].host;
+    }
+    setInterval(updateNowPlaying, 9000);
+  </script>
+</body>
+</html>
