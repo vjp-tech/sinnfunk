@@ -79,7 +79,7 @@ nav {
   display: flex;
   gap: 20px;
   font-family: Arial, sans-serif;
-  font-size: 0.95rem;
+  font-size: 1.05rem;
   color: var(--muted);
 }
 
