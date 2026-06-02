@@ -14,16 +14,15 @@ const sfNav = `
     <a href="index.html">Start</a>
     <a href="podcaster.html">Mitmachen</a>
     <a href="community.html">Community</a>
+    <a href="shop.html">Shop</a>
     <a href="kontakt.html">Kontakt</a>
     <a href="impressum.html">Impressum</a>
   </nav>
 </header>
 `;
 
-// Navigation einfügen
 document.getElementById('sf-nav').outerHTML = sfNav;
 
-// Aktiven Link hervorheben
 document.querySelectorAll('header nav a').forEach(link => {
   if (link.href === window.location.href) {
     link.style.color = 'var(--sage-dark)';
