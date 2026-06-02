@@ -8,67 +8,6 @@
   <link rel="stylesheet" href="style.css" />
   <style>
 
-    /* ── Hero mit Bild ── */
-    .sf-hero {
-      width: 100%;
-      min-height: 420px;
-      position: relative;
-      overflow: hidden;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-    }
-
-    .sf-hero-text {
-      padding: 64px 48px 64px min(64px, calc((100vw - 1120px) / 2 + 32px));
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      background: var(--sand);
-      z-index: 1;
-    }
-
-    .sf-hero-text h1 {
-      font-size: clamp(2.4rem, 4.5vw, 4rem);
-      letter-spacing: -0.04em;
-      margin-bottom: 18px;
-    }
-
-    .sf-hero-text p {
-      font-size: 1.1rem;
-      color: #505248;
-      margin-bottom: 28px;
-      max-width: 420px;
-    }
-
-    .sf-hero-actions {
-      display: flex;
-      gap: 12px;
-      flex-wrap: wrap;
-    }
-
-    .sf-hero-image {
-      position: relative;
-      overflow: hidden;
-    }
-
-    .sf-hero-image img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center top;
-      display: block;
-    }
-
-    /* Fader am linken Rand des Bildes */
-    .sf-hero-image::before {
-      content: "";
-      position: absolute;
-      inset: 0 auto 0 0;
-      width: 120px;
-      background: linear-gradient(to right, var(--sand), transparent);
-      z-index: 2;
-    }
-
     /* ── Zwei Wege ── */
     .sf-paths-wrap {
       width: min(1120px, calc(100% - 32px));
@@ -529,39 +468,104 @@
       .sf-stand-lists { grid-template-columns: 1fr; }
       .sf-features-row { grid-template-columns: 1fr; }
     }
-  </style>
+
+    /* ── Hero boxed (Podcaster-Seite) ── */
+    .sf-hero-boxed {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 0 0 48px;
+    }
+
+    .sf-hero-boxed-inner {
+      background: rgba(255,250,242,0.72);
+      border: 1px solid rgba(123,94,69,0.13);
+      border-radius: 36px;
+      overflow: hidden;
+      box-shadow: 0 18px 45px rgba(74,59,43,0.10);
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      min-height: 360px;
+    }
+
+    .sf-hero-boxed-text {
+      padding: 52px 48px;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      gap: 0;
+    }
+
+    .sf-hero-boxed-text h1 {
+      font-size: clamp(2.2rem, 4vw, 3.6rem);
+      margin-bottom: 16px;
+    }
+
+    .sf-hero-boxed-text p {
+      font-size: 1.08rem;
+      color: #505248;
+      margin-bottom: 28px;
+      max-width: 400px;
+    }
+
+    .sf-hero-boxed-image {
+      position: relative;
+      overflow: hidden;
+    }
+
+    .sf-hero-boxed-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
+
+    .sf-hero-boxed-image::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 80px;
+      background: linear-gradient(to right, rgba(255,250,242,0.72), transparent);
+      z-index: 2;
+    }
+
+    @media (max-width: 720px) {
+      .sf-hero-boxed-inner {
+        grid-template-columns: 1fr;
+      }
+      .sf-hero-boxed-image {
+        height: 240px;
+      }
+      .sf-hero-boxed-image::before { width: 0; }
+      .sf-hero-boxed-text {
+        padding: 36px 28px;
+      }
+    }
+      </style>
 </head>
 <body>
 <div class="page">
 
-  <header>
-    <a class="logo" href="index.html" aria-label="Sinnfunk Startseite">
-      <img src="image/sinnfunk_logo_ohne_schrift.svg" alt="Sinnfunk Logo" />
-      <span class="logo-name">Sinnfunk</span>
-    </a>
-    <nav aria-label="Hauptnavigation">
-      <a href="index.html">Start</a>
-      <a href="podcaster.html">Mitmachen</a>
-      <a href="kontakt.html">Kontakt</a>
-      <a href="impressum.html">Impressum</a>
-    </nav>
-  </header>
+  <div id="sf-nav"></div>
+  <script src="nav.js"></script>
 
   <main>
 
     <!-- ── HERO ── -->
-    <div class="sf-hero">
-      <div class="sf-hero-text">
-        <p class="eyebrow">Sinnfunker werden</p>
-        <h1>Bringe deine Stimme ins Radio.</h1>
-        <p>Wähle deinen Weg: Reiche eine fertige Episode ein oder zeichne gemeinsam mit mir ein Gespräch auf.</p>
-        <div class="sf-hero-actions">
-          <a class="button" href="#wege">Zu den Wegen →</a>
-          <a class="button secondary" href="#warum">Mehr über Sinnfunk</a>
+    <div class="sf-hero-boxed">
+      <div class="sf-hero-boxed-inner">
+        <div class="sf-hero-boxed-text">
+          <p class="eyebrow">Sinnfunker werden</p>
+          <h1>Bringe deine Stimme ins Radio.</h1>
+          <p>Wähle deinen Weg: Reiche eine fertige Episode ein oder zeichne gemeinsam mit mir ein Gespräch auf.</p>
+          <div class="sf-hero-actions">
+            <a class="button" href="#wege">Zu den Wegen →</a>
+            <a class="button secondary" href="#warum">Mehr über Sinnfunk</a>
+          </div>
         </div>
-      </div>
-      <div class="sf-hero-image">
-        <img src="image/We want you.webp" alt="Sinnfunker werden" />
+        <div class="sf-hero-boxed-image">
+          <img src="image/We want you.webp" alt="Sinnfunker werden" />
+        </div>
       </div>
     </div>
 
