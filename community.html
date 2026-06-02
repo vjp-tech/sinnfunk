@@ -5,9 +5,20 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Unsere Sinnfunker – Sinnfunk</title>
   <link rel="stylesheet" href="style.css" />
+
+<!-- Supabase JS laden -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+
+<!-- Deine Zugangsdaten -->
+<script>
+  const SUPABASE_URL  = 'https://mliatnfqgnctbxhbwhzp.supabase.co';
+  const SUPABASE_ANON = 'sb_publishable_KocEqg2UUL2trsGXb_kacA_yfY8DIP3';
+</script>
   <style>
 
-    /* ── Suchbereich ── */
+    /* ══════════════════════════════════════════
+       SUCHBEREICH
+    ══════════════════════════════════════════ */
     .sf-search-wrap {
       width: min(1120px, calc(100% - 32px));
       margin: 0 auto;
@@ -59,9 +70,7 @@
     }
 
     .sf-input-group input:focus,
-    .sf-input-group select:focus {
-      border-color: var(--sage-dark);
-    }
+    .sf-input-group select:focus { border-color: var(--sage-dark); }
 
     .sf-filter-tags {
       display: flex;
@@ -85,8 +94,7 @@
       transition: all 0.2s;
     }
 
-    .sf-tag:hover,
-    .sf-tag.active {
+    .sf-tag:hover, .sf-tag.active {
       background: var(--sage-dark);
       color: var(--warm-white);
       border-color: var(--sage-dark);
@@ -99,7 +107,9 @@
       margin-top: 12px;
     }
 
-    /* ── Community Grid ── */
+    /* ══════════════════════════════════════════
+       GRID
+    ══════════════════════════════════════════ */
     .sf-community-wrap {
       width: min(1120px, calc(100% - 32px));
       margin: 0 auto;
@@ -112,7 +122,53 @@
       gap: 22px;
     }
 
-    /* ── Sinnfunker-Karte ── */
+    /* ══════════════════════════════════════════
+       LADEZUSTAND
+    ══════════════════════════════════════════ */
+    .sf-loading {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      padding: 80px 24px;
+      color: var(--muted);
+      font-family: Arial, sans-serif;
+    }
+
+    .sf-spinner {
+      width: 40px;
+      height: 40px;
+      border: 3px solid rgba(83,107,80,0.2);
+      border-top-color: var(--sage-dark);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    /* ══════════════════════════════════════════
+       FEHLERZUSTAND
+    ══════════════════════════════════════════ */
+    .sf-error {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 64px 24px;
+      font-family: Arial, sans-serif;
+    }
+
+    .sf-error p { color: var(--muted); margin-bottom: 8px; }
+    .sf-error code {
+      background: rgba(123,94,69,0.08);
+      border-radius: 8px;
+      padding: 2px 8px;
+      font-size: 0.88rem;
+      color: var(--earth);
+    }
+
+    /* ══════════════════════════════════════════
+       KARTE
+    ══════════════════════════════════════════ */
     .sf-card {
       background: rgba(255,250,242,0.85);
       border: 1px solid rgba(123,94,69,0.12);
@@ -143,12 +199,24 @@
       object-fit: cover;
       flex-shrink: 0;
       border: 3px solid rgba(143,169,139,0.3);
+      background: rgba(143,169,139,0.15);
     }
 
-    .sf-card-meta {
-      flex: 1;
-      min-width: 0;
+    .sf-card-avatar-placeholder {
+      width: 72px;
+      height: 72px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, rgba(143,169,139,0.5), rgba(200,148,107,0.4));
+      display: grid;
+      place-items: center;
+      font-size: 1.6rem;
+      font-weight: 700;
+      color: var(--warm-white);
+      font-family: Georgia, serif;
     }
+
+    .sf-card-meta { flex: 1; min-width: 0; }
 
     .sf-card-type {
       display: inline-block;
@@ -191,8 +259,8 @@
       line-height: 1.6;
     }
 
-    /* Buchbild */
-    .sf-card-book {
+    /* Produkt/Buch */
+    .sf-card-product {
       margin: 0 24px 16px;
       display: flex;
       gap: 14px;
@@ -203,40 +271,40 @@
       padding: 12px;
     }
 
-    .sf-card-book img {
-      width: 52px;
-      height: 72px;
+    .sf-card-product img {
+      width: 48px;
+      height: 66px;
       object-fit: cover;
       border-radius: 6px;
       box-shadow: 2px 4px 12px rgba(0,0,0,0.15);
       flex-shrink: 0;
     }
 
-    .sf-card-book-info strong {
+    .sf-card-product strong {
       display: block;
       font-size: 0.88rem;
       color: #2c3128;
       margin-bottom: 2px;
     }
 
-    .sf-card-book-info span {
+    .sf-card-product span {
       font-family: Arial, sans-serif;
       font-size: 0.8rem;
       color: var(--muted);
     }
 
-    /* Sendeinfos */
+    /* Sendezeiten */
     .sf-card-slots {
-      margin: 0 24px 16px;
+      margin: 0 24px 12px;
       display: flex;
-      gap: 8px;
+      gap: 6px;
       flex-wrap: wrap;
     }
 
     .sf-slot-badge {
       font-family: Arial, sans-serif;
-      font-size: 0.78rem;
-      padding: 4px 10px;
+      font-size: 0.76rem;
+      padding: 3px 10px;
       border-radius: 999px;
       border: 1px solid rgba(123,94,69,0.18);
       color: var(--muted);
@@ -261,21 +329,18 @@
       border: 1px solid rgba(83,107,80,0.15);
     }
 
-    /* Social + Links */
+    /* Footer */
     .sf-card-footer {
       margin-top: auto;
       padding: 14px 24px 20px;
       border-top: 1px solid rgba(123,94,69,0.09);
       display: flex;
-      gap: 10px;
+      gap: 8px;
       align-items: center;
       flex-wrap: wrap;
     }
 
-    .sf-social {
-      display: flex;
-      gap: 8px;
-    }
+    .sf-social { display: flex; gap: 8px; }
 
     .sf-social a {
       width: 34px;
@@ -285,7 +350,7 @@
       border: 1px solid rgba(83,107,80,0.15);
       display: grid;
       place-items: center;
-      font-size: 0.9rem;
+      font-size: 0.88rem;
       color: var(--sage-dark);
       transition: background 0.2s;
     }
@@ -304,7 +369,7 @@
 
     .sf-website-link:hover { border-color: var(--sage-dark); }
 
-    /* Leer-State */
+    /* Leer */
     .sf-empty {
       grid-column: 1 / -1;
       text-align: center;
@@ -313,7 +378,9 @@
       font-family: Arial, sans-serif;
     }
 
-    /* ── Responsive ── */
+    /* ══════════════════════════════════════════
+       RESPONSIVE
+    ══════════════════════════════════════════ */
     @media (max-width: 900px) {
       .sf-search-row { grid-template-columns: 1fr 1fr; }
       .sf-grid { grid-template-columns: repeat(2, 1fr); }
@@ -337,7 +404,7 @@
     <div class="page-hero">
       <p class="eyebrow">Unsere Sinnfunker</p>
       <h1>Stimmen, die etwas zu sagen haben.</h1>
-      <p>Hier findest du alle, die Teil der Sinnfunk-Community sind – Autoren, Meditationsleiter, Wissenschaftler, Philosophen und mehr.</p>
+      <p>Alle aktiven Sinnfunker – Autoren, Meditationsleiter, Wissenschaftler, Philosophen und mehr.</p>
     </div>
 
     <!-- ── SUCHE & FILTER ── -->
@@ -346,7 +413,9 @@
         <div class="sf-search-row">
           <div class="sf-input-group">
             <label for="search-name">Name oder Keyword</label>
-            <input type="text" id="search-name" placeholder="z.B. Anna, Meditation, Kräuter …" oninput="filterCards()" />
+            <input type="text" id="search-name"
+              placeholder="z.B. Anna, Meditation, Kräuter …"
+              oninput="filterCards()" />
           </div>
           <div class="sf-input-group">
             <label for="filter-type">Art</label>
@@ -369,7 +438,8 @@
           </div>
           <div class="sf-input-group">
             <label>&nbsp;</label>
-            <button class="button secondary" onclick="resetFilter()" style="height:46px;">Zurücksetzen</button>
+            <button class="button secondary" onclick="resetFilter()"
+              style="height:46px;">Zurücksetzen</button>
           </div>
         </div>
 
@@ -384,337 +454,18 @@
           <button class="sf-tag" onclick="setTag('Gesundheit')">Gesundheit</button>
         </div>
 
-        <p class="sf-results-count" id="results-count">8 Sinnfunker gefunden</p>
+        <p class="sf-results-count" id="results-count">Wird geladen …</p>
       </div>
     </div>
 
     <!-- ── KARTEN ── -->
     <div class="sf-community-wrap">
       <div class="sf-grid" id="sf-grid">
-
-        <!-- Karte 1: Meditationsleiterin -->
-        <article class="sf-card"
-          data-name="Anna Bergmann"
-          data-type="meditation"
-          data-slots="vormittag nacht"
-          data-keywords="meditation spiritualität achtsamkeit">
-          <div class="sf-card-header">
-            <img class="sf-card-avatar"
-              src="https://images.unsplash.com/photo-1544005313-94ddf0286df2?w=150&h=150&fit=crop&crop=face"
-              alt="Anna Bergmann" />
-            <div class="sf-card-meta">
-              <span class="sf-card-type type-meditation">Meditation</span>
-              <div class="sf-card-name">Anna Bergmann</div>
-              <div class="sf-card-subtitle">Meditationsleiterin & Achtsamkeitscoach</div>
-            </div>
-          </div>
-          <p class="sf-card-bio">Anna begleitet Menschen seit über zehn Jahren mit geführten Meditationen zurück in ihre eigene Mitte. Täglich um 21 Uhr auf Sinnfunk.</p>
-          <div class="sf-card-slots">
-            <span class="sf-slot-badge">☀ Vormittag</span>
-            <span class="sf-slot-badge">🌙 Nacht (21:00 Uhr)</span>
-          </div>
-          <div class="sf-card-keywords">
-            <span class="sf-keyword">Meditation</span>
-            <span class="sf-keyword">Spiritualität</span>
-            <span class="sf-keyword">Achtsamkeit</span>
-          </div>
-          <div class="sf-card-footer">
-            <div class="sf-social">
-              <a href="#" title="Instagram" aria-label="Instagram">&#9670;</a>
-              <a href="#" title="Facebook" aria-label="Facebook">f</a>
-            </div>
-            <a class="sf-website-link" href="#">anna-bergmann.at →</a>
-          </div>
-        </article>
-
-        <!-- Karte 2: Autor mit Buch -->
-        <article class="sf-card"
-          data-name="Thomas Waldner"
-          data-type="autor"
-          data-slots="vormittag nachmittag"
-          data-keywords="philosophie geschichte bücher">
-          <div class="sf-card-header">
-            <img class="sf-card-avatar"
-              src="https://images.unsplash.com/photo-1552058544-f2b08422138a?w=150&h=150&fit=crop&crop=face"
-              alt="Thomas Waldner" />
-            <div class="sf-card-meta">
-              <span class="sf-card-type type-autor">Autor</span>
-              <div class="sf-card-name">Thomas Waldner</div>
-              <div class="sf-card-subtitle">Autor & Philosoph</div>
-            </div>
-          </div>
-          <p class="sf-card-bio">Thomas schreibt über die großen Fragen des Lebens – verständlich, tief und ohne Schwere. Täglich um 10 Uhr auf Sinnfunk.</p>
-          <div class="sf-card-book">
-            <img src="https://images.unsplash.com/photo-1512820790803-83ca734da794?w=100&h=140&fit=crop"
-              alt="Buchcover: Der stille Weg" />
-            <div class="sf-card-book-info">
-              <strong>Der stille Weg</strong>
-              <span>Philosophie für den Alltag</span><br/>
-              <span style="color:var(--sage-dark);font-size:0.8rem;">→ Im Sinnfunk-Shop</span>
-            </div>
-          </div>
-          <div class="sf-card-slots">
-            <span class="sf-slot-badge">☀ Tägl. 10:00 Uhr</span>
-            <span class="sf-slot-badge">🌤 Nachmittag</span>
-          </div>
-          <div class="sf-card-keywords">
-            <span class="sf-keyword">Philosophie</span>
-            <span class="sf-keyword">Geschichte</span>
-            <span class="sf-keyword">Bücher</span>
-          </div>
-          <div class="sf-card-footer">
-            <div class="sf-social">
-              <a href="#" title="Instagram">&#9670;</a>
-              <a href="#" title="Facebook">f</a>
-              <a href="#" title="YouTube">▶</a>
-            </div>
-            <a class="sf-website-link" href="#">thomas-waldner.com →</a>
-          </div>
-        </article>
-
-        <!-- Karte 3: Kräuterpädagogin -->
-        <article class="sf-card"
-          data-name="Maria Holzer"
-          data-type="podcaster"
-          data-slots="vormittag nachmittag"
-          data-keywords="kräuter natur gesundheit">
-          <div class="sf-card-header">
-            <img class="sf-card-avatar"
-              src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?w=150&h=150&fit=crop&crop=face"
-              alt="Maria Holzer" />
-            <div class="sf-card-meta">
-              <span class="sf-card-type type-podcaster">Podcaster</span>
-              <div class="sf-card-name">Maria Holzer</div>
-              <div class="sf-card-subtitle">Kräuterpädagogin & Naturkundlerin</div>
-            </div>
-          </div>
-          <p class="sf-card-bio">Maria führt durch die Welt der heimischen Kräuter und Heilpflanzen – praxisnah, bodenständig und voller Wissen aus der Natur.</p>
-          <div class="sf-card-slots">
-            <span class="sf-slot-badge">☀ Vormittag</span>
-            <span class="sf-slot-badge">🌤 Nachmittag</span>
-          </div>
-          <div class="sf-card-keywords">
-            <span class="sf-keyword">Kräuter</span>
-            <span class="sf-keyword">Natur</span>
-            <span class="sf-keyword">Gesundheit</span>
-          </div>
-          <div class="sf-card-footer">
-            <div class="sf-social">
-              <a href="#" title="Instagram">&#9670;</a>
-              <a href="#" title="Facebook">f</a>
-            </div>
-            <a class="sf-website-link" href="#">kraeuterwissen.at →</a>
-          </div>
-        </article>
-
-        <!-- Karte 4: Energetiker mit Kurs -->
-        <article class="sf-card"
-          data-name="Stefan Lichtner"
-          data-type="gespraech"
-          data-slots="nachmittag nacht"
-          data-keywords="energetik chakren spiritualität">
-          <div class="sf-card-header">
-            <img class="sf-card-avatar"
-              src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=150&h=150&fit=crop&crop=face"
-              alt="Stefan Lichtner" />
-            <div class="sf-card-meta">
-              <span class="sf-card-type type-gespraech">Gespräch</span>
-              <div class="sf-card-name">Stefan Lichtner</div>
-              <div class="sf-card-subtitle">Energetiker & Chakrenbegleiter</div>
-            </div>
-          </div>
-          <p class="sf-card-bio">Stefan spricht über feinstoffliche Wahrnehmung, Chakrenarbeit und innere Klarheit – bodenständig erklärt, ohne abzuheben.</p>
-          <div class="sf-card-book">
-            <img src="https://images.unsplash.com/photo-1535398089889-dd807df1dfaa?w=100&h=140&fit=crop"
-              alt="Kurs: Chakren verstehen" />
-            <div class="sf-card-book-info">
-              <strong>Chakren Online-Kurs</strong>
-              <span>8 Einheiten, auf Anfrage</span><br/>
-              <span style="color:var(--sage-dark);font-size:0.8rem;">→ Im Sinnfunk-Shop</span>
-            </div>
-          </div>
-          <div class="sf-card-slots">
-            <span class="sf-slot-badge">🌤 Nachmittag</span>
-            <span class="sf-slot-badge">🌙 Nacht</span>
-          </div>
-          <div class="sf-card-keywords">
-            <span class="sf-keyword">Energetik</span>
-            <span class="sf-keyword">Chakren</span>
-            <span class="sf-keyword">Spiritualität</span>
-          </div>
-          <div class="sf-card-footer">
-            <div class="sf-social">
-              <a href="#" title="Instagram">&#9670;</a>
-              <a href="#" title="Facebook">f</a>
-            </div>
-            <a class="sf-website-link" href="#">lichtarbeit-stefan.at →</a>
-          </div>
-        </article>
-
-        <!-- Karte 5: Wissenschaftlerin -->
-        <article class="sf-card"
-          data-name="Dr. Clara Brenn"
-          data-type="podcaster"
-          data-slots="vormittag nachmittag"
-          data-keywords="wissenschaft physik astronomie">
-          <div class="sf-card-header">
-            <img class="sf-card-avatar"
-              src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=150&h=150&fit=crop&crop=face"
-              alt="Dr. Clara Brenn" />
-            <div class="sf-card-meta">
-              <span class="sf-card-type type-podcaster">Podcaster</span>
-              <div class="sf-card-name">Dr. Clara Brenn</div>
-              <div class="sf-card-subtitle">Astrophysikerin & Wissenschaftsvermittlerin</div>
-            </div>
-          </div>
-          <p class="sf-card-bio">Clara erklärt schwarze Löcher, Quantenphysik und das Universum so, dass man staunt – und nichts vorher wissen muss.</p>
-          <div class="sf-card-slots">
-            <span class="sf-slot-badge">☀ Vormittag</span>
-            <span class="sf-slot-badge">🌤 Nachmittag</span>
-          </div>
-          <div class="sf-card-keywords">
-            <span class="sf-keyword">Wissenschaft</span>
-            <span class="sf-keyword">Physik</span>
-            <span class="sf-keyword">Astronomie</span>
-          </div>
-          <div class="sf-card-footer">
-            <div class="sf-social">
-              <a href="#" title="Instagram">&#9670;</a>
-              <a href="#" title="YouTube">▶</a>
-            </div>
-            <a class="sf-website-link" href="#">clarabrenn.science →</a>
-          </div>
-        </article>
-
-        <!-- Karte 6: Autorin mit zwei Büchern -->
-        <article class="sf-card"
-          data-name="Elisabeth Kern"
-          data-type="autor"
-          data-slots="vormittag"
-          data-keywords="geschichte kultur bücher">
-          <div class="sf-card-header">
-            <img class="sf-card-avatar"
-              src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=150&h=150&fit=crop&crop=face"
-              alt="Elisabeth Kern" />
-            <div class="sf-card-meta">
-              <span class="sf-card-type type-autor">Autor</span>
-              <div class="sf-card-name">Elisabeth Kern</div>
-              <div class="sf-card-subtitle">Historikerin & Autorin</div>
-            </div>
-          </div>
-          <p class="sf-card-bio">Elisabeth taucht in die Geschichte Europas ein – von der Antike bis ins Mittelalter. Jeden Montag um 10 Uhr auf Sinnfunk.</p>
-          <div class="sf-card-book">
-            <img src="https://images.unsplash.com/photo-1543002588-bfa74002ed7e?w=100&h=140&fit=crop"
-              alt="Buchcover: Stimmen aus der Vergangenheit" />
-            <div class="sf-card-book-info">
-              <strong>Stimmen aus der Vergangenheit</strong>
-              <span>Historische Erzählungen</span><br/>
-              <span style="color:var(--sage-dark);font-size:0.8rem;">→ Im Sinnfunk-Shop</span>
-            </div>
-          </div>
-          <div class="sf-card-slots">
-            <span class="sf-slot-badge">☀ Tägl. 10:00 Uhr</span>
-          </div>
-          <div class="sf-card-keywords">
-            <span class="sf-keyword">Geschichte</span>
-            <span class="sf-keyword">Kultur</span>
-            <span class="sf-keyword">Bücher</span>
-          </div>
-          <div class="sf-card-footer">
-            <div class="sf-social">
-              <a href="#" title="Instagram">&#9670;</a>
-              <a href="#" title="Facebook">f</a>
-            </div>
-            <a class="sf-website-link" href="#">elisabethkern.at →</a>
-          </div>
-        </article>
-
-        <!-- Karte 7: Therapeutin -->
-        <article class="sf-card"
-          data-name="Renate Mair"
-          data-type="gespraech"
-          data-slots="nachmittag nacht"
-          data-keywords="gesundheit psychologie begleitung">
-          <div class="sf-card-header">
-            <img class="sf-card-avatar"
-              src="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?w=150&h=150&fit=crop&crop=face"
-              alt="Renate Mair" />
-            <div class="sf-card-meta">
-              <span class="sf-card-type type-gespraech">Gespräch</span>
-              <div class="sf-card-name">Renate Mair</div>
-              <div class="sf-card-subtitle">Psychologin & Lebensbegleiterin</div>
-            </div>
-          </div>
-          <p class="sf-card-bio">Renate führt Gespräche über Übergänge, Verluste und die leisen Momente, in denen sich etwas verändert. Ehrlich, warm und ohne Floskeln.</p>
-          <div class="sf-card-slots">
-            <span class="sf-slot-badge">🌤 Nachmittag</span>
-            <span class="sf-slot-badge">🌙 Nacht</span>
-          </div>
-          <div class="sf-card-keywords">
-            <span class="sf-keyword">Gesundheit</span>
-            <span class="sf-keyword">Psychologie</span>
-            <span class="sf-keyword">Begleitung</span>
-          </div>
-          <div class="sf-card-footer">
-            <div class="sf-social">
-              <a href="#" title="Instagram">&#9670;</a>
-              <a href="#" title="Facebook">f</a>
-            </div>
-            <a class="sf-website-link" href="#">renate-mair.at →</a>
-          </div>
-        </article>
-
-        <!-- Karte 8: Kochbuchautorin -->
-        <article class="sf-card"
-          data-name="Julia Sommer"
-          data-type="autor"
-          data-slots="vormittag nachmittag"
-          data-keywords="kochen natur gesundheit bücher">
-          <div class="sf-card-header">
-            <img class="sf-card-avatar"
-              src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=150&h=150&fit=crop&crop=face"
-              alt="Julia Sommer" />
-            <div class="sf-card-meta">
-              <span class="sf-card-type type-autor">Autor</span>
-              <div class="sf-card-name">Julia Sommer</div>
-              <div class="sf-card-subtitle">Kochbuchautorin & Ernährungsberaterin</div>
-            </div>
-          </div>
-          <p class="sf-card-bio">Julia verbindet alte Küche mit modernem Wissen über Ernährung – saisonal, regional und mit viel Liebe zum Handwerk.</p>
-          <div class="sf-card-book">
-            <img src="https://images.unsplash.com/photo-1476275466078-4007374efbbe?w=100&h=140&fit=crop"
-              alt="Buchcover: Vom Garten in die Küche" />
-            <div class="sf-card-book-info">
-              <strong>Vom Garten in die Küche</strong>
-              <span>Saisonale Rezepte</span><br/>
-              <span style="color:var(--sage-dark);font-size:0.8rem;">→ Im Sinnfunk-Shop</span>
-            </div>
-          </div>
-          <div class="sf-card-slots">
-            <span class="sf-slot-badge">☀ Vormittag</span>
-            <span class="sf-slot-badge">🌤 Nachmittag</span>
-          </div>
-          <div class="sf-card-keywords">
-            <span class="sf-keyword">Kochen</span>
-            <span class="sf-keyword">Natur</span>
-            <span class="sf-keyword">Gesundheit</span>
-          </div>
-          <div class="sf-card-footer">
-            <div class="sf-social">
-              <a href="#" title="Instagram">&#9670;</a>
-              <a href="#" title="Facebook">f</a>
-              <a href="#" title="YouTube">▶</a>
-            </div>
-            <a class="sf-website-link" href="#">julia-sommer.at →</a>
-          </div>
-        </article>
-
-        <!-- Leer-State -->
-        <div class="sf-empty" id="sf-empty" style="display:none;">
-          <p style="font-size:1.1rem;margin-bottom:8px;">Kein Sinnfunker gefunden.</p>
-          <p>Versuche einen anderen Suchbegriff oder setze die Filter zurück.</p>
+        <!-- Ladezustand -->
+        <div class="sf-loading" id="sf-loading">
+          <div class="sf-spinner"></div>
+          <p>Sinnfunker werden geladen …</p>
         </div>
-
       </div>
     </div>
 
@@ -732,41 +483,193 @@
 </div>
 
 <script>
+  // ════════════════════════════════════════════
+  // ⚙️  HIER DEINE SUPABASE-DATEN EINTRAGEN
+  // ════════════════════════════════════════════
+  const SUPABASE_URL  = 'https://DEINE-PROJEKT-ID.supabase.co';
+  const SUPABASE_ANON = 'DEIN-ANON-KEY';
+  // ════════════════════════════════════════════
+
+  const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+
+  // Alle geladenen Sinnfunker (für clientseitigen Filter)
+  let alleSinnfunker = [];
+
+  // ── Daten laden ──────────────────────────────
+  async function ladeSinnfunker() {
+    const { data, error } = await db
+      .from('sinnfunker')
+      .select(`
+        id,
+        name,
+        untertitel,
+        biografie,
+        foto_url,
+        website_url,
+        facebook_url,
+        instagram_url,
+        youtube_url,
+        kategorie,
+        keywords,
+        sendeslots,
+        produkt_titel,
+        produkt_beschreibung,
+        produkt_bild_url
+      `)
+      .eq('status', 'aktiv')
+      .order('name');
+
+    if (error) {
+      zeigeError(error.message);
+      return;
+    }
+
+    alleSinnfunker = data || [];
+    renderKarten(alleSinnfunker);
+  }
+
+  // ── Karten rendern ───────────────────────────
+  function renderKarten(liste) {
+    const grid = document.getElementById('sf-grid');
+
+    if (liste.length === 0) {
+      grid.innerHTML = `
+        <div class="sf-empty">
+          <p style="font-size:1.1rem;margin-bottom:8px;">Kein Sinnfunker gefunden.</p>
+          <p>Versuche einen anderen Suchbegriff oder setze die Filter zurück.</p>
+        </div>`;
+      document.getElementById('results-count').textContent = '0 Sinnfunker gefunden';
+      return;
+    }
+
+    grid.innerHTML = liste.map(s => karteHTML(s)).join('');
+
+    const n = liste.length;
+    document.getElementById('results-count').textContent =
+      n === 1 ? '1 Sinnfunker gefunden' : n + ' Sinnfunker gefunden';
+  }
+
+  // ── HTML einer Karte ─────────────────────────
+  function karteHTML(s) {
+    const initial = s.name ? s.name.charAt(0).toUpperCase() : '?';
+
+    const avatar = s.foto_url
+      ? `<img class="sf-card-avatar" src="${esc(s.foto_url)}" alt="${esc(s.name)}" />`
+      : `<div class="sf-card-avatar-placeholder">${initial}</div>`;
+
+    const typLabel = {
+      meditation: 'Meditation',
+      autor:      'Autor',
+      gespraech:  'Gespräch',
+      podcaster:  'Podcaster'
+    }[s.kategorie] || s.kategorie || '';
+
+    const typBadge = typLabel
+      ? `<span class="sf-card-type type-${esc(s.kategorie)}">${typLabel}</span>`
+      : '';
+
+    // Slots (kommagetrennt in DB, z.B. "vormittag,nacht")
+    const slots = s.sendeslots
+      ? s.sendeslots.split(',').map(sl => {
+          const icons = { vormittag: '☀', nachmittag: '🌤', nacht: '🌙' };
+          const labels = { vormittag: 'Vormittag', nachmittag: 'Nachmittag', nacht: 'Nacht' };
+          return `<span class="sf-slot-badge">${icons[sl] || ''} ${labels[sl] || sl}</span>`;
+        }).join('')
+      : '';
+
+    const slotsBlock = slots
+      ? `<div class="sf-card-slots">${slots}</div>` : '';
+
+    // Keywords (kommagetrennt in DB)
+    const kwBlock = s.keywords
+      ? `<div class="sf-card-keywords">
+          ${s.keywords.split(',').map(k =>
+            `<span class="sf-keyword">${esc(k.trim())}</span>`
+          ).join('')}
+        </div>`
+      : '';
+
+    // Produkt/Buch
+    const produktBlock = s.produkt_titel
+      ? `<div class="sf-card-product">
+          ${s.produkt_bild_url
+            ? `<img src="${esc(s.produkt_bild_url)}" alt="${esc(s.produkt_titel)}" />`
+            : ''}
+          <div>
+            <strong>${esc(s.produkt_titel)}</strong>
+            <span>${esc(s.produkt_beschreibung || '')}</span>
+          </div>
+        </div>`
+      : '';
+
+    // Social Links
+    const socials = [
+      s.instagram_url && `<a href="${esc(s.instagram_url)}" target="_blank" rel="noopener" title="Instagram">◆</a>`,
+      s.facebook_url  && `<a href="${esc(s.facebook_url)}"  target="_blank" rel="noopener" title="Facebook">f</a>`,
+      s.youtube_url   && `<a href="${esc(s.youtube_url)}"   target="_blank" rel="noopener" title="YouTube">▶</a>`,
+    ].filter(Boolean).join('');
+
+    const socialBlock = socials
+      ? `<div class="sf-social">${socials}</div>` : '';
+
+    const websiteLink = s.website_url
+      ? `<a class="sf-website-link" href="${esc(s.website_url)}"
+           target="_blank" rel="noopener">
+           ${new URL(s.website_url).hostname} →
+         </a>`
+      : '';
+
+    return `
+      <article class="sf-card"
+        data-name="${esc(s.name)}"
+        data-type="${esc(s.kategorie || '')}"
+        data-slots="${esc(s.sendeslots || '')}"
+        data-keywords="${esc(s.keywords || '')}">
+
+        <div class="sf-card-header">
+          ${avatar}
+          <div class="sf-card-meta">
+            ${typBadge}
+            <div class="sf-card-name">${esc(s.name)}</div>
+            <div class="sf-card-subtitle">${esc(s.untertitel || '')}</div>
+          </div>
+        </div>
+
+        <p class="sf-card-bio">${esc(s.biografie || '')}</p>
+
+        ${produktBlock}
+        ${slotsBlock}
+        ${kwBlock}
+
+        <div class="sf-card-footer">
+          ${socialBlock}
+          ${websiteLink}
+        </div>
+      </article>`;
+  }
+
+  // ── Filter ───────────────────────────────────
   function filterCards() {
-    const name    = document.getElementById('search-name').value.toLowerCase();
-    const type    = document.getElementById('filter-type').value;
-    const slot    = document.getElementById('filter-slot').value;
-    const cards   = document.querySelectorAll('#sf-grid .sf-card');
-    let visible   = 0;
+    const q    = document.getElementById('search-name').value.toLowerCase();
+    const type = document.getElementById('filter-type').value;
+    const slot = document.getElementById('filter-slot').value;
 
-    cards.forEach(card => {
-      const cName     = card.dataset.name.toLowerCase();
-      const cType     = card.dataset.type;
-      const cSlots    = card.dataset.slots;
-      const cKeywords = card.dataset.keywords.toLowerCase();
-
-      const matchName = !name || cName.includes(name) || cKeywords.includes(name);
-      const matchType = !type || cType === type;
-      const matchSlot = !slot || cSlots.includes(slot);
-
-      if (matchName && matchType && matchSlot) {
-        card.style.display = '';
-        visible++;
-      } else {
-        card.style.display = 'none';
-      }
+    const gefiltert = alleSinnfunker.filter(s => {
+      const text = [s.name, s.biografie, s.keywords, s.untertitel]
+        .join(' ').toLowerCase();
+      const mQ    = !q    || text.includes(q);
+      const mType = !type || s.kategorie === type;
+      const mSlot = !slot || (s.sendeslots || '').includes(slot);
+      return mQ && mType && mSlot;
     });
 
-    document.getElementById('results-count').textContent =
-      visible === 1 ? '1 Sinnfunker gefunden' : visible + ' Sinnfunker gefunden';
-    document.getElementById('sf-empty').style.display = visible === 0 ? 'block' : 'none';
+    renderKarten(gefiltert);
   }
 
   function setTag(keyword) {
     document.getElementById('search-name').value = keyword;
-    document.querySelectorAll('.sf-tag').forEach(t => {
-      t.classList.toggle('active', t.textContent === keyword);
-    });
+    document.querySelectorAll('.sf-tag').forEach(t =>
+      t.classList.toggle('active', t.textContent === keyword));
     filterCards();
   }
 
@@ -775,8 +678,34 @@
     document.getElementById('filter-type').value = '';
     document.getElementById('filter-slot').value = '';
     document.querySelectorAll('.sf-tag').forEach(t => t.classList.remove('active'));
-    filterCards();
+    renderKarten(alleSinnfunker);
   }
+
+  // ── Fehler anzeigen ──────────────────────────
+  function zeigeError(msg) {
+    document.getElementById('sf-grid').innerHTML = `
+      <div class="sf-error">
+        <p style="font-size:1.1rem;margin-bottom:12px;">
+          Die Sinnfunker konnten nicht geladen werden.
+        </p>
+        <p>Bitte prüfe die Supabase-Verbindung in <code>community.html</code>.</p>
+        ${msg ? `<p style="margin-top:8px;font-size:0.82rem;color:var(--clay);">${esc(msg)}</p>` : ''}
+      </div>`;
+    document.getElementById('results-count').textContent = '';
+  }
+
+  // ── Hilfsfunktion: HTML escapen ──────────────
+  function esc(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g,'&amp;')
+      .replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;')
+      .replace(/"/g,'&quot;');
+  }
+
+  // ── Start ────────────────────────────────────
+  ladeSinnfunker();
 </script>
 </body>
 </html>
