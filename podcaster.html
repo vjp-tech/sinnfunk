@@ -7,371 +7,772 @@
   <meta name="description" content="Werde Sinnfunker – bring deine Stimme ins Radio. Zwei Wege: eigene Episode einreichen oder ein Gespräch in Pöllau aufzeichnen." />
   <link rel="stylesheet" href="style.css" />
   <style>
-/* ==========================================
-   SINNFUNKER PAGE
-   ========================================== */
 
-.quick-paths {
-  display: grid;
-  grid-template-columns: repeat(2,1fr);
-  gap: 24px;
-  margin: 42px 0 64px;
-}
+    /* ── Hero mit Bild ── */
+    .sf-hero {
+      width: 100%;
+      min-height: 420px;
+      position: relative;
+      overflow: hidden;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+    }
 
-.quick-path {
-  background: rgba(255,250,242,0.78);
-  border: 1px solid rgba(123,94,69,0.12);
-  border-radius: 28px;
-  padding: 32px;
-  box-shadow: 0 12px 28px rgba(74,59,43,0.06);
-}
+    .sf-hero-text {
+      padding: 64px 48px 64px min(64px, calc((100vw - 1120px) / 2 + 32px));
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      background: var(--sand);
+      z-index: 1;
+    }
 
-.quick-path.featured {
-  border-color: rgba(83,107,80,0.25);
-  background: rgba(143,169,139,0.08);
-}
+    .sf-hero-text h1 {
+      font-size: clamp(2.4rem, 4.5vw, 4rem);
+      letter-spacing: -0.04em;
+      margin-bottom: 18px;
+    }
 
-.quick-path .price {
-  display: inline-block;
-  margin-top: 18px;
-  font-size: 1.35rem;
-  font-weight: 700;
-  color: var(--sage-dark);
-}
+    .sf-hero-text p {
+      font-size: 1.1rem;
+      color: #505248;
+      margin-bottom: 28px;
+      max-width: 420px;
+    }
 
-.simple-grid {
-  display: grid;
-  grid-template-columns: repeat(2,1fr);
-  gap: 24px;
-  margin: 24px 0 48px;
-}
+    .sf-hero-actions {
+      display: flex;
+      gap: 12px;
+      flex-wrap: wrap;
+    }
 
-.simple-box {
-  background: rgba(255,250,242,0.65);
-  border: 1px solid rgba(123,94,69,0.1);
-  border-radius: 24px;
-  padding: 24px;
-}
+    .sf-hero-image {
+      position: relative;
+      overflow: hidden;
+    }
 
-.simple-box h3 {
-  margin-bottom: 14px;
-}
+    .sf-hero-image img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center top;
+      display: block;
+    }
 
-.schedule-list {
-  background: rgba(255,250,242,0.65);
-  border-radius: 24px;
-  padding: 24px;
-  margin: 24px 0;
-}
+    /* Fader am linken Rand des Bildes */
+    .sf-hero-image::before {
+      content: "";
+      position: absolute;
+      inset: 0 auto 0 0;
+      width: 120px;
+      background: linear-gradient(to right, var(--sand), transparent);
+      z-index: 2;
+    }
 
-.schedule-row {
-  display: flex;
-  justify-content: space-between;
-  gap: 16px;
-  padding: 12px 0;
-  border-bottom: 1px solid rgba(123,94,69,0.1);
-}
+    /* ── Zwei Wege ── */
+    .sf-paths-wrap {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 64px 0;
+    }
 
-.schedule-row:last-child {
-  border-bottom: none;
-}
+    .sf-paths {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
 
-.schedule-row span {
-  font-family: Arial,sans-serif;
-}
+    .sf-path {
+      background: rgba(255,250,242,0.85);
+      border: 1px solid rgba(123,94,69,0.13);
+      border-radius: 28px;
+      padding: 32px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      box-shadow: 0 10px 28px rgba(74,59,43,0.07);
+    }
 
-.facts {
-  display: grid;
-  grid-template-columns: repeat(2,1fr);
-  gap: 18px;
-  margin: 24px 0 40px;
-}
+    .sf-path.featured {
+      border-color: rgba(83,107,80,0.28);
+      background: rgba(143,169,139,0.09);
+    }
 
-.fact {
-  background: rgba(143,169,139,0.08);
-  border-radius: 20px;
-  padding: 18px;
-  border: 1px solid rgba(83,107,80,0.12);
-}
+    .sf-path-icon {
+      width: 52px;
+      height: 52px;
+      border-radius: 18px;
+      background: rgba(143,169,139,0.18);
+      display: grid;
+      place-items: center;
+      font-size: 1.5rem;
+      flex-shrink: 0;
+    }
 
-.fact strong {
-  display:block;
-  margin-bottom:4px;
-}
+    .sf-path-label {
+      font-family: Arial, sans-serif;
+      font-size: 0.76rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--sage-dark);
+    }
 
-details.legal {
-  background: rgba(255,250,242,0.7);
-  border-radius: 24px;
-  border: 1px solid rgba(123,94,69,0.12);
-  padding: 24px;
-  margin: 40px 0;
-}
+    .sf-path h3 {
+      font-size: 1.5rem;
+      margin: 0;
+    }
 
-details.legal summary {
-  cursor: pointer;
-  font-weight: 700;
-  font-size: 1.1rem;
-}
+    .sf-path p {
+      font-family: Arial, sans-serif;
+      font-size: 0.97rem;
+      color: #55584e;
+      line-height: 1.6;
+      margin: 0;
+      flex: 1;
+    }
 
-details.legal ul {
-  margin-top: 20px;
-}
+    .sf-path-price {
+      margin-top: 8px;
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
 
-.content-narrow {
-  max-width: 760px;
-}
+    .sf-path-price .price-num {
+      font-size: 1.25rem;
+      font-weight: 700;
+      color: var(--sage-dark);
+    }
 
-@media (max-width: 720px) {
+    .sf-path-price .price-sub {
+      font-family: Arial, sans-serif;
+      font-size: 0.88rem;
+      color: var(--muted);
+    }
 
-  .quick-paths,
-  .simple-grid,
-  .facts {
-    grid-template-columns: 1fr;
-  }
+    /* ── Warum Sinnfunk ── */
+    .sf-why-wrap {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 0 0 64px;
+    }
 
-  .schedule-row {
-    flex-direction: column;
-    gap: 4px;
-  }
+    .sf-why {
+      background: rgba(255,250,242,0.6);
+      border: 1px solid rgba(123,94,69,0.11);
+      border-radius: 36px;
+      padding: 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: start;
+    }
 
-  .content-block p {
-    font-size: 1rem;
-  }
-}
+    .sf-why-left h2 {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      margin-bottom: 14px;
+    }
+
+    .sf-why-left p {
+      color: #55584e;
+      font-size: 1.02rem;
+    }
+
+    .sf-why-features {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 16px;
+    }
+
+    .sf-feature {
+      display: flex;
+      flex-direction: column;
+      gap: 6px;
+    }
+
+    .sf-feature-icon {
+      width: 42px;
+      height: 42px;
+      border-radius: 14px;
+      background: rgba(143,169,139,0.15);
+      display: grid;
+      place-items: center;
+      font-size: 1.2rem;
+      margin-bottom: 4px;
+    }
+
+    .sf-feature strong {
+      font-size: 0.98rem;
+      color: #2c3128;
+    }
+
+    .sf-feature span {
+      font-family: Arial, sans-serif;
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.5;
+    }
+
+    /* ── Programm ── */
+    .sf-program-wrap {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 0 0 64px;
+    }
+
+    .sf-program {
+      background: rgba(255,250,242,0.6);
+      border: 1px solid rgba(123,94,69,0.11);
+      border-radius: 36px;
+      padding: 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr;
+      gap: 24px;
+      align-items: start;
+    }
+
+    .sf-program-head {
+      grid-column: 1 / -1;
+      margin-bottom: 8px;
+    }
+
+    .sf-program-head h2 {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      margin-bottom: 0;
+    }
+
+    .sf-slots {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+
+    .sf-slot-row {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 12px 16px;
+      border-radius: 14px;
+      background: rgba(143,169,139,0.1);
+      font-family: Arial, sans-serif;
+      font-size: 0.95rem;
+    }
+
+    .sf-slot-row strong { color: #2c3128; }
+    .sf-slot-row span   { color: var(--muted); }
+
+    .sf-highlights {
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+    }
+
+    .sf-highlight-row {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      padding: 14px 16px;
+      border-radius: 14px;
+      background: rgba(255,250,242,0.8);
+      border: 1px solid rgba(123,94,69,0.1);
+    }
+
+    .sf-highlight-row .hi-icon { font-size: 1.2rem; }
+    .sf-highlight-row strong { font-size: 0.97rem; display: block; }
+    .sf-highlight-row span { font-family: Arial, sans-serif; font-size: 0.86rem; color: var(--muted); }
+
+    .sf-program-note {
+      background: rgba(143,169,139,0.1);
+      border-radius: 20px;
+      padding: 22px;
+      display: flex;
+      gap: 12px;
+      align-items: flex-start;
+    }
+
+    .sf-program-note .note-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
+    .sf-program-note p { font-family: Arial, sans-serif; font-size: 0.95rem; color: #55584e; margin: 0; }
+
+    /* ── Was ist Sinnfunk (3 Karten) ── */
+    .sf-what-wrap {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 0 0 64px;
+    }
+
+    .sf-what-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr 1fr 1fr;
+      gap: 16px;
+      margin-top: 24px;
+    }
+
+    .sf-what-card {
+      background: rgba(255,250,242,0.7);
+      border: 1px solid rgba(123,94,69,0.11);
+      border-radius: 24px;
+      padding: 22px;
+    }
+
+    .sf-what-icon {
+      font-size: 1.4rem;
+      margin-bottom: 10px;
+    }
+
+    .sf-what-card strong {
+      display: block;
+      font-size: 0.97rem;
+      margin-bottom: 6px;
+    }
+
+    .sf-what-card p {
+      font-family: Arial, sans-serif;
+      font-size: 0.88rem;
+      color: var(--muted);
+      line-height: 1.55;
+      margin: 0;
+    }
+
+    /* ── Wofür wir stehen ── */
+    .sf-stand-wrap {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 0 0 64px;
+    }
+
+    .sf-stand {
+      display: grid;
+      grid-template-columns: 1fr 2fr;
+      gap: 40px;
+      background: rgba(255,250,242,0.6);
+      border: 1px solid rgba(123,94,69,0.11);
+      border-radius: 36px;
+      padding: 48px;
+      align-items: start;
+    }
+
+    .sf-stand-left h2 { font-size: clamp(1.6rem, 2.8vw, 2.3rem); margin-bottom: 10px; }
+    .sf-stand-left p  { font-family: Arial, sans-serif; font-size: 0.97rem; color: #55584e; }
+
+    .sf-stand-lists {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 20px;
+    }
+
+    .sf-list-box {
+      border-radius: 20px;
+      padding: 22px;
+    }
+
+    .sf-list-box.green {
+      background: rgba(143,169,139,0.12);
+      border: 1px solid rgba(83,107,80,0.18);
+    }
+
+    .sf-list-box.clay {
+      background: rgba(200,148,107,0.1);
+      border: 1px solid rgba(200,148,107,0.2);
+    }
+
+    .sf-list-box h4 {
+      font-family: Arial, sans-serif;
+      font-size: 0.78rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      margin-bottom: 14px;
+    }
+
+    .sf-list-box.green h4 { color: var(--sage-dark); }
+    .sf-list-box.clay  h4 { color: var(--earth); }
+
+    .sf-list-box ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .sf-list-box ul li {
+      font-family: Arial, sans-serif;
+      font-size: 0.92rem;
+      color: var(--text);
+      padding: 6px 0 6px 22px;
+      border-bottom: 1px solid rgba(123,94,69,0.08);
+      position: relative;
+    }
+
+    .sf-list-box ul li:last-child { border-bottom: none; }
+    .sf-list-box.green ul li::before { content: "✓"; position: absolute; left: 0; color: var(--sage-dark); font-weight: 700; }
+    .sf-list-box.clay  ul li::before { content: "✕"; position: absolute; left: 0; color: var(--clay);      font-weight: 700; }
+
+    /* ── Rechtliches ── */
+    details.sf-legal {
+      background: rgba(200,148,107,0.08);
+      border: 1px solid rgba(200,148,107,0.25);
+      border-radius: 20px;
+      padding: 22px 26px;
+      margin: 0 0 48px;
+      cursor: pointer;
+    }
+
+    details.sf-legal summary {
+      font-family: Arial, sans-serif;
+      font-weight: 700;
+      font-size: 0.95rem;
+      color: var(--earth);
+      list-style: none;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+    details.sf-legal summary::after {
+      content: "▾";
+      transition: transform 0.2s;
+    }
+
+    details.sf-legal[open] summary::after { transform: rotate(180deg); }
+
+    details.sf-legal ul {
+      margin-top: 16px;
+      padding-left: 0;
+      list-style: none;
+    }
+
+    details.sf-legal ul li {
+      font-family: Arial, sans-serif;
+      font-size: 0.94rem;
+      color: var(--text);
+      padding: 8px 0 8px 24px;
+      border-bottom: 1px solid rgba(200,148,107,0.12);
+      position: relative;
+    }
+
+    details.sf-legal ul li:last-child { border-bottom: none; }
+    details.sf-legal ul li::before { content: "!"; position: absolute; left: 0; color: var(--clay); font-weight: 900; }
+
+    /* ── CTA Menschen ── */
+    .sf-cta-wrap {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 0 0 80px;
+    }
+
+    .sf-cta-box {
+      background: rgba(83,107,80,0.09);
+      border: 1px solid rgba(83,107,80,0.2);
+      border-radius: 36px;
+      padding: 52px 48px;
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 48px;
+      align-items: center;
+    }
+
+    .sf-cta-box h2 { font-size: clamp(1.8rem, 3vw, 2.6rem); margin-bottom: 12px; }
+    .sf-cta-box p  { font-family: Arial, sans-serif; font-size: 1rem; color: #55584e; margin-bottom: 24px; }
+
+    .sf-cta-actions { display: flex; gap: 12px; flex-wrap: wrap; }
+
+    .sf-features-row {
+      display: grid;
+      grid-template-columns: repeat(2,1fr);
+      gap: 14px;
+    }
+
+    .sf-feat-pill {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,250,242,0.7);
+      border: 1px solid rgba(123,94,69,0.1);
+      border-radius: 14px;
+      padding: 12px 14px;
+    }
+
+    .sf-feat-pill .pi { font-size: 1.1rem; }
+    .sf-feat-pill span {
+      font-family: Arial, sans-serif;
+      font-size: 0.88rem;
+      color: var(--text);
+      line-height: 1.4;
+    }
+
+    /* ── Divider ── */
+    .sf-divider {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto 64px;
+      border: none;
+      border-top: 2px dashed rgba(123,94,69,0.15);
+    }
+
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .sf-hero { grid-template-columns: 1fr; }
+      .sf-hero-image { height: 280px; }
+      .sf-hero-text { padding: 40px 24px; }
+      .sf-hero-image::before { width: 0; }
+
+      .sf-why, .sf-stand { grid-template-columns: 1fr; gap: 28px; }
+      .sf-program { grid-template-columns: 1fr; }
+      .sf-program-head { grid-column: 1; }
+      .sf-what-grid { grid-template-columns: 1fr 1fr; }
+      .sf-cta-box { grid-template-columns: 1fr; gap: 28px; padding: 36px 28px; }
+      .sf-paths { grid-template-columns: 1fr; }
+    }
+
+    @media (max-width: 560px) {
+      .sf-why-features { grid-template-columns: 1fr; }
+      .sf-what-grid { grid-template-columns: 1fr; }
+      .sf-stand-lists { grid-template-columns: 1fr; }
+      .sf-features-row { grid-template-columns: 1fr; }
+    }
   </style>
 </head>
 <body>
-
 <div class="page">
 
-<header>
-<a class="logo" href="index.html">
-<img src="image/sinnfunk_logo_ohne_schrift.svg" alt="Sinnfunk Logo">
-<span class="logo-name">Sinnfunk</span>
-</a>
+  <header>
+    <a class="logo" href="index.html" aria-label="Sinnfunk Startseite">
+      <img src="image/sinnfunk_logo_ohne_schrift.svg" alt="Sinnfunk Logo" />
+      <span class="logo-name">Sinnfunk</span>
+    </a>
+    <nav aria-label="Hauptnavigation">
+      <a href="index.html">Start</a>
+      <a href="podcaster.html">Mitmachen</a>
+      <a href="kontakt.html">Kontakt</a>
+      <a href="impressum.html">Impressum</a>
+    </nav>
+  </header>
 
-<nav>
-<a href="index.html">Start</a>
-<a href="podcaster.html">Mitmachen</a>
-<a href="kontakt.html">Kontakt</a>
-<a href="impressum.html">Impressum</a>
-</nav>
-</header>
+  <main>
 
-<main>
+    <!-- ── HERO ── -->
+    <div class="sf-hero">
+      <div class="sf-hero-text">
+        <p class="eyebrow">Sinnfunker werden</p>
+        <h1>Bringe deine Stimme ins Radio.</h1>
+        <p>Wähle deinen Weg: Reiche eine fertige Episode ein oder zeichne gemeinsam mit mir ein Gespräch auf.</p>
+        <div class="sf-hero-actions">
+          <a class="button" href="#wege">Zu den Wegen →</a>
+          <a class="button secondary" href="#warum">Mehr über Sinnfunk</a>
+        </div>
+      </div>
+      <div class="sf-hero-image">
+        <img src="image/We want you.webp" alt="Sinnfunker werden" />
+      </div>
+    </div>
 
-<div class="page-hero">
-<p class="eyebrow">Sinnfunker werden</p>
-<h1>Bringe deine Stimme ins Radio.</h1>
-<p>Wähle deinen Weg: Reiche eine fertige Episode ein oder zeichne gemeinsam mit mir ein Gespräch auf.</p>
-</div>
+    <!-- ── ZWEI WEGE ── -->
+    <div class="sf-paths-wrap" id="wege">
+      <div class="sf-paths">
 
-<div class="content-block">
+        <div class="sf-path featured">
+          <div class="sf-path-icon">⬆️</div>
+          <div class="sf-path-label">Weg 1</div>
+          <h3>Eigene Episode einreichen</h3>
+          <p>Für Podcaster, Autoren und alle, die bereits Audioinhalte besitzen.</p>
+          <div class="sf-path-price">
+            <span class="price-num">Kostenlos bis 30.09.2026</span>
+          </div>
+          <span class="price-sub">Danach 10 € pro eingereichter Episode.</span>
+        </div>
 
-<div class="quick-paths">
+        <div class="sf-path">
+          <div class="sf-path-icon">🎙</div>
+          <div class="sf-path-label">Weg 2</div>
+          <h3>Gespräch aufnehmen</h3>
+          <p>Wir zeichnen gemeinsam ein Gespräch in Pöllau (Steiermark) auf. Die Aufnahme gehört dir.</p>
+          <div class="sf-path-price">
+            <span class="price-num">25 € / Stunde</span>
+          </div>
+          <span class="price-sub">Aufzeichnung in Pöllau.</span>
+        </div>
 
-<div class="quick-path featured">
-<h3>Eigene Episode einreichen</h3>
-<p>Für Podcaster, Autoren und alle, die bereits Audioinhalte besitzen.</p>
-<div class="price">Kostenlos bis 30.09.2026</div>
-</div>
+      </div>
+    </div>
 
-<div class="quick-path">
-<h3>Gespräch aufnehmen</h3>
-<p>Wir zeichnen gemeinsam ein Gespräch in Pöllau auf.</p>
-<div class="price">25 € / Stunde</div>
-</div>
+    <!-- ── WARUM SINNFUNK ── -->
+    <div class="sf-why-wrap" id="warum">
+      <div class="sf-why">
+        <div class="sf-why-left">
+          <p class="eyebrow">Warum Sinnfunk?</p>
+          <h2>Ein stiller Ort im lauten Netz.</h2>
+          <p>Sinnfunk ist ein werbefreies Webradio mit festem Programm für Gespräche, Meditationen, Bücher und Wissen.</p>
+        </div>
+        <div class="sf-why-features">
+          <div class="sf-feature">
+            <div class="sf-feature-icon">🌿</div>
+            <strong>Werteorientiert</strong>
+            <span>Fokus auf Wissen, Inspiration und persönliches Wachstum.</span>
+          </div>
+          <div class="sf-feature">
+            <div class="sf-feature-icon">🎧</div>
+            <strong>Vielfältiges Programm</strong>
+            <span>Gespräche, Meditationen, Bücher & Wissen.</span>
+          </div>
+          <div class="sf-feature">
+            <div class="sf-feature-icon">📡</div>
+            <strong>Für mehr Sichtbarkeit</strong>
+            <span>Deine Inhalte erreichen ein interessiertes Publikum.</span>
+          </div>
+          <div class="sf-feature">
+            <div class="sf-feature-icon">🤝</div>
+            <strong>Gemeinschaft</strong>
+            <span>Werde Teil einer wachsenden Sinnfunk-Community.</span>
+          </div>
+        </div>
+      </div>
+    </div>
 
-</div>
+    <!-- ── PROGRAMM & SENDEZEITEN ── -->
+    <div class="sf-program-wrap">
+      <div class="sf-program">
+        <div class="sf-program-head">
+          <p class="eyebrow">Programm & Sendezeiten</p>
+          <h2>So klingt der Tag.</h2>
+        </div>
 
-<h2>Was ist Sinnfunk?</h2>
+        <div class="sf-slots">
+          <div class="sf-slot-row"><strong>☀ Vormittag</strong><span>06:00 – 15:00 Uhr</span></div>
+          <div class="sf-slot-row"><strong>🌤 Nachmittag</strong><span>15:00 – 21:00 Uhr</span></div>
+          <div class="sf-slot-row"><strong>🌙 Nacht</strong><span>21:00 – 06:00 Uhr</span></div>
+        </div>
 
-<div class="content-narrow">
-<p>Sinnfunk ist ein werbefreies Webradio mit festem Programm. Hörer schalten ein und hören das laufende Programm – ähnlich wie bei einem klassischen Radiosender.</p>
-<p>Ausgestrahlt werden Gespräche, Meditationen, Buchvorstellungen und Wissensinhalte.</p>
-</div>
+        <div class="sf-highlights">
+          <p class="eyebrow" style="margin-bottom: 8px;">Highlights im Programm</p>
+          <div class="sf-highlight-row">
+            <span class="hi-icon">📖</span>
+            <div><strong>10:00 Uhr</strong><span>Autoren & Bücher</span></div>
+          </div>
+          <div class="sf-highlight-row">
+            <span class="hi-icon">◌</span>
+            <div><strong>21:00 Uhr</strong><span>Meditationen</span></div>
+          </div>
+        </div>
 
-<h2>Für wen ist Sinnfunk?</h2>
+        <div class="sf-program-note">
+          <span class="note-icon">⏱</span>
+          <p><strong>Maximale Episodenlänge: 60 Minuten.</strong> Längere Inhalte bitte in mehrere Episoden aufteilen.</p>
+        </div>
 
-<div class="simple-grid">
+      </div>
+    </div>
 
-<div class="simple-box">
-<h3>Willkommen</h3>
-<ul>
-<li>Autoren</li>
-<li>Therapeuten</li>
-<li>Coaches</li>
-<li>Forscher</li>
-<li>Künstler</li>
-<li>Meditationsleiter</li>
-<li>Menschen mit Wissen und Erfahrungen</li>
-</ul>
-</div>
+    <!-- ── WAS IST SINNFUNK ── -->
+    <div class="sf-what-wrap">
+      <p class="eyebrow">Wofür wir stehen</p>
+      <h2 style="font-size: clamp(1.8rem,3vw,2.6rem); margin-bottom: 6px;">Was ist Sinnfunk?</h2>
+      <p style="color:#55584e; font-size:1rem; margin-bottom:0;">Wir sind ein Gesprächs-, Meditations- und Podcast-Radio mit einem gemeinsamen Nenner: keine explosiven Themen.</p>
+      <div class="sf-what-grid">
+        <div class="sf-what-card">
+          <div class="sf-what-icon">✕</div>
+          <strong>Keine Wut-Themen</strong>
+          <p>Egal ob Corona, Impfungen, Klimawandel oder aktuelle Politik – Sinnfunk bleibt bewusst außerhalb dieser Themen.</p>
+        </div>
+        <div class="sf-what-card">
+          <div class="sf-what-icon">🎙</div>
+          <strong>Was ist ein Sprachradio?</strong>
+          <p>Mit Ausnahme der Hintergrundmusik bei Meditationen gibt es keine Musik bei Sinnfunk.</p>
+        </div>
+        <div class="sf-what-card">
+          <div class="sf-what-icon">◌</div>
+          <strong>Keine Werbung</strong>
+          <p>Sinnfunk wird über die Personen finanziert, die ihre Inhalte hochladen – nicht durch Werbung.</p>
+        </div>
+        <div class="sf-what-card">
+          <div class="sf-what-icon">⚖</div>
+          <strong>Rechtliches</strong>
+          <p>Als Webradio gelten strengere Auflagen. Keine Fremdwerbung, keine Verleumdung, nur lizenzfreie Musik.</p>
+        </div>
+      </div>
+    </div>
 
-<div class="simple-box">
-<h3>Inhaltlicher Fokus</h3>
-<p>Persönlichkeitsentwicklung, Natur, Kultur, Spiritualität, Gesundheit, Wissen und Lebenserfahrung.</p>
-<p>Aktuelle politische Konflikt- und Streitthemen stehen nicht im Fokus.</p>
-</div>
+    <!-- ── WOFÜR WIR STEHEN ── -->
+    <div class="sf-stand-wrap">
+      <div class="sf-stand">
+        <div class="sf-stand-left">
+          <p class="eyebrow">Für wen?</p>
+          <h2>Menschen hinter den Stimmen.</h2>
+          <p>Du hast etwas zu sagen? Mach mit!</p>
+        </div>
+        <div class="sf-stand-lists">
+          <div class="sf-list-box green">
+            <h4>✓ Willkommen</h4>
+            <ul>
+              <li>Autoren</li>
+              <li>Energetiker</li>
+              <li>Therapeuten & Coaches</li>
+              <li>Philosophen</li>
+              <li>Wissenschaftler</li>
+              <li>Meditationsleiter</li>
+              <li>Künstler & Kulturschaffende</li>
+              <li>Alle mit etwas zu sagen</li>
+            </ul>
+          </div>
+          <div class="sf-list-box clay">
+            <h4>✕ Kein Platz</h4>
+            <ul>
+              <li>Impfungen & Corona</li>
+              <li>Gendersprache & Sternchen</li>
+              <li>USA / Ukraine / Russland</li>
+              <li>Aktuelle Politik & Parteien</li>
+              <li>EU-Politik</li>
+              <li>Migration als Streitthema</li>
+              <li>Alles, das primär Wut auslöst</li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </div>
 
-</div>
+    <!-- ── RECHTLICHES ── -->
+    <div style="width: min(1120px, calc(100% - 32px)); margin: 0 auto; padding: 0 0 64px;">
+      <details class="sf-legal">
+        <summary>Rechtliche Hinweise für Sinnfunker</summary>
+        <ul>
+          <li>Eigenwerbung für eigene Angebote ist erlaubt.</li>
+          <li>Keine Werbung für Alkohol, Waffen oder Pornografie – auch nicht als Eigenwerbung.</li>
+          <li>Nur lizenzfreie oder KI-generierte Musik (als Hintergrund bei Meditationen).</li>
+          <li>Keine Verleumdung von Personen oder Organisationen.</li>
+          <li>Inhalte müssen nach bestem Wissen korrekt sein – kein bewusster Betrug.</li>
+        </ul>
+      </details>
+    </div>
 
-<h2>Sendezeiten</h2>
+    <!-- ── CTA BEREIT ── -->
+    <div class="sf-cta-wrap">
+      <div class="sf-cta-box">
+        <div>
+          <p class="eyebrow">Bereit, deine Stimme zu teilen?</p>
+          <h2>Menschen hinter den Stimmen.</h2>
+          <p>Du hast etwas zu sagen? Mach mit!</p>
+          <div class="sf-cta-actions">
+            <a class="button" href="kontakt.html">Sinnfunker werden</a>
+            <a class="button secondary" href="kontakt.html">Kontaktiere mich</a>
+          </div>
+        </div>
+        <div class="sf-features-row">
+          <div class="sf-feat-pill"><span class="pi">📻</span><span>Faire Chancen für alle</span></div>
+          <div class="sf-feat-pill"><span class="pi">🔇</span><span>Kein Algorithmus</span></div>
+          <div class="sf-feat-pill"><span class="pi">✦</span><span>Gutes Karma</span></div>
+          <div class="sf-feat-pill"><span class="pi">🎙</span><span>Zwei Wege</span></div>
+        </div>
+      </div>
+    </div>
 
-<div class="schedule-list">
+  </main>
 
-<div class="schedule-row">
-<strong>Vormittag</strong>
-<span>06:00 – 15:00 Uhr</span>
-</div>
-
-<div class="schedule-row">
-<strong>Nachmittag</strong>
-<span>15:00 – 21:00 Uhr</span>
-</div>
-
-<div class="schedule-row">
-<strong>Nacht</strong>
-<span>21:00 – 06:00 Uhr</span>
-</div>
-
-</div>
-
-<div class="facts">
-<div class="fact"><strong>10:00 Uhr</strong>Autoren & Bücher</div>
-<div class="fact"><strong>21:00 Uhr</strong>Meditationen</div>
-</div>
-
-<div class="highlight-box">
-<p><strong>Maximale Episodenlänge: 60 Minuten.</strong> Längere Inhalte bitte in mehrere Episoden aufteilen.</p>
-</div>
-
-<details class="legal">
-<summary>Rechtliche Hinweise</summary>
-<ul>
-<li>Eigenwerbung für eigene Angebote ist erlaubt.</li>
-<li>Keine Werbung für Alkohol, Waffen oder Pornografie.</li>
-<li>Nur lizenzfreie oder selbst erstellte Musik.</li>
-<li>Keine Verleumdung von Personen oder Organisationen.</li>
-<li>Inhalte müssen nach bestem Wissen korrekt sein.</li>
-</ul>
-</details>
-
-</div>
-
-<hr class="section-divider">
-
-<div class="content-block path-section">
-
-<p class="eyebrow">Weg 1</p>
-<h2>Eigene Episode einreichen</h2>
-
-<p>Du hast bereits einen Podcast, einen YouTube-Kanal oder andere Audioinhalte? Dann kannst du diese direkt bei Sinnfunk einreichen.</p>
-
-<div class="highlight-box">
-<p><strong>Eigenwerbung ist erlaubt.</strong> Bücher, Seminare, Kurse und eigene Angebote dürfen in deiner Episode erwähnt werden.</p>
-</div>
-
-<h2>Preis</h2>
-
-<div class="quick-path featured">
-<h3>Kostenlos bis 30.09.2026</h3>
-<p>Danach 10 € pro eingereichter Episode.</p>
-</div>
-
-<h2>So funktioniert es</h2>
-
-<div class="steps">
-
-<div class="step">
-<div class="step-number">01</div>
-<h3>Kontakt</h3>
-<p>Kurze Vorstellung per E-Mail oder Telefon.</p>
-</div>
-
-<div class="step">
-<div class="step-number">02</div>
-<h3>Zugang</h3>
-<p>Du erhältst Zugang zur Sinnfunk-Plattform.</p>
-</div>
-
-<div class="step">
-<div class="step-number">03</div>
-<h3>Upload</h3>
-<p>Episode hochladen und zur Ausstrahlung freigeben.</p>
-</div>
-
-</div>
-
-<h2>Du erhältst</h2>
-
-<ul>
-<li>Mehrfache Ausstrahlung im Programm</li>
-<li>Persönliches Profil auf Sinnfunk</li>
-<li>Eigenwerbung innerhalb der Episode</li>
-<li>Präsentation deiner Angebote</li>
-</ul>
-
-</div>
-
-<hr class="section-divider">
-
-<div class="content-block">
-
-<p class="eyebrow">Weg 2</p>
-<h2>Gespräch mit mir aufnehmen</h2>
-
-<p>Du hast noch keinen Podcast? Dann können wir gemeinsam ein Gespräch in Pöllau aufzeichnen.</p>
-
-<p>Die fertige MP3-Datei gehört dir und kann beliebig weiterverwendet werden.</p>
-
-<div class="highlight-box">
-<p><strong>25 € pro Stunde Aufzeichnung.</strong></p>
-</div>
-
-<h2>So funktioniert es</h2>
-
-<div class="steps">
-
-<div class="step">
-<div class="step-number">01</div>
-<h3>Termin vereinbaren</h3>
-<p>Wir besprechen dein Thema und finden einen Termin.</p>
-</div>
-
-<div class="step">
-<div class="step-number">02</div>
-<h3>Aufzeichnung</h3>
-<p>Das Gespräch wird in Pöllau aufgenommen.</p>
-</div>
-
-<div class="step">
-<div class="step-number">03</div>
-<h3>Ausstrahlung</h3>
-<p>Das Gespräch wird in das Programm aufgenommen.</p>
-</div>
-
-</div>
-
-<div style="margin-top:24px;padding:42px;background:rgba(83,107,80,.1);border-radius:32px;border:1px solid rgba(83,107,80,.18);text-align:center;">
-<p class="eyebrow">Bereit?</p>
-<h2>Melde dich bei Sinnfunk.</h2>
-<p>Telefonisch, per E-Mail oder über das Kontaktformular.</p>
-<a class="button" href="kontakt.html">Jetzt Kontakt aufnehmen</a>
-</div>
-
-</div>
-
-</main>
-
-<footer>
-<span>© 2026 Sinnfunk</span>
-<span>
-<a href="impressum.html">Impressum</a> ·
-<a href="datenschutz.html">Datenschutz</a> ·
-<a href="kontakt.html">Kontakt</a>
-</span>
-</footer>
+  <footer>
+    <span>© 2026 Sinnfunk</span>
+    <span>
+      <a href="impressum.html">Impressum</a> ·
+      <a href="datenschutz.html">Datenschutz</a> ·
+      <a href="kontakt.html">Kontakt</a>
+    </span>
+  </footer>
 
 </div>
 </body>
