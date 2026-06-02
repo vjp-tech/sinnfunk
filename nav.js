@@ -98,7 +98,6 @@ const navLinks = [
   { href: 'community.html',  label: 'Community' },
   { href: 'shop.html',       label: 'Shop' },
   { href: 'kontakt.html',    label: 'Kontakt' },
-  { href: 'impressum.html',  label: 'Impressum' },
 ];
 
 // Links als HTML-String
