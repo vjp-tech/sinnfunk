@@ -7,527 +7,372 @@
   <meta name="description" content="Werde Sinnfunker – bring deine Stimme ins Radio. Zwei Wege: eigene Episode einreichen oder ein Gespräch in Pöllau aufzeichnen." />
   <link rel="stylesheet" href="style.css" />
   <style>
+/* ==========================================
+   SINNFUNKER PAGE
+   ========================================== */
 
-    /* ── Zwei-Wege-Tabs ── */
-    .path-tabs {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      margin: 36px 0 56px;
-    }
+.quick-paths {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 24px;
+  margin: 42px 0 64px;
+}
 
-    .path-card {
-      background: rgba(255,250,242,0.78);
-      border: 1px solid rgba(123,94,69,0.14);
-      border-radius: 28px;
-      padding: 32px 28px;
-      box-shadow: 0 12px 28px rgba(74,59,43,0.07);
-    }
+.quick-path {
+  background: rgba(255,250,242,0.78);
+  border: 1px solid rgba(123,94,69,0.12);
+  border-radius: 28px;
+  padding: 32px;
+  box-shadow: 0 12px 28px rgba(74,59,43,0.06);
+}
 
-    .path-card.featured {
-      background: rgba(83,107,80,0.09);
-      border-color: rgba(83,107,80,0.25);
-    }
+.quick-path.featured {
+  border-color: rgba(83,107,80,0.25);
+  background: rgba(143,169,139,0.08);
+}
 
-    .path-label {
-      font-family: Arial, sans-serif;
-      font-size: 0.78rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.14em;
-      color: var(--sage-dark);
-      margin-bottom: 10px;
-    }
+.quick-path .price {
+  display: inline-block;
+  margin-top: 18px;
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: var(--sage-dark);
+}
 
-    .path-card h3 {
-      font-size: 1.55rem;
-      margin-bottom: 14px;
-      color: #2c3128;
-    }
+.simple-grid {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 24px;
+  margin: 24px 0 48px;
+}
 
-    .path-card p {
-      font-family: Arial, sans-serif;
-      font-size: 0.97rem;
-      color: #55584e;
-      line-height: 1.65;
-      margin-bottom: 10px;
-    }
+.simple-box {
+  background: rgba(255,250,242,0.65);
+  border: 1px solid rgba(123,94,69,0.1);
+  border-radius: 24px;
+  padding: 24px;
+}
 
-    .path-price {
-      display: inline-block;
-      margin-top: 14px;
-      background: var(--sage-dark);
-      color: var(--warm-white);
-      font-family: Arial, sans-serif;
-      font-size: 0.88rem;
-      font-weight: 700;
-      padding: 7px 16px;
-      border-radius: 999px;
-    }
+.simple-box h3 {
+  margin-bottom: 14px;
+}
 
-    .path-price.clay {
-      background: var(--clay);
-    }
+.schedule-list {
+  background: rgba(255,250,242,0.65);
+  border-radius: 24px;
+  padding: 24px;
+  margin: 24px 0;
+}
 
-    /* ── Slot-Tabelle ── */
-    .slot-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 16px;
-      margin: 24px 0 48px;
-    }
+.schedule-row {
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  padding: 12px 0;
+  border-bottom: 1px solid rgba(123,94,69,0.1);
+}
 
-    .slot {
-      border-radius: 22px;
-      padding: 22px 20px;
-      text-align: center;
-    }
+.schedule-row:last-child {
+  border-bottom: none;
+}
 
-    .slot.morning  { background: rgba(255,214,100,0.18); border: 1px solid rgba(200,160,60,0.22); }
-    .slot.afternoon{ background: rgba(143,169,139,0.18); border: 1px solid rgba(83,107,80,0.22); }
-    .slot.night    { background: rgba(100,120,180,0.12); border: 1px solid rgba(80,100,160,0.18); }
+.schedule-row span {
+  font-family: Arial,sans-serif;
+}
 
-    .slot-icon { font-size: 1.6rem; margin-bottom: 8px; }
+.facts {
+  display: grid;
+  grid-template-columns: repeat(2,1fr);
+  gap: 18px;
+  margin: 24px 0 40px;
+}
 
-    .slot small {
-      display: block;
-      font-family: Arial, sans-serif;
-      font-size: 0.78rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      color: var(--sage-dark);
-      margin-bottom: 4px;
-    }
+.fact {
+  background: rgba(143,169,139,0.08);
+  border-radius: 20px;
+  padding: 18px;
+  border: 1px solid rgba(83,107,80,0.12);
+}
 
-    .slot strong {
-      display: block;
-      font-size: 1.05rem;
-      margin-bottom: 4px;
-    }
+.fact strong {
+  display:block;
+  margin-bottom:4px;
+}
 
-    .slot span {
-      font-family: Arial, sans-serif;
-      font-size: 0.88rem;
-      color: var(--muted);
-    }
+details.legal {
+  background: rgba(255,250,242,0.7);
+  border-radius: 24px;
+  border: 1px solid rgba(123,94,69,0.12);
+  padding: 24px;
+  margin: 40px 0;
+}
 
-    /* ── Reservierte Slots ── */
-    .reserved-slots {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin: 16px 0 48px;
-    }
+details.legal summary {
+  cursor: pointer;
+  font-weight: 700;
+  font-size: 1.1rem;
+}
 
-    .reserved-slot {
-      display: flex;
-      align-items: center;
-      gap: 14px;
-      background: rgba(255,250,242,0.7);
-      border: 1px solid rgba(123,94,69,0.12);
-      border-radius: 18px;
-      padding: 18px 20px;
-    }
+details.legal ul {
+  margin-top: 20px;
+}
 
-    .reserved-slot-icon {
-      font-size: 1.5rem;
-      flex-shrink: 0;
-    }
+.content-narrow {
+  max-width: 760px;
+}
 
-    .reserved-slot h4 {
-      font-size: 1rem;
-      margin-bottom: 2px;
-    }
+@media (max-width: 720px) {
 
-    .reserved-slot p {
-      font-family: Arial, sans-serif;
-      font-size: 0.88rem;
-      color: var(--muted);
-      margin: 0;
-    }
+  .quick-paths,
+  .simple-grid,
+  .facts {
+    grid-template-columns: 1fr;
+  }
 
-    /* ── Rechtliche Hinweise ── */
-    .legal-box {
-      background: rgba(200,148,107,0.1);
-      border: 2px solid rgba(200,148,107,0.35);
-      border-radius: 24px;
-      padding: 30px 32px;
-      margin: 40px 0;
-    }
+  .schedule-row {
+    flex-direction: column;
+    gap: 4px;
+  }
 
-    .legal-box h3 {
-      font-size: 1.15rem;
-      margin-bottom: 16px;
-      color: var(--earth);
-    }
-
-    .legal-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .legal-list li {
-      font-family: Arial, sans-serif;
-      font-size: 0.97rem;
-      color: var(--text);
-      padding: 9px 0 9px 28px;
-      border-bottom: 1px solid rgba(200,148,107,0.15);
-      position: relative;
-    }
-
-    .legal-list li:last-child { border-bottom: none; }
-
-    .legal-list li::before {
-      content: "!";
-      position: absolute;
-      left: 0;
-      color: var(--clay);
-      font-weight: 900;
-      font-family: Arial, sans-serif;
-    }
-
-    .legal-list li strong {
-      color: #2c3128;
-    }
-
-    /* ── Yes/No Grid ── */
-    .yes-no-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 24px;
-      margin: 24px 0 48px;
-    }
-
-    .yes-box, .no-box {
-      border-radius: 24px;
-      padding: 28px;
-    }
-
-    .yes-box {
-      background: rgba(143,169,139,0.13);
-      border: 1px solid rgba(83,107,80,0.2);
-    }
-
-    .no-box {
-      background: rgba(200,148,107,0.1);
-      border: 1px solid rgba(200,148,107,0.22);
-    }
-
-    .yes-box h3, .no-box h3 {
-      font-family: Arial, sans-serif;
-      font-size: 0.82rem;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      font-weight: 700;
-      margin-bottom: 16px;
-    }
-
-    .yes-box h3 { color: var(--sage-dark); }
-    .no-box h3  { color: var(--earth); }
-
-    .yes-box ul, .no-box ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-    }
-
-    .yes-box ul li, .no-box ul li {
-      font-family: Arial, sans-serif;
-      font-size: 0.97rem;
-      color: var(--text);
-      padding: 7px 0 7px 26px;
-      border-bottom: 1px solid rgba(123,94,69,0.08);
-      position: relative;
-    }
-
-    .yes-box ul li:last-child,
-    .no-box ul li:last-child { border-bottom: none; }
-
-    .yes-box ul li::before { content: "✓"; position: absolute; left: 0; color: var(--sage-dark); font-weight: 700; }
-    .no-box  ul li::before { content: "✕"; position: absolute; left: 0; color: var(--clay); font-weight: 700; }
-
-    /* ── Trennlinie zwischen Bereichen ── */
-    .section-divider {
-      width: min(1120px, calc(100% - 32px));
-      margin: 0 auto 64px;
-      border: none;
-      border-top: 2px dashed rgba(123,94,69,0.15);
-    }
-
-    @media (max-width: 720px) {
-      .yes-no-grid,
-      .path-tabs,
-      .slot-grid,
-      .reserved-slots { grid-template-columns: 1fr; }
-    }
+  .content-block p {
+    font-size: 1rem;
+  }
+}
   </style>
 </head>
 <body>
-  <div class="page">
 
-    <header>
-      <a class="logo" href="index.html" aria-label="Sinnfunk Startseite">
-        <img src="image/sinnfunk_logo_ohne_schrift.svg" alt="Sinnfunk Logo" />
-        <span class="logo-name">Sinnfunk</span>
-      </a>
-      <nav aria-label="Hauptnavigation">
-        <a href="index.html">Start</a>
-        <a href="podcaster.html">Mitmachen</a>
-        <a href="kontakt.html">Kontakt</a>
-        <a href="impressum.html">Impressum</a>
-      </nav>
-    </header>
+<div class="page">
 
-    <main>
+<header>
+<a class="logo" href="index.html">
+<img src="image/sinnfunk_logo_ohne_schrift.svg" alt="Sinnfunk Logo">
+<span class="logo-name">Sinnfunk</span>
+</a>
 
-      <!-- Hero -->
-      <div class="page-hero">
-        <p class="eyebrow">Sinnfunker werden</p>
-        <h1>Werde Teil eines neuen Projekts.</h1>
-        <p>Sinnfunk sucht Stimmen, die etwas zu sagen haben – ruhig, klar und ohne Lärm.</p>
-      </div>
+<nav>
+<a href="index.html">Start</a>
+<a href="podcaster.html">Mitmachen</a>
+<a href="kontakt.html">Kontakt</a>
+<a href="impressum.html">Impressum</a>
+</nav>
+</header>
 
-      <div class="content-block">
+<main>
 
-        <!-- Was ist Sinnfunk -->
-        <h2>Was ist Sinnfunk?</h2>
-        <p>
-          Sinnfunk ist ein österreichisches Webradio. Es läuft über Plattformen wie radio.at und kann von Smartphones, Tablets und Internetradios gestreamt werden – genauso wie ein klassischer Radiosender.
-        </p>
-        <p>
-          Es gibt einen festen Sendeplan. Hörer schalten ein und hören, was gerade läuft – sie müssen keine Wahl treffen, niemanden suchen und sich für niemanden entscheiden. Das ist der Unterschied zu Podcast-Plattformen: Bei Sinnfunk hört man Radio.
-        </p>
+<div class="page-hero">
+<p class="eyebrow">Sinnfunker werden</p>
+<h1>Bringe deine Stimme ins Radio.</h1>
+<p>Wähle deinen Weg: Reiche eine fertige Episode ein oder zeichne gemeinsam mit mir ein Gespräch auf.</p>
+</div>
 
-        <!-- Wer darf mitmachen -->
-        <h2>Wer darf mitmachen?</h2>
-        <p>Sinnfunk ist offen für alle, die etwas zu sagen haben:</p>
+<div class="content-block">
 
-        <div class="yes-no-grid">
-          <div class="yes-box">
-            <h3>✓ Willkommen bei Sinnfunk</h3>
-            <ul>
-              <li>Autoren (Bücher, Hörbücher)</li>
-              <li>Energetiker und spirituelle Begleiter</li>
-              <li>Therapeuten und Coaches</li>
-              <li>Philosophen und Denker</li>
-              <li>Wissenschaftler und Forscher</li>
-              <li>Kräuterpädagogen und Naturkundler</li>
-              <li>Meditationsleiter</li>
-              <li>Künstler und Kulturschaffende</li>
-              <li>Alle, die etwas zu sagen haben</li>
-            </ul>
-          </div>
-          <div class="no-box">
-            <h3>✕ Kein Platz bei Sinnfunk</h3>
-            <ul>
-              <li>Impfungen und Corona</li>
-              <li>Gendergerechte Sprache & Genderstern</li>
-              <li>USA, Amerika, Trump</li>
-              <li>Ukraine, Russland, Krieg</li>
-              <li>Aktuelle Politik & Parteien</li>
-              <li>EU-Politik</li>
-              <li>Migration als Streitthema</li>
-              <li>Alles, was primär Wut auslöst</li>
-            </ul>
-          </div>
-        </div>
+<div class="quick-paths">
 
-        <!-- Sendezeiten -->
-        <h2>Feste Sendezeiten</h2>
-        <p>Täglich werden geführte Meditationen, Buchvorstellungen und Gespräche präsentiert. Jede Episode wird mindestens dreimal ausgestrahlt:</p>
+<div class="quick-path featured">
+<h3>Eigene Episode einreichen</h3>
+<p>Für Podcaster, Autoren und alle, die bereits Audioinhalte besitzen.</p>
+<div class="price">Kostenlos bis 30.09.2026</div>
+</div>
 
-        <div class="slot-grid">
-          <div class="slot morning">
-            <div class="slot-icon">☀️</div>
-            <small>Vormittagsslot</small>
-            <strong>06:00 – 15:00 Uhr</strong>
-            <span>Gespräche & Episoden</span>
-          </div>
-          <div class="slot afternoon">
-            <div class="slot-icon">🌤</div>
-            <small>Nachmittagsslot</small>
-            <strong>15:00 – 21:00 Uhr</strong>
-            <span>Gespräche & Episoden</span>
-          </div>
-          <div class="slot night">
-            <div class="slot-icon">🌙</div>
-            <small>Nachtslot</small>
-            <strong>21:00 – 06:00 Uhr</strong>
-            <span>Gespräche & Episoden</span>
-          </div>
-        </div>
+<div class="quick-path">
+<h3>Gespräch aufnehmen</h3>
+<p>Wir zeichnen gemeinsam ein Gespräch in Pöllau auf.</p>
+<div class="price">25 € / Stunde</div>
+</div>
 
-        <p>Bestimmte Sendezeiten sind reserviert:</p>
+</div>
 
-        <div class="reserved-slots">
-          <div class="reserved-slot">
-            <div class="reserved-slot-icon">📖</div>
-            <div>
-              <h4>Autoren – täglich 10:00 Uhr</h4>
-              <p>Buchvorstellungen und Hörbuch-Auszüge im Vormittagsslot.</p>
-            </div>
-          </div>
-          <div class="reserved-slot">
-            <div class="reserved-slot-icon">◌</div>
-            <div>
-              <h4>Meditationen – täglich 21:00 Uhr</h4>
-              <p>Geführte Meditationen zum Abschluss des Tages.</p>
-            </div>
-          </div>
-        </div>
+<h2>Was ist Sinnfunk?</h2>
 
-        <div class="highlight-box">
-          <p><strong>Maximale Dauer einer Episode: 60 Minuten.</strong> Längere Inhalte müssen geschnitten und als zwei oder drei separate Episoden eingereicht werden.</p>
-        </div>
+<div class="content-narrow">
+<p>Sinnfunk ist ein werbefreies Webradio mit festem Programm. Hörer schalten ein und hören das laufende Programm – ähnlich wie bei einem klassischen Radiosender.</p>
+<p>Ausgestrahlt werden Gespräche, Meditationen, Buchvorstellungen und Wissensinhalte.</p>
+</div>
 
-        <!-- Keine Werbung -->
-        <h2>Keine Werbung – Sinnfunker finanzieren Sinnfunk.</h2>
-        <p>
-          Sinnfunk ist werbefrei. Keine Werbespots, keine bezahlten Einschaltungen, keine Sponsoren. Stattdessen finanziert sich Sinnfunk über die Menschen, die ihre Inhalte einreichen. Das hält den Sender unabhängig und den Ton ruhig.
-        </p>
+<h2>Für wen ist Sinnfunk?</h2>
 
-        <!-- Rechtliche Hinweise -->
-        <div class="legal-box">
-          <h3>Wichtige rechtliche Hinweise</h3>
-          <p style="font-family: Arial, sans-serif; font-size: 0.94rem; color: #55584e; margin-bottom: 16px;">
-            Sinnfunk ist ein Webradio und unterliegt strengeren gesetzlichen Auflagen als ein Podcast. Bitte beachte:
-          </p>
-          <ul class="legal-list">
-            <li><strong>Keine Fremdwerbung</strong> in Episoden – Eigenwerbung für deine eigenen Produkte ist ausdrücklich erlaubt.</li>
-            <li><strong>Keine Werbung für Alkohol, Waffen oder Pornografie</strong> – auch nicht als Eigenwerbung.</li>
-            <li><strong>Keine Musik</strong> – außer nachweislich lizenzfreier Musik oder KI-generierter Musik als Hintergrund bei Meditationen.</li>
-            <li><strong>Keine Verleumdung</strong> anderer Personen oder Organisationen.</li>
-            <li><strong>Kein bewusster Lug und Betrug</strong> – inhaltliche Redlichkeit ist Voraussetzung.</li>
-          </ul>
-        </div>
+<div class="simple-grid">
 
-      </div>
+<div class="simple-box">
+<h3>Willkommen</h3>
+<ul>
+<li>Autoren</li>
+<li>Therapeuten</li>
+<li>Coaches</li>
+<li>Forscher</li>
+<li>Künstler</li>
+<li>Meditationsleiter</li>
+<li>Menschen mit Wissen und Erfahrungen</li>
+</ul>
+</div>
 
-      <!-- ═══ BEREICH 1: EIGENE EPISODE ═══ -->
-      <hr class="section-divider" />
+<div class="simple-box">
+<h3>Inhaltlicher Fokus</h3>
+<p>Persönlichkeitsentwicklung, Natur, Kultur, Spiritualität, Gesundheit, Wissen und Lebenserfahrung.</p>
+<p>Aktuelle politische Konflikt- und Streitthemen stehen nicht im Fokus.</p>
+</div>
 
-      <div class="content-block">
-        <p class="eyebrow">Weg 1</p>
-        <h2>Eigene Episode einreichen</h2>
-        <p>
-          Du hast bereits einen Podcast, einen YouTube-Kanal oder andere aufgezeichnete Inhalte? Dann kannst du deine Episode direkt bei Sinnfunk einreichen – als fertige Audiodatei.
-        </p>
-        <p>
-          Willkommen sind Podcast-Episoden, das Audio von YouTube-Videos sowie Auszüge aus Hörbüchern. Du lädst die Datei einfach über dein persönliches Konto in der Sinnfunk-App hoch.
-        </p>
+</div>
 
-        <div class="highlight-box">
-          <p><strong>Eigenwerbung ist erlaubt.</strong> Du darfst dich und dein Wissen, deine Bücher, Seminare, Kurse und Meditationen in deiner Episode bewerben. Das ist die Idee von Sinnfunk: Seiner Stimme Gehör zu verschaffen.</p>
-        </div>
+<h2>Sendezeiten</h2>
 
-        <h2 style="font-size: clamp(1.4rem, 2.5vw, 2rem); margin-top: 40px;">Preise</h2>
+<div class="schedule-list">
 
-        <div class="path-tabs">
-          <div class="path-card featured">
-            <div class="path-label">⏳ Einführungsangebot</div>
-            <h3>Kostenlos</h3>
-            <p>Bis Ende September 2026 sind alle eingereichten Podcast-Episoden kostenlos.</p>
-            <span class="path-price">Gratis bis 30.09.2026</span>
-          </div>
-          <div class="path-card">
-            <div class="path-label">Ab Oktober 2026</div>
-            <h3>10 € pro Episode</h3>
-            <p>Ab 1. Oktober 2026 gilt ein Beitrag von 10 Euro pro eingereichter Episode.</p>
-            <span class="path-price clay">€ 10 / Episode</span>
-          </div>
-        </div>
+<div class="schedule-row">
+<strong>Vormittag</strong>
+<span>06:00 – 15:00 Uhr</span>
+</div>
 
-        <h2 style="font-size: clamp(1.4rem, 2.5vw, 2rem);">So wird man Sinnfunker</h2>
-        <div class="steps">
-          <div class="step">
-            <div class="step-number">01</div>
-            <h3>Kontakt aufnehmen</h3>
-            <p>Melde dich telefonisch oder per E-Mail. Wir prüfen gemeinsam, ob deine Stimme und deine Themen zu Sinnfunk passen.</p>
-          </div>
-          <div class="step">
-            <div class="step-number">02</div>
-            <h3>Zugang zur App</h3>
-            <p>Wenn alles passt, erhältst du einen persönlichen Zugang zur Sinnfunk-App und kannst dein Profil anlegen.</p>
-          </div>
-          <div class="step">
-            <div class="step-number">03</div>
-            <h3>Episode hochladen</h3>
-            <p>Du lädst deine Episode hoch. Wer zuerst einreicht, wird zuerst gespielt – First Come, First Served.</p>
-          </div>
-        </div>
+<div class="schedule-row">
+<strong>Nachmittag</strong>
+<span>15:00 – 21:00 Uhr</span>
+</div>
 
-        <!-- Was du erhältst -->
-        <h2 style="font-size: clamp(1.4rem, 2.5vw, 2rem);">Was du erhältst</h2>
-        <ul class="content-block" style="padding: 0; margin: 16px 0 48px;">
-          <li>3 garantierte Ausstrahlungen (Vormittag, Nachmittag, Nacht)</li>
-          <li>Persönliches Profil mit Bio, Foto & Links auf sinnfunk.live</li>
-          <li>Eigenwerbung innerhalb der Episode erlaubt</li>
-          <li>Präsentation deiner Bücher, Kurse & Meditationen im Sinnfunk-Webshop (mit Links)</li>
-        </ul>
+<div class="schedule-row">
+<strong>Nacht</strong>
+<span>21:00 – 06:00 Uhr</span>
+</div>
 
-      </div>
+</div>
 
-      <!-- ═══ BEREICH 2: GESPRÄCH ═══ -->
-      <hr class="section-divider" />
+<div class="facts">
+<div class="fact"><strong>10:00 Uhr</strong>Autoren & Bücher</div>
+<div class="fact"><strong>21:00 Uhr</strong>Meditationen</div>
+</div>
 
-      <div class="content-block">
-        <p class="eyebrow">Weg 2</p>
-        <h2>Ein Gespräch mit mir aufnehmen</h2>
-        <p>
-          Du möchtest bei Sinnfunk mitmachen, hast aber keinen eigenen Podcast, YouTube-Kanal oder bereits aufgezeichnete Inhalte? Kein Problem. Wir können gemeinsam ein Gespräch aufnehmen.
-        </p>
-        <p>
-          Ich lade dich nach <strong>Pöllau in der Steiermark</strong> ein. Dort zeichnen wir ein Gespräch zu deinem Thema auf. Du erhältst die fertige Aufnahme als MP3-Datei – <strong>sie gehört dir</strong>. Du kannst sie auf deiner Website veröffentlichen, in sozialen Medien hochladen oder einfach bei Sinnfunk laufen lassen.
-        </p>
-        <p>
-          Bei Sinnfunk wird das Gespräch ebenfalls dreimal ausgestrahlt: einmal vormittags, einmal nachmittags und einmal abends.
-        </p>
+<div class="highlight-box">
+<p><strong>Maximale Episodenlänge: 60 Minuten.</strong> Längere Inhalte bitte in mehrere Episoden aufteilen.</p>
+</div>
 
-        <div class="highlight-box">
-          <p><strong>25 € pro Stunde Aufzeichnung.</strong> Die Aufzeichnung gehört dir. Du kannst sie überall online stellen, teilen und weiterverwenden.</p>
-        </div>
+<details class="legal">
+<summary>Rechtliche Hinweise</summary>
+<ul>
+<li>Eigenwerbung für eigene Angebote ist erlaubt.</li>
+<li>Keine Werbung für Alkohol, Waffen oder Pornografie.</li>
+<li>Nur lizenzfreie oder selbst erstellte Musik.</li>
+<li>Keine Verleumdung von Personen oder Organisationen.</li>
+<li>Inhalte müssen nach bestem Wissen korrekt sein.</li>
+</ul>
+</details>
 
-        <h2 style="font-size: clamp(1.4rem, 2.5vw, 2rem); margin-top: 40px;">So wird man Gesprächsteilnehmer</h2>
-        <div class="steps">
-          <div class="step">
-            <div class="step-number">01</div>
-            <h3>Kontakt aufnehmen</h3>
-            <p>Melde dich telefonisch oder per E-Mail. Wir besprechen dein Thema und vereinbaren einen Termin in Pöllau.</p>
-          </div>
-          <div class="step">
-            <div class="step-number">02</div>
-            <h3>Aufzeichnung in Pöllau</h3>
-            <p>Wir führen das Gespräch vor Ort. Die Aufnahme gehört dir – du erhältst sie als MP3-Datei.</p>
-          </div>
-          <div class="step">
-            <div class="step-number">03</div>
-            <h3>Dreimal auf Sendung</h3>
-            <p>Das Gespräch wird bei Sinnfunk eingeplant und dreimal ausgestrahlt – vormittags, nachmittags und abends.</p>
-          </div>
-        </div>
+</div>
 
-        <!-- CTA -->
-        <div style="margin-top: 24px; padding: 42px; background: rgba(83,107,80,0.1); border-radius: 32px; border: 1px solid rgba(83,107,80,0.18); text-align: center;">
-          <p class="eyebrow" style="text-align: center;">Bereit?</p>
-          <h2 style="font-size: clamp(1.6rem, 3vw, 2.4rem); margin-bottom: 16px;">Melde dich – egal welchen Weg du wählst.</h2>
-          <p style="color: #55584e; max-width: 520px; margin: 0 auto 28px;">Telefonisch, per E-Mail oder über das Kontaktformular. Ich freue mich auf dich.</p>
-          <a class="button" href="kontakt.html">Jetzt Kontakt aufnehmen</a>
-        </div>
+<hr class="section-divider">
 
-      </div>
-    </main>
+<div class="content-block path-section">
 
-    <footer>
-      <span>© 2026 Sinnfunk</span>
-      <span>
-        <a href="impressum.html">Impressum</a> ·
-        <a href="datenschutz.html">Datenschutz</a> ·
-        <a href="kontakt.html">Kontakt</a>
-      </span>
-    </footer>
+<p class="eyebrow">Weg 1</p>
+<h2>Eigene Episode einreichen</h2>
 
-  </div>
+<p>Du hast bereits einen Podcast, einen YouTube-Kanal oder andere Audioinhalte? Dann kannst du diese direkt bei Sinnfunk einreichen.</p>
+
+<div class="highlight-box">
+<p><strong>Eigenwerbung ist erlaubt.</strong> Bücher, Seminare, Kurse und eigene Angebote dürfen in deiner Episode erwähnt werden.</p>
+</div>
+
+<h2>Preis</h2>
+
+<div class="quick-path featured">
+<h3>Kostenlos bis 30.09.2026</h3>
+<p>Danach 10 € pro eingereichter Episode.</p>
+</div>
+
+<h2>So funktioniert es</h2>
+
+<div class="steps">
+
+<div class="step">
+<div class="step-number">01</div>
+<h3>Kontakt</h3>
+<p>Kurze Vorstellung per E-Mail oder Telefon.</p>
+</div>
+
+<div class="step">
+<div class="step-number">02</div>
+<h3>Zugang</h3>
+<p>Du erhältst Zugang zur Sinnfunk-Plattform.</p>
+</div>
+
+<div class="step">
+<div class="step-number">03</div>
+<h3>Upload</h3>
+<p>Episode hochladen und zur Ausstrahlung freigeben.</p>
+</div>
+
+</div>
+
+<h2>Du erhältst</h2>
+
+<ul>
+<li>Mehrfache Ausstrahlung im Programm</li>
+<li>Persönliches Profil auf Sinnfunk</li>
+<li>Eigenwerbung innerhalb der Episode</li>
+<li>Präsentation deiner Angebote</li>
+</ul>
+
+</div>
+
+<hr class="section-divider">
+
+<div class="content-block">
+
+<p class="eyebrow">Weg 2</p>
+<h2>Gespräch mit mir aufnehmen</h2>
+
+<p>Du hast noch keinen Podcast? Dann können wir gemeinsam ein Gespräch in Pöllau aufzeichnen.</p>
+
+<p>Die fertige MP3-Datei gehört dir und kann beliebig weiterverwendet werden.</p>
+
+<div class="highlight-box">
+<p><strong>25 € pro Stunde Aufzeichnung.</strong></p>
+</div>
+
+<h2>So funktioniert es</h2>
+
+<div class="steps">
+
+<div class="step">
+<div class="step-number">01</div>
+<h3>Termin vereinbaren</h3>
+<p>Wir besprechen dein Thema und finden einen Termin.</p>
+</div>
+
+<div class="step">
+<div class="step-number">02</div>
+<h3>Aufzeichnung</h3>
+<p>Das Gespräch wird in Pöllau aufgenommen.</p>
+</div>
+
+<div class="step">
+<div class="step-number">03</div>
+<h3>Ausstrahlung</h3>
+<p>Das Gespräch wird in das Programm aufgenommen.</p>
+</div>
+
+</div>
+
+<div style="margin-top:24px;padding:42px;background:rgba(83,107,80,.1);border-radius:32px;border:1px solid rgba(83,107,80,.18);text-align:center;">
+<p class="eyebrow">Bereit?</p>
+<h2>Melde dich bei Sinnfunk.</h2>
+<p>Telefonisch, per E-Mail oder über das Kontaktformular.</p>
+<a class="button" href="kontakt.html">Jetzt Kontakt aufnehmen</a>
+</div>
+
+</div>
+
+</main>
+
+<footer>
+<span>© 2026 Sinnfunk</span>
+<span>
+<a href="impressum.html">Impressum</a> ·
+<a href="datenschutz.html">Datenschutz</a> ·
+<a href="kontakt.html">Kontakt</a>
+</span>
+</footer>
+
+</div>
 </body>
 </html>
