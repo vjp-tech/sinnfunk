@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kontakt – Sinnfunk</title>
+  <meta name="description" content="Nimm Kontakt mit Sinnfunk auf – per Formular, E-Mail oder Telefon." />
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .kontakt-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 48px;
+      align-items: start;
+      margin-top: 12px;
+    }
+
+    .kontakt-form {
+      background: rgba(255, 250, 242, 0.72);
+      border: 1px solid rgba(123, 94, 69, 0.12);
+      border-radius: 32px;
+      padding: 36px;
+      box-shadow: var(--shadow);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-family: Arial, sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--sage-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1px solid rgba(123, 94, 69, 0.22);
+      border-radius: 14px;
+      background: var(--warm-white);
+      font-family: Georgia, serif;
+      font-size: 1rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--sage-dark);
+    }
+
+    .form-group textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .form-submit {
+      margin-top: 8px;
+    }
+
+    .kontakt-info {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .info-card {
+      background: rgba(255, 250, 242, 0.65);
+      border: 1px solid rgba(123, 94, 69, 0.12);
+      border-radius: 24px;
+      padding: 22px 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .info-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: rgba(143, 169, 139, 0.18);
+      display: grid;
+      place-items: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+
+    .info-card h3 {
+      font-size: 1rem;
+      margin-bottom: 4px;
+      color: var(--sage-dark);
+      font-family: Arial, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.82rem;
+    }
+
+    .info-card p,
+    .info-card a {
+      font-size: 1.02rem;
+      color: var(--text);
+    }
+
+    .info-card a:hover {
+      color: var(--sage-dark);
+    }
+
+    @media (max-width: 900px) {
+      .kontakt-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <div id="sf-nav"></div>
+  <script src="nav.js"></script>
+
+    <main>
+
+      <div class="page-hero">
+        <p class="eyebrow">Kontakt</p>
+        <h1>Wir freuen uns von dir zu hören.</h1>
+        <p>Du hast Fragen zu Sinnfunk, möchtest Podcaster werden oder einfach Hallo sagen? Melde dich – wir antworten so schnell wie möglich.</p>
+      </div>
+
+      <div class="content-block">
+        <div class="kontakt-grid">
+
+          <!-- Formular -->
+          <div class="kontakt-form">
+            <p class="eyebrow" style="margin-bottom: 20px;">Nachricht schreiben</p>
+            <form action="https://formspree.io/f/xaqkvewn" method="POST">
+              <div class="form-group">
+                <label for="name">Dein Name</label>
+                <input type="text" id="name" name="name" placeholder="Vorname Nachname" required />
+              </div>
+              <div class="form-group">
+                <label for="email">E-Mail-Adresse</label>
+                <input type="email" id="email" name="email" placeholder="deine@email.at" required />
+              </div>
+              <div class="form-group">
+                <label for="betreff">Betreff</label>
+                <select id="betreff" name="betreff">
+                  <option value="">Bitte wählen …</option>
+                  <option value="podcaster">Ich möchte Podcaster werden</option>
+                  <option value="hoerer">Frage als Hörer</option>
+                  <option value="kooperation">Kooperation / Zusammenarbeit</option>
+                  <option value="sonstiges">Sonstiges</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="nachricht">Nachricht</label>
+                <textarea id="nachricht" name="nachricht" placeholder="Was liegt dir am Herzen?" required></textarea>
+              </div>
+              <div class="form-submit">
+                <button type="submit" class="button">Nachricht absenden</button>
+              </div>
+            </form>
+          </div>
+
+          <!-- Kontaktinfos -->
+          <div class="kontakt-info">
+            <div class="info-card">
+              <div class="info-icon">✉</div>
+              <div>
+                <h3>E-Mail</h3>
+                <a href="mailto:servus@sinnfunk.live">servus@sinnfunk.live</a>
+              </div>
+            </div>
+            <div class="info-card">
+              <div class="info-icon">☎</div>
+              <div>
+                <h3>Telefon</h3>
+                <a href="tel:+4367764771171">+43 677 64771171</a>
+              </div>
+            </div>
+            <div class="info-card">
+              <div class="info-icon">f</div>
+              <div>
+                <h3>Facebook</h3>
+                <a href="https://www.facebook.com/profile.php?id=61590566336118" target="_blank" rel="noopener">Sinnfunk auf Facebook</a>
+              </div>
+            </div>
+            <div class="highlight-box" style="margin: 0;">
+              <p>Du möchtest Podcaster werden? Am schnellsten geht es über das Formular – wähle einfach den Betreff <em>„Ich möchte Podcaster werden"</em>.</p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </main>
+
+    <footer>
+      <span>© 2026 Sinnfunk</span>
+      <span>
+        <a href="impressum.html">Impressum</a> ·
+        <a href="datenschutz.html">Datenschutz</a> ·
+        <a href="kontakt.html">Kontakt</a>
+      </span>
+    </footer>
+
+  </div>
+</body>
+</html>

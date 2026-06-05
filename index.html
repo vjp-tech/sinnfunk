@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sinnfunk – Radio, das etwas zu sagen hat</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* People-Grid: boxed, nicht full width */
+    .people-section {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 72px 0;
+    }
+    .people-box {
+      background: rgba(255, 250, 242, 0.52);
+      border: 1px solid rgba(123, 94, 69, 0.12);
+      border-radius: 36px;
+      padding: 42px;
+    }
+    .people-box .section-head {
+      margin-bottom: 32px;
+    }
+    .people-box .hero-actions {
+      margin-top: 24px;
+      justify-content: flex-start;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <div id="sf-nav"></div>
+  <script src="nav.js"></script>
+
+    <main id="top">
+
+      <!-- Hero -->
+      <section class="hero" id="radio">
+        <div>
+          <p class="eyebrow">Sinnfunk</p>
+          <h1>Radio, das etwas zu sagen hat.</h1>
+          <p class="hero-text">
+            Sinnfunk startet seinen Betrieb ab August 2026.<br>Wenn du mitmachen möchtest, kontaktiere mich für nähere Informationen.
+          </p>
+          <div class="hero-actions">
+            <a class="button" href="#themen">Wofür wir stehen</a>
+            <a class="button secondary" href="kontakt.html">Kontakt</a>
+          </div>
+        </div>
+
+        <aside class="player-card" id="player" aria-label="Webplayer">
+          <div class="player-title">
+            <div>
+              <p class="eyebrow" style="margin-bottom: 4px;">Live hören</p>
+              <h2 style="font-size: 2rem; margin-bottom: 0;">Unser Stream</h2>
+            </div>
+            <span class="live-badge">On Air</span>
+          </div>
+          <audio controls preload="none">
+            <source src="https://media-ssl.musicradio.com/ClassicFMCalmMP3" type="audio/mpeg" />
+            Dein Browser unterstützt den Audioplayer leider nicht.
+          </audio>
+          <div class="now-playing" aria-live="polite">
+            <small>Jetzt läuft</small>
+            <strong id="current-title">Calm-FM. Ab August läuft hier das Sinnfunk-Webradio</strong>
+            <span id="current-host">Calm-FM</span>
+          </div>
+        </aside>
+      </section>
+
+            <!-- Stiller Ort -->
+      <section id="themen">
+        <div class="about">
+          <div
+            class="about-visual"
+            role="img"
+            aria-label="Radio bei Sinnfunk"
+            style="background-image: linear-gradient(rgba(83,107,80,0.15), rgba(83,107,80,0.05)), url('image/radio-sinnfunk.webp');"
+          ></div>
+          <div>
+            <p class="eyebrow">Warum Sinnfunk?</p>
+            <h2>Ein stiller Ort im lauten Netz.</h2>
+            <p>
+              Sinnfunk sammelt Stimmen von Menschen, die sich einig sind: Es darf einfach sein. Es darf menschlich bleiben. Und es darf Tiefe haben, ohne schwer zu werden.
+            </p>
+          </div>
+        </div>
+      </section>
+
+      <!-- Was ist Sinnfunk -->
+      <section>
+        <div class="section-head">
+          <p class="eyebrow">Wofür wir stehen</p>
+          <h2>Was ist Sinnfunk?</h2>
+          <p>Wir sind ein Gesprächs-, Meditations- und Podcast-Radio mit einem gemeinsamen Nenner: keine explosiven Themen.</p>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <div class="card-icon">⌁</div>
+            <h3>Keine Wut-Themen</h3>
+            <p>Egal ob Corona, Impfungen, Klimawandel, Feminismus oder aktuelle Politik: soziale Medien belohnen Aufregerthemen. Sinnfunk nicht.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon">✦</div>
+            <h3>Was ist ein Sprachradio?</h3>
+            <p>Mit Ausnahme der Hintergrundmusik bei unseren täglichen Meditationen gibt es keine Musik bei Sinnfunk.</p>
+          </article>
+                  <article class="card">
+            <div class="card-icon">◌</div>
+            <h3>Keine Werbung</h3>
+            <p>Sinnfunk wird über die Personen finanziert, die ihre Inhalte hochladen – nicht durch Werbung.</p>
+          </article>
+        </div>
+      </section>
+
+
+      <!-- Programm -->
+      <section id="programm">
+        <div class="section-head">
+          <p class="eyebrow">Programm</p>
+          <h2>Was dich erwartet.</h2>
+        </div>
+        <div class="program-strip">
+          <div class="program-item">
+            <small>Täglich</small>
+            <strong>Meditationen</strong>
+            <span>Kurze Meditationen zum Innehalten – jeden Abend um 20 Uhr.</span>
+          </div>
+          <div class="program-item">
+            <small>Täglich</small>
+            <strong>Autoren</strong>
+            <span>Jeden Tag um 10 Uhr präsentiert ein Autor sein neuestes Werk.</span>
+          </div>
+          <div class="program-item">
+            <small>Vielfalt</small>
+            <strong>Viele Stimmen</strong>
+            <span>Energetiker und Wissenschaftler, Philosophen und Krimi-Autoren, Kräuterpädagogen und Kunstliebhaber.</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- Werde Sinnfunker -->
+      <div class="people-section">
+        <div class="people-box">
+          <div class="section-head">
+            <p class="eyebrow">Werde Sinnfunker</p>
+            <h2>Menschen hinter den Stimmen.</h2>
+            <p>Du hast etwas zu sagen? Mach mit!</p>
+            <div class="hero-actions">
+              <a class="button" href="podcaster.html">Sinnfunker werden</a>
+              <a class="button secondary" href="kontakt.html">Kontaktiere mich</a>
+            </div>
+          </div>
+
+          <div class="people-grid">
+            <article class="person">
+              <div class="avatar" style="font-size: 1.4rem;">✦</div>
+              <h3>Faire Chancen</h3>
+              <p>Sinnfunk bevorzugt niemanden – jeder hat eine Chance, gehört zu werden.</p>
+            </article>
+            <article class="person">
+              <div class="avatar" style="font-size: 1.4rem;">✦</div>
+              <h3>Keine Suche</h3>
+              <p>Sinnfunk ist ein Radio – kein Podcast-Dienst. Zuhörer müssen keine Wahl treffen.</p>
+            </article>
+            <article class="person">
+              <div class="avatar" style="font-size: 1.4rem;">✦</div>
+              <h3>Gutes Karma</h3>
+              <p>Kontroverse Inhalte werden im Internet belohnt. Bei Sinnfunk gilt das Gegenteil.</p>
+            </article>
+            <article class="person">
+              <div class="avatar" style="font-size: 1.4rem;">✦</div>
+              <h3>Zwei Wege</h3>
+              <p>Eigenes Hochladen oder mit mir zusammen ein Gespräch führen.</p>
+            </article>
+          </div>
+        </div>
+      </div>
+
+    </main>
+
+    <footer>
+      <span>© 2026 Sinnfunk</span>
+      <span>
+        <a href="impressum.html">Impressum</a> ·
+        <a href="datenschutz.html">Datenschutz</a> ·
+        <a href="kontakt.html">Kontakt</a>
+      </span>
+    </footer>
+
+  </div>
+
+  <script>
+    const playlist = [
+      { title: "Zurzeit läuft Calm FM", host: "Sinnfunk" },
+      { title: "Ab August 2026 läuft hier Sinnfunk.live", host: "Sinnfunk" },
+      { title: "Ein Webradio für alle, die ein bisschen Abstand vom Drama des Lebens brauchen", host: "Sinnfunk" }
+    ];
+    let currentIndex = 0;
+    const titleEl = document.getElementById("current-title");
+    const hostEl  = document.getElementById("current-host");
+    function updateNowPlaying() {
+      currentIndex = (currentIndex + 1) % playlist.length;
+      titleEl.textContent = playlist[currentIndex].title;
+      hostEl.textContent  = playlist[currentIndex].host;
+    }
+    setInterval(updateNowPlaying, 9000);
+  </script>
+</body>
+</html>
