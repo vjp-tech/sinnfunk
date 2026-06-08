@@ -665,23 +665,30 @@
 
 <!-- ── PROGRAMM & SENDEZEITEN ── -->
 <div class="sf-program-wrap">
-  <div class="sf-program">
-    <div class="sf-program-head">
-      <p class="eyebrow">Sendezeiten</p>
-      <h2>Wann bist du auf Sendung?</h2>
-    </div>
+  <div style="
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 20px;
+    margin-bottom: 20px;
+  ">
 
     <!-- Fixe Sendeplätze -->
-    <div>
-      <p class="eyebrow" style="margin-bottom: 12px;">Fixe Sendeplätze</p>
-      <p style="font-family: Arial, sans-serif; font-size: 0.9rem; color: #55584e; margin-bottom: 16px; line-height: 1.6;">
-        Für bestimmte Inhalte gibt es reservierte Sendeplätze, die täglich oder wöchentlich wiederkehren.
+    <div style="
+      background: rgba(143,169,139,0.12);
+      border: 1px solid rgba(83,107,80,0.2);
+      border-radius: 28px;
+      padding: 36px 32px;
+    ">
+      <p class="eyebrow" style="margin-bottom: 8px;">Fixe Sendeplätze</p>
+      <h3 style="font-size: 1.4rem; margin-bottom: 10px;">Reservierte Zeiten</h3>
+      <p style="font-family: Arial, sans-serif; font-size: 0.88rem; color: #55584e; margin-bottom: 20px; line-height: 1.6;">
+        Für bestimmte Inhalte gibt es wöchentlich wiederkehrende Sendeplätze.
       </p>
-      <div class="sf-highlights">
+      <div style="display: flex; flex-direction: column; gap: 10px;">
         <div class="sf-highlight-row">
           <span class="hi-icon">📖</span>
           <div>
-            <strong>Montag & Donnerstag: 10:00 Uhr</strong>
+            <strong>Mo & Do: 10:00 Uhr</strong>
             <span>Autoren präsentieren ihre Bücher</span>
           </div>
         </div>
@@ -689,20 +696,20 @@
           <span class="hi-icon">◌</span>
           <div>
             <strong>Täglich: 22:00 Uhr</strong>
-            <span>Geführte Meditationen zum Einschlafen</span>
+            <span>Geführte Meditationen</span>
           </div>
         </div>
         <div class="sf-highlight-row">
           <span class="hi-icon">🌙</span>
           <div>
-            <strong>Jeden Sonntag: 11:00 Uhr</strong>
+            <strong>Sonntag: 11:00 Uhr</strong>
             <span>Astrologie</span>
           </div>
         </div>
         <div class="sf-highlight-row">
           <span class="hi-icon">🎙</span>
           <div>
-            <strong>Dienstag, Freitag & Sonntag: 19:00 Uhr</strong>
+            <strong>Di, Fr & So: 19:00 Uhr</strong>
             <span>Gespräche mit Verena</span>
           </div>
         </div>
@@ -710,35 +717,49 @@
     </div>
 
     <!-- Flexible Slots -->
-    <div>
-      <p class="eyebrow" style="margin-bottom: 12px;">Flexible Slots</p>
-      <p style="font-family: Arial, sans-serif; font-size: 0.9rem; color: #55584e; margin-bottom: 16px; line-height: 1.6;">
+    <div style="
+      background: rgba(200,148,107,0.08);
+      border: 1px solid rgba(200,148,107,0.22);
+      border-radius: 28px;
+      padding: 36px 32px;
+    ">
+      <p class="eyebrow" style="margin-bottom: 8px;">Flexible Slots</p>
+      <h3 style="font-size: 1.4rem; margin-bottom: 10px;">Drei Ausstrahlungen pro Jahr</h3>
+      <p style="font-family: Arial, sans-serif; font-size: 0.88rem; color: #55584e; margin-bottom: 20px; line-height: 1.6;">
         Alle anderen Sinnfunker erhalten im Laufe eines Jahres <strong>drei Ausstrahlungen</strong> — einen Slot im Vormittag, einen am Nachmittag und einen in der Nacht. Die Reihenfolge richtet sich nach dem Einreichungsdatum.
       </p>
-      <div class="sf-slots">
+      <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px;">
         <div class="sf-slot-row"><strong>☀ Vormittag</strong><span>06:00 – 15:00 Uhr</span></div>
         <div class="sf-slot-row"><strong>🌤 Nachmittag</strong><span>15:00 – 21:00 Uhr</span></div>
         <div class="sf-slot-row"><strong>🌙 Nacht</strong><span>21:00 – 06:00 Uhr</span></div>
       </div>
-      <div class="sf-program-note" style="margin-top: 14px;">
-        <span class="note-icon">📋</span>
-        <p>Die Zuteilung erfolgt automatisch nach dem Prinzip <strong>First Come, First Served</strong> — wer zuerst einreicht, kommt zuerst dran.</p>
-      </div>
-    </div>
-
-    <!-- Episodenlänge -->
-    <div style="grid-column: 1 / -1;">
       <div class="sf-program-note">
-        <span class="note-icon">⏱</span>
-        <p><strong>Maximale Episodenlänge: 120 Minuten.</strong>
-          <br>Wenn deine Episode länger als 120 Minuten ist, musst du sie in zwei Episoden trennen. Die zwei Teile werden dann zu unterschiedlichen Zeiten gespielt.
-          Dadurch vermeide ich, dass ein einziger Sinnfunker eine zehnstündige Episode hochlädt. 😊
-        </p>
+        <span class="note-icon">📋</span>
+        <p>Die Zuteilung erfolgt nach dem Prinzip <strong>First Come, First Served</strong> — wer zuerst einreicht, kommt zuerst dran.</p>
       </div>
     </div>
 
   </div>
+
+  <!-- Episodenlänge -->
+  <div style="
+    background: rgba(143,169,139,0.08);
+    border: 1px solid rgba(83,107,80,0.15);
+    border-radius: 20px;
+    padding: 22px 28px;
+    display: flex;
+    gap: 14px;
+    align-items: flex-start;
+  ">
+    <span style="font-size: 1.4rem; flex-shrink: 0; margin-top: 2px;">⏱</span>
+    <p style="font-family: Arial, sans-serif; font-size: 0.92rem; color: #55584e; margin: 0; line-height: 1.6;">
+      <strong>Maximale Episodenlänge: 120 Minuten.</strong>
+      <br>Wenn deine Episode länger als 120 Minuten ist, musst du sie in zwei Episoden trennen. Die zwei Teile werden dann zu unterschiedlichen Zeiten gespielt. 😊
+    </p>
+  </div>
+
 </div>
+
 
     <!-- ── WAS IST SINNFUNK ── -->
     <div class="sf-what-wrap">
