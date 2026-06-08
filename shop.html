@@ -448,16 +448,15 @@
   async function ladeProdukte() {
     const { data, error } = await db
       .from('products')
-      .select(`
-        id,
-        title,
-        description,
-        image_url,
-        product_type,
-        provider,
-        link_url,
-        sinnfunker ( name )
-      `)
+.select(`
+  id,
+  title,
+  description,
+  image_url,
+  product_type,
+  provider,
+  link_url
+`)
       .eq('status', 'aktiv')
       .order('title');
 
@@ -501,7 +500,7 @@
       ? `<img class="shop-card-img" src="${esc(p.image_url)}" alt="${esc(p.title)}" />`
       : `<div class="shop-card-img-placeholder">${typIcon}</div>`;
 
-    const autorName = p.sinnfunker?.name || '';
+    const autorName = '';
 
     return `
       <article class="shop-card"
