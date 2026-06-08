@@ -5,20 +5,9 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Unsere Sinnfunker – Sinnfunk</title>
   <link rel="stylesheet" href="style.css" />
-
-<!-- Supabase JS laden -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-<!-- Deine Zugangsdaten -->
-<script>
-  const SUPABASE_URL  = 'https://mliatnfqgnctbxhbwhzp.supabase.co';
-  const SUPABASE_ANON = 'sb_publishable_KocEqg2UUL2trsGXb_kacA_yfY8DIP3';
-</script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
 
-    /* ══════════════════════════════════════════
-       SUCHBEREICH
-    ══════════════════════════════════════════ */
     .sf-search-wrap {
       width: min(1120px, calc(100% - 32px));
       margin: 0 auto;
@@ -35,7 +24,7 @@
 
     .sf-search-row {
       display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
+      grid-template-columns: 2fr 1fr 1fr;
       gap: 14px;
       align-items: end;
     }
@@ -107,9 +96,6 @@
       margin-top: 12px;
     }
 
-    /* ══════════════════════════════════════════
-       GRID
-    ══════════════════════════════════════════ */
     .sf-community-wrap {
       width: min(1120px, calc(100% - 32px));
       margin: 0 auto;
@@ -122,9 +108,6 @@
       gap: 22px;
     }
 
-    /* ══════════════════════════════════════════
-       LADEZUSTAND
-    ══════════════════════════════════════════ */
     .sf-loading {
       grid-column: 1 / -1;
       display: flex;
@@ -147,9 +130,6 @@
 
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* ══════════════════════════════════════════
-       FEHLERZUSTAND
-    ══════════════════════════════════════════ */
     .sf-error {
       grid-column: 1 / -1;
       text-align: center;
@@ -158,17 +138,7 @@
     }
 
     .sf-error p { color: var(--muted); margin-bottom: 8px; }
-    .sf-error code {
-      background: rgba(123,94,69,0.08);
-      border-radius: 8px;
-      padding: 2px 8px;
-      font-size: 0.88rem;
-      color: var(--earth);
-    }
 
-    /* ══════════════════════════════════════════
-       KARTE
-    ══════════════════════════════════════════ */
     .sf-card {
       background: rgba(255,250,242,0.85);
       border: 1px solid rgba(123,94,69,0.12);
@@ -218,7 +188,7 @@
 
     .sf-card-meta { flex: 1; min-width: 0; }
 
-    .sf-card-type {
+    .sf-card-category {
       display: inline-block;
       font-family: Arial, sans-serif;
       font-size: 0.72rem;
@@ -228,12 +198,9 @@
       padding: 3px 10px;
       border-radius: 999px;
       margin-bottom: 6px;
+      background: rgba(143,169,139,0.2);
+      color: var(--sage-dark);
     }
-
-    .type-meditation  { background: rgba(143,169,139,0.2);  color: var(--sage-dark); }
-    .type-autor       { background: rgba(200,148,107,0.18); color: var(--earth); }
-    .type-gespraech   { background: rgba(100,140,200,0.15); color: #3a5a8a; }
-    .type-podcaster   { background: rgba(180,120,200,0.15); color: #6a3a8a; }
 
     .sf-card-name {
       font-size: 1.15rem;
@@ -259,77 +226,6 @@
       line-height: 1.6;
     }
 
-    /* Produkt/Buch */
-    .sf-card-product {
-      margin: 0 24px 16px;
-      display: flex;
-      gap: 14px;
-      align-items: center;
-      background: rgba(143,169,139,0.08);
-      border: 1px solid rgba(83,107,80,0.12);
-      border-radius: 16px;
-      padding: 12px;
-    }
-
-    .sf-card-product img {
-      width: 48px;
-      height: 66px;
-      object-fit: cover;
-      border-radius: 6px;
-      box-shadow: 2px 4px 12px rgba(0,0,0,0.15);
-      flex-shrink: 0;
-    }
-
-    .sf-card-product strong {
-      display: block;
-      font-size: 0.88rem;
-      color: #2c3128;
-      margin-bottom: 2px;
-    }
-
-    .sf-card-product span {
-      font-family: Arial, sans-serif;
-      font-size: 0.8rem;
-      color: var(--muted);
-    }
-
-    /* Sendezeiten */
-    .sf-card-slots {
-      margin: 0 24px 12px;
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
-
-    .sf-slot-badge {
-      font-family: Arial, sans-serif;
-      font-size: 0.76rem;
-      padding: 3px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(123,94,69,0.18);
-      color: var(--muted);
-      background: rgba(255,250,242,0.7);
-    }
-
-    /* Keywords */
-    .sf-card-keywords {
-      margin: 0 24px 16px;
-      display: flex;
-      gap: 6px;
-      flex-wrap: wrap;
-    }
-
-    .sf-keyword {
-      font-family: Arial, sans-serif;
-      font-size: 0.75rem;
-      padding: 3px 9px;
-      border-radius: 999px;
-      background: rgba(143,169,139,0.13);
-      color: var(--sage-dark);
-      border: 1px solid rgba(83,107,80,0.15);
-    }
-
-    /* Footer */
     .sf-card-footer {
       margin-top: auto;
       padding: 14px 24px 20px;
@@ -352,6 +248,7 @@
       place-items: center;
       font-size: 0.88rem;
       color: var(--sage-dark);
+      text-decoration: none;
       transition: background 0.2s;
     }
 
@@ -363,13 +260,13 @@
       font-size: 0.82rem;
       color: var(--sage-dark);
       font-weight: 700;
+      text-decoration: none;
       border-bottom: 1px solid rgba(83,107,80,0.3);
       padding-bottom: 1px;
     }
 
     .sf-website-link:hover { border-color: var(--sage-dark); }
 
-    /* Leer */
     .sf-empty {
       grid-column: 1 / -1;
       text-align: center;
@@ -378,9 +275,6 @@
       font-family: Arial, sans-serif;
     }
 
-    /* ══════════════════════════════════════════
-       RESPONSIVE
-    ══════════════════════════════════════════ */
     @media (max-width: 900px) {
       .sf-search-row { grid-template-columns: 1fr 1fr; }
       .sf-grid { grid-template-columns: repeat(2, 1fr); }
@@ -407,34 +301,14 @@
       <p>Alle aktiven Sinnfunker – Autoren, Meditationsleiter, Wissenschaftler, Philosophen und mehr.</p>
     </div>
 
-    <!-- ── SUCHE & FILTER ── -->
     <div class="sf-search-wrap">
       <div class="sf-search-box">
         <div class="sf-search-row">
           <div class="sf-input-group">
-            <label for="search-name">Name oder Keyword</label>
+            <label for="search-name">Name oder Kategorie</label>
             <input type="text" id="search-name"
               placeholder="z.B. Anna, Meditation, Kräuter …"
               oninput="filterCards()" />
-          </div>
-          <div class="sf-input-group">
-            <label for="filter-type">Art</label>
-            <select id="filter-type" onchange="filterCards()">
-              <option value="">Alle Arten</option>
-              <option value="meditation">Meditation</option>
-              <option value="autor">Autor</option>
-              <option value="gespraech">Gespräch</option>
-              <option value="podcaster">Podcaster</option>
-            </select>
-          </div>
-          <div class="sf-input-group">
-            <label for="filter-slot">Sendezeit</label>
-            <select id="filter-slot" onchange="filterCards()">
-              <option value="">Alle Zeiten</option>
-              <option value="vormittag">Vormittag (06–15 Uhr)</option>
-              <option value="nachmittag">Nachmittag (15–21 Uhr)</option>
-              <option value="nacht">Nacht (21–06 Uhr)</option>
-            </select>
           </div>
           <div class="sf-input-group">
             <label>&nbsp;</label>
@@ -449,20 +323,18 @@
           <button class="sf-tag" onclick="setTag('Philosophie')">Philosophie</button>
           <button class="sf-tag" onclick="setTag('Energetik')">Energetik</button>
           <button class="sf-tag" onclick="setTag('Wissenschaft')">Wissenschaft</button>
-          <button class="sf-tag" onclick="setTag('Spiritualität')">Spiritualität</button>
+          <button class="sf-tag" onclick="setTag('Meditation')">Meditation</button>
           <button class="sf-tag" onclick="setTag('Geschichte')">Geschichte</button>
-          <button class="sf-tag" onclick="setTag('Gesundheit')">Gesundheit</button>
+          <button class="sf-tag" onclick="setTag('Kochen')">Kochen</button>
         </div>
 
         <p class="sf-results-count" id="results-count">Wird geladen …</p>
       </div>
     </div>
 
-    <!-- ── KARTEN ── -->
     <div class="sf-community-wrap">
       <div class="sf-grid" id="sf-grid">
-        <!-- Ladezustand -->
-        <div class="sf-loading" id="sf-loading">
+        <div class="sf-loading">
           <div class="sf-spinner"></div>
           <p>Sinnfunker werden geladen …</p>
         </div>
@@ -483,39 +355,17 @@
 </div>
 
 <script>
-  // ════════════════════════════════════════════
-  // ⚙️  HIER DEINE SUPABASE-DATEN EINTRAGEN
-  // ════════════════════════════════════════════
-  const SUPABASE_URL  = 'https://DEINE-PROJEKT-ID.supabase.co';
-  const SUPABASE_ANON = 'DEIN-ANON-KEY';
-  // ════════════════════════════════════════════
+  const SUPABASE_URL  = 'https://mliatnfqgnctbxhbwhzp.supabase.co';
+  const SUPABASE_ANON = 'sb_publishable_KocEqg2UUL2trsGXb_kacA_yfY8DIP3';
 
   const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
 
-  // Alle geladenen Sinnfunker (für clientseitigen Filter)
   let alleSinnfunker = [];
 
-  // ── Daten laden ──────────────────────────────
   async function ladeSinnfunker() {
     const { data, error } = await db
       .from('sinnfunker')
-      .select(`
-        id,
-        name,
-        untertitel,
-        biografie,
-        foto_url,
-        website_url,
-        facebook_url,
-        instagram_url,
-        youtube_url,
-        kategorie,
-        keywords,
-        sendeslots,
-        produkt_titel,
-        produkt_beschreibung,
-        produkt_bild_url
-      `)
+      .select('id, name, subtitle, biography, photo_url, website, facebook, instagram, category')
       .eq('status', 'aktiv')
       .order('name');
 
@@ -528,7 +378,6 @@
     renderKarten(alleSinnfunker);
   }
 
-  // ── Karten rendern ───────────────────────────
   function renderKarten(liste) {
     const grid = document.getElementById('sf-grid');
 
@@ -536,7 +385,7 @@
       grid.innerHTML = `
         <div class="sf-empty">
           <p style="font-size:1.1rem;margin-bottom:8px;">Kein Sinnfunker gefunden.</p>
-          <p>Versuche einen anderen Suchbegriff oder setze die Filter zurück.</p>
+          <p>Versuche einen anderen Suchbegriff oder setze den Filter zurück.</p>
         </div>`;
       document.getElementById('results-count').textContent = '0 Sinnfunker gefunden';
       return;
@@ -549,97 +398,52 @@
       n === 1 ? '1 Sinnfunker gefunden' : n + ' Sinnfunker gefunden';
   }
 
-  // ── HTML einer Karte ─────────────────────────
   function karteHTML(s) {
     const initial = s.name ? s.name.charAt(0).toUpperCase() : '?';
 
-    const avatar = s.foto_url
-      ? `<img class="sf-card-avatar" src="${esc(s.foto_url)}" alt="${esc(s.name)}" />`
+    const avatar = s.photo_url
+      ? `<img class="sf-card-avatar" src="${esc(s.photo_url)}" alt="${esc(s.name)}" />`
       : `<div class="sf-card-avatar-placeholder">${initial}</div>`;
 
-    const typLabel = {
-      meditation: 'Meditation',
-      autor:      'Autor',
-      gespraech:  'Gespräch',
-      podcaster:  'Podcaster'
-    }[s.kategorie] || s.kategorie || '';
-
-    const typBadge = typLabel
-      ? `<span class="sf-card-type type-${esc(s.kategorie)}">${typLabel}</span>`
+    const categoryBadge = s.category
+      ? `<span class="sf-card-category">${esc(s.category)}</span>`
       : '';
 
-    // Slots (kommagetrennt in DB, z.B. "vormittag,nacht")
-    const slots = s.sendeslots
-      ? s.sendeslots.split(',').map(sl => {
-          const icons = { vormittag: '☀', nachmittag: '🌤', nacht: '🌙' };
-          const labels = { vormittag: 'Vormittag', nachmittag: 'Nachmittag', nacht: 'Nacht' };
-          return `<span class="sf-slot-badge">${icons[sl] || ''} ${labels[sl] || sl}</span>`;
-        }).join('')
-      : '';
-
-    const slotsBlock = slots
-      ? `<div class="sf-card-slots">${slots}</div>` : '';
-
-    // Keywords (kommagetrennt in DB)
-    const kwBlock = s.keywords
-      ? `<div class="sf-card-keywords">
-          ${s.keywords.split(',').map(k =>
-            `<span class="sf-keyword">${esc(k.trim())}</span>`
-          ).join('')}
-        </div>`
-      : '';
-
-    // Produkt/Buch
-    const produktBlock = s.produkt_titel
-      ? `<div class="sf-card-product">
-          ${s.produkt_bild_url
-            ? `<img src="${esc(s.produkt_bild_url)}" alt="${esc(s.produkt_titel)}" />`
-            : ''}
-          <div>
-            <strong>${esc(s.produkt_titel)}</strong>
-            <span>${esc(s.produkt_beschreibung || '')}</span>
-          </div>
-        </div>`
-      : '';
-
-    // Social Links
     const socials = [
-      s.instagram_url && `<a href="${esc(s.instagram_url)}" target="_blank" rel="noopener" title="Instagram">◆</a>`,
-      s.facebook_url  && `<a href="${esc(s.facebook_url)}"  target="_blank" rel="noopener" title="Facebook">f</a>`,
-      s.youtube_url   && `<a href="${esc(s.youtube_url)}"   target="_blank" rel="noopener" title="YouTube">▶</a>`,
+      s.instagram && `<a href="${esc(s.instagram)}" target="_blank" rel="noopener" title="Instagram">▣</a>`,
+      s.facebook  && `<a href="${esc(s.facebook)}"  target="_blank" rel="noopener" title="Facebook">f</a>`,
     ].filter(Boolean).join('');
 
     const socialBlock = socials
       ? `<div class="sf-social">${socials}</div>` : '';
 
-    const websiteLink = s.website_url
-      ? `<a class="sf-website-link" href="${esc(s.website_url)}"
-           target="_blank" rel="noopener">
-           ${new URL(s.website_url).hostname} →
-         </a>`
-      : '';
+    let websiteLink = '';
+    if (s.website) {
+      try {
+        const hostname = new URL(s.website).hostname;
+        websiteLink = `<a class="sf-website-link" href="${esc(s.website)}" target="_blank" rel="noopener">${hostname} →</a>`;
+      } catch(e) {
+        websiteLink = `<a class="sf-website-link" href="${esc(s.website)}" target="_blank" rel="noopener">Website →</a>`;
+      }
+    }
 
     return `
       <article class="sf-card"
         data-name="${esc(s.name)}"
-        data-type="${esc(s.kategorie || '')}"
-        data-slots="${esc(s.sendeslots || '')}"
-        data-keywords="${esc(s.keywords || '')}">
+        data-category="${esc(s.category || '')}"
+        data-biography="${esc(s.biography || '')}"
+        data-subtitle="${esc(s.subtitle || '')}">
 
         <div class="sf-card-header">
           ${avatar}
           <div class="sf-card-meta">
-            ${typBadge}
+            ${categoryBadge}
             <div class="sf-card-name">${esc(s.name)}</div>
-            <div class="sf-card-subtitle">${esc(s.untertitel || '')}</div>
+            <div class="sf-card-subtitle">${esc(s.subtitle || '')}</div>
           </div>
         </div>
 
-        <p class="sf-card-bio">${esc(s.biografie || '')}</p>
-
-        ${produktBlock}
-        ${slotsBlock}
-        ${kwBlock}
+        <p class="sf-card-bio">${esc(s.biography || '')}</p>
 
         <div class="sf-card-footer">
           ${socialBlock}
@@ -648,19 +452,13 @@
       </article>`;
   }
 
-  // ── Filter ───────────────────────────────────
   function filterCards() {
-    const q    = document.getElementById('search-name').value.toLowerCase();
-    const type = document.getElementById('filter-type').value;
-    const slot = document.getElementById('filter-slot').value;
+    const q = document.getElementById('search-name').value.toLowerCase();
 
     const gefiltert = alleSinnfunker.filter(s => {
-      const text = [s.name, s.biografie, s.keywords, s.untertitel]
+      const text = [s.name, s.biography, s.subtitle, s.category]
         .join(' ').toLowerCase();
-      const mQ    = !q    || text.includes(q);
-      const mType = !type || s.kategorie === type;
-      const mSlot = !slot || (s.sendeslots || '').includes(slot);
-      return mQ && mType && mSlot;
+      return !q || text.includes(q);
     });
 
     renderKarten(gefiltert);
@@ -675,26 +473,19 @@
 
   function resetFilter() {
     document.getElementById('search-name').value = '';
-    document.getElementById('filter-type').value = '';
-    document.getElementById('filter-slot').value = '';
     document.querySelectorAll('.sf-tag').forEach(t => t.classList.remove('active'));
     renderKarten(alleSinnfunker);
   }
 
-  // ── Fehler anzeigen ──────────────────────────
   function zeigeError(msg) {
     document.getElementById('sf-grid').innerHTML = `
       <div class="sf-error">
-        <p style="font-size:1.1rem;margin-bottom:12px;">
-          Die Sinnfunker konnten nicht geladen werden.
-        </p>
-        <p>Bitte prüfe die Supabase-Verbindung in <code>community.html</code>.</p>
-        ${msg ? `<p style="margin-top:8px;font-size:0.82rem;color:var(--clay);">${esc(msg)}</p>` : ''}
+        <p style="font-size:1.1rem;margin-bottom:12px;">Die Sinnfunker konnten nicht geladen werden.</p>
+        ${msg ? `<p style="margin-top:8px;font-size:0.82rem;color:var(--muted);">${esc(msg)}</p>` : ''}
       </div>`;
     document.getElementById('results-count').textContent = '';
   }
 
-  // ── Hilfsfunktion: HTML escapen ──────────────
   function esc(str) {
     if (!str) return '';
     return String(str)
@@ -704,7 +495,6 @@
       .replace(/"/g,'&quot;');
   }
 
-  // ── Start ────────────────────────────────────
   ladeSinnfunker();
 </script>
 </body>

@@ -6,20 +6,9 @@
   <title>Shop – Sinnfunk</title>
   <meta name="description" content="Produkte der Sinnfunk-Community – Bücher, Kurse und Meditationen. Wir verlinken direkt zu den Shops der Sinnfunker." />
   <link rel="stylesheet" href="style.css" />
-
-  <!-- Supabase JS laden -->
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-
-  <!-- Deine Zugangsdaten -->
-<script>
-  const SUPABASE_URL  = 'https://mliatnfqgnctbxhbwhzp.supabase.co';
-  const SUPABASE_ANON = 'sb_publishable_KocEqg2UUL2trsGXb_kacA_yfY8DIP3';
-</script>
   <style>
 
-  <style>
-
-    /* ── Hero boxed ── */
     .shop-hero-wrap {
       width: min(1120px, calc(100% - 32px));
       margin: 0 auto;
@@ -100,7 +89,6 @@
       z-index: 2;
     }
 
-    /* ── Filter ── */
     .shop-filter-wrap {
       width: min(1120px, calc(100% - 32px));
       margin: 0 auto;
@@ -189,7 +177,6 @@
       margin-top: 4px;
     }
 
-    /* ── Grid ── */
     .shop-grid-wrap {
       width: min(1120px, calc(100% - 32px));
       margin: 0 auto;
@@ -202,7 +189,6 @@
       gap: 20px;
     }
 
-    /* ── Ladezustand ── */
     .shop-loading {
       grid-column: 1 / -1;
       display: flex;
@@ -225,7 +211,6 @@
 
     @keyframes spin { to { transform: rotate(360deg); } }
 
-    /* ── Fehlerzustand ── */
     .shop-error {
       grid-column: 1 / -1;
       text-align: center;
@@ -234,15 +219,7 @@
     }
 
     .shop-error p { color: var(--muted); margin-bottom: 8px; }
-    .shop-error code {
-      background: rgba(123,94,69,0.08);
-      border-radius: 8px;
-      padding: 2px 8px;
-      font-size: 0.88rem;
-      color: var(--earth);
-    }
 
-    /* ── Produkt-Karte ── */
     .shop-card {
       background: rgba(255,250,242,0.88);
       border: 1px solid rgba(123,94,69,0.12);
@@ -294,12 +271,9 @@
       padding: 3px 9px;
       border-radius: 999px;
       align-self: flex-start;
+      background: rgba(143,169,139,0.2);
+      color: var(--sage-dark);
     }
-
-    .type-buch       { background: rgba(200,148,107,0.18); color: var(--earth); }
-    .type-kurs       { background: rgba(143,169,139,0.2);  color: var(--sage-dark); }
-    .type-meditation { background: rgba(100,140,200,0.15); color: #3a5a8a; }
-    .type-seminar    { background: rgba(180,120,200,0.15); color: #6a3a8a; }
 
     .shop-card-title {
       font-size: 1rem;
@@ -331,31 +305,11 @@
       gap: 8px;
     }
 
-    .shop-link-badge {
-      display: flex;
-      align-items: center;
-      gap: 6px;
+    .shop-card-provider {
       font-family: Arial, sans-serif;
       font-size: 0.76rem;
-      font-weight: 700;
       color: var(--muted);
     }
-
-    .badge-icon {
-      width: 22px;
-      height: 22px;
-      border-radius: 6px;
-      display: grid;
-      place-items: center;
-      font-size: 0.78rem;
-      font-weight: 900;
-    }
-
-    .badge-amazon  { background: rgba(255,153,0,0.15);  color: #b36200; }
-    .badge-bod     { background: rgba(80,120,200,0.12); color: #2a5098; }
-    .badge-website { background: rgba(143,169,139,0.2); color: var(--sage-dark); }
-    .badge-webshop { background: rgba(200,148,107,0.15);color: var(--earth); }
-    .badge-extern  { background: rgba(150,150,150,0.12);color: #555; }
 
     .shop-card-btn {
       display: inline-block;
@@ -366,6 +320,7 @@
       border-radius: 999px;
       background: var(--sage-dark);
       color: var(--warm-white);
+      text-decoration: none;
       transition: background 0.2s;
       white-space: nowrap;
     }
@@ -380,12 +335,10 @@
       font-family: Arial, sans-serif;
     }
 
-    /* ── Responsive ── */
     @media (max-width: 1000px) { .shop-grid { grid-template-columns: repeat(3,1fr); } }
     @media (max-width: 720px) {
       .shop-hero-box { grid-template-columns: 1fr; }
       .shop-hero-image { height: 220px; }
-      .shop-hero-image::before { width: 0; }
       .shop-hero-text { padding: 36px 28px; }
       .shop-grid { grid-template-columns: repeat(2,1fr); }
     }
@@ -401,7 +354,6 @@
 
   <main>
 
-    <!-- ── HERO ── -->
     <div class="shop-hero-wrap">
       <div class="shop-hero-box">
         <div class="shop-hero-text">
@@ -410,7 +362,7 @@
           <p>Bücher, Kurse, Meditationen und Seminare – direkt von den Menschen, die du bei Sinnfunk hörst.</p>
           <div class="shop-disclaimer">
             <span class="shop-disclaimer-icon">ℹ</span>
-            <p><strong>Kein eigener Webshop.</strong> Sinnfunk verkauft keine Produkte. Alle Karten führen direkt zum Shop des jeweiligen Sinnfunkers – zu seiner Website, Amazon, BoD oder einem anderen Anbieter.</p>
+            <p><strong>Kein eigener Webshop.</strong> Sinnfunk verkauft keine Produkte. Alle Karten führen direkt zum Shop des jeweiligen Sinnfunkers.</p>
           </div>
         </div>
         <div class="shop-hero-image">
@@ -420,7 +372,6 @@
       </div>
     </div>
 
-    <!-- ── FILTER ── -->
     <div class="shop-filter-wrap">
       <div class="shop-filter-box">
         <div class="shop-filter-group">
@@ -433,20 +384,15 @@
           <label for="shop-type">Produktart</label>
           <select id="shop-type" onchange="filterShop()">
             <option value="">Alle Produkte</option>
-            <option value="buch">Buch</option>
-            <option value="kurs">Online-Kurs</option>
-            <option value="meditation">Meditation</option>
-            <option value="seminar">Seminar</option>
-          </select>
-        </div>
-        <div class="shop-filter-group">
-          <label for="shop-dest">Anbieter</label>
-          <select id="shop-dest" onchange="filterShop()">
-            <option value="">Alle Anbieter</option>
-            <option value="amazon">Amazon</option>
-            <option value="bod">BoD</option>
-            <option value="website">Autoren-Website</option>
-            <option value="webshop">Webshop</option>
+            <option value="Buch">Buch</option>
+            <option value="Online-Kurs">Online-Kurs</option>
+            <option value="Beratung">Beratung</option>
+            <option value="Workshop">Workshop</option>
+            <option value="Download">Download</option>
+            <option value="Coaching">Coaching</option>
+            <option value="Produkt">Produkt</option>
+            <option value="Dienstleistung">Dienstleistung</option>
+            <option value="Sonstiges">Sonstiges</option>
           </select>
         </div>
         <div style="align-self:flex-end;">
@@ -469,7 +415,6 @@
       </div>
     </div>
 
-    <!-- ── PRODUKTE ── -->
     <div class="shop-grid-wrap">
       <div class="shop-grid" id="shop-grid">
         <div class="shop-loading">
@@ -493,34 +438,28 @@
 </div>
 
 <script>
-  // ════════════════════════════════════════════
-  // ⚙️  HIER DEINE SUPABASE-DATEN EINTRAGEN
-  // ════════════════════════════════════════════
-  const SUPABASE_URL  = 'https://DEINE-PROJEKT-ID.supabase.co';
-  const SUPABASE_ANON = 'DEIN-ANON-KEY';
-  // ════════════════════════════════════════════
+  const SUPABASE_URL  = 'https://mliatnfqgnctbxhbwhzp.supabase.co';
+  const SUPABASE_ANON = 'sb_publishable_KocEqg2UUL2trsGXb_kacA_yfY8DIP3';
 
   const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
 
   let alleProdukte = [];
 
-  // ── Daten laden ──────────────────────────────
   async function ladeProdukte() {
     const { data, error } = await db
-      .from('produkte')
+      .from('products')
       .select(`
         id,
-        titel,
-        beschreibung,
-        bild_url,
-        produktart,
-        anbieter,
+        title,
+        description,
+        image_url,
+        product_type,
+        provider,
         link_url,
-        keywords,
         sinnfunker ( name )
       `)
       .eq('status', 'aktiv')
-      .order('created_at', { ascending: false });
+      .order('title');
 
     if (error) {
       zeigeError(error.message);
@@ -531,7 +470,6 @@
     renderProdukte(alleProdukte);
   }
 
-  // ── Karten rendern ───────────────────────────
   function renderProdukte(liste) {
     const grid = document.getElementById('shop-grid');
 
@@ -552,84 +490,53 @@
       n === 1 ? '1 Produkt gefunden' : n + ' Produkte gefunden';
   }
 
-  // ── HTML einer Karte ─────────────────────────
   function karteHTML(p) {
-    const typLabel = {
-      buch:       'Buch',
-      kurs:       'Online-Kurs',
-      meditation: 'Meditation',
-      seminar:    'Seminar'
-    }[p.produktart] || p.produktart || '';
-
     const typIcon = {
-      buch: '📖', kurs: '💻', meditation: '◌', seminar: '🎓'
-    }[p.produktart] || '📦';
+      'Buch': '📖', 'Online-Kurs': '💻', 'Meditation': '◌',
+      'Workshop': '🎓', 'Coaching': '💬', 'Download': '⬇',
+      'Beratung': '🤝', 'Dienstleistung': '⚙', 'Produkt': '📦'
+    }[p.product_type] || '📦';
 
-    const bild = p.bild_url
-      ? `<img class="shop-card-img"
-            src="${esc(p.bild_url)}"
-            alt="${esc(p.titel)}" />`
+    const bild = p.image_url
+      ? `<img class="shop-card-img" src="${esc(p.image_url)}" alt="${esc(p.title)}" />`
       : `<div class="shop-card-img-placeholder">${typIcon}</div>`;
-
-    // Anbieter-Badge
-    const anbieterLabel = {
-      amazon:  'Amazon',
-      bod:     'BoD',
-      website: 'Autoren-Website',
-      webshop: 'Webshop'
-    }[p.anbieter] || p.anbieter || 'Extern';
-
-    const anbieterIcon = {
-      amazon: 'A', bod: 'B', website: '🌐', webshop: '🛒'
-    }[p.anbieter] || '→';
-
-    const btnLabel = p.anbieter === 'seminar' || p.produktart === 'seminar'
-      ? 'Zur Anmeldung →' : 'Zum Shop →';
 
     const autorName = p.sinnfunker?.name || '';
 
     return `
       <article class="shop-card"
-        data-type="${esc(p.produktart || '')}"
-        data-dest="${esc(p.anbieter || '')}"
-        data-tags="${esc(p.keywords || '')}"
-        data-text="${esc(p.titel + ' ' + autorName + ' ' + (p.beschreibung||'') + ' ' + (p.keywords||''))}">
+        data-type="${esc(p.product_type || '')}"
+        data-text="${esc((p.title||'') + ' ' + autorName + ' ' + (p.description||''))}">
 
         ${bild}
 
         <div class="shop-card-body">
-          <span class="shop-card-type type-${esc(p.produktart)}">${typLabel}</span>
-          <div class="shop-card-title">${esc(p.titel)}</div>
+          ${p.product_type ? `<span class="shop-card-type">${esc(p.product_type)}</span>` : ''}
+          <div class="shop-card-title">${esc(p.title)}</div>
           ${autorName ? `<div class="shop-card-author">${esc(autorName)}</div>` : ''}
-          ${p.beschreibung ? `<div class="shop-card-desc">${esc(p.beschreibung)}</div>` : ''}
+          ${p.description ? `<div class="shop-card-desc">${esc(p.description)}</div>` : ''}
         </div>
 
         <div class="shop-card-footer">
-          <div class="shop-link-badge">
-            <span class="badge-icon badge-${esc(p.anbieter)}">${anbieterIcon}</span>
-            ${anbieterLabel}
-          </div>
+          <div class="shop-card-provider">${esc(p.provider || '')}</div>
           <a class="shop-card-btn"
              href="${esc(p.link_url || '#')}"
              target="_blank"
-             rel="noopener">${btnLabel}</a>
+             rel="noopener">Zum Shop →</a>
         </div>
       </article>`;
   }
 
-  // ── Filter ───────────────────────────────────
   function filterShop() {
     const q    = document.getElementById('shop-search').value.toLowerCase();
     const type = document.getElementById('shop-type').value;
-    const dest = document.getElementById('shop-dest').value;
 
     const gefiltert = alleProdukte.filter(p => {
-      const text = [p.titel, p.beschreibung, p.keywords,
-                    p.sinnfunker?.name].join(' ').toLowerCase();
+      const text = ((p.title||'') + ' ' + (p.description||'') + ' ' +
+                    (p.sinnfunker?.name||'')).toLowerCase();
       const mQ    = !q    || text.includes(q);
-      const mType = !type || p.produktart === type;
-      const mDest = !dest || p.anbieter   === dest;
-      return mQ && mType && mDest;
+      const mType = !type || p.product_type === type;
+      return mQ && mType;
     });
 
     renderProdukte(gefiltert);
@@ -645,25 +552,19 @@
   function resetShop() {
     document.getElementById('shop-search').value = '';
     document.getElementById('shop-type').value   = '';
-    document.getElementById('shop-dest').value   = '';
     document.querySelectorAll('.shop-tag').forEach(t => t.classList.remove('active'));
     renderProdukte(alleProdukte);
   }
 
-  // ── Fehler anzeigen ──────────────────────────
   function zeigeError(msg) {
     document.getElementById('shop-grid').innerHTML = `
       <div class="shop-error">
-        <p style="font-size:1.1rem;margin-bottom:12px;">
-          Die Produkte konnten nicht geladen werden.
-        </p>
-        <p>Bitte prüfe die Supabase-Verbindung in <code>shop.html</code>.</p>
-        ${msg ? `<p style="margin-top:8px;font-size:0.82rem;color:var(--clay);">${esc(msg)}</p>` : ''}
+        <p style="font-size:1.1rem;margin-bottom:12px;">Die Produkte konnten nicht geladen werden.</p>
+        ${msg ? `<p style="margin-top:8px;font-size:0.82rem;color:var(--muted);">${esc(msg)}</p>` : ''}
       </div>`;
     document.getElementById('shop-count').textContent = '';
   }
 
-  // ── HTML escapen ─────────────────────────────
   function esc(str) {
     if (!str) return '';
     return String(str)
@@ -673,7 +574,6 @@
       .replace(/"/g,'&quot;');
   }
 
-  // ── Start ────────────────────────────────────
   ladeProdukte();
 </script>
 </body>
