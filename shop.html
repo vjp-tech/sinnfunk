@@ -89,6 +89,7 @@
       z-index: 2;
     }
 
+    /* ── Filter ── */
     .shop-filter-wrap {
       width: min(1120px, calc(100% - 32px));
       margin: 0 auto;
@@ -140,35 +141,6 @@
     .shop-filter-group input:focus,
     .shop-filter-group select:focus { border-color: var(--sage-dark); }
 
-    .shop-tags {
-      display: flex;
-      gap: 8px;
-      flex-wrap: wrap;
-      align-items: center;
-      padding-top: 14px;
-      border-top: 1px solid rgba(123,94,69,0.09);
-      width: 100%;
-    }
-
-    .shop-tag {
-      font-family: Arial, sans-serif;
-      font-size: 0.8rem;
-      font-weight: 700;
-      padding: 5px 13px;
-      border-radius: 999px;
-      border: 1px solid rgba(123,94,69,0.2);
-      background: transparent;
-      color: var(--muted);
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-
-    .shop-tag:hover, .shop-tag.active {
-      background: var(--sage-dark);
-      color: var(--warm-white);
-      border-color: var(--sage-dark);
-    }
-
     .shop-results-count {
       font-family: Arial, sans-serif;
       font-size: 0.85rem;
@@ -177,6 +149,7 @@
       margin-top: 4px;
     }
 
+    /* ── Grid ── */
     .shop-grid-wrap {
       width: min(1120px, calc(100% - 32px));
       margin: 0 auto;
@@ -186,7 +159,7 @@
     .shop-grid {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      gap: 20px;
+      gap: 16px;
     }
 
     .shop-loading {
@@ -220,25 +193,26 @@
 
     .shop-error p { color: var(--muted); margin-bottom: 8px; }
 
+    /* ── Karte ── */
     .shop-card {
       background: rgba(255,250,242,0.88);
       border: 1px solid rgba(123,94,69,0.12);
-      border-radius: 24px;
+      border-radius: 18px;
       overflow: hidden;
-      box-shadow: 0 8px 24px rgba(74,59,43,0.07);
       display: flex;
       flex-direction: column;
       transition: box-shadow 0.2s, transform 0.2s;
     }
 
     .shop-card:hover {
-      box-shadow: 0 16px 38px rgba(74,59,43,0.13);
+      box-shadow: 0 12px 28px rgba(74,59,43,0.12);
       transform: translateY(-2px);
     }
 
+    /* Bild: schlanker als vorher (3/4 → 4/5, auf Mobil noch kleiner) */
     .shop-card-img {
       width: 100%;
-      aspect-ratio: 3 / 4;
+      aspect-ratio: 4 / 5;
       object-fit: cover;
       display: block;
       background: rgba(143,169,139,0.1);
@@ -246,25 +220,25 @@
 
     .shop-card-img-placeholder {
       width: 100%;
-      aspect-ratio: 3 / 4;
+      aspect-ratio: 4 / 5;
       display: grid;
       place-items: center;
       background: linear-gradient(135deg, rgba(143,169,139,0.15), rgba(200,148,107,0.1));
-      font-size: 3rem;
+      font-size: 2.4rem;
     }
 
     .shop-card-body {
-      padding: 16px 18px;
+      padding: 14px 16px;
       flex: 1;
       display: flex;
       flex-direction: column;
-      gap: 6px;
+      gap: 5px;
     }
 
     .shop-card-type {
       display: inline-block;
       font-family: Arial, sans-serif;
-      font-size: 0.7rem;
+      font-size: 0.68rem;
       font-weight: 700;
       text-transform: uppercase;
       letter-spacing: 0.1em;
@@ -276,7 +250,7 @@
     }
 
     .shop-card-title {
-      font-size: 1rem;
+      font-size: 1.08rem;   /* größer als vorher */
       font-weight: 700;
       color: #2c3128;
       line-height: 1.3;
@@ -284,20 +258,20 @@
 
     .shop-card-author {
       font-family: Arial, sans-serif;
-      font-size: 0.84rem;
+      font-size: 0.82rem;
       color: var(--muted);
     }
 
     .shop-card-desc {
       font-family: Arial, sans-serif;
-      font-size: 0.84rem;
+      font-size: 0.82rem;
       color: #55584e;
       line-height: 1.55;
       flex: 1;
     }
 
     .shop-card-footer {
-      padding: 12px 18px 16px;
+      padding: 10px 16px 14px;
       border-top: 1px solid rgba(123,94,69,0.09);
       display: flex;
       align-items: center;
@@ -307,16 +281,16 @@
 
     .shop-card-provider {
       font-family: Arial, sans-serif;
-      font-size: 0.76rem;
+      font-size: 0.74rem;
       color: var(--muted);
     }
 
     .shop-card-btn {
       display: inline-block;
       font-family: Arial, sans-serif;
-      font-size: 0.8rem;
+      font-size: 0.86rem;   /* größer als vorher */
       font-weight: 700;
-      padding: 7px 14px;
+      padding: 8px 16px;
       border-radius: 999px;
       background: var(--sage-dark);
       color: var(--warm-white);
@@ -335,14 +309,53 @@
       font-family: Arial, sans-serif;
     }
 
-    @media (max-width: 1000px) { .shop-grid { grid-template-columns: repeat(3,1fr); } }
+    /* ── Responsive ── */
+    @media (max-width: 1000px) {
+      .shop-grid { grid-template-columns: repeat(3, 1fr); }
+    }
+
     @media (max-width: 720px) {
       .shop-hero-box { grid-template-columns: 1fr; }
-      .shop-hero-image { height: 220px; }
-      .shop-hero-text { padding: 36px 28px; }
-      .shop-grid { grid-template-columns: repeat(2,1fr); }
+      .shop-hero-image { height: 200px; }
+      .shop-hero-text { padding: 32px 24px; }
+      .shop-grid { grid-template-columns: repeat(2, 1fr); gap: 12px; }
+
+      /* Bild auf Smartphone deutlich kleiner */
+      .shop-card-img,
+      .shop-card-img-placeholder {
+        aspect-ratio: 3 / 2;
+      }
+
+      .shop-card-body { padding: 10px 12px; }
+      .shop-card-footer { padding: 8px 12px 12px; }
+      .shop-card-title { font-size: 0.97rem; }
     }
-    @media (max-width: 480px) { .shop-grid { grid-template-columns: 1fr; } }
+
+    @media (max-width: 480px) {
+      .shop-grid { grid-template-columns: 1fr; gap: 10px; }
+
+      .shop-card {
+        display: grid;
+        grid-template-columns: 100px 1fr;
+        grid-template-rows: auto auto;
+        border-radius: 16px;
+      }
+
+      .shop-card-img,
+      .shop-card-img-placeholder {
+        grid-row: 1 / 3;
+        aspect-ratio: unset;
+        height: 100%;
+        min-height: 110px;
+      }
+
+      .shop-card-body { padding: 10px 12px 4px; }
+      .shop-card-footer {
+        grid-column: 2;
+        padding: 4px 12px 10px;
+        border-top: none;
+      }
+    }
 
   </style>
 </head>
@@ -372,12 +385,13 @@
       </div>
     </div>
 
+    <!-- Filter: nur Suche + Produktart, keine Themen-Tags -->
     <div class="shop-filter-wrap">
       <div class="shop-filter-box">
         <div class="shop-filter-group">
           <label for="shop-search">Suche</label>
           <input type="text" id="shop-search"
-            placeholder="Titel, Sinnfunker, Thema …"
+            placeholder="Titel, Sinnfunker …"
             oninput="filterShop()" />
         </div>
         <div class="shop-filter-group">
@@ -385,30 +399,15 @@
           <select id="shop-type" onchange="filterShop()">
             <option value="">Alle Produkte</option>
             <option value="Buch">Buch</option>
-            <option value="Online-Kurs">Online-Kurs</option>
+            <option value="Meditation">Meditation</option>
+            <option value="Seminar">Seminar</option>
             <option value="Beratung">Beratung</option>
-            <option value="Workshop">Workshop</option>
-            <option value="Download">Download</option>
-            <option value="Coaching">Coaching</option>
-            <option value="Produkt">Produkt</option>
             <option value="Dienstleistung">Dienstleistung</option>
-            <option value="Sonstiges">Sonstiges</option>
           </select>
         </div>
         <div style="align-self:flex-end;">
           <button class="button secondary" onclick="resetShop()"
             style="height:42px;white-space:nowrap;">Zurücksetzen</button>
-        </div>
-
-        <div class="shop-tags">
-          <span style="font-family:Arial;font-size:0.78rem;color:var(--muted);margin-right:4px;">Themen:</span>
-          <button class="shop-tag" onclick="setShopTag('Philosophie')">Philosophie</button>
-          <button class="shop-tag" onclick="setShopTag('Kräuter')">Kräuter</button>
-          <button class="shop-tag" onclick="setShopTag('Meditation')">Meditation</button>
-          <button class="shop-tag" onclick="setShopTag('Energetik')">Energetik</button>
-          <button class="shop-tag" onclick="setShopTag('Geschichte')">Geschichte</button>
-          <button class="shop-tag" onclick="setShopTag('Kochen')">Kochen</button>
-          <button class="shop-tag" onclick="setShopTag('Wissenschaft')">Wissenschaft</button>
         </div>
 
         <p class="shop-results-count" id="shop-count">Wird geladen …</p>
@@ -448,16 +447,15 @@
   async function ladeProdukte() {
     const { data, error } = await db
       .from('products')
-.select(`
-  id,
-  title,
-  description,
-  image_url,
-  product_type,
-  provider,
-  link_url
-`)
-      .eq('status', 'aktiv')
+      .select(`
+        id,
+        title,
+        description,
+        image_url,
+        product_type,
+        provider,
+        link_url
+      `)
       .order('title');
 
     if (error) {
@@ -491,28 +489,24 @@
 
   function karteHTML(p) {
     const typIcon = {
-      'Buch': '📖', 'Online-Kurs': '💻', 'Meditation': '◌',
-      'Workshop': '🎓', 'Coaching': '💬', 'Download': '⬇',
-      'Beratung': '🤝', 'Dienstleistung': '⚙', 'Produkt': '📦'
+      'Buch': '📖', 'Meditation': '◌', 'Seminar': '🎓',
+      'Beratung': '🤝', 'Dienstleistung': '⚙'
     }[p.product_type] || '📦';
 
     const bild = p.image_url
       ? `<img class="shop-card-img" src="${esc(p.image_url)}" alt="${esc(p.title)}" />`
       : `<div class="shop-card-img-placeholder">${typIcon}</div>`;
 
-    const autorName = '';
-
     return `
       <article class="shop-card"
         data-type="${esc(p.product_type || '')}"
-        data-text="${esc((p.title||'') + ' ' + autorName + ' ' + (p.description||''))}">
+        data-text="${esc((p.title||'') + ' ' + (p.description||''))}">
 
         ${bild}
 
         <div class="shop-card-body">
           ${p.product_type ? `<span class="shop-card-type">${esc(p.product_type)}</span>` : ''}
           <div class="shop-card-title">${esc(p.title)}</div>
-          ${autorName ? `<div class="shop-card-author">${esc(autorName)}</div>` : ''}
           ${p.description ? `<div class="shop-card-desc">${esc(p.description)}</div>` : ''}
         </div>
 
@@ -531,8 +525,7 @@
     const type = document.getElementById('shop-type').value;
 
     const gefiltert = alleProdukte.filter(p => {
-      const text = ((p.title||'') + ' ' + (p.description||'') + ' ' +
-                    (p.sinnfunker?.name||'')).toLowerCase();
+      const text = ((p.title||'') + ' ' + (p.description||'')).toLowerCase();
       const mQ    = !q    || text.includes(q);
       const mType = !type || p.product_type === type;
       return mQ && mType;
@@ -541,17 +534,9 @@
     renderProdukte(gefiltert);
   }
 
-  function setShopTag(kw) {
-    document.getElementById('shop-search').value = kw;
-    document.querySelectorAll('.shop-tag').forEach(t =>
-      t.classList.toggle('active', t.textContent === kw));
-    filterShop();
-  }
-
   function resetShop() {
     document.getElementById('shop-search').value = '';
     document.getElementById('shop-type').value   = '';
-    document.querySelectorAll('.shop-tag').forEach(t => t.classList.remove('active'));
     renderProdukte(alleProdukte);
   }
 
