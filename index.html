@@ -25,13 +25,32 @@
       margin-top: 24px;
       justify-content: flex-start;
     }
+
+    /* Programm-Grid responsive */
+    .people-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+
+    @media (max-width: 600px) {
+      .people-box {
+        padding: 28px 20px;
+      }
+      .people-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-actions {
+        flex-direction: column;
+      }
+    }
   </style>
 </head>
 <body>
   <div class="page">
 
     <div id="sf-nav"></div>
-  <script src="nav.js"></script>
+    <script src="nav.js"></script>
 
     <main id="top">
 
@@ -69,7 +88,7 @@
         </aside>
       </section>
 
-            <!-- Stiller Ort -->
+      <!-- Stiller Ort -->
       <section id="themen">
         <div class="about">
           <div
@@ -91,62 +110,36 @@
       <!-- Was ist Sinnfunk -->
       <section>
         <div class="section-head">
-          <p class="eyebrow">Wofür wir stehen</p>
+          <p class="eyebrow">Kein Sticheln für Reichweite</p>
           <h2>Was ist Sinnfunk?</h2>
-          <p>Wir sind ein Gesprächs-, Meditations- und Podcast-Radio mit einem gemeinsamen Nenner: keine explosiven Themen.</p>
+          <p>Wir sind ein Gesprächs- und Podcast-Radio mit einem gemeinsamen Nenner: keine explosiven Themen.</p>
         </div>
         <div class="cards">
           <article class="card">
-            <div class="card-icon">⌁</div>
-            <h3>Keine Wut-Themen</h3>
-            <p>Egal ob Corona, Impfungen, Klimawandel, Feminismus oder aktuelle Politik: soziale Medien belohnen Aufregerthemen. Sinnfunk nicht.</p>
+            <div class="card-icon">✦</div>
+            <h3>Sprache über Musik</h3>
+            <p>Sinnfunk ist ein reines Sprachradio. Alle Inhalte sind Gespräche, Podcast-Episoden und andere gesprochene Formate wie Hörbücher – ohne Musikuntermalung.</p>
           </article>
           <article class="card">
-            <div class="card-icon">✦</div>
-            <h3>Was ist ein Sprachradio?</h3>
-            <p>Mit Ausnahme der Hintergrundmusik bei unseren täglichen Meditationen gibt es keine Musik bei Sinnfunk.</p>
-          </article>
-                  <article class="card">
             <div class="card-icon">◌</div>
-            <h3>Keine Werbung</h3>
-            <p>Sinnfunk wird über die Personen finanziert, die ihre Inhalte hochladen – nicht durch Werbung.</p>
+            <h3>Gespräche statt Werbung</h3>
+            <p>Sinnfunk wird über Sinnfunker selbst finanziert, also die Personen, die ihre Inhalte hochladen – nicht durch Werbung.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon">⌁</div>
+            <h3>Erdung über Wut</h3>
+            <p>Soziale Medien belohnen Aufregerthemen. Sinnfunk nicht. Wir meiden Alltagspolitik, Verschwörungstheorien und Aufregerthemen bei der Auswahl unserer Inhalte.</p>
           </article>
         </div>
       </section>
 
-
-      <!-- Programm -->
-      <section id="programm">
-        <div class="section-head">
-          <p class="eyebrow">Programm</p>
-          <h2>Was dich erwartet.</h2>
-        </div>
-        <div class="program-strip">
-          <div class="program-item">
-            <small>Täglich</small>
-            <strong>Meditationen</strong>
-            <span>Kurze Meditationen zum Innehalten – jeden Abend um 20 Uhr.</span>
-          </div>
-          <div class="program-item">
-            <small>Täglich</small>
-            <strong>Autoren</strong>
-            <span>Jeden Tag um 10 Uhr präsentiert ein Autor sein neuestes Werk.</span>
-          </div>
-          <div class="program-item">
-            <small>Vielfalt</small>
-            <strong>Viele Stimmen</strong>
-            <span>Energetiker und Wissenschaftler, Philosophen und Krimi-Autoren, Kräuterpädagogen und Kunstliebhaber.</span>
-          </div>
-        </div>
-      </section>
-
-      <!-- Werde Sinnfunker -->
+      <!-- Wochenprogramm -->
       <div class="people-section">
         <div class="people-box">
           <div class="section-head">
-            <p class="eyebrow">Werde Sinnfunker</p>
-            <h2>Menschen hinter den Stimmen.</h2>
-            <p>Du hast etwas zu sagen? Mach mit!</p>
+            <p class="eyebrow">Wochenprogramm</p>
+            <h2>Welche Inhalte erwarten dich wann</h2>
+            <p>Sinnfunk sendet vierundzwanzig Stunden am Tag und sieben Tage die Woche. Ein paar fixe Ankerpunkte geben dem Programm seine Struktur.</p>
             <div class="hero-actions">
               <a class="button" href="podcaster.html">Sinnfunker werden</a>
               <a class="button secondary" href="kontakt.html">Kontaktiere mich</a>
@@ -155,24 +148,24 @@
 
           <div class="people-grid">
             <article class="person">
-              <div class="avatar" style="font-size: 1.4rem;">✦</div>
-              <h3>Faire Chancen</h3>
-              <p>Sinnfunk bevorzugt niemanden – jeder hat eine Chance, gehört zu werden.</p>
+              <div class="avatar" style="font-size: 1.4rem;">📖</div>
+              <h3>Buchvorstellung jeden Mo &amp; Do um 10:00 Uhr</h3>
+              <p>Autoren präsentieren ihre Bücher.</p>
+            </article>
+            <article class="person">
+              <div class="avatar" style="font-size: 1.4rem;">🌿</div>
+              <h3>Kräuter &amp; Natur jeden Mi &amp; Sa um 15:00 Uhr</h3>
+              <p>Alles rund um Heilkräuter, Wildpflanzen und das Leben mit der Natur.</p>
             </article>
             <article class="person">
               <div class="avatar" style="font-size: 1.4rem;">✦</div>
-              <h3>Keine Suche</h3>
-              <p>Sinnfunk ist ein Radio – kein Podcast-Dienst. Zuhörer müssen keine Wahl treffen.</p>
+              <h3>Astrologie jeden Sonntag um 11:00 Uhr</h3>
+              <p>Was bringen die Sterne? Jeden Sonntagvormittag erwartet dich eine astrologische Vorschau auf die neue Woche.</p>
             </article>
             <article class="person">
-              <div class="avatar" style="font-size: 1.4rem;">✦</div>
-              <h3>Gutes Karma</h3>
-              <p>Kontroverse Inhalte werden im Internet belohnt. Bei Sinnfunk gilt das Gegenteil.</p>
-            </article>
-            <article class="person">
-              <div class="avatar" style="font-size: 1.4rem;">✦</div>
-              <h3>Zwei Wege</h3>
-              <p>Eigenes Hochladen oder mit mir zusammen ein Gespräch führen.</p>
+              <div class="avatar" style="font-size: 1.4rem;">🎙</div>
+              <h3>Gespräche mit Verena jeden Di, Fr &amp; So um 19:00 Uhr</h3>
+              <p>Als Sinnfunkerin der ersten Stunde lade ich interessante Gäste ein. Egal ob Upcycling oder wie man Vereine aufbaut – jeder darf zu Wort kommen.</p>
             </article>
           </div>
         </div>

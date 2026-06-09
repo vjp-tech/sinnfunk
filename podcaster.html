@@ -29,7 +29,6 @@
       display: flex;
       flex-direction: column;
       gap: 12px;
-      box-shadow: 0 10px 28px rgba(74,59,43,0.07);
     }
 
     .sf-path.featured {
@@ -90,121 +89,11 @@
       color: var(--muted);
     }
 
-    /* ── Warum Sinnfunk ── */
-    .sf-why-wrap {
-      width: min(1120px, calc(100% - 32px));
-      margin: 0 auto;
-      padding: 0 0 64px;
-    }
-
-    .sf-why {
-      background: rgba(255,250,242,0.6);
-      border: 1px solid rgba(123,94,69,0.11);
-      border-radius: 36px;
-      padding: 48px;
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 48px;
-      align-items: start;
-    }
-
-    .sf-why-left h2 {
-      font-size: clamp(1.8rem, 3vw, 2.6rem);
-      margin-bottom: 14px;
-    }
-
-    .sf-why-left p {
-      color: #55584e;
-      font-size: 1.02rem;
-    }
-
-    .sf-why-features {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
-
-    .sf-feature {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-
-    .sf-feature-icon {
-      width: 42px;
-      height: 42px;
-      border-radius: 14px;
-      background: rgba(143,169,139,0.15);
-      display: grid;
-      place-items: center;
-      font-size: 1.2rem;
-      margin-bottom: 4px;
-    }
-
-    .sf-feature strong {
-      font-size: 0.98rem;
-      color: #2c3128;
-    }
-
-    .sf-feature span {
-      font-family: Arial, sans-serif;
-      font-size: 0.88rem;
-      color: var(--muted);
-      line-height: 1.5;
-    }
-
     /* ── Programm ── */
     .sf-program-wrap {
       width: min(1120px, calc(100% - 32px));
       margin: 0 auto;
       padding: 0 0 64px;
-    }
-
-    .sf-program {
-      background: rgba(255,250,242,0.6);
-      border: 1px solid rgba(123,94,69,0.11);
-      border-radius: 36px;
-      padding: 48px;
-      display: grid;
-      grid-template-columns: 1fr 1fr 1fr;
-      gap: 24px;
-      align-items: start;
-    }
-
-    .sf-program-head {
-      grid-column: 1 / -1;
-      margin-bottom: 8px;
-    }
-
-    .sf-program-head h2 {
-      font-size: clamp(1.8rem, 3vw, 2.6rem);
-      margin-bottom: 0;
-    }
-
-    .sf-slots {
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
-    .sf-slot-row {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      padding: 12px 16px;
-      border-radius: 14px;
-      background: rgba(143,169,139,0.1);
-      font-family: Arial, sans-serif;
-      font-size: 0.95rem;
-    }
-
-    .sf-slot-row strong { color: #2c3128; }
-    .sf-slot-row span   { color: var(--muted); }
-
-    .sf-highlights {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
     }
 
     .sf-highlight-row {
@@ -217,7 +106,7 @@
       border: 1px solid rgba(123,94,69,0.1);
     }
 
-    .sf-highlight-row .hi-icon { font-size: 1.2rem; }
+    .sf-highlight-row .hi-icon { font-size: 1.2rem; flex-shrink: 0; }
     .sf-highlight-row strong { font-size: 0.97rem; display: block; }
     .sf-highlight-row span { font-family: Arial, sans-serif; font-size: 0.86rem; color: var(--muted); }
 
@@ -233,7 +122,7 @@
     .sf-program-note .note-icon { font-size: 1.4rem; flex-shrink: 0; margin-top: 2px; }
     .sf-program-note p { font-family: Arial, sans-serif; font-size: 0.95rem; color: #55584e; margin: 0; }
 
-    /* ── Was ist Sinnfunk (3 Karten) ── */
+    /* ── Regeln (4 Karten) ── */
     .sf-what-wrap {
       width: min(1120px, calc(100% - 32px));
       margin: 0 auto;
@@ -242,7 +131,7 @@
 
     .sf-what-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr 1fr 1fr;
+      grid-template-columns: 1fr 1fr;
       gap: 16px;
       margin-top: 24px;
     }
@@ -251,7 +140,7 @@
       background: rgba(255,250,242,0.7);
       border: 1px solid rgba(123,94,69,0.11);
       border-radius: 24px;
-      padding: 22px;
+      padding: 26px;
     }
 
     .sf-what-icon {
@@ -261,90 +150,75 @@
 
     .sf-what-card strong {
       display: block;
-      font-size: 0.97rem;
-      margin-bottom: 6px;
+      font-size: 1.05rem;
+      margin-bottom: 10px;
+      color: #2c3128;
     }
 
     .sf-what-card p {
       font-family: Arial, sans-serif;
-      font-size: 0.88rem;
+      font-size: 0.92rem;
       color: var(--muted);
-      line-height: 1.55;
-      margin: 0;
+      line-height: 1.6;
+      margin: 0 0 8px;
     }
 
-    /* ── Wofür wir stehen ── */
-    .sf-stand-wrap {
+    .sf-what-card p:last-child { margin-bottom: 0; }
+
+    /* ── Für wen ── */
+    .sf-fuer-wen-wrap {
       width: min(1120px, calc(100% - 32px));
       margin: 0 auto;
       padding: 0 0 64px;
     }
 
-    .sf-stand {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 40px;
-      background: rgba(255,250,242,0.6);
-      border: 1px solid rgba(123,94,69,0.11);
+    .sf-fuer-wen {
+      background: rgba(143,169,139,0.09);
+      border: 1px solid rgba(83,107,80,0.18);
       border-radius: 36px;
       padding: 48px;
-      align-items: start;
     }
 
-    .sf-stand-left h2 { font-size: clamp(1.6rem, 2.8vw, 2.3rem); margin-bottom: 10px; }
-    .sf-stand-left p  { font-family: Arial, sans-serif; font-size: 0.97rem; color: #55584e; }
-
-    .sf-stand-lists {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
+    .sf-fuer-wen-head {
+      margin-bottom: 32px;
     }
 
-    .sf-list-box {
-      border-radius: 20px;
-      padding: 22px;
+    .sf-fuer-wen-head h2 {
+      font-size: clamp(1.8rem, 3vw, 2.6rem);
+      margin-bottom: 10px;
     }
 
-    .sf-list-box.green {
-      background: rgba(143,169,139,0.12);
-      border: 1px solid rgba(83,107,80,0.18);
-    }
-
-    .sf-list-box.clay {
-      background: rgba(200,148,107,0.1);
-      border: 1px solid rgba(200,148,107,0.2);
-    }
-
-    .sf-list-box h4 {
+    .sf-fuer-wen-head p {
       font-family: Arial, sans-serif;
-      font-size: 0.78rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      margin-bottom: 14px;
+      font-size: 1rem;
+      color: #55584e;
     }
 
-    .sf-list-box.green h4 { color: var(--sage-dark); }
-    .sf-list-box.clay  h4 { color: var(--earth); }
-
-    .sf-list-box ul {
-      list-style: none;
-      padding: 0;
-      margin: 0;
+    .sf-fuer-wen-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+      gap: 12px;
     }
 
-    .sf-list-box ul li {
+    .sf-fuer-wen-pill {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      background: rgba(255,250,242,0.8);
+      border: 1px solid rgba(83,107,80,0.15);
+      border-radius: 14px;
+      padding: 12px 16px;
       font-family: Arial, sans-serif;
       font-size: 0.92rem;
-      color: var(--text);
-      padding: 6px 0 6px 22px;
-      border-bottom: 1px solid rgba(123,94,69,0.08);
-      position: relative;
+      color: #2c3128;
     }
 
-    .sf-list-box ul li:last-child { border-bottom: none; }
-    .sf-list-box.green ul li::before { content: "✓"; position: absolute; left: 0; color: var(--sage-dark); font-weight: 700; }
-    .sf-list-box.clay  ul li::before { content: "✕"; position: absolute; left: 0; color: var(--clay);      font-weight: 700; }
+    .sf-fuer-wen-pill::before {
+      content: "✓";
+      color: var(--sage-dark);
+      font-weight: 700;
+      flex-shrink: 0;
+    }
 
     /* ── Rechtliches ── */
     details.sf-legal {
@@ -392,7 +266,7 @@
     details.sf-legal ul li:last-child { border-bottom: none; }
     details.sf-legal ul li::before { content: "!"; position: absolute; left: 0; color: var(--clay); font-weight: 900; }
 
-    /* ── CTA Menschen ── */
+    /* ── CTA ── */
     .sf-cta-wrap {
       width: min(1120px, calc(100% - 32px));
       margin: 0 auto;
@@ -417,7 +291,7 @@
 
     .sf-features-row {
       display: grid;
-      grid-template-columns: repeat(2,1fr);
+      grid-template-columns: repeat(2, 1fr);
       gap: 14px;
     }
 
@@ -439,37 +313,7 @@
       line-height: 1.4;
     }
 
-    /* ── Divider ── */
-    .sf-divider {
-      width: min(1120px, calc(100% - 32px));
-      margin: 0 auto 64px;
-      border: none;
-      border-top: 2px dashed rgba(123,94,69,0.15);
-    }
-
-    /* ── Responsive ── */
-    @media (max-width: 900px) {
-      .sf-hero { grid-template-columns: 1fr; }
-      .sf-hero-image { height: 280px; }
-      .sf-hero-text { padding: 40px 24px; }
-      .sf-hero-image::before { width: 0; }
-
-      .sf-why, .sf-stand { grid-template-columns: 1fr; gap: 28px; }
-      .sf-program { grid-template-columns: 1fr; }
-      .sf-program-head { grid-column: 1; }
-      .sf-what-grid { grid-template-columns: 1fr 1fr; }
-      .sf-cta-box { grid-template-columns: 1fr; gap: 28px; padding: 36px 28px; }
-      .sf-paths { grid-template-columns: 1fr; }
-    }
-
-    @media (max-width: 560px) {
-      .sf-why-features { grid-template-columns: 1fr; }
-      .sf-what-grid { grid-template-columns: 1fr; }
-      .sf-stand-lists { grid-template-columns: 1fr; }
-      .sf-features-row { grid-template-columns: 1fr; }
-    }
-
-    /* ── Hero boxed (Podcaster-Seite) ── */
+    /* ── Hero boxed ── */
     .sf-hero-boxed {
       width: min(1120px, calc(100% - 32px));
       margin: 0 auto;
@@ -481,7 +325,6 @@
       border: 1px solid rgba(123,94,69,0.13);
       border-radius: 36px;
       overflow: hidden;
-      box-shadow: 0 18px 45px rgba(74,59,43,0.10);
       display: grid;
       grid-template-columns: 1.1fr 0.9fr;
       min-height: 360px;
@@ -529,6 +372,13 @@
       z-index: 2;
     }
 
+    /* ── Responsive ── */
+    @media (max-width: 900px) {
+      .sf-paths { grid-template-columns: 1fr; }
+      .sf-cta-box { grid-template-columns: 1fr; gap: 28px; padding: 36px 28px; }
+      .sf-what-grid { grid-template-columns: 1fr; }
+    }
+
     @media (max-width: 720px) {
       .sf-hero-boxed-inner {
         grid-template-columns: 1fr;
@@ -541,7 +391,17 @@
         padding: 36px 28px;
       }
     }
-      </style>
+
+    @media (max-width: 560px) {
+      .sf-features-row { grid-template-columns: 1fr; }
+      .sf-fuer-wen { padding: 32px 20px; }
+      .sf-cta-box { padding: 32px 20px; }
+      .sf-what-wrap, .sf-program-wrap, .sf-paths-wrap, .sf-fuer-wen-wrap, .sf-cta-wrap {
+        padding-left: 0;
+        padding-right: 0;
+      }
+    }
+  </style>
 </head>
 <body>
 <div class="page">
@@ -560,7 +420,7 @@
           <p>Wähle deinen Weg: Reiche eine fertige Episode ein oder zeichne gemeinsam mit mir ein Gespräch auf.</p>
           <div class="sf-hero-actions">
             <a class="button" href="#wege">Zu den Wegen →</a>
-            <a class="button secondary" href="#warum">Mehr über Sinnfunk</a>
+            <a class="button secondary" href="#regeln">Die Regeln</a>
           </div>
         </div>
         <div class="sf-hero-boxed-image">
@@ -577,18 +437,18 @@
           <div class="sf-path-icon">⬆️</div>
           <div class="sf-path-label">Weg 1</div>
           <h3>Eigene Episode einreichen</h3>
-          <p>Für Podcaster, Autoren, Meditationsleiter und alle, die bereits Audioinhalte besitzen.</p>
+          <p>Für Podcaster, Autoren und alle, die bereits Audioinhalte besitzen.</p>
           <div class="sf-path-price">
             <span class="price-num">Kostenlos bis 30.09.2026</span>
           </div>
-          <span class="price-sub">Danach 10 € für 60 Minuten. Maximale Länge einer Episode 120 Minuten.</span>
+          <span class="price-sub">Danach 10 € pro Episode. Maximale Länge einer Episode: 120 Minuten.</span>
         </div>
 
         <div class="sf-path">
           <div class="sf-path-icon">🎙</div>
           <div class="sf-path-label">Weg 2</div>
           <h3>Gespräch aufnehmen</h3>
-          <p>Wir zeichnen gemeinsam ein Gespräch in Pöllau (Steiermark) auf. Die Aufnahme gehört dir.</p>
+          <p>Du hast keinen Inhalt, aber möchtest einen? Ein eigener Podcast ist dir zu viel Aufwand? Wir zeichnen gemeinsam ein Gespräch in Pöllau (Steiermark) auf. Die Aufnahme gehört dir.</p>
           <div class="sf-path-price">
             <span class="price-num">25 € / Stunde</span>
           </div>
@@ -598,165 +458,114 @@
       </div>
     </div>
 
-
-
-<!-- ── PROGRAMM & SENDEZEITEN ── -->
-<div class="sf-program-wrap">
-  <div style="
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 20px;
-    margin-bottom: 20px;
-  ">
-
-    <!-- Fixe Sendeplätze -->
-    <div style="
-      background: rgba(143,169,139,0.12);
-      border: 1px solid rgba(83,107,80,0.2);
-      border-radius: 28px;
-      padding: 36px 32px;
-    ">
-      <p class="eyebrow" style="margin-bottom: 8px;">Fixe Sendeplätze</p>
-      <h3 style="font-size: 1.4rem; margin-bottom: 10px;">Reservierte Zeiten</h3>
-      <p style="font-family: Arial, sans-serif; font-size: 0.88rem; color: #55584e; margin-bottom: 20px; line-height: 1.6;">
-        Für bestimmte Inhalte gibt es wöchentlich wiederkehrende Sendeplätze.
-      </p>
-      <div style="display: flex; flex-direction: column; gap: 10px;">
-        <div class="sf-highlight-row">
-          <span class="hi-icon">📖</span>
-          <div>
-            <strong>Mo & Do: 10:00 Uhr</strong>
-            <span>Autoren präsentieren ihre Bücher</span>
+    <!-- ── PROGRAMM & SENDEZEITEN ── -->
+    <div class="sf-program-wrap" id="programm">
+      <div style="
+        background: rgba(143,169,139,0.12);
+        border: 1px solid rgba(83,107,80,0.2);
+        border-radius: 28px;
+        padding: 36px 32px;
+      ">
+        <p class="eyebrow" style="margin-bottom: 8px;">Sendeprogramm</p>
+        <h3 style="font-size: 1.4rem; margin-bottom: 10px;">Fixe Sendeplätze</h3>
+        <p style="font-family: Arial, sans-serif; font-size: 0.88rem; color: #55584e; margin-bottom: 20px; line-height: 1.6;">
+          Für bestimmte Inhalte gibt es wöchentlich wiederkehrende Sendeplätze. Alle anderen Episoden laufen in der allgemeinen Rotation <b>mindestens dreimal in einem Jahr.</b> 
+          Das bedeutet: Deine eingereichte Episode oder dein Gespräch mit mir wird dreimal zu einem bestimmten Zeitpunkt gestreamt. Der Zeitpunkt selbst folgt dem <b>First-Come-First-Serve-Prinzip</b>
+        </p>
+        <div style="display: flex; flex-direction: column; gap: 10px;">
+          <div class="sf-highlight-row">
+            <span class="hi-icon">📖</span>
+            <div>
+              <strong>Mo &amp; Do: 10:00 Uhr</strong>
+              <span>Autoren präsentieren ihre Bücher</span>
+            </div>
           </div>
-        </div>
-        <div class="sf-highlight-row">
-          <span class="hi-icon">◌</span>
-          <div>
-            <strong>Täglich: 22:00 Uhr</strong>
-            <span>Geführte Meditationen</span>
+          <div class="sf-highlight-row">
+            <span class="hi-icon">🌿</span>
+            <div>
+              <strong>Mi &amp; Sa: 15:00 Uhr</strong>
+              <span>Kräuter &amp; Natur</span>
+            </div>
           </div>
-        </div>
-        <div class="sf-highlight-row">
-          <span class="hi-icon">🌙</span>
-          <div>
-            <strong>Sonntag: 11:00 Uhr</strong>
-            <span>Astrologie</span>
+          <div class="sf-highlight-row">
+            <span class="hi-icon">✦</span>
+            <div>
+              <strong>Sonntag: 11:00 Uhr</strong>
+              <span>Astrologie</span>
+            </div>
           </div>
-        </div>
-        <div class="sf-highlight-row">
-          <span class="hi-icon">🎙</span>
-          <div>
-            <strong>Di, Fr & So: 19:00 Uhr</strong>
-            <span>Gespräche mit Verena</span>
+          <div class="sf-highlight-row">
+            <span class="hi-icon">🎙</span>
+            <div>
+              <strong>Di, Fr &amp; So: 19:00 Uhr</strong>
+              <span>Gespräche mit Verena</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
 
-    <!-- Flexible Slots -->
-    <div style="
-      background: rgba(200,148,107,0.08);
-      border: 1px solid rgba(200,148,107,0.22);
-      border-radius: 28px;
-      padding: 36px 32px;
-    ">
-      <p class="eyebrow" style="margin-bottom: 8px;">Flexible Slots</p>
-      <h3 style="font-size: 1.4rem; margin-bottom: 10px;">Drei Ausstrahlungen pro Jahr</h3>
-      <p style="font-family: Arial, sans-serif; font-size: 0.88rem; color: #55584e; margin-bottom: 20px; line-height: 1.6;">
-        Alle anderen Sinnfunker erhalten im Laufe eines Jahres <strong>drei Ausstrahlungen</strong> — einen Slot im Vormittag, einen am Nachmittag und einen in der Nacht. Die Reihenfolge richtet sich nach dem Einreichungsdatum.
-      </p>
-      <div style="display: flex; flex-direction: column; gap: 10px; margin-bottom: 16px;">
-        <div class="sf-slot-row"><strong>☀ Vormittag</strong><span>06:00 – 15:00 Uhr</span></div>
-        <div class="sf-slot-row"><strong>🌤 Nachmittag</strong><span>15:00 – 21:00 Uhr</span></div>
-        <div class="sf-slot-row"><strong>🌙 Nacht</strong><span>21:00 – 06:00 Uhr</span></div>
-      </div>
-      <div class="sf-program-note">
-        <span class="note-icon">📋</span>
-        <p>Die Zuteilung erfolgt nach dem Prinzip <strong>First Come, First Served</strong> — wer zuerst einreicht, kommt zuerst dran.</p>
-      </div>
-    </div>
-
-  </div>
-
-  <!-- Episodenlänge -->
-  <div style="
-    background: rgba(143,169,139,0.08);
-    border: 1px solid rgba(83,107,80,0.15);
-    border-radius: 20px;
-    padding: 22px 28px;
-    display: flex;
-    gap: 14px;
-    align-items: flex-start;
-  ">
-    <span style="font-size: 1.4rem; flex-shrink: 0; margin-top: 2px;">⏱</span>
-    <p style="font-family: Arial, sans-serif; font-size: 0.92rem; color: #55584e; margin: 0; line-height: 1.6;">
-      <strong>Maximale Episodenlänge: 120 Minuten.</strong>
-      <br>Wenn deine Episode länger als 120 Minuten ist, musst du sie in zwei Episoden trennen. Die zwei Teile werden dann zu unterschiedlichen Zeiten gespielt. 😊
-    </p>
-  </div>
-
-</div>
-
-
-    <!-- ── WAS IST SINNFUNK ── -->
-    <div class="sf-what-wrap">
+    <!-- ── DIE REGELN ── -->
+    <div class="sf-what-wrap" id="regeln">
       <p class="eyebrow">Was du wissen musst</p>
-      <h2 style="font-size: clamp(1.8rem,3vw,2.6rem); margin-bottom: 6px;">Die Grenzen bei Sinnfunk</h2>
-      <p style="color:#55584e; font-size:1rem; margin-bottom:0;">Wir sind ein Gesprächs-, Meditations- und Podcast-Radio mit einem gemeinsamen Nenner: keine explosiven Themen.</p>
+      <h2 style="font-size: clamp(1.8rem,3vw,2.6rem); margin-bottom: 6px;">Die Regeln bei Sinnfunk</h2>
+      <p style="color:#55584e; font-size:1rem; margin-bottom:0;">Sinnfunk ist ein Gesprächs- und Podcast-Radio für Inhalte, die verbinden statt polarisieren.</p>
       <div class="sf-what-grid">
+
         <div class="sf-what-card">
           <div class="sf-what-icon">✕</div>
-          <strong>Keine Wut-Themen</strong>
-          <p>Egal ob Verschwörungstheorien, Feminismus, Klimawandel oder aktuelle Politik – Sinnfunk bleibt bewusst außerhalb dieser Themen.<br> Du darfst über die Wut reden - aber keine produzieren.</p>
+          <strong>Ruhe statt Aufregung</strong>
+          <p>Sinnfunk bietet bewusst einen Raum abseits von Polarisierung.</p>
+          <p>Nicht geeignet sind Inhalte zu aktuellen politischen Auseinandersetzungen, Verschwörungstheorien, Feminismus & gendergerechter Sprache, Migration, Klimawandel und Ähnliches.</p>
+          <p>Bei Sinnfunk geht es um Inhalte, die <b>keine starken Gefühle</b> entfachen.</p>
         </div>
+
         <div class="sf-what-card">
           <div class="sf-what-icon">🎙</div>
-          <strong>Was ist ein Sprachradio?</strong>
-          <p>Mit Ausnahme der Hintergrundmusik bei Meditationen gibt es keine Musik bei Sinnfunk.<br>Achtung: Hintergrundmusik muss nachweislich lizenzfrei oder mit KI generiert sein.</p>
+          <strong>Sprachradio statt Musikradio</strong>
+          <p>Sinnfunk ist ein Radio für Worte, Gedanken und Gespräche.</p>
+          <p>Keine Musik – außer einem kurzen Gong im Hintergrund oder einer kurzen, lizenzfreien Einspielung von einigen Sekunden im Hintergrund.</p>
         </div>
+
         <div class="sf-what-card">
           <div class="sf-what-icon">◌</div>
-          <strong>Keine Werbung</strong>
-          <p>Du kannst auf Sinnfunk dich als Person oder deine eigenen Produkte bewerben (Bücher, Seminare, Beratungen, ...) - aber keine Drittwerbung.<br>
-            Achtung: Ein Radio unterliegt strengen Regeln: Keine Werbung für Alkohol, Waffen oder Pornografie – auch nicht als Eigenwerbung.</p>
+          <strong>Menschen statt ständige Werbeunterbrechnung</strong>
+          <p>Du darfst dich selbst sowie deine eigenen Angebote vorstellen – beispielsweise Bücher, Seminare, Kurse oder Beratungen.</p>
+          <p>Nicht erlaubt ist Werbung für fremde Unternehmen, Produkte oder Dienstleistungen.</p>
+          <p>Unabhängig davon gelten die gesetzlichen Werbebeschränkungen für Inhalte wie Alkohol, Waffen oder Pornografie.</p>
         </div>
+
         <div class="sf-what-card">
           <div class="sf-what-icon">⚖</div>
           <strong>Rechtliches</strong>
-          <p>Keine Verleumdung von Personen oder Organisationen.</p>
-          <br>
-            <p>Keine Heilsversprechen und keine unfundierten Aussagen im Bereich der Medizin, Psychologie und ähnlichen Feldern.</p>
+          <p>Veröffentliche keine verleumderischen oder rufschädigenden Aussagen über Personen oder Organisationen.</p>
+          <p>Bei medizinischen, psychologischen oder therapeutischen Themen sind keine Heilsversprechen und keine unbelegten Behauptungen erlaubt.</p>
+          <p>Jeder Sinnfunker ist für die Rechtmäßigkeit seiner Inhalte selbst verantwortlich.</p>
         </div>
+
       </div>
     </div>
 
-    <!-- ── WOFÜR WIR STEHEN ── -->
-    <div class="sf-stand-wrap">
-      <div class="sf-stand">
-        <div class="sf-stand-left">
+    <!-- ── FÜR WEN ── -->
+    <div class="sf-fuer-wen-wrap">
+      <div class="sf-fuer-wen">
+        <div class="sf-fuer-wen-head">
           <p class="eyebrow">Für wen?</p>
-          <h2>Menschen hinter den Stimmen.</h2>
-          <p>Du hast etwas zu sagen? Mach mit!</p>
+          <h2>Du hast etwas zu sagen? Mach mit.</h2>
+          <p>Sinnfunk ist offen für alle, die Inhalte teilen möchten, die verbinden, vertiefen oder bereichern – egal aus welchem Bereich.</p>
         </div>
-        <div class="sf-stand-lists">
-          <div class="sf-list-box green">
-            <h4>✓ Willkommen</h4>
-            <ul>
-              <li>Autoren</li>
-              <li>Energetiker</li>
-              <li>Therapeuten & Coaches</li>
-              <li>Philosophen</li>
-              <li>Wissenschaftler</li>
-              <li>Meditationsleiter</li>
-              <li>Astrologen</li>
-              <li>Künstler </li>
-              <li>Kräuterpädagogen</li>
-              <li>Coaches & Berater </li>
-              <li>Menschen, mit interessanten Hobbys </li>
-              <li>Alle, die etwas mitzuteilen haben.</li>
-            </ul>
-          </div>
-         
+        <div class="sf-fuer-wen-grid">
+          <div class="sf-fuer-wen-pill">Autoren</div>
+          <div class="sf-fuer-wen-pill">Energetiker</div>
+          <div class="sf-fuer-wen-pill">Therapeuten &amp; Coaches</div>
+          <div class="sf-fuer-wen-pill">Philosophen</div>
+          <div class="sf-fuer-wen-pill">Wissenschaftler</div>
+          <div class="sf-fuer-wen-pill">Astrologen</div>
+          <div class="sf-fuer-wen-pill">Künstler</div>
+          <div class="sf-fuer-wen-pill">Kräuterpädagogen</div>
+          <div class="sf-fuer-wen-pill">Personen, die im Bereich IT arbeiten</div>
+          <div class="sf-fuer-wen-pill">Menschen mit interessanten Hobbys</div>
+          <div class="sf-fuer-wen-pill">Alle, die etwas mitzuteilen haben</div>
         </div>
       </div>
     </div>
@@ -767,20 +576,19 @@
         <summary>Rechtliche Hinweise für Sinnfunker</summary>
         <ul>
           <li>Inhalte werden abgelehnt, wenn sie nicht den Regeln – keine Wut-Inhalte – entsprechen.</li>
-          <li>Plagiate oder anderweitige Diebstahl von Ideen, Gedanken und Inhalten führt zu einer Auflösung des Vertrags.</li>
-          <li>Lizenz bei Hintergrundmusik muss nachgewiesen werden.</li>
+          <li>Plagiate oder anderweitiger Diebstahl von Ideen, Gedanken und Inhalten führt zu einer Auflösung des Vertrags.</li>
           <li>Inhalte werden vorab von einer KI überprüft. Die letztendliche Entscheidung über die Ausstrahlung trifft jedoch ein Mensch.</li>
         </ul>
       </details>
     </div>
 
-    <!-- ── CTA BEREIT ── -->
+    <!-- ── CTA ── -->
     <div class="sf-cta-wrap">
       <div class="sf-cta-box">
         <div>
           <p class="eyebrow">Bereit, deine Stimme zu teilen?</p>
           <h2>Du hast etwas zu sagen? Mach mit!</h2>
-          <p>Ein Erstgespräch ist kostenlos und mit wenig Hüren verbunden.</br> Ich freue mich, mit dir zusammenzuarbeiten.</p>
+          <p>Ein Erstgespräch ist kostenlos und mit wenig Hürden verbunden. Ich freue mich, mit dir zusammenzuarbeiten.</p>
           <div class="sf-cta-actions">
             <a class="button" href="kontakt.html">Sinnfunker werden</a>
             <a class="button secondary" href="kontakt.html">Kontaktiere mich</a>
