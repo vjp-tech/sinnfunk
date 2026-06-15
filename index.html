@@ -183,20 +183,25 @@
 
   </div>
 
-  <script>
+    <script>
   const audio = document.querySelector("audio");
   const canvas = document.getElementById("visualizer");
   const ctx = canvas.getContext("2d");
-  let analyser, dataArray, animationId;
+  let analyser, dataArray, animationId, audioCtx, source;
+  let initialized = false;
 
   audio.addEventListener("play", () => {
-    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-    const source = audioCtx.createMediaElementSource(audio);
-    analyser = audioCtx.createAnalyser();
-    analyser.fftSize = 256;
-    source.connect(analyser);
-    analyser.connect(audioCtx.destination);
-    dataArray = new Uint8Array(analyser.frequencyBinCount);
+    if (!initialized) {
+      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+      source = audioCtx.createMediaElementSource(audio);
+      analyser = audioCtx.createAnalyser();
+      analyser.fftSize = 256;
+      source.connect(analyser);
+      analyser.connect(audioCtx.destination);
+      dataArray = new Uint8Array(analyser.frequencyBinCount);
+      initialized = true;
+    }
+    if (audioCtx.state === "suspended") audioCtx.resume();
     draw();
   });
 
@@ -237,6 +242,7 @@
 
   drawStatic();
 </script>
+
   <script>
     const playlist = [
       { title: "Ich freue mich, von dir zu hören", host: "Sinnfunk" },
