@@ -74,7 +74,7 @@
               <p class="eyebrow" style="margin-bottom: 4px;">Live hören</p>
               <h2 style="font-size: 2rem; margin-bottom: 0;">Unser Stream</h2>
             </div>
-            <span class="live-badge">On Air</span>
+            <canvas id="visualizer" width="60" height="60" style="border-radius: 50%;"></canvas>
           </div>
           <audio controls preload="none">
             <source src="https://radio.sinnfunk.live/listen/sinnfunk/radio.mp3" type="audio/mpeg" />
@@ -183,6 +183,60 @@
 
   </div>
 
+  <script>
+  const audio = document.querySelector("audio");
+  const canvas = document.getElementById("visualizer");
+  const ctx = canvas.getContext("2d");
+  let analyser, dataArray, animationId;
+
+  audio.addEventListener("play", () => {
+    const audioCtx = new (window.AudioContext || window.webkitAudioContext)();
+    const source = audioCtx.createMediaElementSource(audio);
+    analyser = audioCtx.createAnalyser();
+    analyser.fftSize = 256;
+    source.connect(analyser);
+    analyser.connect(audioCtx.destination);
+    dataArray = new Uint8Array(analyser.frequencyBinCount);
+    draw();
+  });
+
+  audio.addEventListener("pause", () => {
+    cancelAnimationFrame(animationId);
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    drawStatic();
+  });
+
+  function draw() {
+    animationId = requestAnimationFrame(draw);
+    analyser.getByteFrequencyData(dataArray);
+    const avg = dataArray.reduce((a, b) => a + b, 0) / dataArray.length;
+    const scale = 1 + (avg / 255) * 0.5;
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    const cx = canvas.width / 2;
+    const cy = canvas.height / 2;
+    [0.9, 0.65, 0.4].forEach((r, i) => {
+      ctx.beginPath();
+      ctx.arc(cx, cy, r * 30 * (i === 0 ? scale : 1), 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(83, 107, 80, ${0.25 + i * 0.25})`;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    });
+  }
+
+  function drawStatic() {
+    const cx = canvas.width / 2;
+    const cy = canvas.height / 2;
+    [0.9, 0.65, 0.4].forEach((r, i) => {
+      ctx.beginPath();
+      ctx.arc(cx, cy, r * 30, 0, Math.PI * 2);
+      ctx.strokeStyle = `rgba(83, 107, 80, ${0.25 + i * 0.25})`;
+      ctx.lineWidth = 2;
+      ctx.stroke();
+    });
+  }
+
+  drawStatic();
+</script>
   <script>
     const playlist = [
       { title: "Ich freue mich, von dir zu hören", host: "Sinnfunk" },
