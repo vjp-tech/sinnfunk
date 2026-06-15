@@ -5,8 +5,8 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sinnfunk – Radio, das etwas zu sagen hat</title>
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="image/icon.webp" type="image/x-icon" />
   <style>
-    /* People-Grid: boxed, nicht full width */
     .people-section {
       width: min(1120px, calc(100% - 32px));
       margin: 0 auto;
@@ -25,14 +25,11 @@
       margin-top: 24px;
       justify-content: flex-start;
     }
-
-    /* Programm-Grid responsive */
     .people-grid {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
       gap: 16px;
     }
-
     @media (max-width: 600px) {
       .people-box {
         padding: 28px 20px;
@@ -74,7 +71,7 @@
               <p class="eyebrow" style="margin-bottom: 4px;">Live hören</p>
               <h2 style="font-size: 2rem; margin-bottom: 0;">Unser Stream</h2>
             </div>
-            <canvas id="visualizer" width="60" height="60" style="border-radius: 50%;"></canvas>
+            <span class="live-badge">On Air</span>
           </div>
           <audio controls preload="none">
             <source src="https://radio.sinnfunk.live/listen/sinnfunk/radio.mp3" type="audio/mpeg" />
@@ -183,71 +180,11 @@
 
   </div>
 
-    <script>
-  const audio = document.querySelector("audio");
-  const canvas = document.getElementById("visualizer");
-  const ctx = canvas.getContext("2d");
-  let analyser, dataArray, animationId, audioCtx, source;
-  let initialized = false;
-
-  audio.addEventListener("play", () => {
-    if (!initialized) {
-      audioCtx = new (window.AudioContext || window.webkitAudioContext)();
-      source = audioCtx.createMediaElementSource(audio);
-      analyser = audioCtx.createAnalyser();
-      analyser.fftSize = 256;
-      source.connect(analyser);
-      analyser.connect(audioCtx.destination);
-      dataArray = new Uint8Array(analyser.frequencyBinCount);
-      initialized = true;
-    }
-    if (audioCtx.state === "suspended") audioCtx.resume();
-    draw();
-  });
-
-  audio.addEventListener("pause", () => {
-    cancelAnimationFrame(animationId);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    drawStatic();
-  });
-
-  function draw() {
-    animationId = requestAnimationFrame(draw);
-    analyser.getByteFrequencyData(dataArray);
-    const avg = dataArray.reduce((a, b) => a + b, 0) / dataArray.length;
-    const scale = 1 + (avg / 255) * 0.5;
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    const cx = canvas.width / 2;
-    const cy = canvas.height / 2;
-    [0.9, 0.65, 0.4].forEach((r, i) => {
-      ctx.beginPath();
-      ctx.arc(cx, cy, r * 30 * (i === 0 ? scale : 1), 0, Math.PI * 2);
-      ctx.strokeStyle = `rgba(83, 107, 80, ${0.25 + i * 0.25})`;
-      ctx.lineWidth = 2;
-      ctx.stroke();
-    });
-  }
-
-  function drawStatic() {
-    const cx = canvas.width / 2;
-    const cy = canvas.height / 2;
-    [0.9, 0.65, 0.4].forEach((r, i) => {
-      ctx.beginPath();
-      ctx.arc(cx, cy, r * 30, 0, Math.PI * 2);
-      ctx.strokeStyle = `rgba(83, 107, 80, ${0.25 + i * 0.25})`;
-      ctx.lineWidth = 2;
-      ctx.stroke();
-    });
-  }
-
-  drawStatic();
-</script>
-
   <script>
     const playlist = [
       { title: "Ich freue mich, von dir zu hören", host: "Sinnfunk" },
       { title: "Ab 1. August 2026 läuft hier Sinnfunk.live", host: "Sinnfunk" },
-      { title: "Ein Webradio für gut Gespräche und keinen Lärm", host: "Sinnfunk" }
+      { title: "Ein Webradio für gut Gespräche und ohne Lärm", host: "Sinnfunk" }
     ];
     let currentIndex = 0;
     const titleEl = document.getElementById("current-title");
