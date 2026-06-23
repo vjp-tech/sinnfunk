@@ -72,12 +72,49 @@
     }
 
     /* ===================================================== */
+    /* KOSTENLOS-BANNER (neu, ganz oben)                     */
+    /* ===================================================== */
+    .sf-free-banner {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto 0;
+      padding: 0 0 20px;
+    }
+    .sf-free-banner-inner {
+      background: rgba(143, 169, 139, 0.18);
+      border: 2px solid rgba(83, 107, 80, 0.28);
+      border-radius: 20px;
+      padding: 20px 28px;
+      display: flex;
+      align-items: center;
+      gap: 18px;
+    }
+    .sf-free-banner-inner .sf-ico {
+      width: 28px;
+      height: 28px;
+      color: var(--sage-dark, #536b50);
+      flex-shrink: 0;
+    }
+    .sf-free-banner-inner p {
+      font-family: Arial, sans-serif;
+      font-size: 1rem;
+      color: #2c3128;
+      line-height: 1.55;
+      margin: 0;
+    }
+    .sf-free-banner-inner p strong {
+      color: var(--sage-dark, #536b50);
+    }
+    @media (max-width: 640px) {
+      .sf-free-banner-inner { flex-direction: column; gap: 12px; text-align: center; padding: 18px 16px; }
+    }
+
+    /* ===================================================== */
     /* 1. HERO                                               */
     /* ===================================================== */
     .sf-hero {
       width: min(1120px, calc(100% - 32px));
       margin: 0 auto;
-      padding: 24px 0 56px;
+      padding: 16px 0 56px;
     }
     .sf-hero-grid {
       display: grid;
@@ -157,6 +194,7 @@
       padding: 24px 0 64px;
     }
     .sf-two-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+    .sf-three-cards { display: grid; grid-template-columns: 1fr 1fr 1fr; gap: 20px; }
     .sf-info-card { padding: 32px; }
     .sf-info-card .sf-icon-circle { margin-bottom: 18px; }
     .sf-info-card > p {
@@ -167,9 +205,24 @@
       margin: 0 0 18px;
       max-width: 55ch;
     }
+    /* Kostenlos-Tag in den Karten */
+    .sf-free-tag {
+      display: inline-block;
+      font-family: Arial, sans-serif;
+      font-size: 0.72rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--sage-dark, #536b50);
+      background: rgba(143, 169, 139, 0.22);
+      border: 1px solid rgba(83, 107, 80, 0.25);
+      padding: 5px 13px;
+      border-radius: 999px;
+      margin-top: 18px;
+    }
 
     /* ===================================================== */
-    /* 3. FIXE SENDEPLÄTZE                                   */
+    /* 3. SENDEPLÄTZE                                        */
     /* ===================================================== */
     .sf-program-wrap {
       width: min(1120px, calc(100% - 32px));
@@ -457,15 +510,12 @@
     /* RESPONSIVE – Tablet & Smartphone                      */
     /* ===================================================== */
 
-    /* Tablet: ab 768px, unter 1024px */
     @media (max-width: 1024px) {
       .sf-hero-grid { gap: 28px; }
       .sf-contact-inner { gap: 36px; }
     }
 
-    /* Tablet: unter 900px – zweispaltig → einspaltig */
     @media (max-width: 900px) {
-      /* Hero: Bild zuerst auf Mobil/Tablet */
       .sf-hero-grid {
         grid-template-columns: 1fr;
         gap: 0;
@@ -478,6 +528,7 @@
       }
 
       .sf-two-cards,
+      .sf-three-cards,
       .sf-price-grid,
       .sf-what-grid,
       .sf-regular-grid { grid-template-columns: 1fr; }
@@ -494,7 +545,6 @@
       }
     }
 
-    /* Smartphone: unter 640px – nur Abstände, keine font-size */
     @media (max-width: 640px) {
       .sf-hero { padding: 16px 0 40px; }
       .sf-hero-image { min-height: 240px; max-height: 320px; }
@@ -514,9 +564,13 @@
       .sf-price-card,
       .sf-what-card,
       .sf-regular-box { padding: 20px 16px; }
+
+      .sf-regular-box { padding: 24px 18px; }
+
+      .sf-price-box .price-big { font-size: 2rem; }
+      .sf-regular-item .reg-price { font-size: 1.8rem; }
     }
 
-    /* Sehr kleine Smartphones: unter 400px */
     @media (max-width: 400px) {
       .sf-hero-features { grid-template-columns: 1fr; }
       .sf-hero-image { min-height: 200px; }
@@ -546,6 +600,7 @@
     <symbol id="icon-calendar" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></g></symbol>
     <symbol id="icon-phone" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92Z"/></g></symbol>
     <symbol id="icon-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></g></symbol>
+    <symbol id="icon-gift" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="8" width="18" height="4" rx="1"/><path d="M12 8v13"/><path d="M19 12v7a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2v-7"/><path d="M7.5 8a2.5 2.5 0 0 1 0-5A4.8 8 0 0 1 12 8a4.8 8 0 0 1 4.5-5 2.5 2.5 0 0 1 0 5"/></g></symbol>
   </svg>
 
 <div class="page">
@@ -554,7 +609,7 @@
 
   <main>
 
-    <!-- ===== 1. HERO ===== -->
+    <!-- ===== HERO ===== -->
     <section class="sf-hero">
       <div class="sf-hero-grid">
 
@@ -589,13 +644,21 @@
       </div>
     </section>
 
-    <!-- ===== 2. MITMACHEN ===== -->
+    <!-- ===== KOSTENLOS-BANNER ===== -->
+    <div class="sf-free-banner">
+      <div class="sf-free-banner-inner">
+        <svg class="sf-ico"><use href="#icon-gift"/></svg>
+        <p><strong>Mitmachen ist kostenlos.</strong> Ein Gespräch mit mir oder das Einreichen deines Podcasts kostet dich nichts. Kosten entstehen nur, wenn du eine eigene Vorstellung als fertigen Beitrag hochlädst – und das ist bis 31.&nbsp;Dezember&nbsp;2026 ebenfalls kostenlos.</p>
+      </div>
+    </div>
+
+    <!-- ===== MITMACHEN ===== -->
     <section class="sf-mitmachen-wrap" id="mitmachen">
       <div class="sf-section-head">
         <p class="eyebrow">So kannst du bei Sinnfunk mitmachen</p>
-        <h2>Zwei Wege zu deiner Stimme</h2>
+        <h2>Drei Wege zu deiner Stimme</h2>
       </div>
-      <div class="sf-two-cards">
+      <div class="sf-three-cards">
         <div class="sf-info-card sf-card">
           <div class="sf-icon-circle"><svg><use href="#icon-mic"/></svg></div>
           <h3>Gespräch im Radio</h3>
@@ -605,26 +668,39 @@
             <li>Professionelle Aufnahme &amp; Nachbearbeitung</li>
             <li>Die Aufnahme gehört dir</li>
           </ul>
+          <span class="sf-free-tag">✓ Kostenlos</span>
+        </div>
+        <div class="sf-info-card sf-card">
+          <div class="sf-icon-circle"><svg><use href="#icon-headphones"/></svg></div>
+          <h3>Podcast einreichen</h3>
+          <p>Du produzierst bereits einen Podcast? Gerne nehmen wir ausgewählte Folgen in unser Programm auf. Dein Inhalt bleibt dein Inhalt – wir geben ihm einfach mehr Reichweite.</p>
+          <ul class="sf-check-list">
+            <li>Bestehende Folgen einreichen</li>
+            <li>Mehr Hörer für deinen Podcast</li>
+            <li>Du bleibst Eigentümer deiner Inhalte</li>
+          </ul>
+          <span class="sf-free-tag">✓ Kostenlos</span>
         </div>
         <div class="sf-info-card sf-card">
           <div class="sf-icon-circle"><svg><use href="#icon-radio"/></svg></div>
-          <h3>Vorstellung im Radio</h3>
-          <p>Stelle dein Buch, dein Unternehmen, dein Projekt oder deine Veranstaltung im Radio vor.</p>
+          <h3>Eigenvorstellung hochladen</h3>
+          <p>Stelle dein Buch, dein Unternehmen, dein Projekt oder deine Veranstaltung im Radio vor – mit deiner eigenen fertigen Aufnahme, die du selbst gestaltest und hochlädst.</p>
           <ul class="sf-check-list">
             <li>Du bestimmst die Inhalte</li>
             <li>Geplant und angekündigt im Programm</li>
-            <li>Für dich und deine Zuhörer</li>
+            <li>Bis 90 Minuten pro Episode</li>
           </ul>
+          <span class="sf-free-tag">✓ Bis 31.12.2026 kostenlos</span>
         </div>
       </div>
     </section>
 
-    <!-- ===== 3. FIXE SENDEPLÄTZE ===== -->
+    <!-- ===== SENDEPLÄTZE ===== -->
     <section class="sf-program-wrap" id="programm">
       <div class="sf-head-left">
         <p class="eyebrow">Sendeprogramm</p>
         <h2>Fixe Sendeplätze</h2>
-        <p class="sf-lead">Für bestimmte Inhalte gibt es wöchentlich wiederkehrende Sendeplätze. Alle anderen Episoden laufen in der allgemeinen Rotation mindestens dreimal in einem Jahr. Das bedeutet: Deine eingereichte Episode oder dein Gespräch mit mir wird dreimal zu einem bestimmten Zeitpunkt gesendet. Der Zeitpunkt selbst folgt dem First-Come-First-Serve-Prinzip.</p>
+        <p class="sf-lead">Für bestimmte Inhalte gibt es wöchentlich wiederkehrende Sendeplätze. Alle anderen Episoden laufen in der allgemeinen Rotation und werden mindestens dreimal im Jahr ausgestrahlt. Der genaue Zeitpunkt richtet sich nach dem Eingang – wer zuerst einreicht, sendet zuerst.</p>
       </div>
       <div class="sf-rows">
         <div class="sf-row sf-card"><span class="sf-icon-circle sm"><svg><use href="#icon-book"/></svg></span><div><strong>Mo &amp; Do: vormittags</strong><span>Autoren präsentieren ihre Bücher</span></div></div>
@@ -636,33 +712,32 @@
       </div>
     </section>
 
-    <!-- ===== 4. REGELN ===== -->
+    <!-- ===== REGELN ===== -->
     <section class="sf-what-wrap" id="regeln">
       <div class="sf-head-left">
         <p class="eyebrow">Was du wissen musst</p>
         <h2>Die Regeln bei Sinnfunk</h2>
-        <p class="sf-lead">Sinnfunk ist ein Gesprächs- und Podcast-Radio für Inhalte, die verbinden statt polarisieren.</p>
+        <p class="sf-lead">Sinnfunk ist ein Gesprächs- und Podcast-Radio für Inhalte, die verbinden statt polarisieren. Damit das so bleibt, gibt es ein paar klare Spielregeln.</p>
       </div>
       <div class="sf-what-grid">
         <div class="sf-what-card sf-card">
           <div class="sf-icon-circle sm"><svg><use href="#icon-x"/></svg></div>
           <strong>Ruhe statt Aufregung</strong>
           <p>Sinnfunk bietet bewusst einen Raum abseits von Polarisierung.</p>
-          <p>Nicht geeignet sind Inhalte <b>zu aktuellen politischen Auseinandersetzungen, Verschwörungstheorien, Feminismus &amp; gendergerechter Sprache, Migration, Klimawandel und Ähnliches.</b></p>
+          <p>Nicht geeignet sind Inhalte <b>zu aktuellen politischen Auseinandersetzungen, Verschwörungstheorien, Feminismus &amp; gendergerechter Sprache, Migration, Klimawandel und Ähnlichem.</b></p>
           <p>Bei Sinnfunk geht es um Inhalte, die <b>keine starken Gefühle</b> entfachen.</p>
         </div>
         <div class="sf-what-card sf-card">
           <div class="sf-icon-circle sm"><svg><use href="#icon-mic"/></svg></div>
           <strong>Sprachradio statt Musikradio</strong>
           <p>Sinnfunk ist ein Radio für Worte, Gedanken und Gespräche.</p>
-          <p><b>Keine Musik</b> – außer einem kurzen Gong im Hintergrund oder einer kurzen, lizenzfreien Einspielung von einigen Sekunden im Hintergrund.</p>
+          <p><b>Keine Musik</b> – außer einem kurzen Gong im Hintergrund oder einer kurzen, lizenzfreien Einspielung von einigen Sekunden.</p>
         </div>
         <div class="sf-what-card sf-card">
           <div class="sf-icon-circle sm"><svg><use href="#icon-user"/></svg></div>
-          <strong>Menschen statt ständige Werbeunterbrechung</strong>
-          <p>Du darfst dich selbst sowie deine eigenen Angebote vorstellen – beispielsweise Bücher, Seminare, Kurse oder Beratungen.</p>
-          <p>Wichtig: <b>Keine Werbung für fremde Unternehmen, Produkte oder Dienstleistungen.</b></p>
-          <p>Unabhängig davon gelten die gesetzlichen Werbebeschränkungen für Inhalte wie Alkohol, Waffen oder Pornografie.</p>
+          <strong>Menschen statt Werbung</strong>
+          <p>Du darfst dich selbst sowie deine eigenen Angebote vorstellen – Bücher, Seminare, Kurse oder Beratungen.</p>
+          <p>Wichtig: <b>Keine Werbung für fremde Unternehmen, Produkte oder Dienstleistungen.</b> Die gesetzlichen Werbebeschränkungen (z.&nbsp;B. Alkohol, Waffen) gelten selbstverständlich.</p>
         </div>
         <div class="sf-what-card sf-card">
           <div class="sf-icon-circle sm"><svg><use href="#icon-scale"/></svg></div>
@@ -671,7 +746,6 @@
           <p>Bei medizinischen, psychologischen oder therapeutischen Themen sind <b>keine Heilsversprechen und keine unbelegten Behauptungen</b> erlaubt.</p>
           <p>Jeder Sinnfunker ist für die Rechtmäßigkeit seiner Inhalte selbst verantwortlich.</p>
         </div>
-        <!-- Qualitäts-Karte: volle Breite, zentriert -->
         <div class="sf-what-card sf-card full">
           <div class="sf-icon-circle sm"><svg><use href="#icon-headphones"/></svg></div>
           <strong>Gut hörbare Qualität</strong>
@@ -681,7 +755,7 @@
       </div>
     </section>
 
-    <!-- ===== 5. PREISE – Vorteilspreise ===== -->
+    <!-- ===== PREISE – Vorteilspreise ===== -->
     <section class="sf-price-wrap" id="preise">
       <div class="sf-section-head">
         <p class="eyebrow">Preise</p>
@@ -689,13 +763,12 @@
       </div>
       <div class="sf-price-grid">
 
-        <!-- Karte 1: Vorstellung (grün) -->
+        <!-- Karte 1: Eigenvorstellung (grün) -->
         <div class="sf-price-card sf-card card-green">
           <div class="sf-icon-circle"><svg><use href="#icon-megaphone"/></svg></div>
           <h3>Eigenvorstellung im Radio</h3>
-          <p>Präsentiere dein Buch, dein Unternehmen, dein Projekt oder deine Veranstaltung.</p>
+          <p>Lade deine fertige Aufnahme hoch und stelle dein Buch, dein Unternehmen, dein Projekt oder deine Veranstaltung vor.</p>
 
-          <!-- Vorteile hervorgehoben -->
           <div class="sf-advantage-block">
             <span class="adv-label">Deine Vorteile</span>
             <ul>
@@ -709,18 +782,17 @@
           <div class="sf-price-box">
             <span class="sf-badge">Vorteilspreis</span>
             <div class="price-big">KOSTENLOS</div>
-            <span class="price-sub">bis 30.09.2026</span>
-            <p class="price-then">Ab 01.10.2026 bis 31.12.2026:<br><b>10 € pro hochgeladener Stunde</b></p>
+            <span class="price-sub">bis 31.12.2026</span>
+            <p class="price-then">Ab 01.01.2027:<br><b>50 € pro Eigenvorstellung</b></p>
           </div>
         </div>
 
-        <!-- Karte 2: Gesprächspaket (warm/terrakotta) -->
+        <!-- Karte 2: Aufnahme mit Verena (warm/terrakotta) -->
         <div class="sf-price-card sf-card card-warm">
           <div class="sf-icon-circle"><svg><use href="#icon-mic"/></svg></div>
-          <h3>Gesprächspaket</h3>
-          <p>Wir zeichnen gemeinsam ein Gespräch auf – professionell aufbereitet. Die Aufnahme gehört dir.</p>
+          <h3>Aufnahme mit Verena</h3>
+          <p>Wir zeichnen gemeinsam ein Gespräch auf – professionell aufbereitet und geschnitten. Die Aufnahme gehört dir und kann frei verwendet werden.</p>
 
-          <!-- Vorteile hervorgehoben -->
           <div class="sf-advantage-block">
             <span class="adv-label">Deine Vorteile</span>
             <ul>
@@ -741,7 +813,7 @@
       </div>
     </section>
 
-    <!-- ===== 6. REGULÄRE PREISE ===== -->
+    <!-- ===== REGULÄRE PREISE ===== -->
     <section class="sf-regular-wrap">
       <div class="sf-regular-box">
         <div class="reg-head">
@@ -756,7 +828,7 @@
             <div class="reg-detail">für maximal 90 Minuten</div>
           </div>
           <div class="sf-regular-item">
-            <div class="reg-label">Gesprächspaket</div>
+            <div class="reg-label">Aufnahme mit Verena</div>
             <div class="reg-price">150 €</div>
             <div class="reg-detail">für maximal 2 Stunden</div>
           </div>
@@ -764,7 +836,7 @@
       </div>
     </section>
 
-    <!-- ===== 7. KONTAKT ===== -->
+    <!-- ===== KONTAKT ===== -->
     <section class="sf-contact" id="kontakt">
       <div class="sf-contact-inner">
         <div class="sf-contact-img">
