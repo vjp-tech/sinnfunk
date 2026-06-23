@@ -94,7 +94,7 @@ document.head.appendChild(sfNavCSS);
 // ── Nav-Links ────────────────────────────────
 const navLinks = [
   { href: 'index.html',      label: 'Start' },
-  { href: 'podcaster.html',  label: 'Mitmachen' },
+  { href: 'mitmachen.html',  label: 'Mitmachen' },
   { href: 'community.html',  label: 'Community' },
   { href: 'shop.html',       label: 'Shop' },
   { href: 'kontakt.html',    label: 'Kontakt' },
