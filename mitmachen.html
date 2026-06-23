@@ -109,9 +109,9 @@
     .sf-feat .sf-ico { width: 24px; height: 24px; }
     .sf-feat span {
       font-family: Arial, sans-serif;
-      font-size: 0.86rem;
+      font-size: 0.95rem;
       color: #55584e;
-      line-height: 1.35;
+      line-height: 1.45;
     }
 
     /* Bild */
@@ -178,8 +178,8 @@
     }
     .sf-rows { display: flex; flex-direction: column; gap: 12px; margin-top: 28px; }
     .sf-row { display: flex; align-items: center; gap: 16px; padding: 16px 18px; }
-    .sf-row strong { font-size: 0.98rem; display: block; }
-    .sf-row span { font-family: Arial, sans-serif; font-size: 0.88rem; color: var(--muted); line-height: 1.5; }
+    .sf-row strong { font-size: 1rem; display: block; }
+    .sf-row span { font-family: Arial, sans-serif; font-size: 0.95rem; color: var(--muted); line-height: 1.55; }
 
     /* ===================================================== */
     /* 4. REGELN                                             */
@@ -346,19 +346,19 @@
 
     .sf-price-box .price-sub {
       font-family: Arial, sans-serif;
-      font-size: 0.9rem;
+      font-size: 0.98rem;
       color: var(--muted);
       display: block;
       margin-top: 4px;
     }
     .sf-price-box .price-then {
       font-family: Arial, sans-serif;
-      font-size: 0.87rem;
+      font-size: 0.95rem;
       color: #55584e;
       margin: 12px 0 0;
       padding-top: 12px;
       border-top: 1px solid rgba(83, 107, 80, 0.18);
-      line-height: 1.55;
+      line-height: 1.6;
     }
     .sf-price-card.card-warm .sf-price-box .price-then {
       border-top-color: rgba(200, 148, 107, 0.22);
@@ -449,7 +449,7 @@
       display: block;
       font-family: Arial, sans-serif;
       color: var(--muted);
-      font-size: 0.85rem;
+      font-size: 0.92rem;
       margin-top: 2px;
     }
 
@@ -472,18 +472,16 @@
       }
       .sf-hero-image {
         order: -1;
-        min-height: 320px;
+        min-height: 300px;
         margin-bottom: 28px;
         border-radius: 20px;
       }
-      .sf-hero-text h1 { font-size: clamp(2rem, 6vw, 2.8rem); }
 
       .sf-two-cards,
       .sf-price-grid,
       .sf-what-grid,
       .sf-regular-grid { grid-template-columns: 1fr; }
 
-      /* Qualitäts-Karte: grid-column: 1 gilt auch mit einem Grid */
       .sf-what-card.full { grid-column: 1; }
 
       .sf-contact-inner {
@@ -491,18 +489,16 @@
         gap: 28px;
       }
       .sf-contact-img {
-        min-height: 280px;
-        max-height: 360px;
+        min-height: 260px;
+        max-height: 340px;
       }
     }
 
-    /* Smartphone: unter 640px */
+    /* Smartphone: unter 640px – nur Abstände, keine font-size */
     @media (max-width: 640px) {
       .sf-hero { padding: 16px 0 40px; }
-      .sf-hero-image { min-height: 260px; max-height: 340px; }
+      .sf-hero-image { min-height: 240px; max-height: 320px; }
       .sf-sendestart { padding: 14px 16px; gap: 10px; }
-      .sf-sendestart strong { font-size: 0.95rem; }
-      .sf-sendestart span { font-size: 0.82rem; }
 
       .sf-hero-features { gap: 8px; }
       .sf-feat { padding: 12px; }
@@ -512,23 +508,18 @@
       .sf-what-wrap,
       .sf-price-wrap,
       .sf-regular-wrap,
-      .sf-contact { padding-bottom: 44px; }
+      .sf-contact { padding-bottom: 40px; }
 
       .sf-info-card,
       .sf-price-card,
       .sf-what-card,
-      .sf-regular-box { padding: 22px 18px; }
-
-      .sf-price-box .price-big { font-size: 2rem; }
-      .sf-regular-item .reg-price { font-size: 1.8rem; }
-
-      .sf-contact-line a { font-size: 1.15rem; }
+      .sf-regular-box { padding: 20px 16px; }
     }
 
     /* Sehr kleine Smartphones: unter 400px */
     @media (max-width: 400px) {
       .sf-hero-features { grid-template-columns: 1fr; }
-      .sf-hero-image { min-height: 220px; }
+      .sf-hero-image { min-height: 200px; }
     }
   </style>
 </head>
