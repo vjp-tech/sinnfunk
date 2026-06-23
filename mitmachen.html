@@ -10,6 +10,44 @@
   <style>
 
     /* ===================================================== */
+    /* ===== GEMEINSAME KARTEN-OPTIK (Punkt 2)         ===== */
+    /* Eine einzige Optik für ALLE Karten der Seite.       */
+    /* Hier zentral ändern = überall geändert.             */
+    /* ===================================================== */
+    .sf-card {
+      background: rgba(255, 250, 242, 0.55);
+      -webkit-backdrop-filter: blur(10px);
+      backdrop-filter: blur(10px);
+      border: 1px solid rgba(123, 94, 69, 0.10);
+      border-radius: 24px;
+      box-shadow: 0 4px 18px rgba(44, 49, 40, 0.05);
+    }
+
+    /* Icon im grünen Kreis – größer und luftiger (Punkt 1) */
+    .sf-icon-circle {
+      width: 64px;
+      height: 64px;
+      border-radius: 50%;
+      background: rgba(143, 169, 139, 0.16);
+      display: grid;
+      place-items: center;
+      color: var(--sage-dark, #536b50);
+      flex-shrink: 0;
+    }
+    .sf-icon-circle > svg { display: block; width: 28px; height: 28px; }
+
+    .sf-icon-circle.sm { width: 46px; height: 46px; }
+    .sf-icon-circle.sm > svg { width: 22px; height: 22px; }
+
+    /* Kleine Inline-Icons (Merkmale, Kontakt) */
+    .sf-ico {
+      width: 22px;
+      height: 22px;
+      color: var(--sage-dark, #536b50);
+      flex-shrink: 0;
+    }
+
+    /* ===================================================== */
     /* ===== 1. HERO                                   ===== */
     /* ===================================================== */
     .sf-hero {
@@ -25,54 +63,55 @@
       align-items: center;
     }
 
+    /* Typografie ruhiger (Punkt 7): weniger fett, mehr Zeilenhöhe */
     .sf-hero-text h1 {
-      font-size: clamp(2.4rem, 5vw, 4rem);
-      line-height: 1.05;
+      font-size: clamp(2.2rem, 4.5vw, 3.6rem);
+      font-weight: 400;
+      line-height: 1.12;
+      letter-spacing: -0.01em;
       margin: 10px 0 18px;
     }
 
     .sf-hero-text > p {
       font-size: 1.08rem;
       color: #505248;
-      line-height: 1.6;
+      line-height: 1.7;
       margin: 0 0 28px;
-      max-width: 440px;
+      max-width: 60ch;
     }
 
-    /* Vier kleine Merkmale unter dem Text */
+    /* Vier Merkmale als 2x2-Raster (Punkt 4) */
     .sf-hero-features {
       display: grid;
-      grid-template-columns: repeat(4, 1fr);
-      gap: 14px;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
       margin: 0 0 28px;
-      max-width: 480px;
+      max-width: 460px;
     }
 
-    .sf-hero-feat {
+    .sf-feat {
       display: flex;
       flex-direction: column;
       gap: 8px;
-      text-align: center;
+      padding: 16px;
     }
 
-    .sf-hero-feat .feat-icon {
-      font-size: 1.4rem;
-      line-height: 1;
-    }
+    .sf-feat .sf-ico { width: 24px; height: 24px; }
 
-    .sf-hero-feat span {
+    .sf-feat span {
       font-family: Arial, sans-serif;
-      font-size: 0.78rem;
-      color: var(--muted);
+      font-size: 0.86rem;
+      color: #55584e;
       line-height: 1.35;
     }
 
-    /* Bildspalte rechts */
+    /* Bildspalte */
     .sf-hero-image {
       position: relative;
-      border-radius: 28px;
+      border-radius: 24px;
       overflow: hidden;
-      min-height: 380px;
+      min-height: 400px;
+      box-shadow: 0 4px 18px rgba(44, 49, 40, 0.05);
     }
 
     .sf-hero-image img {
@@ -83,38 +122,36 @@
       display: block;
     }
 
-    /* Grüne "Sendestart"-Box, die unten ins Bild ragt */
+    /* Grüne "Sendestart"-Box als Glasleiste unten im Bild */
     .sf-sendestart {
       position: absolute;
-      left: -28px;
-      bottom: 24px;
-      right: 24px;
-      background: var(--sage-dark, #536b50);
+      left: 16px;
+      right: 16px;
+      bottom: 16px;
+      background: rgba(83, 107, 80, 0.90);
+      -webkit-backdrop-filter: blur(6px);
+      backdrop-filter: blur(6px);
       color: #f7f4ec;
-      border-radius: 20px;
-      padding: 20px 24px;
+      border-radius: 18px;
+      padding: 16px 20px;
       display: flex;
       align-items: center;
       gap: 14px;
-      box-shadow: 0 12px 30px rgba(44,49,40,0.18);
     }
 
-    .sf-sendestart .cal-icon {
-      font-size: 1.5rem;
-      flex-shrink: 0;
-    }
+    .sf-sendestart .sf-ico { color: #f7f4ec; width: 24px; height: 24px; }
+    .sf-sendestart strong { display: block; font-size: 1.05rem; margin-bottom: 2px; }
+    .sf-sendestart span { font-family: Arial, sans-serif; font-size: 0.9rem; opacity: 0.92; }
 
-    .sf-sendestart strong {
-      display: block;
-      font-size: 1.1rem;
-      margin-bottom: 2px;
-    }
+    /* ===================================================== */
+    /* ===== ABSCHNITTS-KÖPFE                          ===== */
+    /* ===================================================== */
+    .sf-section-head { text-align: center; margin-bottom: 36px; }
+    .sf-section-head h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); font-weight: 400; margin: 6px 0 0; }
 
-    .sf-sendestart span {
-      font-family: Arial, sans-serif;
-      font-size: 0.92rem;
-      opacity: 0.92;
-    }
+    .sf-head-left { margin-bottom: 8px; }
+    .sf-head-left h2 { font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 400; margin: 6px 0; }
+    .sf-head-left > p { color: #55584e; font-size: 1rem; line-height: 1.7; max-width: 65ch; margin: 0; }
 
     /* ===================================================== */
     /* ===== 2. SO KANNST DU MITMACHEN (zwei Karten)  ===== */
@@ -125,62 +162,21 @@
       padding: 24px 0 64px;
     }
 
-    .sf-section-head {
-      text-align: center;
-      margin-bottom: 36px;
-    }
+    .sf-two-cards { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
 
-    .sf-section-head h2 {
-      font-size: clamp(1.6rem, 3vw, 2.2rem);
-      margin: 6px 0 0;
-    }
-
-    .sf-two-cards {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-    }
-
-    .sf-info-card {
-      background: rgba(255,250,242,0.85);
-      border: 1px solid rgba(123,94,69,0.13);
-      border-radius: 28px;
-      padding: 32px;
-    }
-
-    .sf-info-card .card-icon {
-      width: 64px;
-      height: 64px;
-      border-radius: 20px;
-      background: rgba(143,169,139,0.18);
-      display: grid;
-      place-items: center;
-      font-size: 1.7rem;
-      margin-bottom: 18px;
-    }
-
-    .sf-info-card h3 {
-      font-size: 1.5rem;
-      margin: 0 0 12px;
-    }
-
+    .sf-info-card { padding: 32px; }
+    .sf-info-card .sf-icon-circle { margin-bottom: 18px; }
+    .sf-info-card h3 { font-size: 1.5rem; font-weight: 400; margin: 0 0 12px; }
     .sf-info-card > p {
       font-family: Arial, sans-serif;
       font-size: 0.97rem;
       color: #55584e;
-      line-height: 1.6;
+      line-height: 1.65;
       margin: 0 0 18px;
+      max-width: 55ch;
     }
 
-    .sf-check-list {
-      list-style: none;
-      padding: 0;
-      margin: 0;
-      display: flex;
-      flex-direction: column;
-      gap: 10px;
-    }
-
+    .sf-check-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: 10px; }
     .sf-check-list li {
       font-family: Arial, sans-serif;
       font-size: 0.92rem;
@@ -188,7 +184,6 @@
       padding-left: 26px;
       position: relative;
     }
-
     .sf-check-list li::before {
       content: "✓";
       position: absolute;
@@ -206,19 +201,11 @@
       padding: 0 0 64px;
     }
 
-    .sf-highlight-row {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      padding: 14px 16px;
-      border-radius: 14px;
-      background: rgba(255,250,242,0.8);
-      border: 1px solid rgba(123,94,69,0.1);
-    }
+    .sf-rows { display: flex; flex-direction: column; gap: 12px; margin-top: 28px; }
 
-    .sf-highlight-row .hi-icon { font-size: 1.2rem; flex-shrink: 0; }
-    .sf-highlight-row strong { font-size: 0.97rem; display: block; }
-    .sf-highlight-row span { font-family: Arial, sans-serif; font-size: 0.86rem; color: var(--muted); }
+    .sf-row { display: flex; align-items: center; gap: 16px; padding: 16px 18px; }
+    .sf-row strong { font-size: 0.98rem; display: block; }
+    .sf-row span { font-family: Arial, sans-serif; font-size: 0.88rem; color: var(--muted); line-height: 1.5; }
 
     /* ===================================================== */
     /* ===== 4. REGELN BEI SINNFUNK                    ===== */
@@ -229,51 +216,24 @@
       padding: 0 0 64px;
     }
 
-    .sf-what-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-      margin-top: 24px;
-    }
+    .sf-what-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 28px; }
 
-    .sf-what-card {
-      background: rgba(255,250,242,0.7);
-      border: 1px solid rgba(123,94,69,0.11);
-      border-radius: 24px;
-      padding: 26px;
-    }
-
-    /* Qualitäts-Karte über die ganze Breite */
-    .sf-what-card.full {
-      grid-column: 1 / -1;
-      background: rgba(143,169,139,0.1);
-      border-color: rgba(83,107,80,0.2);
-    }
-
-    .sf-what-icon {
-      font-size: 1.4rem;
-      margin-bottom: 10px;
-    }
-
-    .sf-what-card strong {
-      display: block;
-      font-size: 1.05rem;
-      margin-bottom: 10px;
-      color: #2c3128;
-    }
-
+    .sf-what-card { padding: 28px; }
+    .sf-what-card.full { grid-column: 1 / -1; background: rgba(143, 169, 139, 0.12); }
+    .sf-what-card .sf-icon-circle.sm { margin-bottom: 14px; }
+    .sf-what-card strong { display: block; font-size: 1.05rem; margin-bottom: 10px; color: #2c3128; }
     .sf-what-card p {
       font-family: Arial, sans-serif;
       font-size: 0.92rem;
       color: var(--muted);
-      line-height: 1.6;
+      line-height: 1.65;
       margin: 0 0 8px;
+      max-width: 60ch;
     }
-
     .sf-what-card p:last-child { margin-bottom: 0; }
 
     /* ===================================================== */
-    /* ===== 5. PREISE (zwei Vorteilspreis-Karten)     ===== */
+    /* ===== 5. PREISE (Vorteilspreise, hervorgehoben) ===== */
     /* ===================================================== */
     .sf-price-wrap {
       width: min(1120px, calc(100% - 32px));
@@ -281,79 +241,64 @@
       padding: 0 0 28px;
     }
 
-    .sf-price-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 20px;
-      margin-top: 32px;
-    }
+    .sf-price-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; margin-top: 32px; }
 
-    .sf-price-card {
-      background: rgba(255,250,242,0.85);
-      border: 1px solid rgba(123,94,69,0.13);
-      border-radius: 28px;
-      padding: 32px;
-      display: flex;
-      flex-direction: column;
-    }
-
-    .sf-price-card .card-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 18px;
-      background: rgba(143,169,139,0.18);
-      display: grid;
-      place-items: center;
-      font-size: 1.5rem;
-      margin-bottom: 16px;
-    }
-
-    .sf-price-card h3 {
-      font-size: 1.3rem;
-      margin: 0 0 10px;
-    }
-
+    .sf-price-card { padding: 32px; display: flex; flex-direction: column; }
+    .sf-price-card .sf-icon-circle { margin-bottom: 16px; }
+    .sf-price-card h3 { font-size: 1.3rem; font-weight: 400; margin: 0 0 10px; }
     .sf-price-card > p {
       font-family: Arial, sans-serif;
       font-size: 0.94rem;
       color: #55584e;
       line-height: 1.6;
       margin: 0 0 16px;
+      max-width: 50ch;
     }
-
     .sf-price-card .sf-check-list { margin-bottom: 22px; }
 
-    /* Preis-Block unten in der Karte */
-    .sf-price-box {
-      margin-top: auto;
-      background: rgba(143,169,139,0.12);
-      border-radius: 18px;
-      padding: 20px;
+    /* Preis-Block – deutlich größer, mit Badge (Punkt 5) */
+    .sf-price-box { margin-top: auto; border-radius: 18px; padding: 22px; }
+    .sf-price-box.free { background: rgba(143, 169, 139, 0.22); border: 1px solid rgba(83, 107, 80, 0.30); }
+    .sf-price-box.paid { background: rgba(255, 250, 242, 0.65); border: 1px solid rgba(123, 94, 69, 0.12); }
+
+    .sf-badge {
+      display: inline-block;
+      font-family: Arial, sans-serif;
+      font-size: 0.7rem;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--sage-dark, #536b50);
+      background: rgba(143, 169, 139, 0.28);
+      padding: 4px 11px;
+      border-radius: 999px;
+      margin-bottom: 14px;
     }
 
     .sf-price-box .price-big {
-      font-size: 1.7rem;
+      font-size: 2.5rem;
       font-weight: 700;
       color: var(--sage-dark, #536b50);
-      line-height: 1.1;
+      line-height: 1;
     }
+    .sf-price-box .price-big.free-word { letter-spacing: 0.04em; }
 
     .sf-price-box .price-sub {
       font-family: Arial, sans-serif;
-      font-size: 0.9rem;
+      font-size: 0.92rem;
       color: var(--muted);
       display: block;
-      margin-top: 2px;
+      margin-top: 4px;
     }
 
     .sf-price-box .price-then {
       font-family: Arial, sans-serif;
       font-size: 0.88rem;
       color: #55584e;
-      margin: 12px 0 0;
-      padding-top: 12px;
-      border-top: 1px solid rgba(83,107,80,0.18);
-      line-height: 1.5;
+      margin: 14px 0 0;
+      padding-top: 14px;
+      border-top: 1px solid rgba(83, 107, 80, 0.18);
+      line-height: 1.55;
     }
 
     /* ===================================================== */
@@ -362,53 +307,37 @@
     .sf-regular-wrap {
       width: min(1120px, calc(100% - 32px));
       margin: 0 auto;
-      padding: 0 0 64px;
+      padding: 0 0 72px;
     }
 
     .sf-regular-box {
       background: var(--sage-dark, #536b50);
       color: #f7f4ec;
-      border-radius: 28px;
+      border-radius: 24px;
       padding: 40px;
+      box-shadow: 0 8px 26px rgba(44, 49, 40, 0.12);
     }
 
-    .sf-regular-box .reg-head {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      margin-bottom: 8px;
-    }
-
-    .sf-regular-box .reg-head .cal-icon { font-size: 1.5rem; }
-
-    .sf-regular-box h3 {
-      font-size: 1.5rem;
-      margin: 0;
-      color: #f7f4ec;
-    }
-
+    .sf-regular-box .reg-head { display: flex; align-items: center; gap: 12px; margin-bottom: 10px; }
+    .sf-regular-box .reg-head .sf-ico { color: #f7f4ec; width: 26px; height: 26px; }
+    .sf-regular-box h3 { font-size: 1.5rem; font-weight: 400; margin: 0; color: #f7f4ec; }
     .sf-regular-box > p {
       font-family: Arial, sans-serif;
       font-size: 0.95rem;
       opacity: 0.9;
-      line-height: 1.6;
+      line-height: 1.7;
       margin: 0 0 24px;
-      max-width: 620px;
+      max-width: 62ch;
     }
 
-    .sf-regular-grid {
-      display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 16px;
-    }
+    .sf-regular-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
 
     .sf-regular-item {
-      background: rgba(247,244,236,0.1);
-      border: 1px solid rgba(247,244,236,0.22);
+      background: rgba(247, 244, 236, 0.10);
+      border: 1px solid rgba(247, 244, 236, 0.22);
       border-radius: 18px;
-      padding: 22px;
+      padding: 24px;
     }
-
     .sf-regular-item .reg-label {
       font-family: Arial, sans-serif;
       font-size: 0.82rem;
@@ -416,92 +345,121 @@
       letter-spacing: 0.1em;
       opacity: 0.85;
     }
-
-    .sf-regular-item .reg-price {
-      font-size: 1.9rem;
-      font-weight: 700;
-      margin: 6px 0 4px;
-    }
-
-    .sf-regular-item .reg-detail {
-      font-family: Arial, sans-serif;
-      font-size: 0.9rem;
-      opacity: 0.9;
-    }
+    .sf-regular-item .reg-price { font-size: 2.1rem; font-weight: 700; margin: 8px 0 4px; }
+    .sf-regular-item .reg-detail { font-family: Arial, sans-serif; font-size: 0.9rem; opacity: 0.9; }
 
     /* ===================================================== */
-    /* ===== 7. KONTAKT                                 ===== */
+    /* ===== 7. KONTAKT (Abschlussbereich, Punkt 6)   ===== */
     /* ===================================================== */
-    .sf-contact-wrap {
+    .sf-contact {
       width: min(1120px, calc(100% - 32px));
       margin: 0 auto;
-      padding: 0 0 80px;
+      padding: 16px 0 96px;
     }
 
-    .sf-contact-box {
-      background: rgba(255,250,242,0.85);
-      border: 1px solid rgba(123,94,69,0.16);
-      border-radius: 28px;
-      padding: 40px;
+    .sf-contact-inner {
       display: grid;
-      grid-template-columns: 1fr 1fr;
-      gap: 36px;
+      grid-template-columns: 0.9fr 1.1fr;
+      gap: 56px;
       align-items: center;
     }
 
-    .sf-contact-box h2 { font-size: clamp(1.6rem, 3vw, 2.2rem); margin: 6px 0 12px; }
+    .sf-contact-img {
+      border-radius: 24px;
+      overflow: hidden;
+      min-height: 340px;
+      box-shadow: 0 4px 18px rgba(44, 49, 40, 0.06);
+    }
+    .sf-contact-img img { width: 100%; height: 100%; object-fit: cover; display: block; }
 
-    .sf-contact-box .contact-intro {
+    .sf-contact-info h2 { font-size: clamp(1.8rem, 3vw, 2.6rem); font-weight: 400; margin: 8px 0 16px; }
+    .sf-contact-info .contact-intro {
       font-family: Arial, sans-serif;
-      font-size: 1rem;
+      font-size: 1.05rem;
       color: #55584e;
-      line-height: 1.6;
-      margin: 0 0 22px;
+      line-height: 1.7;
+      margin: 0 0 32px;
+      max-width: 50ch;
     }
 
-    .sf-contact-lines {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
+    .sf-contact-lines { display: flex; flex-direction: column; gap: 22px; }
 
-    .sf-contact-line {
-      display: flex;
-      align-items: center;
-      gap: 12px;
-      font-family: Arial, sans-serif;
-      font-size: 0.97rem;
+    .sf-contact-line { display: flex; align-items: center; gap: 16px; }
+    .sf-contact-line .sf-icon-circle.sm { background: rgba(143, 169, 139, 0.16); }
+    .sf-contact-line a {
+      font-size: 1.4rem;
       color: #2c3128;
+      text-decoration: none;
+      line-height: 1.2;
     }
-
-    .sf-contact-line .ci { font-size: 1.2rem; flex-shrink: 0; }
-    .sf-contact-line a { color: #2c3128; text-decoration: none; border-bottom: 1px solid rgba(83,107,80,0.4); }
-    .sf-contact-line small { display: block; color: var(--muted); font-size: 0.82rem; }
+    .sf-contact-line a:hover { color: var(--sage-dark, #536b50); }
+    .sf-contact-line small {
+      display: block;
+      font-family: Arial, sans-serif;
+      color: var(--muted);
+      font-size: 0.85rem;
+      margin-top: 2px;
+    }
 
     /* ===================================================== */
     /* ===== RESPONSIVE                                 ===== */
     /* ===================================================== */
     @media (max-width: 900px) {
+      /* Hero mobil: Bild zuerst (Punkt 3) */
       .sf-hero-grid { grid-template-columns: 1fr; gap: 24px; }
-      .sf-hero-image { min-height: 280px; }
-      .sf-sendestart { position: static; left: 0; right: 0; bottom: 0; margin-top: -40px; }
+      .sf-hero-image { order: -1; min-height: 300px; }
+      .sf-hero-features { max-width: none; }
+
       .sf-two-cards,
       .sf-price-grid,
       .sf-what-grid,
       .sf-regular-grid,
-      .sf-contact-box { grid-template-columns: 1fr; }
+      .sf-contact-inner { grid-template-columns: 1fr; }
+
+      .sf-contact-inner { gap: 32px; }
+      .sf-contact-img { min-height: 260px; }
     }
 
     @media (max-width: 560px) {
-      .sf-hero-features { max-width: none; }
       .sf-info-card,
       .sf-price-card,
-      .sf-regular-box,
-      .sf-contact-box { padding: 28px 22px; }
+      .sf-what-card,
+      .sf-regular-box { padding: 26px 22px; }
     }
   </style>
 </head>
 <body>
+
+  <!-- ===================================================== -->
+  <!-- ===== ICON-BIBLIOTHEK (SVG, Punkt 1)           ===== -->
+  <!-- Dünne Line-Icons im Lucide-Stil. Ein Icon tauschst   -->
+  <!-- du, indem du im Markup href="#icon-XXX" änderst.     -->
+  <!-- Verfügbar: heart, headphones, clock, users, mic,     -->
+  <!-- radio, book, pin, leaf, shield, star, message, x,    -->
+  <!-- user, scale, megaphone, calendar, phone, mail        -->
+  <!-- ===================================================== -->
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="icon-heart" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></g></symbol>
+    <symbol id="icon-headphones" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5a9 9 0 0 1 18 0v5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/></g></symbol>
+    <symbol id="icon-clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></g></symbol>
+    <symbol id="icon-users" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></g></symbol>
+    <symbol id="icon-mic" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v3"/></g></symbol>
+    <symbol id="icon-radio" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M4.93 19.07a10 10 0 0 1 0-14.14"/><path d="M7.76 16.24a6 6 0 0 1 0-8.49"/><path d="M16.24 7.76a6 6 0 0 1 0 8.49"/><path d="M19.07 4.93a10 10 0 0 1 0 14.14"/></g></symbol>
+    <symbol id="icon-book" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></g></symbol>
+    <symbol id="icon-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.4-8 12-8 12s-8-7.6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></g></symbol>
+    <symbol id="icon-leaf" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></g></symbol>
+    <symbol id="icon-shield" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1Z"/><path d="m9 12 2 2 4-4"/></g></symbol>
+    <symbol id="icon-star" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M11.5 2.8a.5.5 0 0 1 1 0l2.3 4.6a.5.5 0 0 0 .4.3l5.1.7a.5.5 0 0 1 .3.9l-3.7 3.6a.5.5 0 0 0-.1.4l.9 5.1a.5.5 0 0 1-.8.6l-4.6-2.4a.5.5 0 0 0-.5 0L7.9 19.6a.5.5 0 0 1-.8-.6l.9-5.1a.5.5 0 0 0-.1-.4L4.2 9.9a.5.5 0 0 1 .3-.9l5.1-.7a.5.5 0 0 0 .4-.3Z"/></g></symbol>
+    <symbol id="icon-message" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></g></symbol>
+    <symbol id="icon-x" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></g></symbol>
+    <symbol id="icon-user" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></g></symbol>
+    <symbol id="icon-scale" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></g></symbol>
+    <symbol id="icon-megaphone" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m3 11 18-5v12L3 14v-3z"/><path d="M11.6 16.8a3 3 0 1 1-5.8-1.6"/></g></symbol>
+    <symbol id="icon-calendar" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></g></symbol>
+    <symbol id="icon-phone" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92Z"/></g></symbol>
+    <symbol id="icon-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></g></symbol>
+  </svg>
+
 <div class="page">
 
   <div id="sf-nav"></div>
@@ -519,10 +477,10 @@
           <p>Sinnfunk ist ein werbefreies Webradio für gute Gespräche, Bücher, Geschichten und Menschen mit etwas zu sagen.</p>
 
           <div class="sf-hero-features">
-            <div class="sf-hero-feat"><span class="feat-icon">♡</span><span>Gute Gespräche statt Lärm</span></div>
-            <div class="sf-hero-feat"><span class="feat-icon">🎧</span><span>Ohne Werbung, ohne Musik</span></div>
-            <div class="sf-hero-feat"><span class="feat-icon">🕐</span><span>Inhalte, die bleiben</span></div>
-            <div class="sf-hero-feat"><span class="feat-icon">👥</span><span>Für Menschen, die zuhören</span></div>
+            <div class="sf-feat sf-card"><svg class="sf-ico"><use href="#icon-heart"/></svg><span>Gute Gespräche statt Lärm</span></div>
+            <div class="sf-feat sf-card"><svg class="sf-ico"><use href="#icon-headphones"/></svg><span>Ohne Werbung, ohne Musik</span></div>
+            <div class="sf-feat sf-card"><svg class="sf-ico"><use href="#icon-clock"/></svg><span>Inhalte, die bleiben</span></div>
+            <div class="sf-feat sf-card"><svg class="sf-ico"><use href="#icon-users"/></svg><span>Für Menschen, die zuhören</span></div>
           </div>
 
           <div class="sf-hero-actions">
@@ -533,7 +491,7 @@
         <div class="sf-hero-image">
           <img src="image/We want you.webp" alt="Sinnfunker werden" />
           <div class="sf-sendestart">
-            <span class="cal-icon">📅</span>
+            <svg class="sf-ico"><use href="#icon-calendar"/></svg>
             <div>
               <strong>Sendestart: August 2026</strong>
               <span>Ein Ort für deine Stimme.</span>
@@ -553,8 +511,8 @@
 
       <div class="sf-two-cards">
 
-        <div class="sf-info-card">
-          <div class="card-icon">🎙</div>
+        <div class="sf-info-card sf-card">
+          <div class="sf-icon-circle"><svg><use href="#icon-mic"/></svg></div>
           <h3>Gespräch im Radio</h3>
           <p>Du möchtest gehört werden, aber ein eigener Podcast ist dir zu viel Aufwand? Wir zeichnen gemeinsam ein Gespräch auf – ruhig vorbereitet und professionell aufbereitet. Die Aufnahme gehört dir.</p>
           <ul class="sf-check-list">
@@ -564,8 +522,8 @@
           </ul>
         </div>
 
-        <div class="sf-info-card">
-          <div class="card-icon">📻</div>
+        <div class="sf-info-card sf-card">
+          <div class="sf-icon-circle"><svg><use href="#icon-radio"/></svg></div>
           <h3>Vorstellung im Radio</h3>
           <p>Stelle dein Buch, dein Unternehmen, dein Projekt oder deine Veranstaltung im Radio vor.</p>
           <ul class="sf-check-list">
@@ -580,97 +538,75 @@
 
     <!-- ===== 3. FIXE SENDEPLÄTZE ===== -->
     <section class="sf-program-wrap" id="programm">
-      <div style="
-        background: rgba(143,169,139,0.12);
-        border: 1px solid rgba(83,107,80,0.2);
-        border-radius: 28px;
-        padding: 36px 32px;
-      ">
-        <p class="eyebrow" style="margin-bottom: 8px;">Sendeprogramm</p>
-        <h3 style="font-size: 1.4rem; margin-bottom: 10px;">Fixe Sendeplätze</h3>
-        <p style="font-family: Arial, sans-serif; font-size: 0.88rem; color: #55584e; margin-bottom: 20px; line-height: 1.6;">
-          Für bestimmte Inhalte gibt es wöchentlich wiederkehrende Sendeplätze. Alle anderen Episoden laufen in der allgemeinen Rotation <b>mindestens dreimal in einem Jahr.</b>
-          Das bedeutet: Deine eingereichte Episode oder dein Gespräch mit mir wird dreimal zu einem bestimmten Zeitpunkt gesendet. Der Zeitpunkt selbst folgt dem <b>First-Come-First-Serve-Prinzip</b>
-        </p>
-        <div style="display: flex; flex-direction: column; gap: 10px;">
-          <div class="sf-highlight-row">
-            <span class="hi-icon">📖</span>
-            <div>
-              <strong>Mo &amp; Do: vormittags</strong>
-              <span>Autoren präsentieren ihre Bücher</span>
-            </div>
-          </div>
-          <div class="sf-highlight-row">
-            <span class="hi-icon">🏘</span>
-            <div>
-              <strong>Mo, Di &amp; Do: nachmittags</strong>
-              <span>Menschen und Veranstaltungen aus der Region stellen sich vor</span>
-            </div>
-          </div>
-          <div class="sf-highlight-row">
-            <span class="hi-icon">🌿</span>
-            <div>
-              <strong>Mi &amp; Sa: nachmittags</strong>
-              <span>Kräuter &amp; Natur</span>
-            </div>
-          </div>
-          <div class="sf-highlight-row">
-            <span class="hi-icon">🎙️</span>
-            <div>
-              <strong>Freitag: nachmittags</strong>
-              <span>IT &amp; Sicherheit</span>
-            </div>
-          </div>
-          <div class="sf-highlight-row">
-            <span class="hi-icon">✦</span>
-            <div>
-              <strong>Sonntag: vormittags</strong>
-              <span>Astrologie</span>
-            </div>
-          </div>
-          <div class="sf-highlight-row">
-            <span class="hi-icon">🎙</span>
-            <div>
-              <strong>Di, Fr &amp; So: abends</strong>
-              <span>Gespräche mit Verena</span>
-            </div>
-          </div>
+      <div class="sf-head-left">
+        <p class="eyebrow">Sendeprogramm</p>
+        <h2>Fixe Sendeplätze</h2>
+        <p>Für bestimmte Inhalte gibt es wöchentlich wiederkehrende Sendeplätze. Alle anderen Episoden laufen in der allgemeinen Rotation mindestens dreimal in einem Jahr. Das bedeutet: Deine eingereichte Episode oder dein Gespräch mit mir wird dreimal zu einem bestimmten Zeitpunkt gesendet. Der Zeitpunkt selbst folgt dem First-Come-First-Serve-Prinzip.</p>
+      </div>
+
+      <div class="sf-rows">
+        <div class="sf-row sf-card">
+          <span class="sf-icon-circle sm"><svg><use href="#icon-book"/></svg></span>
+          <div><strong>Mo &amp; Do: vormittags</strong><span>Autoren präsentieren ihre Bücher</span></div>
+        </div>
+        <div class="sf-row sf-card">
+          <span class="sf-icon-circle sm"><svg><use href="#icon-pin"/></svg></span>
+          <div><strong>Mo, Di &amp; Do: nachmittags</strong><span>Menschen und Veranstaltungen aus der Region stellen sich vor</span></div>
+        </div>
+        <div class="sf-row sf-card">
+          <span class="sf-icon-circle sm"><svg><use href="#icon-leaf"/></svg></span>
+          <div><strong>Mi &amp; Sa: nachmittags</strong><span>Kräuter &amp; Natur</span></div>
+        </div>
+        <div class="sf-row sf-card">
+          <span class="sf-icon-circle sm"><svg><use href="#icon-shield"/></svg></span>
+          <div><strong>Freitag: nachmittags</strong><span>IT &amp; Sicherheit</span></div>
+        </div>
+        <div class="sf-row sf-card">
+          <span class="sf-icon-circle sm"><svg><use href="#icon-star"/></svg></span>
+          <div><strong>Sonntag: vormittags</strong><span>Astrologie</span></div>
+        </div>
+        <div class="sf-row sf-card">
+          <span class="sf-icon-circle sm"><svg><use href="#icon-message"/></svg></span>
+          <div><strong>Di, Fr &amp; So: abends</strong><span>Gespräche mit Verena</span></div>
         </div>
       </div>
     </section>
 
     <!-- ===== 4. REGELN BEI SINNFUNK ===== -->
     <section class="sf-what-wrap" id="regeln">
-      <p class="eyebrow">Was du wissen musst</p>
-      <h2 style="font-size: clamp(1.8rem,3vw,2.6rem); margin-bottom: 6px;">Die Regeln bei Sinnfunk</h2>
-      <p style="color:#55584e; font-size:1rem; margin-bottom:0;">Sinnfunk ist ein Gesprächs- und Podcast-Radio für Inhalte, die verbinden statt polarisieren.</p>
+      <div class="sf-head-left">
+        <p class="eyebrow">Was du wissen musst</p>
+        <h2>Die Regeln bei Sinnfunk</h2>
+        <p>Sinnfunk ist ein Gesprächs- und Podcast-Radio für Inhalte, die verbinden statt polarisieren.</p>
+      </div>
+
       <div class="sf-what-grid">
 
-        <div class="sf-what-card">
-          <div class="sf-what-icon">✕</div>
+        <div class="sf-what-card sf-card">
+          <div class="sf-icon-circle sm"><svg><use href="#icon-x"/></svg></div>
           <strong>Ruhe statt Aufregung</strong>
           <p>Sinnfunk bietet bewusst einen Raum abseits von Polarisierung.</p>
           <p>Nicht geeignet sind Inhalte <b>zu aktuellen politischen Auseinandersetzungen, Verschwörungstheorien, Feminismus &amp; gendergerechter Sprache, Migration, Klimawandel und Ähnliches.</b></p>
           <p>Bei Sinnfunk geht es um Inhalte, die <b>keine starken Gefühle</b> entfachen.</p>
         </div>
 
-        <div class="sf-what-card">
-          <div class="sf-what-icon">🎙</div>
+        <div class="sf-what-card sf-card">
+          <div class="sf-icon-circle sm"><svg><use href="#icon-mic"/></svg></div>
           <strong>Sprachradio statt Musikradio</strong>
           <p>Sinnfunk ist ein Radio für Worte, Gedanken und Gespräche.</p>
           <p><b>Keine Musik </b>– außer einem kurzen Gong im Hintergrund oder einer kurzen, lizenzfreien Einspielung von einigen Sekunden im Hintergrund.</p>
         </div>
 
-        <div class="sf-what-card">
-          <div class="sf-what-icon">◌</div>
+        <div class="sf-what-card sf-card">
+          <div class="sf-icon-circle sm"><svg><use href="#icon-user"/></svg></div>
           <strong>Menschen statt ständige Werbeunterbrechnung</strong>
           <p>Du darfst dich selbst sowie deine eigenen Angebote vorstellen – beispielsweise Bücher, Seminare, Kurse oder Beratungen.</p>
           <p>Wichtig: <b>Keine Werbung für fremde Unternehmen, Produkte oder Dienstleistungen.</b></p>
           <p>Unabhängig davon gelten die gesetzlichen Werbebeschränkungen für Inhalte wie Alkohol, Waffen oder Pornografie.</p>
         </div>
 
-        <div class="sf-what-card">
-          <div class="sf-what-icon">⚖</div>
+        <div class="sf-what-card sf-card">
+          <div class="sf-icon-circle sm"><svg><use href="#icon-scale"/></svg></div>
           <strong>Rechtliches</strong>
           <p>Veröffentliche keine verleumderischen oder rufschädigenden Aussagen über Personen oder Organisationen.</p>
           <p>Bei medizinischen, psychologischen oder therapeutischen Themen sind <b>keine Heilsversprechen und keine unbelegten Behauptungen </b>erlaubt.</p>
@@ -678,8 +614,8 @@
         </div>
 
         <!-- NEU: Qualitäts-Regel über die ganze Breite -->
-        <div class="sf-what-card full">
-          <div class="sf-what-icon">🎧</div>
+        <div class="sf-what-card sf-card full">
+          <div class="sf-icon-circle sm"><svg><use href="#icon-headphones"/></svg></div>
           <strong>Gut hörbare Qualität</strong>
           <p>Inhalte, die du selbst vorstellst, müssen gut hörbar sein: <b>nicht zu leise, keine störenden Hintergrundgeräusche</b> und eine <b>verständliche Aussprache</b>.</p>
           <p>Da Sinnfunk ein regionales Radio ist, darf dabei gerne <b>Mundart</b> gesprochen werden.</p>
@@ -698,8 +634,8 @@
       <div class="sf-price-grid">
 
         <!-- Preiskarte 1: Eigenvorstellung -->
-        <div class="sf-price-card">
-          <div class="card-icon">📣</div>
+        <div class="sf-price-card sf-card">
+          <div class="sf-icon-circle"><svg><use href="#icon-megaphone"/></svg></div>
           <h3>Eigenvorstellung im Radio</h3>
           <p>Präsentiere dein Buch, dein Unternehmen, dein Projekt oder deine Veranstaltung.</p>
           <ul class="sf-check-list">
@@ -707,16 +643,17 @@
             <li>Mehrfach im Radio ausgestrahlt</li>
             <li>Dauer: bis 90 Minuten pro Episode</li>
           </ul>
-          <div class="sf-price-box">
-            <div class="price-big">Kostenlos</div>
+          <div class="sf-price-box free">
+            <span class="sf-badge">Vorteilspreis</span>
+            <div class="price-big free-word">KOSTENLOS</div>
             <span class="price-sub">bis 30.09.2026</span>
-            <p class="price-then">Ab 01.10.2026 bis 31.12.2026:<br><b>10 € pro hochgeladener Episode (maximal 90 Minuten)</b></p>
+            <p class="price-then">Ab 01.10.2026 bis 31.12.2026:<br><b>10 € pro hochgeladener Stunde</b></p>
           </div>
         </div>
 
         <!-- Preiskarte 2: Gesprächspaket -->
-        <div class="sf-price-card">
-          <div class="card-icon">🎙</div>
+        <div class="sf-price-card sf-card">
+          <div class="sf-icon-circle"><svg><use href="#icon-mic"/></svg></div>
           <h3>Gesprächspaket</h3>
           <p>Wir zeichnen gemeinsam ein Gespräch auf – professionell aufbereitet. Die Aufnahme gehört dir.</p>
           <ul class="sf-check-list">
@@ -725,9 +662,10 @@
             <li>Schnitt &amp; Nachbearbeitung</li>
             <li>Audiodatei für deine weitere Nutzung</li>
           </ul>
-          <div class="sf-price-box">
-            <div class="price-big">50 €</div>
-            <span class="price-sub">maximal 2 Stunden</span>
+          <div class="sf-price-box paid">
+            <span class="sf-badge">Vorteilspreis</span>
+            <div class="price-big">25 €</div>
+            <span class="price-sub">pro Aufnahme</span>
           </div>
         </div>
 
@@ -738,7 +676,7 @@
     <section class="sf-regular-wrap">
       <div class="sf-regular-box">
         <div class="reg-head">
-          <span class="cal-icon">📅</span>
+          <svg class="sf-ico"><use href="#icon-calendar"/></svg>
           <h3>Reguläre Preise ab 01. Jänner 2027</h3>
         </div>
         <p>Die oben genannten Preise sind Vorteilspreise und gelten nur bis 31.12.2026. Ab 01.01.2027 gelten die regulären Preise:</p>
@@ -757,30 +695,30 @@
       </div>
     </section>
 
-    <!-- ===== 7. KONTAKT ===== -->
-    <section class="sf-contact-wrap" id="kontakt">
-      <div class="sf-contact-box">
-        <div>
+    <!-- ===== 7. KONTAKT (Abschlussbereich) ===== -->
+    <section class="sf-contact" id="kontakt">
+      <div class="sf-contact-inner">
+        <div class="sf-contact-img">
+          <img src="image/We want you.webp" alt="Sprich mit mir" />
+        </div>
+        <div class="sf-contact-info">
           <p class="eyebrow">Kontakt</p>
           <h2>Sprich mit mir</h2>
           <p class="contact-intro">Du hast Fragen oder möchtest mitmachen? Anrufen ist <b>vormittags</b> möglich. Eine Nachricht kannst du <b>jederzeit</b> schreiben.</p>
-          <div class="sf-hero-actions">
-            <a class="button" href="kontakt.html">Nachricht schreiben</a>
-          </div>
-        </div>
-        <div class="sf-contact-lines">
-          <div class="sf-contact-line">
-            <span class="ci">📞</span>
-            <div>
-              <a href="tel:+4367764771171">+43 677 64771171</a>
-              <small>Vormittags und Werktags</small>
+          <div class="sf-contact-lines">
+            <div class="sf-contact-line">
+              <span class="sf-icon-circle sm"><svg><use href="#icon-phone"/></svg></span>
+              <div>
+                <a href="tel:+4367764771171">+43 677 64771171</a>
+                <small>Anrufe vormittags</small>
+              </div>
             </div>
-          </div>
-          <div class="sf-contact-line">
-            <span class="ci">✉</span>
-            <div>
-              <a href="mailto:servus@sinnfunk.live">servus@sinnfunk.live</a>
-              <small>Nachrichten jederzeit</small>
+            <div class="sf-contact-line">
+              <span class="sf-icon-circle sm"><svg><use href="#icon-mail"/></svg></span>
+              <div>
+                <a href="mailto:servus@sinnfunk.live">servus@sinnfunk.live</a>
+                <small>Nachrichten jederzeit</small>
+              </div>
             </div>
           </div>
         </div>
