@@ -487,7 +487,7 @@
     const { data, error } = await db
       .from('sinnfunker')
       .select('id, name, subtitle, biography, photo_url, website, facebook, instagram, extra_link, category')
-      .eq('status', 'aktiv')   // intern und andere Status werden nicht angezeigt
+      .in('status', ['aktiv', 'freigegeben']) // intern und andere Status werden nicht angezeigt
       .order('name');
 
     if (error) { zeigeError(error.message); return; }
