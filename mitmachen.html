@@ -9,61 +9,63 @@
   <link rel="icon" href="image/icon.webp" type="image/x-icon" />
   <style>
 
+    /* Diese Seite nutzt die gemeinsamen Tokens & Schriften aus style.css.
+       Hier liegt nur das seitenspezifische Layout – im neuen, flachen Stil. */
+
+    .sf-hero h1 { font-size: clamp(2.4rem, 5vw, 3.8rem); }
+
     .sf-card {
-      background: rgba(255,250,242,0.80);
-      -webkit-backdrop-filter: blur(10px);
-      backdrop-filter: blur(10px);
-      border: 1px solid rgba(123,94,69,0.12);
-      border-radius: 24px;
-      box-shadow: 0 4px 18px rgba(44,49,40,0.06);
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
     }
 
     .sf-icon-circle {
-      width: 64px; height: 64px; border-radius: 50%;
-      background: rgba(143,169,139,0.18);
+      width: 56px; height: 56px; border-radius: 50%;
+      background: rgba(168,148,92,0.14);
       display: grid; place-items: center;
-      color: var(--sage-dark,#536b50); flex-shrink: 0;
+      color: var(--gold-deep); flex-shrink: 0;
     }
-    .sf-icon-circle > svg { display:block; width:28px; height:28px; }
-    .sf-icon-circle.sm { width:46px; height:46px; }
-    .sf-icon-circle.sm > svg { width:22px; height:22px; }
-    .sf-ico { width:22px; height:22px; color:var(--sage-dark,#536b50); flex-shrink:0; }
+    .sf-icon-circle > svg { display:block; width:26px; height:26px; }
+    .sf-icon-circle.sm { width:44px; height:44px; }
+    .sf-icon-circle.sm > svg { width:20px; height:20px; }
+    .sf-ico { width:22px; height:22px; color:var(--gold-deep); flex-shrink:0; }
 
     .sf-head-left { margin-bottom:28px; }
     .sf-head-left > p.sf-lead {
-      color:#55584e; font-size:1.05rem; line-height:1.7;
+      color:var(--ink-soft); font-size:1.05rem; line-height:1.7;
       max-width:70ch; margin:0;
     }
 
     .sf-check-list { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px; }
     .sf-check-list li {
-      font-family:Arial,sans-serif; font-size:0.93rem; color:#2c3128;
+      font-family:var(--font-body); font-size:0.93rem; color:var(--ink-soft);
       padding-left:26px; position:relative; line-height:1.55;
     }
     .sf-check-list li::before {
       content:"✓"; position:absolute; left:0;
-      color:var(--sage-dark,#536b50); font-weight:700;
+      color:var(--gold-deep); font-weight:700;
     }
 
     /* ── HERO ── */
     .sf-hero {
-      width: min(1200px, calc(100% - 48px));
-      margin: 0 auto; padding: 24px 0 64px;
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto; padding: 40px 0 64px;
     }
     .sf-hero-grid {
       display: grid; grid-template-columns: 1.1fr 0.9fr;
       gap: 48px; align-items: center;
     }
     .sf-hero-text > p.sf-lead-hero {
-      font-size: 1.12rem; color: #505248; line-height: 1.72;
+      font-size: 1.12rem; color: var(--ink-soft); line-height: 1.72;
       margin: 0 0 28px; max-width: 58ch;
     }
     .sf-hero-actions {
       display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
     }
     .sf-hero-image {
-      position: relative; border-radius: 24px; overflow: hidden;
-      min-height: 440px; box-shadow: 0 4px 18px rgba(44,49,40,0.07);
+      position: relative; border-radius: var(--radius); overflow: hidden;
+      min-height: 440px; border: 1px solid var(--line);
     }
     .sf-hero-image img {
       width: 100%; height: 100%; object-fit: cover;
@@ -71,87 +73,73 @@
     }
     .sf-sendestart {
       position: absolute; left: 16px; right: 16px; bottom: 16px;
-      background: rgba(83,107,80,0.92);
+      background: rgba(53,61,46,0.92);
       -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
-      color: #f7f4ec; border-radius: 18px; padding: 16px 20px;
+      color: #f3efe4; border-radius: var(--radius-sm); padding: 16px 20px;
       display: flex; align-items: center; gap: 14px;
     }
-    .sf-sendestart .sf-ico { color:#f7f4ec; width:24px; height:24px; }
-    .sf-sendestart strong { display:block; font-size:1.05rem; margin-bottom:2px; }
-    .sf-sendestart span { font-family:Arial,sans-serif; font-size:0.9rem; opacity:0.92; }
+    .sf-sendestart .sf-ico { color:#d8c79a; width:24px; height:24px; }
+    .sf-sendestart strong { display:block; font-size:1.02rem; margin-bottom:2px; font-family:var(--font-body); }
+    .sf-sendestart span { font-family:var(--font-body); font-size:0.9rem; opacity:0.85; }
 
     /* ── EIGENE INHALTE ── */
     .sf-eigene-wrap {
-      width: min(1200px, calc(100% - 48px));
+      width: min(1180px, calc(100% - 40px));
       margin: 0 auto; padding: 0 0 72px;
     }
-    .sf-eigene-grid {
-      display: grid; grid-template-columns: 1fr 1fr;
-      gap: 40px; align-items: start;
-    }
     .sf-eigene-container {
-      background: rgba(255,250,242,0.92);
-      border: 1px solid rgba(123,94,69,0.12);
-      border-radius: 28px;
-      box-shadow: 0 4px 18px rgba(44,49,40,0.06);
-      padding: 36px;
-      grid-column: 1 / -1;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 40px;
     }
     .sf-eigene-inner {
       display: grid; grid-template-columns: 1fr 1fr;
       gap: 40px; align-items: start;
     }
-    .sf-eigene-text h3 {
-      font-size: 1.28rem; margin-bottom: 14px; color: #33372f;
-    }
+    .sf-eigene-text h3 { margin-bottom: 14px; }
     .sf-eigene-text > p {
-      font-family: Arial,sans-serif; font-size: 0.97rem;
-      color: #55584e; line-height: 1.7; margin: 0 0 18px;
+      font-family: var(--font-body); font-size: 0.97rem;
+      color: var(--ink-soft); line-height: 1.7; margin: 0 0 18px;
     }
     .sf-eigene-bonus {
       margin-top: 22px; padding-top: 18px;
-      border-top: 1px solid rgba(83,107,80,0.15);
+      border-top: 1px solid var(--line);
     }
     .sf-bonus-label {
-      font-family: Arial,sans-serif; font-size: 0.7rem;
-      font-weight: 700; text-transform: uppercase;
-      letter-spacing: 0.12em; color: var(--sage-dark,#536b50);
+      font-family: var(--font-body); font-size: 0.7rem;
+      font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.14em; color: var(--gold-deep);
       margin-bottom: 8px; display: block;
     }
-    .sf-bonus-price {
-      display: flex; align-items: baseline; gap: 12px;
-    }
-    .sf-bonus-price .strike {
-      text-decoration: line-through; color: #9a9e92;
-      font-size: 1.1rem; font-family: Arial,sans-serif;
-    }
+    .sf-bonus-price { display: flex; align-items: baseline; gap: 12px; }
     .sf-bonus-price .price-free {
-      font-size: 1.9rem; font-weight: 700;
-      color: var(--sage-dark,#536b50); line-height: 1;
+      font-size: 1.9rem; font-weight: 600;
+      color: var(--gold-deep); line-height: 1;
+      font-family: var(--font-display);
     }
     .sf-bonus-sub {
-      font-family: Arial,sans-serif; font-size: 0.88rem;
-      color: #6f7169; margin-top: 6px; display: block; line-height: 1.6;
+      font-family: var(--font-body); font-size: 0.88rem;
+      color: var(--muted); margin-top: 6px; display: block; line-height: 1.6;
     }
     .sf-eigene-box {
-      background: rgba(143,169,139,0.10);
-      border: 1px solid rgba(83,107,80,0.18);
-      border-radius: 20px; padding: 28px;
+      background: var(--paper-warm);
+      border: 1px solid var(--line);
+      border-radius: var(--radius); padding: 28px;
     }
     .sf-eigene-box .sf-icon-circle { margin-bottom: 18px; }
-    .sf-eigene-box h3 {
-      font-size: 1.12rem; margin-bottom: 14px; color: #33372f;
-    }
-    .sf-eigene-box .sf-ablauf-note {
+    .sf-eigene-box h3 { font-size: 1.25rem; margin-bottom: 14px; }
+    .sf-eigene-box .sf-ablauf-note,
+    .sf-eigene-box__note {
       margin-top: 18px; padding-top: 16px;
-      border-top: 1px solid rgba(83,107,80,0.15);
-      font-family: Arial,sans-serif; font-size: 0.88rem;
-      color: #55584e; line-height: 1.65;
+      border-top: 1px solid var(--line);
+      font-family: var(--font-body); font-size: 0.88rem;
+      color: var(--ink-soft); line-height: 1.65;
     }
 
     /* ── GESPRÄCH ── */
     .sf-talk-wrap {
-      width: min(1200px, calc(100% - 48px));
+      width: min(1180px, calc(100% - 40px));
       margin: 0 auto; padding: 0 0 72px;
     }
     .sf-two-cards {
@@ -159,116 +147,115 @@
       margin-top: 28px;
     }
     .sf-info-card {
-      background: rgba(255,250,242,0.95);
-      border: 1px solid rgba(123,94,69,0.12);
-      border-radius: 24px;
-      box-shadow: 0 4px 18px rgba(44,49,40,0.06);
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
       padding: 32px;
       display: flex; flex-direction: column;
     }
-    .sf-info-card h3 { font-size: 1.22rem; margin-bottom: 10px; color: #2c3128; }
+    .sf-info-card h3 { font-size: 1.35rem; margin-bottom: 10px; }
     .sf-info-card > p {
-      font-family: Arial,sans-serif; font-size: 0.97rem;
-      color: #55584e; line-height: 1.65; margin: 0 0 18px;
+      font-family: var(--font-body); font-size: 0.97rem;
+      color: var(--ink-soft); line-height: 1.65; margin: 0 0 18px;
     }
 
-    /* Grüne Akzente – Gespräch kostenlos */
-    .sf-info-card .icon-green { background: rgba(143,169,139,0.20); }
-    .sf-info-card .icon-green svg { color: #536b50; }
+    /* Olivgrüne Akzente – Gespräch kostenlos */
+    .sf-info-card .icon-green { background: rgba(84,102,63,0.16); }
+    .sf-info-card .icon-green svg { color: #54663f; }
     .sf-free-tag {
-      display: inline-block; font-family: Arial,sans-serif;
+      display: inline-block; font-family: var(--font-body);
       font-size: 0.72rem; font-weight: 700;
       text-transform: uppercase; letter-spacing: 0.12em;
-      color: #27500a;
-      background: rgba(143,169,139,0.28);
-      border: 1px solid rgba(83,107,80,0.28);
-      padding: 7px 16px; border-radius: 12px; margin-top: auto;
+      color: #41502f;
+      background: rgba(84,102,63,0.16);
+      border: 1px solid rgba(84,102,63,0.28);
+      padding: 7px 16px; border-radius: 999px; margin-top: auto;
     }
 
-    /* Orange Akzente – Gespräch behalten */
-    .sf-info-card .icon-warm { background: rgba(200,148,107,0.20); }
-    .sf-info-card .icon-warm svg { color: #9b5e35; }
+    /* Gold-Akzente – Gespräch behalten */
+    .sf-info-card .icon-warm { background: rgba(168,148,92,0.18); }
+    .sf-info-card .icon-warm svg { color: var(--gold-deep); }
     .sf-price-box-inline {
       margin-top: auto;
-      border-radius: 14px; padding: 18px 20px;
-      background: rgba(200,148,107,0.11);
-      border: 1px solid rgba(200,148,107,0.28);
+      border-radius: var(--radius-sm); padding: 18px 20px;
+      background: rgba(168,148,92,0.1);
+      border: 1px solid rgba(168,148,92,0.28);
     }
     .sf-price-box-inline .pbadge {
-      font-family: Arial,sans-serif; font-size: 0.68rem;
+      font-family: var(--font-body); font-size: 0.68rem;
       font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;
-      color: #633806; background: rgba(200,148,107,0.25);
+      color: #fff; background: var(--gold);
       padding: 4px 12px; border-radius: 999px;
       display: inline-block; margin-bottom: 10px;
     }
     .sf-price-strike {
-      text-decoration: line-through; color: #9a9e92;
-      font-family: Arial,sans-serif; font-size: 0.95rem;
+      text-decoration: line-through; color: var(--muted);
+      font-family: var(--font-body); font-size: 0.95rem;
     }
-    .sf-price-big { font-size: 1.9rem; font-weight: 700; color: #9b5e35; line-height: 1; }
+    .sf-price-big { font-size: 1.9rem; font-weight: 600; color: var(--gold-deep); line-height: 1; font-family: var(--font-display); }
     .sf-price-sub {
-      font-family: Arial,sans-serif; font-size: 0.88rem;
-      color: #6f7169; display: block; margin-top: 4px;
+      font-family: var(--font-body); font-size: 0.88rem;
+      color: var(--muted); display: block; margin-top: 4px;
     }
     .sf-price-total {
-      font-family: Arial,sans-serif; font-size: 0.9rem;
-      color: #55584e; margin-top: 10px; padding-top: 10px;
-      border-top: 1px solid rgba(200,148,107,0.22); line-height: 1.6;
+      font-family: var(--font-body); font-size: 0.9rem;
+      color: var(--ink-soft); margin-top: 10px; padding-top: 10px;
+      border-top: 1px solid rgba(168,148,92,0.22); line-height: 1.6;
     }
     .sf-social-note {
       margin-top: 18px;
-      background: rgba(143,169,139,0.10);
-      border-left: 3px solid var(--sage-dark,#536b50);
-      border-radius: 0 12px 12px 0;
+      background: rgba(168,148,92,0.1);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
       padding: 12px 18px;
-      font-family: Arial,sans-serif; font-size: 0.9rem;
-      color: #455e42; line-height: 1.65;
+      font-family: var(--font-body); font-size: 0.9rem;
+      color: var(--ink-soft); line-height: 1.65;
     }
 
     /* ── SENDEPLÄTZE ── */
     .sf-program-wrap {
-      width: min(1200px, calc(100% - 48px));
+      width: min(1180px, calc(100% - 40px));
       margin: 0 auto; padding: 0 0 72px;
     }
     .sf-slots-grid {
       display: grid;
       grid-template-columns: repeat(3, 1fr);
-      gap: 12px; margin-top: 28px;
+      gap: 14px; margin-top: 28px;
     }
     .sf-slot {
       display: flex; align-items: center; gap: 12px;
-      padding: 14px 16px;
-      background: rgba(255,250,242,0.85);
-      border: 1px solid rgba(123,94,69,0.12);
-      border-radius: 16px;
-      border-left: 3px solid var(--sage,#8fa98b);
+      padding: 16px 18px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      border-left: 3px solid var(--gold);
     }
     .sf-slot .sf-icon-circle.sm { flex-shrink: 0; }
-    .sf-slot strong { font-size: 0.9rem; display: block; color: #2c3128; }
-    .sf-slot span { font-family: Arial,sans-serif; font-size: 0.82rem; color: #6f7169; line-height: 1.4; }
+    .sf-slot strong { font-size: 0.92rem; display: block; color: var(--ink); font-family: var(--font-body); }
+    .sf-slot span { font-family: var(--font-body); font-size: 0.82rem; color: var(--muted); line-height: 1.4; }
 
     /* ── REGELN ── */
     .sf-what-wrap {
-      width: min(1200px, calc(100% - 48px));
+      width: min(1180px, calc(100% - 40px));
       margin: 0 auto; padding: 0 0 72px;
     }
     .sf-what-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 28px; }
-    .sf-what-card { padding: 28px; border-radius: 24px; }
+    .sf-what-card { padding: 28px; border-radius: var(--radius); }
     .sf-what-card .sf-icon-circle.sm { margin-bottom: 14px; }
-    .sf-what-card strong { display: block; font-size: 1.05rem; margin-bottom: 10px; color: #2c3128; }
-    .sf-what-card p { font-family: Arial,sans-serif; font-size: 0.92rem; color: var(--muted); line-height: 1.65; margin: 0 0 8px; }
+    .sf-what-card strong { display: block; font-size: 1.1rem; margin-bottom: 10px; color: var(--ink); font-family: var(--font-display); font-weight: 600; }
+    .sf-what-card p { font-family: var(--font-body); font-size: 0.92rem; color: var(--muted); line-height: 1.65; margin: 0 0 8px; }
     .sf-what-card p:last-child { margin-bottom: 0; }
     .sf-what-card.full {
       grid-column: 1 / -1;
-      background: rgba(143,169,139,0.12) !important;
-      border-color: rgba(83,107,80,0.18) !important;
+      background: var(--paper-warm) !important;
+      border-color: var(--line) !important;
       text-align: center; display: flex; flex-direction: column; align-items: center;
     }
     .sf-what-card.full p { max-width: 60ch; }
 
     /* ── KONTAKT ── */
     .sf-contact {
-      width: min(1200px, calc(100% - 48px));
+      width: min(1180px, calc(100% - 40px));
       margin: 0 auto; padding: 16px 0 96px;
     }
     .sf-contact-inner {
@@ -276,29 +263,25 @@
       gap: 56px; align-items: center;
     }
     .sf-contact-img {
-      border-radius: 24px; overflow: hidden;
-      min-height: 380px; box-shadow: 0 4px 18px rgba(44,49,40,0.08);
+      border-radius: var(--radius); overflow: hidden;
+      min-height: 380px; border: 1px solid var(--line);
     }
     .sf-contact-img img { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; }
     .sf-contact-info > p.contact-intro {
-      font-family: Arial,sans-serif; font-size: 1.05rem;
-      color: #55584e; line-height: 1.7; margin: 0 0 32px; max-width: 50ch;
+      font-family: var(--font-body); font-size: 1.05rem;
+      color: var(--ink-soft); line-height: 1.7; margin: 0 0 32px; max-width: 50ch;
     }
     .sf-contact-lines { display: flex; flex-direction: column; gap: 22px; }
     .sf-contact-line { display: flex; align-items: center; gap: 16px; }
-    .sf-contact-line a { font-size: 1.35rem; color: #2c3128; text-decoration: none; line-height: 1.2; }
-    .sf-contact-line a:hover { color: var(--sage-dark,#536b50); }
+    .sf-contact-line a { font-family: var(--font-display); font-size: 1.5rem; color: var(--ink); text-decoration: none; line-height: 1.2; }
+    .sf-contact-line a:hover { color: var(--gold-deep); }
     .sf-contact-line small {
-      display: block; font-family: Arial,sans-serif;
+      display: block; font-family: var(--font-body);
       color: var(--muted); font-size: 0.92rem; margin-top: 2px;
     }
 
     /* ── RESPONSIVE ── */
-    @media (max-width: 900px) {
-      .sf-hero, .sf-eigene-wrap, .sf-talk-wrap,
-      .sf-program-wrap, .sf-what-wrap, .sf-contact {
-        width: calc(100% - 32px);
-      }
+    @media (max-width: 980px) {
       .sf-hero-grid,
       .sf-eigene-inner,
       .sf-two-cards,
@@ -307,25 +290,25 @@
 
       .sf-hero-image {
         order: -1; min-height: 300px;
-        margin-bottom: 28px; border-radius: 20px;
+        margin-bottom: 28px;
       }
       .sf-slots-grid { grid-template-columns: 1fr 1fr; }
       .sf-what-card.full { grid-column: 1; }
-      .sf-contact-img { min-height: 260px; max-height: 340px; }
-      nav { display: none; }
+      .sf-contact-img { min-height: 260px; max-height: 360px; }
     }
 
-    @media (max-width: 640px) {
-      .sf-hero { padding: 16px 0 40px; }
+    @media (max-width: 600px) {
+      .sf-hero { padding: 24px 0 40px; }
       .sf-hero-image { min-height: 240px; max-height: 320px; }
       .sf-sendestart { padding: 14px 16px; gap: 10px; }
-      .sf-eigene-container { padding: 22px 18px; }
+      .sf-eigene-container { padding: 24px 20px; }
       .sf-eigene-wrap, .sf-talk-wrap,
       .sf-program-wrap, .sf-what-wrap,
-      .sf-contact { padding-bottom: 44px; }
-      .sf-info-card, .sf-what-card { padding: 22px 18px; }
+      .sf-contact { padding-bottom: 48px; }
+      .sf-info-card, .sf-what-card { padding: 24px 20px; }
       .sf-slots-grid { grid-template-columns: 1fr; }
-      .sf-hero-actions { flex-direction: column; align-items: flex-start; gap: 10px; }
+      .sf-hero-actions { flex-direction: column; align-items: stretch; gap: 10px; }
+      .sf-hero-actions .button { justify-content: center; }
     }
   </style>
 </head>
@@ -480,7 +463,7 @@
               <span class="sf-price-strike">75 € / Stunde</span>
               <span class="sf-price-big">25 € / Stunde</span>
             </div>
-            <span class="sf-price-sub">Aktionspreis gilt bis bis 31. Dezember 2026/span>
+            <span class="sf-price-sub">Aktionspreis gilt bis 31. Dezember 2026
           </div>
         </div>
 
