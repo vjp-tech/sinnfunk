@@ -1,319 +1,194 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sinnfunk – Radio, das etwas zu sagen hat</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="image/icon.webp" type="image/x-icon" />
+  <style>
+    .people-section {
+      width: min(1120px, calc(100% - 32px));
+      margin: 0 auto;
+      padding: 72px 0;
+    }
+    .people-box {
+      background: rgba(255, 250, 242, 0.52);
+      border: 1px solid rgba(123, 94, 69, 0.12);
+      border-radius: 36px;
+      padding: 42px;
+    }
+    .people-box .section-head {
+      margin-bottom: 32px;
+    }
+    .people-box .hero-actions {
+      margin-top: 24px;
+      justify-content: flex-start;
+    }
+    .people-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 16px;
+    }
+    @media (max-width: 600px) {
+      .people-box {
+        padding: 28px 20px;
+      }
+      .people-grid {
+        grid-template-columns: 1fr;
+      }
+      .hero-actions {
+        flex-direction: column;
+      }
+    }
+  </style>
 </head>
 <body>
-<x-dc>
-<helmet>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<style>
-  *{box-sizing:border-box;}
-  body{margin:0;}
-  @keyframes sf-spin{to{transform:rotate(360deg);}}
-</style>
-</helmet>
+  <div class="page">
 
-<div style="background:#f4eee3;color:#2c2b26;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;min-height:100vh;line-height:1.65;overflow-x:hidden;">
+    <div id="sf-nav"></div>
+    <script src="nav.js"></script>
 
-  <div id="sf-nav"></div>
+    <main id="top">
 
-  <!-- ============ HERO ============ -->
-  <section id="top" style="position:relative;width:100%;background:radial-gradient(130% 120% at 78% 12%, rgba(186,156,102,.5), transparent 55%), linear-gradient(158deg,#26301d 0%, #313a27 44%, #4b4d33 72%, #6e6140 100%);overflow:hidden;">
-    <div id="player" style="width:min(1180px,calc(100% - 40px));margin:0 auto;display:grid;grid-template-columns:1.08fr .92fr;gap:52px;align-items:center;padding:88px 0 96px;">
-      <div>
-        <p style="font-size:.78rem;letter-spacing:.2em;text-transform:uppercase;color:#d9b87e;margin:0 0 22px;font-weight:600;">Sinnfunk · Sprachradio</p>
-        <h1 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(3.2rem,7vw,6rem);line-height:.96;letter-spacing:-.01em;color:#f6f0e2;margin:0 0 22px;">Stimmen,<br>die erden.</h1>
-        <p style="max-width:520px;font-size:1.16rem;line-height:1.6;color:rgba(244,238,225,.82);margin:0 0 34px;">Ruhige Gespräche über Spiritualität, Energiearbeit, Meditation und ein Leben im Einklang mit der Natur. Kein Lärm, kein Algorithmus.</p>
-        <div style="display:flex;flex-wrap:wrap;gap:14px;">
-          <a href="#sendungen" style="display:inline-block;background:#b0894f;color:#fffdf8;font-weight:600;font-size:.98rem;padding:15px 30px;border-radius:999px;text-decoration:none;">Was uns ausmacht</a>
-          <a href="mitmachen.html" style="display:inline-block;background:transparent;color:#f4eee3;border:1px solid rgba(244,238,225,.45);font-weight:600;font-size:.98rem;padding:15px 30px;border-radius:999px;text-decoration:none;">Mitmachen</a>
+      <!-- Hero -->
+      <section class="hero" id="radio">
+        <div>
+          <p class="eyebrow">Sinnfunk</p>
+          <h1>Radio, das etwas zu sagen hat.</h1>
+          <p class="hero-text">
+            Sinnfunk startet seinen Betrieb ab August 2026.<br>Wenn du mitmachen möchtest, kontaktiere mich für nähere Informationen.
+          </p>
+          <div class="hero-actions">
+            <a class="button" href="#themen">Wofür wir stehen</a>
+            <a class="button secondary" href="mitmachen.html">Mitmachen</a>
+          </div>
         </div>
-      </div>
 
-      <sc-if value="{{ showPlayer }}" hint-placeholder-val="{{ true }}">
-      <aside style="background:rgba(255,253,248,.08);border:1px solid rgba(255,253,248,.2);border-radius:26px;padding:28px;backdrop-filter:blur(10px);box-shadow:0 6px 20px rgba(0,0,0,.14);">
-        <div style="display:flex;justify-content:space-between;align-items:center;gap:16px;margin-bottom:18px;">
+        <aside class="player-card" id="player" aria-label="Webplayer">
+          <div class="player-title">
+            <div>
+              <p class="eyebrow" style="margin-bottom: 4px;">Live hören</p>
+              <h2 style="font-size: 2rem; margin-bottom: 0;">Unser Stream</h2>
+            </div>
+            <span class="live-badge">On Air</span>
+          </div>
+          <audio controls preload="none">
+            <source src="https://radio.sinnfunk.live/listen/sinnfunk/radio.mp3" type="audio/mpeg" />
+            Dein Browser unterstützt den Audioplayer leider nicht.
+          </audio>
+          <div class="now-playing" aria-live="polite">
+            <small>Jetzt läuft</small>
+            <strong id="current-title">Warum bei Sinnfunk mitmachen</strong>
+            <span id="current-host">Sinnfunk Webradio</span>
+          </div>
+        </aside>
+      </section>
+
+      <!-- Stiller Ort -->
+      <section id="themen">
+        <div class="about">
+          <div
+            class="about-visual"
+            role="img"
+            aria-label="Radio bei Sinnfunk"
+            style="background-image: linear-gradient(rgba(83,107,80,0.15), rgba(83,107,80,0.05)), url('image/radio-sinnfunk.webp');"
+          ></div>
           <div>
-            <p style="font-size:.7rem;letter-spacing:.18em;text-transform:uppercase;color:#d9b87e;margin:0 0 5px;font-weight:600;">Live hören</p>
-            <h2 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.9rem;color:#f6f0e2;margin:0;">Unser Stream</h2>
-          </div>
-          <span style="display:inline-flex;align-items:center;gap:7px;font-size:.72rem;letter-spacing:.1em;text-transform:uppercase;font-weight:600;color:#f6f0e2;background:rgba(176,137,79,.4);border:1px solid rgba(217,184,126,.5);padding:6px 12px;border-radius:999px;white-space:nowrap;"><span style="width:7px;height:7px;border-radius:50%;background:#e7c585;display:block;"></span>Live</span>
-        </div>
-        <audio controls preload="none" style="width:100%;margin:6px 0 18px;">
-          <source src="https://radio.sinnfunk.live/listen/sinnfunk/radio.mp3" type="audio/mpeg" />
-          Dein Browser unterstützt den Audioplayer leider nicht.
-        </audio>
-        <div style="background:rgba(0,0,0,.22);border:1px solid rgba(255,253,248,.1);border-radius:18px;padding:16px 18px;">
-          <small style="display:block;font-size:.66rem;letter-spacing:.16em;text-transform:uppercase;color:#d9b87e;font-weight:600;margin-bottom:7px;">Jetzt läuft</small>
-          <strong style="display:block;font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.25rem;color:#f6f0e2;line-height:1.2;margin-bottom:3px;">{{ npTitle }}</strong>
-          <span style="font-size:.9rem;color:rgba(244,238,225,.7);">{{ npHost }}</span>
-        </div>
-      </aside>
-      </sc-if>
-    </div>
-  </section>
-
-  <!-- ============ SENDUNGEN ============ -->
-  <section id="sendungen" style="width:min(1180px,calc(100% - 40px));margin:0 auto;padding:88px 0;">
-    <div style="display:grid;grid-template-columns:1.05fr .95fr;gap:48px;align-items:center;">
-      <div>
-        <p style="font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;color:#b0894f;margin:0 0 16px;font-weight:600;">Worum es geht</p>
-        <h2 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(2.1rem,4vw,3rem);line-height:1.07;letter-spacing:-.01em;color:#2c2b26;margin:0 0 20px;">Spiritualität mit beiden Füßen am Boden.</h2>
-        <p style="font-size:1.08rem;color:#5b5a50;margin:0 0 16px;max-width:540px;">Ich möchte mit Sinnfunk ein Webradio aufbauen, das eine Heimat für geerdete Spiritualität ist. Wo dich Achtsamkeit, Seelenarbeit und Energetik erwarten — aber nicht Heilsversprechen, Weltverschwörungen und andere Aufregerthemen.</p>
-        <p style="font-size:1.08rem;color:#5b5a50;margin:0;max-width:540px;">Im Kern ist Sinnfunk ein Ort für Stimmen, die erden und nicht aufwühlen.</p>
-      </div>
-      <aside style="background:#fffdf8;border:1px solid rgba(120,95,60,.12);border-radius:26px;padding:32px;">
-        <p style="font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:#b0894f;margin:0 0 22px;font-weight:600;">Was uns trägt</p>
-        <div style="display:flex;flex-direction:column;">
-          <div style="display:flex;align-items:center;gap:16px;padding:17px 0;border-bottom:1px solid rgba(120,95,60,.09);">
-            <span style="width:7px;height:7px;border-radius:50%;background:#b0894f;flex:none;display:block;"></span>
-            <span style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:#2c2b26;line-height:1.2;">Sprache statt Musik</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:16px;padding:17px 0;border-bottom:1px solid rgba(120,95,60,.09);">
-            <span style="width:7px;height:7px;border-radius:50%;background:#8a9d84;flex:none;display:block;"></span>
-            <span style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:#2c2b26;line-height:1.2;">Gespräch statt Werbung</span>
-          </div>
-          <div style="display:flex;align-items:center;gap:16px;padding:17px 0;">
-            <span style="width:7px;height:7px;border-radius:50%;background:#c8946b;flex:none;display:block;"></span>
-            <span style="font-family:'Cormorant Garamond',serif;font-size:1.6rem;color:#2c2b26;line-height:1.2;">Erdung statt Lärm</span>
+            <p class="eyebrow">Warum Sinnfunk?</p>
+            <h2>Ein stiller Ort im lauten Netz.</h2>
+            <p>
+              Sinnfunk sammelt Stimmen von Menschen, die sich einig sind: Es darf einfach sein. Es darf menschlich bleiben. Und es darf Tiefe haben, ohne schwer zu werden.
+            </p>
           </div>
         </div>
-        <div style="margin-top:22px;background:rgba(138,157,132,.13);border-left:3px solid #8a9d84;border-radius:10px;padding:14px 16px;">
-          <p style="font-size:.96rem;color:#3f4a3b;margin:0;line-height:1.55;">Der Sender startet im August 2026.</p>
-        </div>
-      </aside>
-    </div>
-  </section>
+      </section>
 
-  <!-- ============ THEMENWELTEN ============ -->
-  <section id="themen" style="width:min(1180px,calc(100% - 40px));margin:0 auto;padding:72px 0;">
-    <div style="max-width:700px;margin-bottom:44px;">
-      <p style="font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;color:#b0894f;margin:0 0 16px;font-weight:600;">Themenwelten</p>
-      <h2 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(2.2rem,4vw,3.2rem);line-height:1.06;letter-spacing:-.01em;color:#2c2b26;margin:0 0 14px;">Worüber wir sprechen.</h2>
-      <p style="font-size:1.1rem;color:#5b5a50;margin:0;">Sinnfunk ist eine Heimat für Stimmen aus der Welt der Spiritualität, des Heilens und der bewussten Lebensführung.</p>
-    </div>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:18px;">
+      <!-- Was ist Sinnfunk -->
+      <section>
+        <div class="section-head">
+          <p class="eyebrow">Kein Sticheln für Reichweite</p>
+          <h2>Was ist Sinnfunk?</h2>
+          <p>Wir sind ein Gesprächs- und Podcast-Radio mit einem gemeinsamen Nenner: keine explosiven Themen.</p>
+        </div>
+        <div class="cards">
+          <article class="card">
+            <div class="card-icon">✦</div>
+            <h3>Sprache über Musik</h3>
+            <p>Sinnfunk ist ein reines Sprachradio. Alle Inhalte sind Gespräche, Podcast-Episoden und andere gesprochene Formate wie Hörbücher – ohne Musikuntermalung.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon">◌</div>
+            <h3>Gespräche statt Werbung</h3>
+            <p>Sinnfunk wird über Sinnfunker selbst finanziert, also die Personen, die ihre Inhalte hochladen – nicht durch Werbung.</p>
+          </article>
+          <article class="card">
+            <div class="card-icon">⌁</div>
+            <h3>Kein Lärm</h3>
+            <p>Soziale Medien belohnen Aufregerthemen. Sinnfunk nicht. Wir meiden Alltagspolitik, Verschwörungstheorien und Aufregerthemen bei der Auswahl unserer Inhalte.</p>
+          </article>
+        </div>
+      </section>
 
-      <article style="background:#fffdf8;border:1px solid rgba(120,95,60,.12);border-radius:20px;overflow:hidden;">
-        <div style="position:relative;height:155px;background:linear-gradient(150deg,#b8c9b4 0%,#8a9d84 60%,#6b8766 100%);">
-          <span style="position:absolute;top:10px;right:12px;font-family:monospace;font-size:.65rem;color:rgba(255,255,255,.55);letter-spacing:.05em;">foto: spiritualität</span>
-          <div style="position:absolute;bottom:-21px;left:50%;transform:translateX(-50%);width:42px;height:42px;border-radius:50%;background:#fffdf8;border:1.5px solid rgba(176,137,79,.45);display:grid;place-items:center;"><span style="width:11px;height:11px;border-radius:50%;border:1.5px solid #b0894f;display:block;"></span></div>
-        </div>
-        <div style="padding:32px 20px 24px;text-align:center;">
-          <h3 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.6rem;color:#2c2b26;margin:0 0 8px;">Spiritualität</h3>
-          <p style="font-size:.93rem;color:#6f6e64;line-height:1.6;margin:0;">Vom Suchen, Staunen und Innehalten. Gespräche über das, was trägt — jenseits von Dogma und Schublade.</p>
-        </div>
-      </article>
-
-      <article style="background:#fffdf8;border:1px solid rgba(120,95,60,.12);border-radius:20px;overflow:hidden;">
-        <div style="position:relative;height:155px;background:linear-gradient(150deg,#d4b882 0%,#b08a5a 60%,#8c6a40 100%);">
-          <span style="position:absolute;top:10px;right:12px;font-family:monospace;font-size:.65rem;color:rgba(255,255,255,.55);letter-spacing:.05em;">foto: energiearbeit</span>
-          <div style="position:absolute;bottom:-21px;left:50%;transform:translateX(-50%);width:42px;height:42px;border-radius:50%;background:#fffdf8;border:1.5px solid rgba(176,137,79,.45);display:grid;place-items:center;"><span style="width:11px;height:11px;border-radius:50%;border:1.5px solid #b0894f;display:block;"></span></div>
-        </div>
-        <div style="padding:32px 20px 24px;text-align:center;">
-          <h3 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.6rem;color:#2c2b26;margin:0 0 8px;">Energiearbeit</h3>
-          <p style="font-size:.93rem;color:#6f6e64;line-height:1.6;margin:0;">Was dich stärkt und wieder ins Gleichgewicht bringt. Energetiker und Praktiker erzählen aus ihrer Arbeit.</p>
-        </div>
-      </article>
-
-      <article style="background:#fffdf8;border:1px solid rgba(120,95,60,.12);border-radius:20px;overflow:hidden;">
-        <div style="position:relative;height:155px;background:linear-gradient(150deg,#b5c5b0 0%,#8a9d84 50%,#647d60 100%);">
-          <span style="position:absolute;top:10px;right:12px;font-family:monospace;font-size:.65rem;color:rgba(255,255,255,.55);letter-spacing:.05em;">foto: meditation</span>
-          <div style="position:absolute;bottom:-21px;left:50%;transform:translateX(-50%);width:42px;height:42px;border-radius:50%;background:#fffdf8;border:1.5px solid rgba(176,137,79,.45);display:grid;place-items:center;"><span style="width:11px;height:11px;border-radius:50%;border:1.5px solid #b0894f;display:block;"></span></div>
-        </div>
-        <div style="padding:32px 20px 24px;text-align:center;">
-          <h3 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.6rem;color:#2c2b26;margin:0 0 8px;">Meditation &amp; Yoga</h3>
-          <p style="font-size:.93rem;color:#6f6e64;line-height:1.6;margin:0;">Zur Ruhe kommen, im Atem ankommen. Geführte Einblicke und ruhige Gespräche für den Alltag.</p>
-        </div>
-      </article>
-
-      <article style="background:#fffdf8;border:1px solid rgba(120,95,60,.12);border-radius:20px;overflow:hidden;">
-        <div style="position:relative;height:155px;background:linear-gradient(150deg,#c8a882 0%,#a07850 60%,#7a5a38 100%);">
-          <span style="position:absolute;top:10px;right:12px;font-family:monospace;font-size:.65rem;color:rgba(255,255,255,.55);letter-spacing:.05em;">foto: heilpraktik</span>
-          <div style="position:absolute;bottom:-21px;left:50%;transform:translateX(-50%);width:42px;height:42px;border-radius:50%;background:#fffdf8;border:1.5px solid rgba(176,137,79,.45);display:grid;place-items:center;"><span style="width:11px;height:11px;border-radius:50%;border:1.5px solid #b0894f;display:block;"></span></div>
-        </div>
-        <div style="padding:32px 20px 24px;text-align:center;">
-          <h3 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.6rem;color:#2c2b26;margin:0 0 8px;">Heilpraktik</h3>
-          <p style="font-size:.93rem;color:#6f6e64;line-height:1.6;margin:0;">Naturheilkunde, ganzheitliche Begleitung, alternative Methoden — mit Offenheit und ohne Absolutheitsanspruch.</p>
-        </div>
-      </article>
-
-      <article style="background:#fffdf8;border:1px solid rgba(120,95,60,.12);border-radius:20px;overflow:hidden;">
-        <div style="position:relative;height:155px;background:linear-gradient(150deg,#7a9576 0%,#536b50 55%,#384d36 100%);">
-          <span style="position:absolute;top:10px;right:12px;font-family:monospace;font-size:.65rem;color:rgba(255,255,255,.55);letter-spacing:.05em;">foto: natur</span>
-          <div style="position:absolute;bottom:-21px;left:50%;transform:translateX(-50%);width:42px;height:42px;border-radius:50%;background:#fffdf8;border:1.5px solid rgba(176,137,79,.45);display:grid;place-items:center;"><span style="width:11px;height:11px;border-radius:50%;border:1.5px solid #b0894f;display:block;"></span></div>
-        </div>
-        <div style="padding:32px 20px 24px;text-align:center;">
-          <h3 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.6rem;color:#2c2b26;margin:0 0 8px;">Natur &amp; Kräuter</h3>
-          <p style="font-size:.93rem;color:#6f6e64;line-height:1.6;margin:0;">Wildpflanzen, Jahreskreis, altes Wissen. Die Natur als Lehrerin — für alle, die ihr zuhören wollen.</p>
-        </div>
-      </article>
-
-      <article style="background:#fffdf8;border:1px solid rgba(120,95,60,.12);border-radius:20px;overflow:hidden;">
-        <div style="position:relative;height:155px;background:linear-gradient(150deg,#e0d4be 0%,#c8b99a 55%,#a89270 100%);">
-          <span style="position:absolute;top:10px;right:12px;font-family:monospace;font-size:.65rem;color:rgba(255,255,255,.55);letter-spacing:.05em;">foto: achtsamkeit</span>
-          <div style="position:absolute;bottom:-21px;left:50%;transform:translateX(-50%);width:42px;height:42px;border-radius:50%;background:#fffdf8;border:1.5px solid rgba(176,137,79,.45);display:grid;place-items:center;"><span style="width:11px;height:11px;border-radius:50%;border:1.5px solid #b0894f;display:block;"></span></div>
-        </div>
-        <div style="padding:32px 20px 24px;text-align:center;">
-          <h3 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.6rem;color:#2c2b26;margin:0 0 8px;">Achtsamkeit</h3>
-          <p style="font-size:.93rem;color:#6f6e64;line-height:1.6;margin:0;">Bewusster leben, langsamer werden. Praktische Wege zu mehr Stille im Alltag.</p>
-        </div>
-      </article>
-
-    </div>
-  </section>
-
-  <!-- ============ VERBINDE DICH ============ -->
-  <section style="width:min(1180px,calc(100% - 40px));margin:0 auto;padding:48px 0 88px;">
-    <div style="display:grid;grid-template-columns:1.1fr 1fr 1fr;gap:22px;">
-
-      <!-- Neue Sinnfunker -->
-      <div style="background:#fffdf8;border:1px solid rgba(120,95,60,.14);border-radius:26px;padding:30px;display:flex;flex-direction:column;">
-        <p style="font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:#b0894f;margin:0 0 18px;font-weight:600;">Neue Sinnfunker</p>
-
-        <sc-if value="{{ isLoading }}" hint-placeholder-val="{{ true }}">
-          <div style="display:flex;align-items:center;gap:12px;padding:20px 0;color:#9a8f7d;font-size:.92rem;">
-            <span style="width:22px;height:22px;border:2px solid rgba(176,137,79,.25);border-top-color:#b0894f;border-radius:50%;display:block;animation:sf-spin .8s linear infinite;"></span>
-            Wird geladen …
+      <!-- Wochenprogramm -->
+      <div class="people-section">
+        <div class="people-box">
+          <div class="section-head">
+            <p class="eyebrow">Wochenprogramm</p>
+            <h2>Welche Inhalte erwarten dich wann</h2>
+            <p>Sinnfunk sendet vierundzwanzig Stunden am Tag und sieben Tage die Woche. Ein paar fixe Ankerpunkte geben dem Programm seine Struktur.</p>
+            <div class="hero-actions">
+              <a class="button" href="mitmachen.html">Sinnfunker werden</a>
+            </div>
           </div>
-        </sc-if>
 
-        <sc-if value="{{ hasFunker }}" hint-placeholder-val="{{ false }}">
-          <div style="display:flex;flex-direction:column;">
-            <sc-for list="{{ funker }}" as="f" hint-placeholder-count="4">
-              <a href="community.html" style="display:flex;align-items:center;gap:11px;padding:10px 0;border-bottom:1px solid rgba(120,95,60,.1);text-decoration:none;color:#2c2b26;">
-                <span style="width:7px;height:7px;border-radius:50%;background:#b0894f;flex:none;display:block;"></span>
-                <span style="font-family:'Cormorant Garamond',serif;font-size:1.3rem;">{{ f.name }}</span>
-              </a>
-            </sc-for>
+          <div class="people-grid">
+            <article class="person">
+              <div class="avatar" style="font-size: 1.4rem;">📖</div>
+              <h3>Buchvorstellung jeden Mo &amp; Do um 10:00 Uhr</h3>
+              <p>Autoren präsentieren ihre Bücher.</p>
+            </article>
+            <article class="person">
+              <div class="avatar" style="font-size: 1.4rem;">🌿</div>
+              <h3>Kräuter &amp; Natur jeden Mi &amp; Sa um 15:00 Uhr</h3>
+              <p>Alles rund um Heilkräuter, Wildpflanzen und das Leben mit der Natur.</p>
+            </article>
+            <article class="person">
+              <div class="avatar" style="font-size: 1.4rem;">✦</div>
+              <h3>Astrologie jeden Sonntag um 11:00 Uhr</h3>
+              <p>Was bringen die Sterne? Jeden Sonntagvormittag erwartet dich eine astrologische Vorschau auf die neue Woche.</p>
+            </article>
+            <article class="person">
+              <div class="avatar" style="font-size: 1.4rem;">🎙</div>
+              <h3>Gespräche mit Verena jeden Di, Fr &amp; So um 19:00 Uhr</h3>
+              <p>Als Sinnfunkerin der ersten Stunde lade ich interessante Gäste ein. Egal ob Upcycling oder wie man Vereine aufbaut – jeder darf zu Wort kommen.</p>
+            </article>
           </div>
-        </sc-if>
-
-        <sc-if value="{{ isEmpty }}" hint-placeholder-val="{{ false }}">
-          <p style="font-size:.95rem;color:#6f6e64;margin:8px 0 0;line-height:1.6;">Noch keine Sinnfunker — sei eine der ersten Stimmen.</p>
-        </sc-if>
-
-        <sc-if value="{{ isError }}" hint-placeholder-val="{{ false }}">
-          <p style="font-size:.95rem;color:#6f6e64;margin:8px 0 0;line-height:1.6;">Die Sinnfunker können gerade nicht geladen werden.</p>
-        </sc-if>
-
-        <a href="community.html" style="margin-top:auto;padding-top:18px;font-size:.9rem;font-weight:600;color:#b0894f;text-decoration:none;">Alle Sinnfunker ansehen →</a>
+        </div>
       </div>
 
-      <!-- Verbinde dich -->
-      <div style="background:#fffdf8;border:1px solid rgba(120,95,60,.14);border-radius:26px;padding:30px;">
-        <p style="font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:#b0894f;margin:0 0 18px;font-weight:600;">Verbinde dich</p>
-        <a href="https://www.facebook.com/profile.php?id=61590566336118&locale=de_DE" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid rgba(120,95,60,.1);text-decoration:none;color:#2c2b26;">
-          <span style="width:40px;height:40px;border-radius:12px;background:rgba(176,137,79,.14);display:grid;place-items:center;font-family:Georgia,serif;font-weight:700;color:#b0894f;flex:none;">f</span>
-          <span><span style="display:block;font-family:'Cormorant Garamond',serif;font-size:1.3rem;">Facebook</span><span style="display:block;font-size:.84rem;color:#6f6e64;">Sinnfunk Webradio</span></span>
-        </a>
-        <a href="https://www.instagram.com/sinnfunk.webradio/" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:14px;padding:14px 0;border-bottom:1px solid rgba(120,95,60,.1);text-decoration:none;color:#2c2b26;">
-          <span style="width:40px;height:40px;border-radius:12px;background:rgba(176,137,79,.14);display:grid;place-items:center;flex:none;"><span style="width:16px;height:16px;border:2px solid #b0894f;border-radius:6px;display:block;position:relative;"></span></span>
-          <span><span style="display:block;font-family:'Cormorant Garamond',serif;font-size:1.3rem;">Instagram</span><span style="display:block;font-size:.84rem;color:#6f6e64;">@sinnfunk.webradio</span></span>
-        </a>
-        <p style="font-size:.9rem;color:#9a8f7d;margin:16px 0 0;line-height:1.55;">Telegram- und WhatsApp-Kanal folgen.</p>
-      </div>
+    </main>
 
-      <!-- Kontakt -->
-      <div style="background:linear-gradient(160deg,#2f3a2d,#26301f);border-radius:26px;padding:30px;color:#f6f0e2;display:flex;flex-direction:column;">
-        <p style="font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:#d9b87e;margin:0 0 16px;font-weight:600;">Kontakt</p>
-        <h3 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:1.7rem;color:#f6f0e2;margin:0 0 12px;line-height:1.15;">Du möchtest mitmachen?</h3>
-        <p style="font-size:.97rem;color:rgba(244,238,225,.78);line-height:1.6;margin:0 0 22px;">Sinnfunk startet ab August 2026. Wenn du eine Stimme beitragen willst, schreib mir für nähere Informationen.</p>
-        <a href="kontakt.html" style="margin-top:auto;align-self:flex-start;display:inline-block;background:#b0894f;color:#fffdf8;font-weight:600;font-size:.95rem;padding:13px 26px;border-radius:999px;text-decoration:none;">Kontakt aufnehmen →</a>
-      </div>
+    <div id="sf-footer"></div>
+    <script src="footer.js"></script>
 
-    </div>
-  </section>
+  </div>
 
-  <div id="sf-footer"></div>
-
-</div>
-</x-dc>
-<script type="text/x-dc" data-dc-script data-props="{&quot;$preview&quot;:{&quot;width&quot;:1180},&quot;showPlayer&quot;:{&quot;editor&quot;:&quot;boolean&quot;,&quot;default&quot;:true,&quot;tsType&quot;:&quot;boolean&quot;,&quot;section&quot;:&quot;Hero&quot;},&quot;funkerLimit&quot;:{&quot;editor&quot;:&quot;range&quot;,&quot;default&quot;:8,&quot;min&quot;:4,&quot;max&quot;:12,&quot;step&quot;:1,&quot;tsType&quot;:&quot;number&quot;,&quot;section&quot;:&quot;Neue Sinnfunker&quot;}}">
-class Component extends DCLogic {
-  state = { funker: [], funkerStatus: 'loading', np: 0 };
-
-  get playlist() {
-    return [
-      { title: 'Sinnfunk startet im August 2026.', host: 'Sinnfunk Webradio' },
-      { title: 'Stimmen, die erden – kein Lärm, kein Algorithmus.', host: 'Sinnfunk Webradio' },
-      { title: 'Ein stiller Ort im lauten Netz.', host: 'Sinnfunk Webradio' }
+  <script>
+    const playlist = [
+      { title: "Sinnfunk: Keine Werbung. Keine Wut.", host: "Sinnfunk" },
+      { title: "Ab August 2026 beginnt das reguläre Sendeprogramm", host: "Sinnfunk" },
+      { title: "Ein Webradio für gute Gespräche und ohne Lärm", host: "Sinnfunk" }
     ];
-  }
-
-  renderVals() {
-    const st = this.state.funkerStatus;
-    return {
-      showPlayer: this.props.showPlayer ?? true,
-      funker: this.state.funker,
-      isLoading: st === 'loading',
-      isEmpty: st === 'empty',
-      isError: st === 'error',
-      hasFunker: st === 'ok',
-      npTitle: this.playlist[this.state.np].title,
-      npHost: this.playlist[this.state.np].host
-    };
-  }
-
-  loadScript(src) {
-    if (document.querySelector(`script[data-sf="${src}"]`)) return;
-    const s = document.createElement('script');
-    s.src = src;
-    s.setAttribute('data-sf', src);
-    document.body.appendChild(s);
-  }
-
-  componentDidMount() {
-    this.loadScript('nav.js');
-    this.loadScript('footer.js');
-    this.timer = setInterval(
-      () => this.setState(s => ({ np: (s.np + 1) % this.playlist.length })),
-      9000
-    );
-    this.loadFunker(0);
-  }
-
-  componentWillUnmount() {
-    if (this.timer) clearInterval(this.timer);
-  }
-
-  async loadFunker(attempt) {
-    if (!window.supabase) {
-      if (attempt < 20) { setTimeout(() => this.loadFunker(attempt + 1), 300); return; }
-      this.setState({ funkerStatus: 'error' });
-      return;
+    let currentIndex = 0;
+    const titleEl = document.getElementById("current-title");
+    const hostEl  = document.getElementById("current-host");
+    function updateNowPlaying() {
+      currentIndex = (currentIndex + 1) % playlist.length;
+      titleEl.textContent = playlist[currentIndex].title;
+      hostEl.textContent  = playlist[currentIndex].host;
     }
-    const URL = 'https://mliatnfqgnctbxhbwhzp.supabase.co';
-    const ANON = 'sb_publishable_KocEqg2UUL2trsGXb_kacA_yfY8DIP3';
-    const limit = this.props.funkerLimit ?? 8;
-    try {
-      const db = window.supabase.createClient(URL, ANON);
-      let res = await db.from('sinnfunker')
-        .select('id,name,created_at')
-        .in('status', ['aktiv', 'freigegeben'])
-        .order('created_at', { ascending: false })
-        .limit(limit);
-      if (res.error) {
-        res = await db.from('sinnfunker')
-          .select('id,name')
-          .in('status', ['aktiv', 'freigegeben'])
-          .order('name')
-          .limit(limit);
-      }
-      if (res.error) { this.setState({ funkerStatus: 'error' }); return; }
-      const list = res.data || [];
-      this.setState({ funker: list, funkerStatus: list.length ? 'ok' : 'empty' });
-    } catch (e) {
-      this.setState({ funkerStatus: 'error' });
-    }
-  }
-}
-</script>
+    setInterval(updateNowPlaying, 9000);
+  </script>
 </body>
 </html>
