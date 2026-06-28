@@ -59,7 +59,10 @@ document.head.appendChild(sfFooterCSS);
 
 const sfFooterHTML = `
 <footer>
-  <span>© 2026 Sinnfunk</span>
+  <a href="index.html" style="display:flex;align-items:center;gap:10px;text-decoration:none;color:inherit;">
+    <span style="width:28px;height:28px;border-radius:50%;border:1.5px solid #b0894f;display:block;flex:none;"></span>
+    <span style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:700;font-size:1.25rem;letter-spacing:.01em;">sinnfunk</span>
+  </a>
 
   <div class="sf-footer-social">
     <a class="sf-social-link"
