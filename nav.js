@@ -108,9 +108,12 @@ const linksHTML = navLinks
 // ── Header HTML ──────────────────────────────
 const sfNavHTML = `
 <header>
-  <a class="logo" href="index.html" aria-label="Sinnfunk Startseite">
-    <img src="image/icon.png" alt="Sinnfunk Logo" />
-    <span class="logo-name">Sinnfunk</span>
+  <a class="logo" href="index.html" aria-label="Sinnfunk Startseite" style="display:flex;align-items:center;gap:11px;text-decoration:none;color:inherit;">
+    <span style="width:34px;height:34px;border-radius:50%;border:1.5px solid #b0894f;display:block;flex:none;"></span>
+    <span style="display:flex;flex-direction:column;line-height:1;">
+      <span style="font-family:'Cormorant Garamond',Georgia,serif;font-weight:700;font-size:1.45rem;letter-spacing:.01em;">sinnfunk</span>
+      <span style="font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:#9a8f7d;margin-top:3px;">Sprachradio</span>
+    </span>
   </a>
 
   <!-- Desktop Navigation -->
