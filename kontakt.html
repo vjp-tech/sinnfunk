@@ -1,109 +1,213 @@
 <!DOCTYPE html>
-<html>
+<html lang="de">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<script src="./support.js"></script>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kontakt – Sinnfunk</title>
+  <meta name="description" content="Nimm Kontakt mit Sinnfunk auf – per Formular, E-Mail oder Telefon." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="image/icon.webp" type="image/x-icon" />
+  <style>
+    .kontakt-grid {
+      display: grid;
+      grid-template-columns: 1.1fr 0.9fr;
+      gap: 48px;
+      align-items: start;
+      margin-top: 12px;
+    }
+
+    .kontakt-form {
+      background: rgba(255, 250, 242, 0.72);
+      border: 1px solid rgba(123, 94, 69, 0.12);
+      border-radius: 32px;
+      padding: 36px;
+      box-shadow: var(--shadow);
+    }
+
+    .form-group {
+      margin-bottom: 20px;
+    }
+
+    .form-group label {
+      display: block;
+      font-family: Arial, sans-serif;
+      font-size: 0.88rem;
+      font-weight: 700;
+      color: var(--sage-dark);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      margin-bottom: 8px;
+    }
+
+    .form-group input,
+    .form-group textarea,
+    .form-group select {
+      width: 100%;
+      padding: 13px 16px;
+      border: 1px solid rgba(123, 94, 69, 0.22);
+      border-radius: 14px;
+      background: var(--warm-white);
+      font-family: Georgia, serif;
+      font-size: 1rem;
+      color: var(--text);
+      outline: none;
+      transition: border-color 0.2s;
+    }
+
+    .form-group input:focus,
+    .form-group textarea:focus,
+    .form-group select:focus {
+      border-color: var(--sage-dark);
+    }
+
+    .form-group textarea {
+      min-height: 140px;
+      resize: vertical;
+    }
+
+    .form-submit {
+      margin-top: 8px;
+    }
+
+    .kontakt-info {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    .info-card {
+      background: rgba(255, 250, 242, 0.65);
+      border: 1px solid rgba(123, 94, 69, 0.12);
+      border-radius: 24px;
+      padding: 22px 24px;
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
+    }
+
+    .info-icon {
+      width: 44px;
+      height: 44px;
+      border-radius: 14px;
+      background: rgba(143, 169, 139, 0.18);
+      display: grid;
+      place-items: center;
+      font-size: 1.3rem;
+      flex-shrink: 0;
+    }
+
+    .info-card h3 {
+      font-size: 1rem;
+      margin-bottom: 4px;
+      color: var(--sage-dark);
+      font-family: Arial, sans-serif;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      font-size: 0.82rem;
+    }
+
+    .info-card p,
+    .info-card a {
+      font-size: 1.02rem;
+      color: var(--text);
+    }
+
+    .info-card a:hover {
+      color: var(--sage-dark);
+    }
+
+    @media (max-width: 900px) {
+      .kontakt-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+  </style>
 </head>
 <body>
-<x-dc>
-<helmet>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
-<style>*{box-sizing:border-box;}body{margin:0;}</style>
-</helmet>
+  <div class="page">
 
-<div style="background:#f4eee3;color:#2c2b26;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;min-height:100vh;line-height:1.65;overflow-x:hidden;">
+    <div id="sf-nav"></div>
+  <script src="nav.js"></script>
 
-  <div id="sf-nav"></div>
+    <main>
 
-  <!-- HERO -->
-  <section style="width:min(1180px,calc(100% - 40px));margin:0 auto;padding:72px 0 56px;">
-    <p style="font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;color:#b0894f;margin:0 0 16px;font-weight:600;">Kontakt</p>
-    <h1 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(2.8rem,6vw,5rem);line-height:.97;letter-spacing:-.01em;color:#2c2b26;margin:0 0 18px;">Wir freuen uns<br>von dir zu hören.</h1>
-    <p style="font-size:1.12rem;color:#5b5a50;margin:0;max-width:560px;">Du hast Fragen zu Sinnfunk, möchtest Sinnfunker werden oder einfach Hallo sagen? Melde dich — wir antworten so schnell wie möglich.</p>
-  </section>
-
-  <!-- FORM + INFO -->
-  <section style="width:min(1180px,calc(100% - 40px));margin:0 auto;padding:0 0 96px;">
-    <div style="display:grid;grid-template-columns:1.1fr .9fr;gap:40px;align-items:start;">
-
-      <!-- Formular -->
-      <div style="background:#fffdf8;border:1px solid rgba(120,95,60,.12);border-radius:28px;padding:36px;">
-        <p style="font-size:.72rem;letter-spacing:.16em;text-transform:uppercase;color:#b0894f;margin:0 0 24px;font-weight:600;">Nachricht schreiben</p>
-        <form action="https://formspree.io/f/xaqkvewn" method="POST">
-          <div style="margin-bottom:18px;">
-            <label for="name" style="display:block;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#536b50;margin-bottom:8px;">Dein Name</label>
-            <input type="text" id="name" name="name" placeholder="Vorname Nachname" required style="width:100%;padding:13px 16px;border:1px solid rgba(120,95,60,.22);border-radius:14px;background:#fffdf8;font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:#2c2b26;outline:none;" />
-          </div>
-          <div style="margin-bottom:18px;">
-            <label for="email" style="display:block;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#536b50;margin-bottom:8px;">E-Mail-Adresse</label>
-            <input type="email" id="email" name="email" placeholder="deine@email.at" required style="width:100%;padding:13px 16px;border:1px solid rgba(120,95,60,.22);border-radius:14px;background:#fffdf8;font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:#2c2b26;outline:none;" />
-          </div>
-          <div style="margin-bottom:18px;">
-            <label for="betreff" style="display:block;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#536b50;margin-bottom:8px;">Betreff</label>
-            <select id="betreff" name="betreff" style="width:100%;padding:13px 16px;border:1px solid rgba(120,95,60,.22);border-radius:14px;background:#fffdf8;font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:#2c2b26;outline:none;appearance:none;">
-              <option value="">Bitte wählen …</option>
-              <option value="podcaster">Ich möchte Sinnfunker werden.</option>
-              <option value="hoerer">Frage als Hörer</option>
-              <option value="kooperation">Kooperation / Zusammenarbeit</option>
-              <option value="sonstiges">Sonstiges</option>
-            </select>
-          </div>
-          <div style="margin-bottom:24px;">
-            <label for="nachricht" style="display:block;font-size:.72rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#536b50;margin-bottom:8px;">Nachricht</label>
-            <textarea id="nachricht" name="nachricht" placeholder="Was liegt dir am Herzen?" required style="width:100%;min-height:140px;padding:13px 16px;border:1px solid rgba(120,95,60,.22);border-radius:14px;background:#fffdf8;font-family:'Cormorant Garamond',serif;font-size:1.05rem;color:#2c2b26;outline:none;resize:vertical;"></textarea>
-          </div>
-          <button type="submit" style="display:inline-block;background:#b0894f;color:#fffdf8;font-weight:600;font-size:1rem;padding:15px 32px;border-radius:999px;border:none;cursor:pointer;letter-spacing:.01em;">Nachricht absenden</button>
-        </form>
+      <div class="page-hero">
+        <p class="eyebrow">Kontakt</p>
+        <h1>Wir freuen uns von dir zu hören.</h1>
+        <p>Du hast Fragen zu Sinnfunk, möchtest Sinnfunker werden oder einfach Hallo sagen? Melde dich – wir antworten so schnell wie möglich.</p>
       </div>
 
-      <!-- Info -->
-      <div style="display:flex;flex-direction:column;gap:16px;">
-        <a href="/cdn-cgi/l/email-protection#1467716662616754677d7a7a72617a7f3a787d6271" style="display:flex;align-items:center;gap:16px;background:#fffdf8;border:1px solid rgba(120,95,60,.12);border-radius:22px;padding:22px 24px;text-decoration:none;color:#2c2b26;">
-          <span style="width:46px;height:46px;border-radius:14px;background:rgba(138,157,132,.18);display:grid;place-items:center;flex:none;"><span style="width:14px;height:10px;border:1.5px solid #536b50;border-radius:3px;display:block;"></span></span>
-          <div>
-            <span style="display:block;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#536b50;margin-bottom:4px;">E-Mail</span>
-            <span style="display:block;font-family:'Cormorant Garamond',serif;font-size:1.4rem;line-height:1.2;"><span class="__cf_email__" data-cfemail="8af9eff8fcfff9caf9e3e4e4ecffe4e1a4e6e3fcef">[email&#160;protected]</span></span>
+      <div class="content-block">
+        <div class="kontakt-grid">
+
+          <!-- Formular -->
+          <div class="kontakt-form">
+            <p class="eyebrow" style="margin-bottom: 20px;">Nachricht schreiben</p>
+            <form action="https://formspree.io/f/xaqkvewn" method="POST">
+              <div class="form-group">
+                <label for="name">Dein Name</label>
+                <input type="text" id="name" name="name" placeholder="Vorname Nachname" required />
+              </div>
+              <div class="form-group">
+                <label for="email">E-Mail-Adresse</label>
+                <input type="email" id="email" name="email" placeholder="deine@email.at" required />
+              </div>
+              <div class="form-group">
+                <label for="betreff">Betreff</label>
+                <select id="betreff" name="betreff">
+                  <option value="">Bitte wählen …</option>
+                  <option value="podcaster">Ich möchte Sinnfunker werden.</option>
+                  <option value="hoerer">Frage als Hörer</option>
+                  <option value="kooperation">Kooperation / Zusammenarbeit</option>
+                  <option value="sonstiges">Sonstiges</option>
+                </select>
+              </div>
+              <div class="form-group">
+                <label for="nachricht">Nachricht</label>
+                <textarea id="nachricht" name="nachricht" placeholder="Was liegt dir am Herzen?" required></textarea>
+              </div>
+              <div class="form-submit">
+                <button type="submit" class="button">Nachricht absenden</button>
+              </div>
+            </form>
           </div>
-        </a>
-        <a href="tel:+4367764771171" style="display:flex;align-items:center;gap:16px;background:#fffdf8;border:1px solid rgba(120,95,60,.12);border-radius:22px;padding:22px 24px;text-decoration:none;color:#2c2b26;">
-          <span style="width:46px;height:46px;border-radius:14px;background:rgba(138,157,132,.18);display:grid;place-items:center;flex:none;"><span style="width:14px;height:14px;border:1.5px solid #536b50;border-radius:50%;display:block;"></span></span>
-          <div>
-            <span style="display:block;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#536b50;margin-bottom:4px;">Telefon (vormittags)</span>
-            <span style="display:block;font-family:'Cormorant Garamond',serif;font-size:1.4rem;line-height:1.2;">+43 677 64771171</span>
+
+          <!-- Kontaktinfos -->
+          <div class="kontakt-info">
+            <div class="info-card">
+              <div class="info-icon">✉</div>
+              <div>
+                <h3>E-Mail</h3>
+                <a href="mailto:servus@sinnfunk.live">servus@sinnfunk.live</a>
+              </div>
+            </div>
+            <div class="info-card">
+              <div class="info-icon">☎</div>
+              <div>
+                <h3>Telefon</h3>
+                <a href="tel:+4367764771171">+43 677 64771171</a>
+              </div>
+            </div>
+            <div class="info-card">
+              <div class="info-icon">f</div>
+              <div>
+                <h3>Facebook</h3>
+                <a href="https://www.facebook.com/profile.php?id=61590566336118" target="_blank" rel="noopener">Sinnfunk auf Facebook</a>
+              </div>
+            </div>
+            <div class="highlight-box" style="margin: 0;">
+              <p>Du möchtest mitmachen? Am schnellsten geht es über das Formular – wähle einfach den Betreff <em>„Ich möchte Sinnfunker werden"</em>.</p>
+            </div>
           </div>
-        </a>
-        <a href="https://www.facebook.com/profile.php?id=61590566336118" target="_blank" rel="noopener" style="display:flex;align-items:center;gap:16px;background:#fffdf8;border:1px solid rgba(120,95,60,.12);border-radius:22px;padding:22px 24px;text-decoration:none;color:#2c2b26;">
-          <span style="width:46px;height:46px;border-radius:14px;background:rgba(176,137,79,.14);display:grid;place-items:center;font-family:Georgia,serif;font-weight:700;color:#b0894f;font-size:1.2rem;flex:none;">f</span>
-          <div>
-            <span style="display:block;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#536b50;margin-bottom:4px;">Facebook</span>
-            <span style="display:block;font-family:'Cormorant Garamond',serif;font-size:1.4rem;line-height:1.2;">Sinnfunk auf Facebook</span>
-          </div>
-        </a>
-        <div style="background:rgba(138,157,132,.1);border-left:3px solid #8a9d84;border-radius:0 16px 16px 0;padding:16px 20px;">
-          <p style="font-size:.96rem;color:#455e42;margin:0;line-height:1.6;">Du möchtest mitmachen? Am schnellsten geht es über das Formular — wähle den Betreff <em>„Ich möchte Sinnfunker werden"</em>.</p>
+
         </div>
       </div>
 
-    </div>
-  </section>
+    </main>
 
-  <div id="sf-footer"></div>
-</div>
-</x-dc>
-<script data-cfasync="false" src="/cdn-cgi/scripts/5c5dd728/cloudflare-static/email-decode.min.js"></script><script type="text/x-dc" data-dc-script>
-class Component extends DCLogic {
-  componentDidMount() {
-    ['nav.js','footer.js'].forEach(src => {
-      if (document.querySelector(`script[data-sf="${src}"]`)) return;
-      const s = document.createElement('script');
-      s.src = src; s.setAttribute('data-sf', src);
-      document.body.appendChild(s);
-    });
-  }
-}
-</script>
+ <div id="sf-footer"></div>
+    <script src="footer.js"></script>
+
+  </div>
 </body>
 </html>
