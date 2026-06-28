@@ -1,618 +1,262 @@
 <!DOCTYPE html>
-<html lang="de">
+<html>
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Unsere Sinnfunker – Sinnfunk</title>
-  <link rel="stylesheet" href="style.css" />
-  <link rel="icon" href="image/icon.webp" type="image/x-icon" />
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-  <style>
-
-    /* ── Tabs ── */
-    .sf-tabs {
-      width: min(1120px, calc(100% - 32px));
-      margin: 0 auto 32px;
-      display: flex;
-      gap: 6px;
-      background: rgba(123,94,69,0.08);
-      border-radius: 28px;
-      padding: 5px;
-      width: fit-content;
-    }
-    .sf-tab {
-      padding: 10px 28px;
-      border-radius: 22px;
-      border: none;
-      background: transparent;
-      font-family: Arial, sans-serif;
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: var(--muted);
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .sf-tab.aktiv {
-      background: var(--sage-dark);
-      color: var(--warm-white);
-    }
-
-    /* ── Suche ── */
-    .sf-search-wrap {
-      width: min(1120px, calc(100% - 32px));
-      margin: 0 auto;
-      padding: 0 0 48px;
-    }
-    .sf-search-box {
-      background: rgba(255,250,242,0.82);
-      border: 1px solid rgba(123,94,69,0.14);
-      border-radius: 28px;
-      padding: 32px;
-      box-shadow: 0 12px 32px rgba(74,59,43,0.08);
-    }
-    .sf-search-row {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr;
-      gap: 14px;
-      align-items: end;
-    }
-    .sf-search-row-ep {
-      display: grid;
-      grid-template-columns: 2fr 1fr 1fr 1fr;
-      gap: 14px;
-      align-items: end;
-    }
-    .sf-input-group {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
-    .sf-input-group label {
-      font-family: Arial, sans-serif;
-      font-size: 0.76rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--sage-dark);
-    }
-    .sf-input-group input,
-    .sf-input-group select {
-      padding: 12px 16px;
-      border: 1px solid rgba(123,94,69,0.2);
-      border-radius: 14px;
-      background: var(--warm-white);
-      font-family: Georgia, serif;
-      font-size: 0.97rem;
-      color: var(--text);
-      outline: none;
-      transition: border-color 0.2s;
-      width: 100%;
-      box-sizing: border-box;
-    }
-    .sf-input-group input:focus,
-    .sf-input-group select:focus { border-color: var(--sage-dark); }
-
-    .sf-filter-tags {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 8px;
-      margin-top: 18px;
-      padding-top: 18px;
-      border-top: 1px solid rgba(123,94,69,0.1);
-    }
-    .sf-tag {
-      font-family: Arial, sans-serif;
-      font-size: 0.82rem;
-      font-weight: 700;
-      padding: 6px 14px;
-      border-radius: 999px;
-      border: 1px solid rgba(123,94,69,0.2);
-      background: transparent;
-      color: var(--muted);
-      cursor: pointer;
-      transition: all 0.2s;
-    }
-    .sf-tag:hover, .sf-tag.active {
-      background: var(--sage-dark);
-      color: var(--warm-white);
-      border-color: var(--sage-dark);
-    }
-    .sf-results-count {
-      font-family: Arial, sans-serif;
-      font-size: 0.88rem;
-      color: var(--muted);
-      margin-top: 12px;
-    }
-
-    /* ── Sinnfunker Grid ── */
-    .sf-community-wrap {
-      width: min(1120px, calc(100% - 32px));
-      margin: 0 auto;
-      padding: 0 0 80px;
-    }
-    .sf-grid {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 22px;
-    }
-    .sf-loading {
-      grid-column: 1 / -1;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      gap: 16px;
-      padding: 80px 24px;
-      color: var(--muted);
-      font-family: Arial, sans-serif;
-    }
-    .sf-spinner {
-      width: 40px; height: 40px;
-      border: 3px solid rgba(83,107,80,0.2);
-      border-top-color: var(--sage-dark);
-      border-radius: 50%;
-      animation: spin 0.8s linear infinite;
-    }
-    @keyframes spin { to { transform: rotate(360deg); } }
-
-    .sf-card {
-      background: rgba(255,250,242,0.85);
-      border: 1px solid rgba(123,94,69,0.12);
-      border-radius: 28px;
-      overflow: hidden;
-      box-shadow: 0 10px 28px rgba(74,59,43,0.07);
-      display: flex;
-      flex-direction: column;
-      transition: box-shadow 0.2s, transform 0.2s;
-    }
-    .sf-card:hover {
-      box-shadow: 0 18px 40px rgba(74,59,43,0.13);
-      transform: translateY(-2px);
-    }
-    .sf-card-header {
-      padding: 24px 24px 16px;
-      display: flex;
-      gap: 16px;
-      align-items: flex-start;
-    }
-    .sf-card-avatar {
-      width: 72px; height: 72px;
-      border-radius: 50%;
-      object-fit: cover;
-      flex-shrink: 0;
-      border: 3px solid rgba(143,169,139,0.3);
-      background: rgba(143,169,139,0.15);
-    }
-    .sf-card-avatar-placeholder {
-      width: 72px; height: 72px;
-      border-radius: 50%;
-      flex-shrink: 0;
-      background: linear-gradient(135deg, rgba(143,169,139,0.5), rgba(200,148,107,0.4));
-      display: grid;
-      place-items: center;
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: var(--warm-white);
-      font-family: Georgia, serif;
-    }
-    .sf-card-meta { flex: 1; min-width: 0; }
-    .sf-card-category {
-      display: inline-block;
-      font-family: Arial, sans-serif;
-      font-size: 0.72rem;
-      font-weight: 700;
-      text-transform: uppercase;
-      letter-spacing: 0.1em;
-      padding: 3px 10px;
-      border-radius: 999px;
-      margin-bottom: 6px;
-      background: rgba(143,169,139,0.2);
-      color: var(--sage-dark);
-    }
-    .sf-card-name {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: #2c3128;
-      margin-bottom: 2px;
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .sf-card-subtitle {
-      font-family: Arial, sans-serif;
-      font-size: 0.85rem;
-      color: var(--muted);
-    }
-    .sf-card-bio {
-      padding: 0 24px 16px;
-      font-family: Arial, sans-serif;
-      font-size: 0.92rem;
-      color: #55584e;
-      line-height: 1.6;
-    }
-    .sf-card-footer {
-      margin-top: auto;
-      padding: 14px 24px 20px;
-      border-top: 1px solid rgba(123,94,69,0.09);
-      display: flex;
-      gap: 8px;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-    .sf-social { display: flex; gap: 8px; }
-    .sf-social a {
-      width: 34px; height: 34px;
-      border-radius: 10px;
-      background: rgba(143,169,139,0.12);
-      border: 1px solid rgba(83,107,80,0.15);
-      display: grid;
-      place-items: center;
-      font-size: 0.88rem;
-      color: var(--sage-dark);
-      text-decoration: none;
-      transition: background 0.2s;
-    }
-    .sf-social a:hover { background: rgba(83,107,80,0.18); }
-    .sf-website-link {
-      margin-left: auto;
-      font-family: Arial, sans-serif;
-      font-size: 0.82rem;
-      color: var(--sage-dark);
-      font-weight: 700;
-      text-decoration: none;
-      border-bottom: 1px solid rgba(83,107,80,0.3);
-      padding-bottom: 1px;
-    }
-    .sf-website-link:hover { border-color: var(--sage-dark); }
-    .sf-empty {
-      grid-column: 1 / -1;
-      text-align: center;
-      padding: 64px 24px;
-      color: var(--muted);
-      font-family: Arial, sans-serif;
-    }
-
-    /* ── Episoden-Liste ── */
-    .ep-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
-    .ep-card {
-      background: rgba(255,250,242,0.85);
-      border: 1px solid rgba(123,94,69,0.12);
-      border-radius: 18px;
-      padding: 18px 22px;
-      box-shadow: 0 6px 18px rgba(74,59,43,0.06);
-    }
-    .ep-card-title {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: #2c3128;
-      margin-bottom: 5px;
-    }
-    .ep-card-meta {
-      font-family: Arial, sans-serif;
-      font-size: 0.82rem;
-      color: var(--muted);
-      display: flex;
-      flex-wrap: wrap;
-      gap: 10px;
-      align-items: center;
-    }
-    .ep-badge {
-      display: inline-block;
-      padding: 2px 9px;
-      border-radius: 999px;
-      font-family: Arial, sans-serif;
-      font-size: 0.72rem;
-      font-weight: 700;
-    }
-    .ep-badge-vormittag { background: rgba(245,200,66,0.2); color: #7a6000; }
-    .ep-badge-nachmittag { background: rgba(90,158,111,0.2); color: #2d6b46; }
-    .ep-badge-nacht { background: rgba(74,126,181,0.2); color: #1a4a7a; }
-    .ep-slots {
-      margin-top: 8px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
-    .ep-slot-tag {
-      font-family: Arial, sans-serif;
-      font-size: 0.75rem;
-      padding: 3px 10px;
-      border-radius: 999px;
-      border: 1px solid rgba(123,94,69,0.18);
-      color: var(--muted);
-    }
-
-    @media (max-width: 900px) {
-      .sf-search-row, .sf-search-row-ep { grid-template-columns: 1fr 1fr; }
-      .sf-grid { grid-template-columns: repeat(2, 1fr); }
-    }
-    @media (max-width: 560px) {
-      .sf-search-row, .sf-search-row-ep { grid-template-columns: 1fr; }
-      .sf-grid { grid-template-columns: 1fr; }
-    }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
 </head>
 <body>
-<div class="page">
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<style>*{box-sizing:border-box;}body{margin:0;}@keyframes sf-spin{to{transform:rotate(360deg);}}</style>
+</helmet>
+
+<div style="background:#f4eee3;color:#2c2b26;font-family:'Helvetica Neue',Helvetica,Arial,sans-serif;min-height:100vh;line-height:1.65;overflow-x:hidden;">
 
   <div id="sf-nav"></div>
-  <script src="nav.js"></script>
 
-  <main>
+  <!-- HERO -->
+  <section style="width:min(1180px,calc(100% - 40px));margin:0 auto;padding:72px 0 48px;">
+    <p style="font-size:.76rem;letter-spacing:.2em;text-transform:uppercase;color:#b0894f;margin:0 0 16px;font-weight:600;">Unsere Sinnfunker</p>
+    <h1 style="font-family:'Cormorant Garamond',serif;font-weight:600;font-size:clamp(2.8rem,6vw,5rem);line-height:.97;letter-spacing:-.01em;color:#2c2b26;margin:0 0 16px;">Stimmen, die etwas<br>zu sagen haben.</h1>
+    <p style="font-size:1.1rem;color:#5b5a50;margin:0;max-width:540px;">Alle aktiven Sinnfunker und ihr Programm auf Sinnfunk.</p>
+  </section>
 
-    <div class="page-hero">
-      <p class="eyebrow">Unsere Sinnfunker</p>
-      <h1>Stimmen, die etwas zu sagen haben.</h1>
-      <p>Alle aktiven Sinnfunker und ihr Programm auf Sinnfunk.</p>
+  <!-- TABS -->
+  <div style="width:min(1180px,calc(100% - 40px));margin:0 auto 32px;">
+    <div style="display:inline-flex;gap:6px;background:rgba(120,95,60,.08);border-radius:999px;padding:5px;">
+      <button onClick="{{ showSinnfunker }}" style="{{ tabSinnfunkerStyle }}">Sinnfunker</button>
+      <button onClick="{{ showEpisoden }}" style="{{ tabEpisodenStyle }}">Episoden &amp; Programm</button>
     </div>
+  </div>
 
-    <!-- Tabs -->
-    <div style="display:flex;justify-content:center;margin-bottom:32px;">
-      <div class="sf-tabs">
-        <button class="sf-tab aktiv" id="tab-sinnfunker" onclick="zeigeTab('sinnfunker')">
-          👤 Sinnfunker
-        </button>
-        <button class="sf-tab" id="tab-episoden" onclick="zeigeTab('episoden')">
-          🎙 Episoden & Programm
-        </button>
-      </div>
-    </div>
-
-    <!-- ══ TAB: SINNFUNKER ══ -->
-    <div id="bereich-sinnfunker">
-      <div class="sf-search-wrap">
-        <div class="sf-search-box">
-          <div class="sf-search-row">
-            <div class="sf-input-group">
-              <label for="search-name">Name oder Kategorie</label>
-              <input type="text" id="search-name"
-                placeholder="z.B. Anna, Meditation, Kräuter …"
-                oninput="filterSinnfunker()" />
-            </div>
-            <div class="sf-input-group">
-              <label>&nbsp;</label>
-              <button class="button secondary" onclick="resetSinnfunker()"
-                style="height:46px;">Zurücksetzen</button>
-            </div>
+  <!-- ══ TAB SINNFUNKER ══ -->
+  <sc-if value="{{ isSinnfunkerTab }}" hint-placeholder-val="{{ true }}">
+    <section style="width:min(1180px,calc(100% - 40px));margin:0 auto;padding:0 0 40px;">
+      <div style="background:#fffdf8;border:1px solid rgba(120,95,60,.12);border-radius:22px;padding:24px 28px;">
+        <div style="display:flex;flex-wrap:wrap;gap:14px;align-items:flex-end;margin-bottom:16px;">
+          <div style="flex:2;min-width:200px;display:flex;flex-direction:column;gap:6px;">
+            <label style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#536b50;">Name oder Kategorie</label>
+            <input type="text" id="sf-search" placeholder="z.B. Anna, Meditation, Kräuter …" onInput="{{ onFunkerSearch }}" style="padding:11px 14px;border:1px solid rgba(120,95,60,.2);border-radius:12px;background:#f4eee3;font-family:'Cormorant Garamond',serif;font-size:1rem;color:#2c2b26;outline:none;width:100%;" />
           </div>
-          <div class="sf-filter-tags">
-            <span style="font-family:Arial;font-size:0.8rem;color:var(--muted);align-self:center;margin-right:4px;">Schnellfilter:</span>
-            <button class="sf-tag" onclick="setTag('Kräuter')">Kräuter</button>
-            <button class="sf-tag" onclick="setTag('Philosophie')">Philosophie</button>
-            <button class="sf-tag" onclick="setTag('Energetik')">Energetik</button>
-            <button class="sf-tag" onclick="setTag('Wissenschaft')">Wissenschaft</button>
-            <button class="sf-tag" onclick="setTag('Geschichte')">Geschichte</button>
-            <button class="sf-tag" onclick="setTag('Kochen')">Kochen</button>
-          </div>
-          <p class="sf-results-count" id="results-count">Wird geladen …</p>
+          <button onClick="{{ onFunkerReset }}" style="padding:11px 22px;border:1px solid rgba(120,95,60,.2);border-radius:12px;background:transparent;font-size:.95rem;color:#6f6e64;cursor:pointer;white-space:nowrap;align-self:flex-end;">Zurücksetzen</button>
         </div>
+        <div style="display:flex;flex-wrap:wrap;gap:8px;padding-top:16px;border-top:1px solid rgba(120,95,60,.09);">
+          <span style="font-size:.78rem;color:#9a8f7d;align-self:center;margin-right:4px;">Schnellfilter:</span>
+          <sc-for list="{{ filterTags }}" as="tag" hint-placeholder-count="6">
+            <button onClick="{{ tag.onClick }}" style="{{ tag.style }}">{{ tag.label }}</button>
+          </sc-for>
+        </div>
+        <p style="font-size:.84rem;color:#9a8f7d;margin:12px 0 0;">{{ funkerCount }}</p>
       </div>
-      <div class="sf-community-wrap">
-        <div class="sf-grid" id="sf-grid">
-          <div class="sf-loading">
-            <div class="sf-spinner"></div>
-            <p>Sinnfunker werden geladen …</p>
+    </section>
+
+    <section style="width:min(1180px,calc(100% - 40px));margin:0 auto;padding:0 0 88px;">
+      <sc-if value="{{ funkerLoading }}" hint-placeholder-val="{{ true }}">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:16px;padding:80px 24px;color:#9a8f7d;">
+          <span style="width:36px;height:36px;border:2px solid rgba(176,137,79,.2);border-top-color:#b0894f;border-radius:50%;display:block;animation:sf-spin .8s linear infinite;"></span>
+          <p style="font-size:.95rem;margin:0;">Sinnfunker werden geladen …</p>
+        </div>
+      </sc-if>
+      <sc-if value="{{ funkerEmpty }}" hint-placeholder-val="{{ false }}">
+        <div style="text-align:center;padding:64px 24px;color:#9a8f7d;"><p style="margin:0;">Kein Sinnfunker gefunden.</p></div>
+      </sc-if>
+      <sc-if value="{{ funkerHasData }}" hint-placeholder-val="{{ false }}">
+        <div style="display:grid;grid-template-columns:repeat(auto-fill,minmax(320px,1fr));gap:20px;">
+          <sc-for list="{{ funkerFiltered }}" as="f" hint-placeholder-count="6">
+            <article style="background:#fffdf8;border:1px solid rgba(120,95,60,.12);border-radius:22px;overflow:hidden;display:flex;flex-direction:column;">
+              <div style="padding:22px 22px 14px;display:flex;gap:14px;align-items:flex-start;">
+                <sc-if value="{{ f.photoUrl }}" hint-placeholder-val="{{ '' }}">
+                  <img src="{{ f.photoUrl }}" alt="{{ f.name }}" style="width:62px;height:62px;border-radius:50%;object-fit:cover;flex:none;border:2px solid rgba(138,157,132,.25);" />
+                </sc-if>
+                <sc-if value="{{ f.noPhoto }}" hint-placeholder-val="{{ false }}">
+                  <div style="width:62px;height:62px;border-radius:50%;flex:none;background:linear-gradient(135deg,rgba(138,157,132,.5),rgba(200,148,107,.4));display:grid;place-items:center;font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;color:#fffdf8;">{{ f.initial }}</div>
+                </sc-if>
+                <div style="flex:1;min-width:0;">
+                  <sc-if value="{{ f.category }}" hint-placeholder-val="{{ '' }}">
+                    <span style="display:inline-block;font-size:.66rem;font-weight:700;text-transform:uppercase;letter-spacing:.1em;padding:3px 10px;border-radius:999px;margin-bottom:6px;background:rgba(138,157,132,.2);color:#536b50;">{{ f.category }}</span>
+                  </sc-if>
+                  <div style="font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:600;color:#2c2b26;line-height:1.2;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;">{{ f.name }}</div>
+                  <div style="font-size:.84rem;color:#6f6e64;margin-top:2px;">{{ f.subtitle }}</div>
+                </div>
+              </div>
+              <sc-if value="{{ f.biography }}" hint-placeholder-val="{{ '' }}">
+                <p style="padding:0 22px 14px;font-size:.92rem;color:#5b5a50;line-height:1.6;margin:0;">{{ f.biography }}</p>
+              </sc-if>
+              <div style="margin-top:auto;padding:12px 22px 18px;border-top:1px solid rgba(120,95,60,.09);display:flex;gap:8px;align-items:center;flex-wrap:wrap;">
+                <sc-if value="{{ f.instagram }}" hint-placeholder-val="{{ '' }}">
+                  <a href="{{ f.instagram }}" target="_blank" rel="noopener" style="width:32px;height:32px;border-radius:9px;background:rgba(138,157,132,.12);border:1px solid rgba(83,107,80,.15);display:grid;place-items:center;font-size:.82rem;color:#536b50;text-decoration:none;">▣</a>
+                </sc-if>
+                <sc-if value="{{ f.facebook }}" hint-placeholder-val="{{ '' }}">
+                  <a href="{{ f.facebook }}" target="_blank" rel="noopener" style="width:32px;height:32px;border-radius:9px;background:rgba(138,157,132,.12);border:1px solid rgba(83,107,80,.15);display:grid;place-items:center;font-family:Georgia,serif;font-weight:700;color:#536b50;text-decoration:none;">f</a>
+                </sc-if>
+                <sc-if value="{{ f.website }}" hint-placeholder-val="{{ '' }}">
+                  <a href="{{ f.website }}" target="_blank" rel="noopener" style="margin-left:auto;font-size:.82rem;font-weight:700;color:#b0894f;text-decoration:none;border-bottom:1px solid rgba(176,137,79,.4);padding-bottom:1px;">{{ f.websiteHostname }} →</a>
+                </sc-if>
+              </div>
+            </article>
+          </sc-for>
+        </div>
+      </sc-if>
+    </section>
+  </sc-if>
+
+  <!-- ══ TAB EPISODEN ══ -->
+  <sc-if value="{{ isEpisodenTab }}" hint-placeholder-val="{{ false }}">
+    <section style="width:min(1180px,calc(100% - 40px));margin:0 auto;padding:0 0 40px;">
+      <div style="background:#fffdf8;border:1px solid rgba(120,95,60,.12);border-radius:22px;padding:24px 28px;">
+        <div style="display:grid;grid-template-columns:2fr 1fr 1fr 1fr;gap:14px;align-items:flex-end;margin-bottom:14px;">
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <label style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#536b50;">Titel oder Sinnfunker</label>
+            <input type="text" id="ep-suche" placeholder="z.B. Heilkräuter …" onInput="{{ onEpSearch }}" style="padding:11px 14px;border:1px solid rgba(120,95,60,.2);border-radius:12px;background:#f4eee3;font-family:'Cormorant Garamond',serif;font-size:1rem;color:#2c2b26;outline:none;width:100%;" />
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <label style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#536b50;">Datum</label>
+            <input type="date" id="ep-datum" onChange="{{ onEpDatum }}" style="padding:11px 14px;border:1px solid rgba(120,95,60,.2);border-radius:12px;background:#f4eee3;font-family:'Cormorant Garamond',serif;font-size:.95rem;color:#2c2b26;outline:none;width:100%;" />
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <label style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#536b50;">Wochentag</label>
+            <select id="ep-wochentag" onChange="{{ onEpWochentag }}" style="padding:11px 14px;border:1px solid rgba(120,95,60,.2);border-radius:12px;background:#f4eee3;font-family:'Cormorant Garamond',serif;font-size:.95rem;color:#2c2b26;outline:none;width:100%;appearance:none;">
+              <option value="">Alle Tage</option>
+              <option value="1">Montag</option>
+              <option value="2">Dienstag</option>
+              <option value="3">Mittwoch</option>
+              <option value="4">Donnerstag</option>
+              <option value="5">Freitag</option>
+              <option value="6">Samstag</option>
+              <option value="0">Sonntag</option>
+            </select>
+          </div>
+          <div style="display:flex;flex-direction:column;gap:6px;">
+            <label style="font-size:.7rem;font-weight:700;text-transform:uppercase;letter-spacing:.12em;color:#536b50;">Tageszeit</label>
+            <select id="ep-tageszeit" onChange="{{ onEpTageszeit }}" style="padding:11px 14px;border:1px solid rgba(120,95,60,.2);border-radius:12px;background:#f4eee3;font-family:'Cormorant Garamond',serif;font-size:.95rem;color:#2c2b26;outline:none;width:100%;appearance:none;">
+              <option value="">Alle Zeiten</option>
+              <option value="vormittag">Vormittag (06–15 Uhr)</option>
+              <option value="nachmittag">Nachmittag (15–21 Uhr)</option>
+              <option value="nacht">Nacht (21–06 Uhr)</option>
+            </select>
           </div>
         </div>
-      </div>
-    </div>
-
-    <!-- ══ TAB: EPISODEN ══ -->
-    <div id="bereich-episoden" style="display:none;">
-      <div class="sf-search-wrap">
-        <div class="sf-search-box">
-          <div class="sf-search-row-ep">
-            <div class="sf-input-group">
-              <label for="ep-suche">Titel oder Sinnfunker</label>
-              <input type="text" id="ep-suche"
-                placeholder="z.B. Heilkräuter, Maria …"
-                oninput="filterEpisoden()" />
-            </div>
-            <div class="sf-input-group">
-              <label for="ep-datum">Datum</label>
-              <input type="date" id="ep-datum" onchange="filterEpisoden()" />
-            </div>
-            <div class="sf-input-group">
-              <label for="ep-wochentag">Wochentag</label>
-              <select id="ep-wochentag" onchange="filterEpisoden()">
-                <option value="">Alle Tage</option>
-                <option value="1">Montag</option>
-                <option value="2">Dienstag</option>
-                <option value="3">Mittwoch</option>
-                <option value="4">Donnerstag</option>
-                <option value="5">Freitag</option>
-                <option value="6">Samstag</option>
-                <option value="0">Sonntag</option>
-              </select>
-            </div>
-            <div class="sf-input-group">
-              <label for="ep-tageszeit">Tageszeit</label>
-              <select id="ep-tageszeit" onchange="filterEpisoden()">
-                <option value="">Alle Zeiten</option>
-                <option value="vormittag">Vormittag (06–15 Uhr)</option>
-                <option value="nachmittag">Nachmittag (15–21 Uhr)</option>
-                <option value="nacht">Nacht (21–06 Uhr)</option>
-              </select>
-            </div>
-          </div>
-          <div style="margin-top:14px;display:flex;justify-content:flex-end;">
-            <button class="button secondary" onclick="resetEpisoden()"
-              style="height:40px;padding:0 20px;">Zurücksetzen</button>
-          </div>
-          <p class="sf-results-count" id="ep-results-count">Wird geladen …</p>
+        <div style="display:flex;justify-content:flex-end;">
+          <button onClick="{{ onEpReset }}" style="padding:10px 20px;border:1px solid rgba(120,95,60,.2);border-radius:12px;background:transparent;font-size:.9rem;color:#6f6e64;cursor:pointer;">Zurücksetzen</button>
         </div>
+        <p style="font-size:.84rem;color:#9a8f7d;margin:12px 0 0;">{{ epCount }}</p>
       </div>
-      <div class="sf-community-wrap">
-        <div class="ep-list" id="ep-list">
-          <div class="sf-loading">
-            <div class="sf-spinner"></div>
-            <p>Episoden werden geladen …</p>
-          </div>
+    </section>
+
+    <section style="width:min(1180px,calc(100% - 40px));margin:0 auto;padding:0 0 88px;">
+      <sc-if value="{{ epLoading }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;align-items:center;gap:16px;padding:80px 24px;color:#9a8f7d;">
+          <span style="width:36px;height:36px;border:2px solid rgba(176,137,79,.2);border-top-color:#b0894f;border-radius:50%;display:block;animation:sf-spin .8s linear infinite;"></span>
+          <p style="font-size:.95rem;margin:0;">Episoden werden geladen …</p>
         </div>
-      </div>
-    </div>
+      </sc-if>
+      <sc-if value="{{ epEmpty }}" hint-placeholder-val="{{ false }}">
+        <div style="text-align:center;padding:64px 24px;color:#9a8f7d;"><p style="margin:0;">Keine Episoden gefunden.</p></div>
+      </sc-if>
+      <sc-if value="{{ epHasData }}" hint-placeholder-val="{{ false }}">
+        <div style="display:flex;flex-direction:column;gap:12px;">
+          <sc-for list="{{ episodenFiltered }}" as="ep" hint-placeholder-count="5">
+            <article style="background:#fffdf8;border:1px solid rgba(120,95,60,.12);border-radius:18px;padding:18px 22px;">
+              <div style="font-family:'Cormorant Garamond',serif;font-size:1.45rem;font-weight:600;color:#2c2b26;margin-bottom:6px;line-height:1.2;">{{ ep.title }}</div>
+              <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:.84rem;color:#6f6e64;">
+                <span>{{ ep.sinnfunkerName }}</span>
+                <sc-if value="{{ ep.duration }}" hint-placeholder-val="{{ '' }}">
+                  <span>· {{ ep.duration }} Min.</span>
+                </sc-if>
+              </div>
+              <div style="margin-top:10px;display:flex;flex-wrap:wrap;gap:6px;">
+                <sc-if value="{{ ep.noSlots }}" hint-placeholder-val="{{ false }}">
+                  <span style="font-size:.78rem;color:#9a8f7d;">Noch kein Sendetermin</span>
+                </sc-if>
+                <sc-for list="{{ ep.slotsFormatted }}" as="slotText" hint-placeholder-count="0">
+                  <span style="font-size:.78rem;padding:3px 10px;border-radius:999px;border:1px solid rgba(120,95,60,.18);color:#6f6e64;">{{ slotText }}</span>
+                </sc-for>
+              </div>
+            </article>
+          </sc-for>
+        </div>
+      </sc-if>
+    </section>
+  </sc-if>
 
-  </main>
-
- <div id="sf-footer"></div>
-    <script src="footer.js"></script>
-
+  <div id="sf-footer"></div>
 </div>
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+class Component extends DCLogic {
+  state = {
+    activeTab: 'sinnfunker',
+    alleFunker: [], funkerStatus: 'loading',
+    alleEpisoden: [], episodenStatus: 'idle',
+    funkerQuery: '', activeTag: null,
+    epQuery: '', epDatum: '', epWochentag: '', epTageszeit: ''
+  };
 
-<script>
-  const SUPABASE_URL  = 'https://mliatnfqgnctbxhbwhzp.supabase.co';
-  const SUPABASE_ANON = 'sb_publishable_KocEqg2UUL2trsGXb_kacA_yfY8DIP3';
-  const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
-
-  let alleSinnfunker = [];
-  let alleEpisoden   = [];
-  let epGeladen      = false;
-
-  // ── Tab-Umschalter ────────────────────────────────────────────────────────
-
-  function zeigeTab(tab) {
-    document.getElementById('bereich-sinnfunker').style.display = tab === 'sinnfunker' ? '' : 'none';
-    document.getElementById('bereich-episoden').style.display   = tab === 'episoden'   ? '' : 'none';
-    document.getElementById('tab-sinnfunker').classList.toggle('aktiv', tab === 'sinnfunker');
-    document.getElementById('tab-episoden').classList.toggle('aktiv', tab === 'episoden');
-    if (tab === 'episoden' && !epGeladen) ladeEpisoden();
-  }
-
-  // ── Sinnfunker laden ──────────────────────────────────────────────────────
-
-  async function ladeSinnfunker() {
-    const { data, error } = await db
-      .from('sinnfunker')
-      .select('id, name, subtitle, biography, photo_url, website, facebook, instagram, extra_link, category')
-      .in('status', ['aktiv', 'freigegeben']) // intern und andere Status werden nicht angezeigt
-      .order('name');
-
-    if (error) { zeigeError(error.message); return; }
-    alleSinnfunker = data || [];
-    renderSinnfunker(alleSinnfunker);
-  }
-
-  function renderSinnfunker(liste) {
-    const grid = document.getElementById('sf-grid');
-    if (liste.length === 0) {
-      grid.innerHTML = `<div class="sf-empty"><p>Kein Sinnfunker gefunden.</p></div>`;
-      document.getElementById('results-count').textContent = '0 Sinnfunker gefunden';
-      return;
-    }
-    grid.innerHTML = liste.map(s => karteHTML(s)).join('');
-    const n = liste.length;
-    document.getElementById('results-count').textContent =
-      n === 1 ? '1 Sinnfunker gefunden' : n + ' Sinnfunker gefunden';
-  }
-
-  function karteHTML(s) {
-    const initial = s.name ? s.name.charAt(0).toUpperCase() : '?';
-    const avatar = s.photo_url
-      ? `<img class="sf-card-avatar" src="${esc(s.photo_url)}" alt="${esc(s.name)}" />`
-      : `<div class="sf-card-avatar-placeholder">${initial}</div>`;
-    const categoryBadge = s.category
-      ? `<span class="sf-card-category">${esc(s.category)}</span>` : '';
-    const socials = [
-      s.instagram  && `<a href="${esc(s.instagram)}"  target="_blank" rel="noopener" title="Instagram">▣</a>`,
-      s.facebook   && `<a href="${esc(s.facebook)}"   target="_blank" rel="noopener" title="Facebook">f</a>`,
-      s.extra_link && `<a href="${esc(s.extra_link)}" target="_blank" rel="noopener" title="Weiterer Link">🔗</a>`,
-    ].filter(Boolean).join('');
-    const socialBlock = socials ? `<div class="sf-social">${socials}</div>` : '';
-    let websiteLink = '';
-    if (s.website) {
-      try {
-        const hostname = new URL(s.website).hostname;
-        websiteLink = `<a class="sf-website-link" href="${esc(s.website)}" target="_blank" rel="noopener">${hostname} →</a>`;
-      } catch(e) {
-        websiteLink = `<a class="sf-website-link" href="${esc(s.website)}" target="_blank" rel="noopener">Website →</a>`;
-      }
-    }
-    return `
-      <article class="sf-card"
-        data-name="${esc(s.name)}"
-        data-category="${esc(s.category || '')}"
-        data-biography="${esc(s.biography || '')}"
-        data-subtitle="${esc(s.subtitle || '')}">
-        <div class="sf-card-header">
-          ${avatar}
-          <div class="sf-card-meta">
-            ${categoryBadge}
-            <div class="sf-card-name">${esc(s.name)}</div>
-            <div class="sf-card-subtitle">${esc(s.subtitle || '')}</div>
-          </div>
-        </div>
-        <p class="sf-card-bio">${esc(s.biography || '')}</p>
-        <div class="sf-card-footer">
-          ${socialBlock}
-          ${websiteLink}
-        </div>
-      </article>`;
-  }
-
-  function filterSinnfunker() {
-    const q = document.getElementById('search-name').value.toLowerCase();
-    const gefiltert = alleSinnfunker.filter(s => {
-      const text = [s.name, s.biography, s.subtitle, s.category].join(' ').toLowerCase();
-      return !q || text.includes(q);
+  componentDidMount() {
+    ['nav.js','footer.js'].forEach(src => {
+      if (document.querySelector(`script[data-sf="${src}"]`)) return;
+      const s = document.createElement('script');
+      s.src = src; s.setAttribute('data-sf', src);
+      document.body.appendChild(s);
     });
-    renderSinnfunker(gefiltert);
+    this.loadFunker(0);
   }
 
-  function setTag(keyword) {
-    document.getElementById('search-name').value = keyword;
-    document.querySelectorAll('.sf-tag').forEach(t =>
-      t.classList.toggle('active', t.textContent.trim() === keyword));
-    filterSinnfunker();
-  }
-
-  function resetSinnfunker() {
-    document.getElementById('search-name').value = '';
-    document.querySelectorAll('.sf-tag').forEach(t => t.classList.remove('active'));
-    renderSinnfunker(alleSinnfunker);
-  }
-
-  // ── Episoden laden ────────────────────────────────────────────────────────
-
-  async function ladeEpisoden() {
-    epGeladen = true;
-    const { data: epData, error } = await db
-      .from('episodes')
-      .select('id, title, duration, sinnfunker:sinnfunker_id(name)')
-      .eq('status', 'aktiv')
-      .order('title');
-
-    if (error) {
-      document.getElementById('ep-list').innerHTML =
-        `<div class="sf-empty"><p>Episoden konnten nicht geladen werden.</p></div>`;
-      return;
+  async loadFunker(attempt) {
+    if (!window.supabase) {
+      if (attempt < 20) { setTimeout(() => this.loadFunker(attempt + 1), 300); return; }
+      this.setState({ funkerStatus: 'error' }); return;
     }
+    const db = window.supabase.createClient('https://mliatnfqgnctbxhbwhzp.supabase.co','sb_publishable_KocEqg2UUL2trsGXb_kacA_yfY8DIP3');
+    const { data, error } = await db.from('sinnfunker').select('id,name,subtitle,biography,photo_url,website,facebook,instagram,category').in('status',['aktiv','freigegeben']).order('name');
+    if (error) { this.setState({ funkerStatus: 'error' }); return; }
+    const list = (data||[]).map(s => ({
+      ...s,
+      initial: s.name?.charAt(0)?.toUpperCase() || '?',
+      noPhoto: !s.photo_url,
+      photoUrl: s.photo_url || null,
+      category: s.category || '',
+      subtitle: s.subtitle || '',
+      biography: s.biography || '',
+      website: s.website || '',
+      facebook: s.facebook || '',
+      instagram: s.instagram || '',
+      websiteHostname: s.website ? (() => { try { return new URL(s.website).hostname; } catch(e) { return s.website; } })() : ''
+    }));
+    this.setState({ alleFunker: list, funkerStatus: list.length ? 'ok' : 'empty' });
+  }
 
-    // Broadcast-Slots laden
-    const epIds = (epData || []).map(e => e.id);
+  async loadEpisoden(attempt) {
+    if (!window.supabase) {
+      if ((attempt||0) < 20) { setTimeout(() => this.loadEpisoden((attempt||0)+1), 300); return; }
+      this.setState({ episodenStatus: 'error' }); return;
+    }
+    this.setState({ episodenStatus: 'loading' });
+    const db = window.supabase.createClient('https://mliatnfqgnctbxhbwhzp.supabase.co','sb_publishable_KocEqg2UUL2trsGXb_kacA_yfY8DIP3');
+    const { data: epData, error } = await db.from('episodes').select('id,title,duration,sinnfunker:sinnfunker_id(name)').eq('status','aktiv').order('title');
+    if (error) { this.setState({ episodenStatus: 'error' }); return; }
+    const epIds = (epData||[]).map(e => e.id);
     let slotsMap = {};
     if (epIds.length > 0) {
-      const { data: slotData } = await db
-        .from('broadcast_slots')
-        .select('episode_id, scheduled_at')
-        .in('episode_id', epIds);
-      (slotData || []).forEach(s => {
-        if (!slotsMap[s.episode_id]) slotsMap[s.episode_id] = [];
-        slotsMap[s.episode_id].push(s.scheduled_at);
-      });
+      const { data: slotData } = await db.from('broadcast_slots').select('episode_id,scheduled_at').in('episode_id',epIds);
+      (slotData||[]).forEach(s => { if (!slotsMap[s.episode_id]) slotsMap[s.episode_id]=[]; slotsMap[s.episode_id].push(s.scheduled_at); });
     }
-
-    alleEpisoden = (epData || []).map(ep => ({
+    const list = (epData||[]).map(ep => ({
       ...ep,
-      slots: (slotsMap[ep.id] || []).sort(),
+      sinnfunkerName: ep.sinnfunker?.name || '–',
+      slotIsos: (slotsMap[ep.id]||[]).sort(),
+      slotsFormatted: (slotsMap[ep.id]||[]).sort().map(s => new Date(s).toLocaleString('de-AT',{weekday:'long',day:'numeric',month:'long',year:'numeric',hour:'2-digit',minute:'2-digit'}) + ' Uhr'),
+      noSlots: !(slotsMap[ep.id]||[]).length
     }));
-
-    renderEpisoden(alleEpisoden);
+    this.setState({ alleEpisoden: list, episodenStatus: list.length ? 'ok' : 'empty' });
   }
 
-  function tageszeit(iso) {
+  tageszeit(iso) {
     if (!iso) return '';
     const h = new Date(iso).getHours();
     if (h >= 6 && h < 15) return 'vormittag';
@@ -620,111 +264,90 @@
     return 'nacht';
   }
 
-  function tageszeitLabel(tz) {
-    if (tz === 'vormittag') return 'Vormittag';
-    if (tz === 'nachmittag') return 'Nachmittag';
-    if (tz === 'nacht') return 'Nacht';
-    return '';
+  setTag(kw) {
+    const newTag = this.state.activeTag === kw ? null : kw;
+    this.setState({ activeTag: newTag, funkerQuery: newTag || '' });
+    const input = document.getElementById('sf-search');
+    if (input) input.value = newTag || '';
   }
 
-  function slotDatumText(iso) {
-    if (!iso) return '';
-    return new Date(iso).toLocaleString('de-AT', {
-      weekday: 'long', day: 'numeric', month: 'long', year: 'numeric',
-      hour: '2-digit', minute: '2-digit'
-    }) + ' Uhr';
+  get funkerFiltered() {
+    const q = this.state.funkerQuery.toLowerCase();
+    return this.state.alleFunker.filter(f => {
+      const text = [f.name,f.biography,f.subtitle,f.category].join(' ').toLowerCase();
+      return !q || text.includes(q);
+    });
   }
 
-  function renderEpisoden(liste) {
-    const container = document.getElementById('ep-list');
-    const n = liste.length;
-    document.getElementById('ep-results-count').textContent =
-      n === 0 ? 'Keine Episoden gefunden.' :
-      n === 1 ? '1 Episode gefunden' : n + ' Episoden gefunden';
-
-    if (liste.length === 0) {
-      container.innerHTML = `<div class="sf-empty"><p>Keine Episoden gefunden.</p></div>`;
-      return;
-    }
-
-    container.innerHTML = liste.map(ep => {
-      const slotsHtml = ep.slots.length === 0
-        ? '<span style="font-family:Arial;font-size:0.78rem;color:var(--muted);">Noch kein Sendetermin</span>'
-        : ep.slots.map(s => {
-            const tz = tageszeit(s);
-            return `<span class="ep-slot-tag ep-badge ep-badge-${tz}">${slotDatumText(s)}</span>`;
-          }).join('');
-
-      return `
-        <div class="ep-card">
-          <div class="ep-card-title">${esc(ep.title)}</div>
-          <div class="ep-card-meta">
-            <span>${esc(ep.sinnfunker?.name || '–')}</span>
-            ${ep.duration ? `<span>· ${ep.duration} Min.</span>` : ''}
-          </div>
-          <div class="ep-slots">${slotsHtml}</div>
-        </div>`;
-    }).join('');
-  }
-
-  function filterEpisoden() {
-    const q   = document.getElementById('ep-suche').value.toLowerCase();
-    const dat = document.getElementById('ep-datum').value;         // YYYY-MM-DD
-    const wt  = document.getElementById('ep-wochentag').value;     // 0-6 als String
-    const tz  = document.getElementById('ep-tageszeit').value;     // vormittag/nachmittag/nacht/''
-
-    const gefiltert = alleEpisoden.filter(ep => {
-      // Textsuche
-      if (q) {
-        const text = [ep.title, ep.sinnfunker?.name].join(' ').toLowerCase();
-        if (!text.includes(q)) return false;
-      }
-
-      // Wenn Datum, Wochentag oder Tageszeit gesetzt: Episode muss mind. einen passenden Slot haben
+  get episodenFiltered() {
+    const q = this.state.epQuery.toLowerCase();
+    const dat = this.state.epDatum;
+    const wt = this.state.epWochentag;
+    const tz = this.state.epTageszeit;
+    return this.state.alleEpisoden.filter(ep => {
+      if (q) { const text = [ep.title,ep.sinnfunkerName].join(' ').toLowerCase(); if (!text.includes(q)) return false; }
       if (dat || wt !== '' || tz) {
-        const hatPassendenSlot = ep.slots.some(s => {
+        const hasSlot = ep.slotIsos.some(s => {
           const d = new Date(s);
-          if (dat && s.slice(0, 10) !== dat) return false;
+          if (dat && s.slice(0,10) !== dat) return false;
           if (wt !== '' && d.getDay() !== parseInt(wt)) return false;
-          if (tz && tageszeit(s) !== tz) return false;
+          if (tz && this.tageszeit(s) !== tz) return false;
           return true;
         });
-        if (!hatPassendenSlot) return false;
+        if (!hasSlot) return false;
       }
-
       return true;
     });
-
-    renderEpisoden(gefiltert);
   }
 
-  function resetEpisoden() {
-    document.getElementById('ep-suche').value = '';
-    document.getElementById('ep-datum').value = '';
-    document.getElementById('ep-wochentag').value = '';
-    document.getElementById('ep-tageszeit').value = '';
-    renderEpisoden(alleEpisoden);
+  renderVals() {
+    const isSF = this.state.activeTab === 'sinnfunker';
+    const isEP = this.state.activeTab === 'episoden';
+    const fst = this.state.funkerStatus;
+    const est = this.state.episodenStatus;
+    const ff = this.funkerFiltered;
+    const ef = this.episodenFiltered;
+    const tabBase = { padding:'10px 28px', borderRadius:'22px', border:'none', fontWeight:'600', fontSize:'.9rem', cursor:'pointer', transition:'all .2s' };
+    const tagKeywords = ['Kräuter','Philosophie','Energetik','Wissenschaft','Geschichte','Kochen'];
+    return {
+      isSinnfunkerTab: isSF,
+      isEpisodenTab: isEP,
+      tabSinnfunkerStyle: { ...tabBase, background: isSF ? '#536b50' : 'transparent', color: isSF ? '#fffdf8' : '#6f6e64' },
+      tabEpisodenStyle: { ...tabBase, background: isEP ? '#536b50' : 'transparent', color: isEP ? '#fffdf8' : '#6f6e64' },
+      showSinnfunker: () => this.setState({ activeTab: 'sinnfunker' }),
+      showEpisoden: () => {
+        this.setState({ activeTab: 'episoden' });
+        if (this.state.episodenStatus === 'idle') this.loadEpisoden(0);
+      },
+      filterTags: tagKeywords.map(kw => ({
+        label: kw,
+        isActive: this.state.activeTag === kw,
+        style: { padding:'5px 14px', borderRadius:'999px', border:'1px solid rgba(120,95,60,.2)', background: this.state.activeTag === kw ? '#536b50' : 'transparent', color: this.state.activeTag === kw ? '#fffdf8' : '#6f6e64', fontSize:'.82rem', fontWeight:'600', cursor:'pointer', transition:'all .2s' },
+        onClick: () => this.setTag(kw)
+      })),
+      funkerLoading: fst === 'loading',
+      funkerEmpty: fst !== 'loading' && ff.length === 0,
+      funkerHasData: ff.length > 0,
+      funkerFiltered: ff,
+      funkerCount: fst === 'loading' ? 'Wird geladen …' : ff.length === 1 ? '1 Sinnfunker gefunden' : ff.length + ' Sinnfunker gefunden',
+      onFunkerSearch: e => this.setState({ funkerQuery: e.target.value, activeTag: null }),
+      onFunkerReset: () => { this.setState({ funkerQuery: '', activeTag: null }); const inp = document.getElementById('sf-search'); if(inp) inp.value=''; },
+      epLoading: est === 'loading',
+      epEmpty: est !== 'loading' && est !== 'idle' && ef.length === 0,
+      epHasData: ef.length > 0,
+      episodenFiltered: ef,
+      epCount: est === 'loading' ? 'Wird geladen …' : est === 'idle' ? '' : ef.length === 1 ? '1 Episode gefunden' : ef.length + ' Episoden gefunden',
+      onEpSearch: e => this.setState({ epQuery: e.target.value }),
+      onEpDatum: e => this.setState({ epDatum: e.target.value }),
+      onEpWochentag: e => this.setState({ epWochentag: e.target.value }),
+      onEpTageszeit: e => this.setState({ epTageszeit: e.target.value }),
+      onEpReset: () => {
+        this.setState({ epQuery:'', epDatum:'', epWochentag:'', epTageszeit:'' });
+        ['ep-suche','ep-datum','ep-wochentag','ep-tageszeit'].forEach(id => { const el=document.getElementById(id); if(el) el.value=''; });
+      }
+    };
   }
-
-  // ── Fehler ────────────────────────────────────────────────────────────────
-
-  function zeigeError(msg) {
-    document.getElementById('sf-grid').innerHTML = `
-      <div class="sf-empty">
-        <p>Die Sinnfunker konnten nicht geladen werden.</p>
-        ${msg ? `<p style="font-size:0.82rem;margin-top:8px;">${esc(msg)}</p>` : ''}
-      </div>`;
-    document.getElementById('results-count').textContent = '';
-  }
-
-  function esc(str) {
-    if (!str) return '';
-    return String(str)
-      .replace(/&/g,'&amp;').replace(/</g,'&lt;')
-      .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
-  }
-
-  ladeSinnfunker();
+}
 </script>
 </body>
 </html>
