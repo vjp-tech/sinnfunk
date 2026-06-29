@@ -394,7 +394,7 @@ p { font-size: 1rem; }
 .impuls-inner {
   width: min(1180px, calc(100% - 40px));
   margin: 0 auto;
-  padding: 56px 0;
+  padding: 72px 0;
   display: grid;
   grid-template-columns: 1.25fr 0.75fr;
   gap: 48px;
@@ -427,7 +427,7 @@ p { font-size: 1rem; }
 .programm {
   width: min(1180px, calc(100% - 40px));
   margin: 0 auto;
-  padding: 64px 0 0;
+  padding: 80px 0;
   display: grid;
   grid-template-columns: 1fr 0.8fr 1fr;
   gap: 24px;
@@ -467,18 +467,19 @@ p { font-size: 1rem; }
 .prog-stream audio { width: 100%; margin: 6px 0 18px; }
 .prog-stream .now-playing { margin-top: auto; }
 
-/* Bild-Spalte */
-.prog-image {
-  padding: 0;
-  overflow: hidden;
-  min-height: 300px;
-}
-.prog-image img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-  display: block;
-}
+/* Bild-Spalte */ 
+.prog-image { 
+  padding: 0; 
+  overflow: hidden; 
+  min-height: 300px; 
+  } 
+
+  .prog-image img { 
+    width: 100%; 
+    height: 100%; 
+    object-fit: cover; 
+    display: block; 
+  }
 
 /* Sendungen-Spalte */
 .prog-list {
@@ -530,7 +531,7 @@ p { font-size: 1rem; }
 .themen {
   width: min(1180px, calc(100% - 40px));
   margin: 0 auto;
-  padding: 72px 0 64px;
+  padding: 96px 0 80px;
 }
 .themen .eyebrow { margin-bottom: 26px; }
 .tw-grid {
@@ -589,7 +590,7 @@ p { font-size: 1rem; }
 .bottom-grid {
   width: min(1180px, calc(100% - 40px));
   margin: 0 auto;
-  padding: 0 0 80px;
+  padding: 80px 0 100px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 24px;
@@ -1043,19 +1044,16 @@ section {
   h1 { font-size: clamp(2.6rem, 9vw, 3.6rem); }
 }
 
-@media (max-width: 560px) {
-  .hero { min-height: 440px; }
-  .hero-inner { padding: 52px 0; }
-<<<<<<< HEAD
-=======
-  /* Eigenes Hero-Bild fürs Smartphone */
-  .hero-bg { background-image: url('/image/hero-mobil.webp'); }
->>>>>>> 61176740bed7f0e732d7415a9d70aaecfe57a1b6
-  .tw-grid { grid-template-columns: 1fr; }
-  .people-grid { grid-template-columns: 1fr; }
-  .prog-stream, .prog-list, .col-card { padding: 24px; }
-  .impuls-inner { padding: 44px 0; }
-  .sf-footer-inner { flex-direction: column; align-items: flex-start; }
-  .sf-footer-nav { gap: 16px; }
-  .ep-dur { display: none; }
-}
+@media (max-width: 560px) { 
+  .hero { min-height: 440px; } 
+  .hero-inner { padding: 52px 0; } 
+  
+  /* Eigenes Hero-Bild fürs Smartphone */ 
+  .hero-bg { background-image: url('/image/hero-mobil.webp'); } 
+  .tw-grid { grid-template-columns: 1fr; } 
+  .people-grid { grid-template-columns: 1fr; } 
+  .prog-stream, .prog-list, .col-card { padding: 24px; } 
+  .impuls-inner { padding: 44px 0; } 
+  .sf-footer-inner { flex-direction: column; align-items: flex-start; } 
+  .sf-footer-nav { gap: 16px; } 
+  .ep-dur { display: none; } }
