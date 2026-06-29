@@ -9,46 +9,47 @@
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
   <style>
 
+    /* Nutzt die gemeinsamen Tokens aus style.css – nur seitenspezifisches Layout. */
+
     /* ── Tabs ── */
     .sf-tabs {
-      width: min(1120px, calc(100% - 32px));
       margin: 0 auto 32px;
       display: flex;
       gap: 6px;
-      background: rgba(123,94,69,0.08);
-      border-radius: 28px;
+      background: rgba(60,52,34,0.06);
+      border: 1px solid var(--line-soft);
+      border-radius: 999px;
       padding: 5px;
       width: fit-content;
     }
     .sf-tab {
-      padding: 10px 28px;
-      border-radius: 22px;
+      padding: 10px 26px;
+      border-radius: 999px;
       border: none;
       background: transparent;
-      font-family: Arial, sans-serif;
+      font-family: var(--font-body);
       font-size: 0.88rem;
-      font-weight: 700;
+      font-weight: 600;
       color: var(--muted);
       cursor: pointer;
       transition: all 0.2s;
     }
     .sf-tab.aktiv {
-      background: var(--sage-dark);
-      color: var(--warm-white);
+      background: var(--gold);
+      color: #fff;
     }
 
     /* ── Suche ── */
     .sf-search-wrap {
-      width: min(1120px, calc(100% - 32px));
+      width: min(1180px, calc(100% - 40px));
       margin: 0 auto;
-      padding: 0 0 48px;
+      padding: 0 0 44px;
     }
     .sf-search-box {
-      background: rgba(255,250,242,0.82);
-      border: 1px solid rgba(123,94,69,0.14);
-      border-radius: 28px;
-      padding: 32px;
-      box-shadow: 0 12px 32px rgba(74,59,43,0.08);
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 30px;
     }
     .sf-search-row {
       display: grid;
@@ -62,35 +63,31 @@
       gap: 14px;
       align-items: end;
     }
-    .sf-input-group {
-      display: flex;
-      flex-direction: column;
-      gap: 6px;
-    }
+    .sf-input-group { display: flex; flex-direction: column; gap: 6px; }
     .sf-input-group label {
-      font-family: Arial, sans-serif;
-      font-size: 0.76rem;
-      font-weight: 700;
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.12em;
-      color: var(--sage-dark);
+      letter-spacing: 0.14em;
+      color: var(--gold-deep);
     }
     .sf-input-group input,
     .sf-input-group select {
       padding: 12px 16px;
-      border: 1px solid rgba(123,94,69,0.2);
-      border-radius: 14px;
-      background: var(--warm-white);
-      font-family: Georgia, serif;
-      font-size: 0.97rem;
-      color: var(--text);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      background: var(--paper-warm);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--ink);
       outline: none;
       transition: border-color 0.2s;
       width: 100%;
       box-sizing: border-box;
     }
     .sf-input-group input:focus,
-    .sf-input-group select:focus { border-color: var(--sage-dark); }
+    .sf-input-group select:focus { border-color: var(--gold); }
 
     .sf-filter-tags {
       display: flex;
@@ -98,27 +95,27 @@
       gap: 8px;
       margin-top: 18px;
       padding-top: 18px;
-      border-top: 1px solid rgba(123,94,69,0.1);
+      border-top: 1px solid var(--line-soft);
     }
     .sf-tag {
-      font-family: Arial, sans-serif;
+      font-family: var(--font-body);
       font-size: 0.82rem;
-      font-weight: 700;
+      font-weight: 600;
       padding: 6px 14px;
       border-radius: 999px;
-      border: 1px solid rgba(123,94,69,0.2);
+      border: 1px solid var(--line);
       background: transparent;
       color: var(--muted);
       cursor: pointer;
       transition: all 0.2s;
     }
     .sf-tag:hover, .sf-tag.active {
-      background: var(--sage-dark);
-      color: var(--warm-white);
-      border-color: var(--sage-dark);
+      background: var(--gold);
+      color: #fff;
+      border-color: var(--gold);
     }
     .sf-results-count {
-      font-family: Arial, sans-serif;
+      font-family: var(--font-body);
       font-size: 0.88rem;
       color: var(--muted);
       margin-top: 12px;
@@ -126,7 +123,7 @@
 
     /* ── Sinnfunker Grid ── */
     .sf-community-wrap {
-      width: min(1120px, calc(100% - 32px));
+      width: min(1180px, calc(100% - 40px));
       margin: 0 auto;
       padding: 0 0 80px;
     }
@@ -143,30 +140,29 @@
       gap: 16px;
       padding: 80px 24px;
       color: var(--muted);
-      font-family: Arial, sans-serif;
+      font-family: var(--font-body);
     }
     .sf-spinner {
       width: 40px; height: 40px;
-      border: 3px solid rgba(83,107,80,0.2);
-      border-top-color: var(--sage-dark);
+      border: 3px solid rgba(168,148,92,0.25);
+      border-top-color: var(--gold);
       border-radius: 50%;
       animation: spin 0.8s linear infinite;
     }
     @keyframes spin { to { transform: rotate(360deg); } }
 
     .sf-card {
-      background: rgba(255,250,242,0.85);
-      border: 1px solid rgba(123,94,69,0.12);
-      border-radius: 28px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
       overflow: hidden;
-      box-shadow: 0 10px 28px rgba(74,59,43,0.07);
       display: flex;
       flex-direction: column;
       transition: box-shadow 0.2s, transform 0.2s;
     }
     .sf-card:hover {
-      box-shadow: 0 18px 40px rgba(74,59,43,0.13);
-      transform: translateY(-2px);
+      box-shadow: var(--shadow);
+      transform: translateY(-3px);
     }
     .sf-card-header {
       padding: 24px 24px 16px;
@@ -175,64 +171,64 @@
       align-items: flex-start;
     }
     .sf-card-avatar {
-      width: 72px; height: 72px;
+      width: 68px; height: 68px;
       border-radius: 50%;
       object-fit: cover;
       flex-shrink: 0;
-      border: 3px solid rgba(143,169,139,0.3);
-      background: rgba(143,169,139,0.15);
+      border: 2px solid rgba(168,148,92,0.3);
+      background: rgba(168,148,92,0.12);
     }
     .sf-card-avatar-placeholder {
-      width: 72px; height: 72px;
+      width: 68px; height: 68px;
       border-radius: 50%;
       flex-shrink: 0;
-      background: linear-gradient(135deg, rgba(143,169,139,0.5), rgba(200,148,107,0.4));
+      background: linear-gradient(135deg, rgba(168,148,92,0.6), rgba(53,61,46,0.5));
       display: grid;
       place-items: center;
-      font-size: 1.6rem;
-      font-weight: 700;
-      color: var(--warm-white);
-      font-family: Georgia, serif;
+      font-size: 1.5rem;
+      color: #fff;
+      font-family: var(--font-display);
     }
     .sf-card-meta { flex: 1; min-width: 0; }
     .sf-card-category {
       display: inline-block;
-      font-family: Arial, sans-serif;
-      font-size: 0.72rem;
-      font-weight: 700;
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 600;
       text-transform: uppercase;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.12em;
       padding: 3px 10px;
       border-radius: 999px;
       margin-bottom: 6px;
-      background: rgba(143,169,139,0.2);
-      color: var(--sage-dark);
+      background: rgba(168,148,92,0.18);
+      color: var(--gold-deep);
     }
     .sf-card-name {
-      font-size: 1.15rem;
-      font-weight: 700;
-      color: #2c3128;
+      font-family: var(--font-display);
+      font-size: 1.4rem;
+      font-weight: 600;
+      color: var(--ink);
       margin-bottom: 2px;
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
     }
     .sf-card-subtitle {
-      font-family: Arial, sans-serif;
+      font-family: var(--font-body);
       font-size: 0.85rem;
       color: var(--muted);
     }
     .sf-card-bio {
       padding: 0 24px 16px;
-      font-family: Arial, sans-serif;
+      font-family: var(--font-body);
       font-size: 0.92rem;
-      color: #55584e;
+      color: var(--ink-soft);
       line-height: 1.6;
     }
     .sf-card-footer {
       margin-top: auto;
       padding: 14px 24px 20px;
-      border-top: 1px solid rgba(123,94,69,0.09);
+      border-top: 1px solid var(--line-soft);
       display: flex;
       gap: 8px;
       align-items: center;
@@ -242,56 +238,52 @@
     .sf-social a {
       width: 34px; height: 34px;
       border-radius: 10px;
-      background: rgba(143,169,139,0.12);
-      border: 1px solid rgba(83,107,80,0.15);
+      background: rgba(168,148,92,0.1);
+      border: 1px solid var(--line);
       display: grid;
       place-items: center;
       font-size: 0.88rem;
-      color: var(--sage-dark);
+      color: var(--gold-deep);
       text-decoration: none;
       transition: background 0.2s;
     }
-    .sf-social a:hover { background: rgba(83,107,80,0.18); }
+    .sf-social a:hover { background: rgba(168,148,92,0.2); }
     .sf-website-link {
       margin-left: auto;
-      font-family: Arial, sans-serif;
+      font-family: var(--font-body);
       font-size: 0.82rem;
-      color: var(--sage-dark);
-      font-weight: 700;
+      color: var(--gold-deep);
+      font-weight: 600;
       text-decoration: none;
-      border-bottom: 1px solid rgba(83,107,80,0.3);
+      border-bottom: 1px solid rgba(168,148,92,0.4);
       padding-bottom: 1px;
     }
-    .sf-website-link:hover { border-color: var(--sage-dark); }
+    .sf-website-link:hover { border-color: var(--gold-deep); }
     .sf-empty {
       grid-column: 1 / -1;
       text-align: center;
       padding: 64px 24px;
       color: var(--muted);
-      font-family: Arial, sans-serif;
+      font-family: var(--font-body);
     }
 
     /* ── Episoden-Liste ── */
-    .ep-list {
-      display: flex;
-      flex-direction: column;
-      gap: 12px;
-    }
+    .ep-list { display: flex; flex-direction: column; gap: 12px; }
     .ep-card {
-      background: rgba(255,250,242,0.85);
-      border: 1px solid rgba(123,94,69,0.12);
-      border-radius: 18px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
       padding: 18px 22px;
-      box-shadow: 0 6px 18px rgba(74,59,43,0.06);
     }
     .ep-card-title {
-      font-size: 1.05rem;
-      font-weight: 700;
-      color: #2c3128;
+      font-family: var(--font-display);
+      font-size: 1.2rem;
+      font-weight: 600;
+      color: var(--ink);
       margin-bottom: 5px;
     }
     .ep-card-meta {
-      font-family: Arial, sans-serif;
+      font-family: var(--font-body);
       font-size: 0.82rem;
       color: var(--muted);
       display: flex;
@@ -303,25 +295,20 @@
       display: inline-block;
       padding: 2px 9px;
       border-radius: 999px;
-      font-family: Arial, sans-serif;
+      font-family: var(--font-body);
       font-size: 0.72rem;
-      font-weight: 700;
+      font-weight: 600;
     }
-    .ep-badge-vormittag { background: rgba(245,200,66,0.2); color: #7a6000; }
-    .ep-badge-nachmittag { background: rgba(90,158,111,0.2); color: #2d6b46; }
-    .ep-badge-nacht { background: rgba(74,126,181,0.2); color: #1a4a7a; }
-    .ep-slots {
-      margin-top: 8px;
-      display: flex;
-      flex-wrap: wrap;
-      gap: 6px;
-    }
+    .ep-badge-vormittag { background: rgba(245,200,66,0.18); color: #7a6000; }
+    .ep-badge-nachmittag { background: rgba(90,158,111,0.18); color: #2d6b46; }
+    .ep-badge-nacht { background: rgba(74,126,181,0.18); color: #1a4a7a; }
+    .ep-slots { margin-top: 8px; display: flex; flex-wrap: wrap; gap: 6px; }
     .ep-slot-tag {
-      font-family: Arial, sans-serif;
+      font-family: var(--font-body);
       font-size: 0.75rem;
       padding: 3px 10px;
       border-radius: 999px;
-      border: 1px solid rgba(123,94,69,0.18);
+      border: 1px solid var(--line);
       color: var(--muted);
     }
 

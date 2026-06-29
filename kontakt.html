@@ -11,31 +11,28 @@
     .kontakt-grid {
       display: grid;
       grid-template-columns: 1.1fr 0.9fr;
-      gap: 48px;
+      gap: 44px;
       align-items: start;
       margin-top: 12px;
     }
 
     .kontakt-form {
-      background: rgba(255, 250, 242, 0.72);
-      border: 1px solid rgba(123, 94, 69, 0.12);
-      border-radius: 32px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
       padding: 36px;
-      box-shadow: var(--shadow);
     }
 
-    .form-group {
-      margin-bottom: 20px;
-    }
+    .form-group { margin-bottom: 20px; }
 
     .form-group label {
       display: block;
-      font-family: Arial, sans-serif;
-      font-size: 0.88rem;
-      font-weight: 700;
-      color: var(--sage-dark);
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 600;
+      color: var(--gold-deep);
       text-transform: uppercase;
-      letter-spacing: 0.1em;
+      letter-spacing: 0.14em;
       margin-bottom: 8px;
     }
 
@@ -44,41 +41,34 @@
     .form-group select {
       width: 100%;
       padding: 13px 16px;
-      border: 1px solid rgba(123, 94, 69, 0.22);
-      border-radius: 14px;
-      background: var(--warm-white);
-      font-family: Georgia, serif;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      background: var(--paper-warm);
+      font-family: var(--font-body);
       font-size: 1rem;
-      color: var(--text);
+      color: var(--ink);
       outline: none;
       transition: border-color 0.2s;
     }
 
     .form-group input:focus,
     .form-group textarea:focus,
-    .form-group select:focus {
-      border-color: var(--sage-dark);
-    }
+    .form-group select:focus { border-color: var(--gold); }
 
-    .form-group textarea {
-      min-height: 140px;
-      resize: vertical;
-    }
+    .form-group textarea { min-height: 140px; resize: vertical; }
 
-    .form-submit {
-      margin-top: 8px;
-    }
+    .form-submit { margin-top: 8px; }
 
     .kontakt-info {
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: 16px;
     }
 
     .info-card {
-      background: rgba(255, 250, 242, 0.65);
-      border: 1px solid rgba(123, 94, 69, 0.12);
-      border-radius: 24px;
+      background: var(--paper-warm);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
       padding: 22px 24px;
       display: flex;
       align-items: flex-start;
@@ -88,8 +78,9 @@
     .info-icon {
       width: 44px;
       height: 44px;
-      border-radius: 14px;
-      background: rgba(143, 169, 139, 0.18);
+      border-radius: 12px;
+      background: rgba(168,148,92,0.14);
+      color: var(--gold-deep);
       display: grid;
       place-items: center;
       font-size: 1.3rem;
@@ -97,29 +88,26 @@
     }
 
     .info-card h3 {
-      font-size: 1rem;
       margin-bottom: 4px;
-      color: var(--sage-dark);
-      font-family: Arial, sans-serif;
+      color: var(--gold-deep);
+      font-family: var(--font-body);
       text-transform: uppercase;
-      letter-spacing: 0.1em;
-      font-size: 0.82rem;
+      letter-spacing: 0.14em;
+      font-size: 0.72rem;
+      font-weight: 600;
     }
 
     .info-card p,
     .info-card a {
-      font-size: 1.02rem;
-      color: var(--text);
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--ink);
     }
 
-    .info-card a:hover {
-      color: var(--sage-dark);
-    }
+    .info-card a:hover { color: var(--gold-deep); }
 
     @media (max-width: 900px) {
-      .kontakt-grid {
-        grid-template-columns: 1fr;
-      }
+      .kontakt-grid { grid-template-columns: 1fr; }
     }
   </style>
 </head>

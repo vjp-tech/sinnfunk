@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Freunde von Sinnfunk – Sinnfunk</title>
+  <meta name="description" content="Menschen, Initiativen und Orte, die nicht auf Sinnfunk senden, mit uns aber verbunden sind." />
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="image/icon.webp" type="image/x-icon" />
+  <style>
+    /* Nutzt die gemeinsamen Tokens aus style.css – nur seitenspezifisches Layout. */
+
+    .fr-wrap {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 0 0 80px;
+    }
+
+    .fr-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+
+    .fr-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 28px;
+      display: flex;
+      flex-direction: column;
+      transition: box-shadow 0.2s, transform 0.2s;
+    }
+    .fr-card:hover {
+      box-shadow: var(--shadow);
+      transform: translateY(-3px);
+    }
+
+    .fr-card-top {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 12px;
+      margin-bottom: 18px;
+    }
+
+    .fr-avatar {
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      overflow: hidden;
+      display: grid;
+      place-items: center;
+      color: #fff;
+      font-family: var(--font-display);
+      font-size: 1.3rem;
+      background: linear-gradient(135deg, rgba(168,148,92,0.65), rgba(53,61,46,0.55));
+    }
+    .fr-avatar img { width: 100%; height: 100%; object-fit: cover; }
+
+    .fr-badge {
+      font-family: var(--font-body);
+      font-size: 0.68rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 5px 12px;
+      border-radius: 999px;
+      background: rgba(168,148,92,0.16);
+      color: var(--gold-deep);
+      white-space: nowrap;
+    }
+
+    .fr-name {
+      font-size: 1.4rem;
+      margin-bottom: 8px;
+    }
+
+    .fr-desc {
+      font-family: var(--font-body);
+      font-size: 0.94rem;
+      color: var(--ink-soft);
+      line-height: 1.65;
+      margin: 0 0 18px;
+    }
+
+    .fr-card .arrow-link { margin-top: auto; }
+
+    .fr-empty {
+      grid-column: 1 / -1;
+      text-align: center;
+      padding: 56px 24px;
+      color: var(--muted);
+      font-family: var(--font-body);
+    }
+
+    @media (max-width: 900px) {
+      .fr-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 560px) {
+      .fr-grid { grid-template-columns: 1fr; }
+      .fr-card { padding: 24px; }
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <div id="sf-nav"></div>
+    <script src="nav.js"></script>
+
+    <main>
+
+      <div class="page-hero">
+        <p class="eyebrow">Freunde von Sinnfunk</p>
+        <h1>Mit uns verbunden.</h1>
+        <p>Hier findest du Menschen, Initiativen und Orte, die nicht auf Sinnfunk senden, uns aber am Herzen liegen. Wir teilen eine Haltung — und freuen uns, dich zu ihnen weiterzuschicken.</p>
+      </div>
+
+      <div class="fr-wrap">
+        <div class="fr-grid" id="fr-grid">
+          <!-- Karten werden aus der Liste unten erzeugt -->
+        </div>
+      </div>
+
+    </main>
+
+    <div id="sf-footer"></div>
+    <script src="footer.js"></script>
+
+  </div>
+
+  <!-- ============================================================
+       FREUNDE PFLEGEN
+
+       Um einen Freund hinzuzufügen, kopiere einen Block { … }
+       und passe ihn an. Reihenfolge = Reihenfolge auf der Seite.
+
+       name        : Name der Person oder Institution (Pflicht)
+       kategorie   : z. B. "Person", "Institution", "Verein", "Projekt"
+       beschreibung: ein bis zwei Sätze
+       link        : volle Adresse mit https://  (oder "" wenn kein Link)
+       logo        : Bildpfad, z. B. "image/freund-name.webp"
+                     (oder "" — dann erscheint der erste Buchstabe)
+       ============================================================ -->
+  <script>
+    
+  {
+    name: "Adrian Vogler",
+    kategorie: "Autor",
+    beschreibung: "Historische Detektivromane …",
+    link: "https://adrianvogler.synology.me/",
+    logo: "image/bram-stroker.webp"
+  }
+  // Nächsten Freund hier anfügen ↓
+
+      {
+        name: "Beispiel: Anna Berger",
+        kategorie: "Person",
+        beschreibung: "Meditationslehrerin und Wegbegleiterin, die unsere Idee von Anfang an unterstützt.",
+        link: "#",
+        logo: ""
+      },
+      {
+        name: "Beispiel: Verein für gelebte Achtsamkeit",
+        kategorie: "Verein",
+        beschreibung: "Setzt sich für mehr Stille und Bewusstsein im Alltag ein — ganz ohne Lärm.",
+        link: "#",
+        logo: ""
+      }
+    ];
+
+    (function () {
+      const grid = document.getElementById("fr-grid");
+      if (!grid) return;
+
+      function esc(str) {
+        return String(str || "")
+          .replace(/&/g, "&amp;").replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+      }
+
+      if (!freunde.length) {
+        grid.innerHTML = '<p class="fr-empty">Bald findest du hier unsere Freunde.</p>';
+        return;
+      }
+
+      grid.innerHTML = freunde.map(function (f) {
+        const initial = f.name ? f.name.trim().charAt(0).toUpperCase() : "?";
+        const avatar = f.logo
+          ? '<span class="fr-avatar"><img src="' + esc(f.logo) + '" alt="' + esc(f.name) + '" /></span>'
+          : '<span class="fr-avatar">' + initial + '</span>';
+        const badge = f.kategorie
+          ? '<span class="fr-badge">' + esc(f.kategorie) + '</span>'
+          : '';
+        const link = (f.link && f.link !== "#")
+          ? '<a class="arrow-link" href="' + esc(f.link) + '" target="_blank" rel="noopener">Zur Website →</a>'
+          : '';
+        return '<article class="fr-card">' +
+                 '<div class="fr-card-top">' + avatar + badge + '</div>' +
+                 '<h3 class="fr-name">' + esc(f.name) + '</h3>' +
+                 (f.beschreibung ? '<p class="fr-desc">' + esc(f.beschreibung) + '</p>' : '') +
+                 link +
+               '</article>';
+      }).join("");
+    })();
+  </script>
+</body>
+</html>
