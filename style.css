@@ -1,9 +1,9 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap');
+
 /* ============================================
    SINNFUNK – Gemeinsames Stylesheet (Redesign 2026)
    Eine Datei für alle Seiten.
    ============================================ */
-
-@import url('https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Inter:wght@400;500;600;700&display=swap');
 
 :root {
   /* Flächen */
@@ -308,7 +308,6 @@ p { font-size: 1rem; }
 .hero-bg {
   position: absolute;
   inset: 0;
-  background-image: url('image/hero-wald-radio.webp');
   background-size: cover;
   background-position: center;
 }
@@ -1046,8 +1045,6 @@ section {
 @media (max-width: 560px) {
   .hero { min-height: 440px; }
   .hero-inner { padding: 52px 0; }
-  /* Eigenes Hero-Bild fürs Smartphone */
-  .hero-bg { background-image: url('image/hero-mobile.webp'); }
   .tw-grid { grid-template-columns: 1fr; }
   .people-grid { grid-template-columns: 1fr; }
   .prog-stream, .prog-list, .col-card { padding: 24px; }

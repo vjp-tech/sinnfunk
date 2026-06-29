@@ -145,40 +145,35 @@
                      (oder "" — dann erscheint der erste Buchstabe)
        ============================================================ -->
   <script>
-    
-  {
-    name: "Adrian Vogler",
-    kategorie: "Autor",
-    beschreibung: "Historische Detektivromane …",
-    link: "https://adrianvogler.synology.me/",
-    logo: "image/bram-stroker.webp"
-  }
-  // Nächsten Freund hier anfügen ↓
-
-      {
-        name: "Beispiel: Anna Berger",
-        kategorie: "Person",
-        beschreibung: "Meditationslehrerin und Wegbegleiterin, die unsere Idee von Anfang an unterstützt.",
-        link: "#",
-        logo: ""
-      },
-      {
-        name: "Beispiel: Verein für gelebte Achtsamkeit",
-        kategorie: "Verein",
-        beschreibung: "Setzt sich für mehr Stille und Bewusstsein im Alltag ein — ganz ohne Lärm.",
-        link: "#",
-        logo: ""
-      }
-    ];
-
     (function () {
+      const freunde = [
+        {
+          name: "Adrian Vogler",
+          kategorie: "Autor",
+          beschreibung: "Historische Detektivromane in der Tradition von Conan Doyle, Earl Derr Biggers und Robert van Gulik.",
+          link: "https://adrianvogler.synology.me/",
+          logo: "image/bram-stroker.webp"
+        }
+        /* Weiteren Freund hinzufügen: Komma nach }, dann neuer Block:
+        ,{
+          name: "Name",
+          kategorie: "Person",
+          beschreibung: "Kurze Beschreibung.",
+          link: "https://...",
+          logo: "image/dateiname.webp"
+        }
+        */
+      ];
+
       const grid = document.getElementById("fr-grid");
       if (!grid) return;
 
       function esc(str) {
         return String(str || "")
-          .replace(/&/g, "&amp;").replace(/</g, "&lt;")
-          .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+          .replace(/&/g, "&amp;")
+          .replace(/</g, "&lt;")
+          .replace(/>/g, "&gt;")
+          .replace(/"/g, "&quot;");
       }
 
       if (!freunde.length) {
@@ -195,14 +190,14 @@
           ? '<span class="fr-badge">' + esc(f.kategorie) + '</span>'
           : '';
         const link = (f.link && f.link !== "#")
-          ? '<a class="arrow-link" href="' + esc(f.link) + '" target="_blank" rel="noopener">Zur Website →</a>'
+          ? '<a class="arrow-link" href="' + esc(f.link) + '" target="_blank" rel="noopener">Zur Website &#8594;</a>'
           : '';
-        return '<article class="fr-card">' +
-                 '<div class="fr-card-top">' + avatar + badge + '</div>' +
-                 '<h3 class="fr-name">' + esc(f.name) + '</h3>' +
-                 (f.beschreibung ? '<p class="fr-desc">' + esc(f.beschreibung) + '</p>' : '') +
-                 link +
-               '</article>';
+        return '<article class="fr-card">'
+             +   '<div class="fr-card-top">' + avatar + badge + '</div>'
+             +   '<h3 class="fr-name">' + esc(f.name) + '</h3>'
+             +   (f.beschreibung ? '<p class="fr-desc">' + esc(f.beschreibung) + '</p>' : '')
+             +   link
+             + '</article>';
       }).join("");
     })();
   </script>

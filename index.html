@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sinnfunk – Stimmen, die erden</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Hero-Bild – nur für die Startseite. Jede Seite hat ihren eigenen Hero. */
+    .hero-bg { background-image: url('image/hero-wald-radio.webp'); }   /* Desktop + Tablet */
+    @media (max-width: 560px) {
+      .hero-bg { background-image: url('image/hero-mobile.webp'); }     /* Smartphone */
+    }
+  </style>
   <link rel="icon" href="image/icon.webp" type="image/x-icon" />
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -229,8 +236,8 @@
         <!-- Über Sinnfunk -->
         <div class="col-card dark">
           <p class="label">Über Sinnfunk</p>
-          <p>Sinnfunk ist das erste deutschsprachhige Talk-Radio für geerdete Spiritualität.</p>
-          <a class="arrow-link" href="mitmachen.html">Sei dabei →</a>
+          <p>Sinnfunk ist ein unabhängiges Webradio für geerdete Spiritualität. Achtsamkeit, Seelenarbeit und Energetik erwarten dich hier — aber keine Heilsversprechen und keine Aufregerthemen. Stimmen, die erden und nicht aufwühlen.</p>
+          <a class="arrow-link" href="mitmachen.html">Mehr über unsere Idee →</a>
         </div>
 
       </div>
