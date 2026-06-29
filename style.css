@@ -308,6 +308,7 @@ p { font-size: 1rem; }
 .hero-bg {
   position: absolute;
   inset: 0;
+  background-image: url('/image/hero-wald-radio.webp');
   background-size: cover;
   background-position: center;
 }
@@ -1045,6 +1046,11 @@ section {
 @media (max-width: 560px) {
   .hero { min-height: 440px; }
   .hero-inner { padding: 52px 0; }
+<<<<<<< HEAD
+=======
+  /* Eigenes Hero-Bild fürs Smartphone */
+  .hero-bg { background-image: url('/image/hero-mobil.webp'); }
+>>>>>>> 61176740bed7f0e732d7415a9d70aaecfe57a1b6
   .tw-grid { grid-template-columns: 1fr; }
   .people-grid { grid-template-columns: 1fr; }
   .prog-stream, .prog-list, .col-card { padding: 24px; }
