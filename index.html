@@ -5,13 +5,6 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sinnfunk – Stimmen, die erden</title>
   <link rel="stylesheet" href="style.css" />
-  <style>
-    /* Hero-Bild – nur für die Startseite. Jede Seite hat ihren eigenen Hero. */
-    .hero-bg { background-image: url('image/hero-wald-radio.webp'); }   /* Desktop + Tablet */
-    @media (max-width: 560px) {
-      .hero-bg { background-image: url('image/hero-mobile.webp'); }     /* Smartphone */
-    }
-  </style>
   <link rel="icon" href="image/icon.webp" type="image/x-icon" />
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -27,9 +20,9 @@
       <section class="hero">
         <div class="hero-bg"></div>
         <div class="hero-inner">
-          <p class="eyebrow">Sinnfunk. Stimmen, die Erden</p>
-          <h1>Das Sprachradio für deine ganzheitliche Lebenspraxis</h1>
-          <p>Sinnfunk ist ein Raum im Internet für Spiritualität, Energiearbeit und ein Leben im Einklang mit der Natur.</p>
+          <p class="eyebrow">Sinnfunk Webradio</p>
+          <h1>Stimmen,<br>die erden</h1>
+          <p>Ruhige Gespräche über Spiritualität, Energiearbeit, Meditation und ein Leben im Einklang mit der Natur. Kein Lärm, kein Algorithmus.</p>
           <a class="hero-play" href="#player" id="hero-play-btn">
             <span class="hero-play-circle"></span>
             <span id="hero-play-label">Jetzt live hören</span>
@@ -41,16 +34,12 @@
       <div class="impuls">
         <div class="impuls-inner">
           <div>
-          <p class="eyebrow">Warum Sinnfunk?</p>
-<h2>Mein Impuls hinter Sinnfunk</h2>
-
-<p class="impuls-text">Eine ganzheitliche Lebenspraxis bedeutet für mich, geerdet zu sein, sich selbst gegenüber Mitgefühl zu entwickeln und die Werkzeuge zu besitzen, das eigene Leben bewusst zu gestalten. 
-  <b>Dazu braucht es auch digitale Räume der Ruhe.</b> 
-  Mein Webradio soll dieser Ort werden — für Stimmen, die Tiefe statt Aufregung bringen. 
-  Verschwörungserzählungen, Dogmatismus und künstliche erzeugte Empörung finden deshalb bei Sinnfunk kein Gehör.</p>
+            <p class="eyebrow">Warum Sinnfunk?</p>
+            <h2>Spiritualität mit Haltung.</h2>
+            <p class="impuls-text">Ich möchte mit Sinnfunk ein Webradio aufbauen, das eine Heimat für geerdete Spiritualität ist. Wo dich Achtsamkeit, Seelenarbeit und Energetik erwarten — aber nicht Heilsversprechen, Weltverschwörungen und andere Aufregerthemen. Im Kern ist Sinnfunk ein Ort für Stimmen, die erden und nicht aufwühlen.</p>
           </div>
           <div class="impuls-img" role="img" aria-label="Klangschale mit Olivenzweig"
-               style="background-image: url('image/Impuls-Verena.webp');"></div>
+               style="background-image: url('image/Klangschale-Zweig.webp');"></div>
         </div>
       </div>
 
@@ -103,11 +92,11 @@
               <span class="next-time">Abend</span>
               <div>
                 <strong>Gespräche mit Verena</strong>
-                <span>Di, Fr &amp; So — Gute Gespräche zur ganzheitlichen Lebenspraxis.</span>
+                <span>Di, Fr &amp; So — Gäste aus der Welt der Spiritualität.</span>
               </div>
             </div>
           </div>
-          <a class="arrow-link" href="mitmachen.html">Sei dabei! →</a>
+          <a class="arrow-link" href="mitmachen.html">Zum ganzen Programm →</a>
         </div>
 
       </div>
@@ -115,7 +104,11 @@
       <!-- ── Themenwelten ── -->
       <div class="themen" id="themen">
         <p class="eyebrow">Themenwelten</p>
-        <div class="tw-grid">
+        <div class="tw-carousel">
+          <button class="tw-nav tw-nav-prev" id="tw-prev" aria-label="Vorherige Themen" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
+          </button>
+          <div class="tw-grid" id="tw-grid">
 
           <article class="tw-card">
             <div class="tw-img" style="background-image:url('image/steine-karte.webp');">
@@ -189,6 +182,10 @@
             </div>
           </article>
 
+          </div>
+          <button class="tw-nav tw-nav-next" id="tw-next" aria-label="Weitere Themen" type="button">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
+          </button>
         </div>
       </div>
 
@@ -231,7 +228,7 @@
             </span>
             <a href="kontakt.html">
               <strong>Kontakt</strong>
-              <span>Schreib Sinnfunk</span>
+              <span>Schreib uns direkt</span>
             </a>
           </div>
         </div>
@@ -239,10 +236,8 @@
         <!-- Über Sinnfunk -->
         <div class="col-card dark">
           <p class="label">Über Sinnfunk</p>
-          <p>Sinnfunk ist ein unabhängiges Webradio für deine ganzheitliche Lebenspraxis. 
-            Sinnfunk bringt Astrologen, Energetiker, Kräuterpädagogen, Heilpraktiker, Achtsamkeitstrainer und viele andere Personen aus diesem Bereich an einem Ort zusammen.
-          <b>Das Sinnfunk-Ziel: Ein Sprachradio, das erdet.</b></p>
-          <a class="arrow-link" href="mitmachen.html">Sei dabei →</a>
+          <p>Sinnfunk ist ein unabhängiges Webradio für geerdete Spiritualität. Achtsamkeit, Seelenarbeit und Energetik erwarten dich hier — aber keine Heilsversprechen und keine Aufregerthemen. Stimmen, die erden und nicht aufwühlen.</p>
+          <a class="arrow-link" href="mitmachen.html">Mehr über unsere Idee →</a>
         </div>
 
       </div>
@@ -282,8 +277,8 @@
     if (heroBtn && stream) {
       heroBtn.addEventListener("click", function (e) {
         e.preventDefault();
-        const player = document.getElementById("player");
-        if (player) player.scrollIntoView({ behavior: "smooth", block: "center" });
+        const streamCol = document.querySelector(".prog-stream") || document.getElementById("player");
+        if (streamCol) streamCol.scrollIntoView({ behavior: "smooth", block: "start" });
 
         if (stream.paused) {
           setHeroLabel("Stream lädt …");
@@ -306,6 +301,20 @@
       stream.addEventListener("waiting", function () { setHeroLabel("Stream lädt …"); });
       stream.addEventListener("pause",   function () { setHeroLabel("Jetzt live hören"); });
       stream.addEventListener("error",   function () { setHeroLabel("Stream nicht erreichbar"); });
+    }
+
+    // Themenwelten-Karussell: Pfeile scrollen um eine Kartenbreite
+    const twGrid = document.getElementById("tw-grid");
+    const twPrev = document.getElementById("tw-prev");
+    const twNext = document.getElementById("tw-next");
+    if (twGrid && twPrev && twNext) {
+      function scrollByCard(dir) {
+        const card = twGrid.querySelector(".tw-card");
+        const step = card ? card.getBoundingClientRect().width + 20 : 300;
+        twGrid.scrollBy({ left: dir * step, behavior: "smooth" });
+      }
+      twPrev.addEventListener("click", function () { scrollByCard(-1); });
+      twNext.addEventListener("click", function () { scrollByCard(1); });
     }
   </script>
 

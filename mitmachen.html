@@ -239,19 +239,31 @@
       width: min(1180px, calc(100% - 40px));
       margin: 0 auto; padding: 0 0 72px;
     }
-    .sf-what-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; margin-top: 28px; }
-    .sf-what-card { padding: 28px; border-radius: var(--radius); }
+    /* Modular dank CSS-Columns: jede Karte ist nur so hoch wie ihr Inhalt,
+       statt sich auf Grid-Zeilenhöhe zu strecken. */
+    .sf-what-grid {
+      columns: 2;
+      column-gap: 16px;
+      margin-top: 28px;
+    }
+    .sf-what-card {
+      padding: 28px;
+      border-radius: var(--radius);
+      break-inside: avoid;
+      margin-bottom: 16px;
+      display: inline-block;
+      width: 100%;
+    }
     .sf-what-card .sf-icon-circle.sm { margin-bottom: 14px; }
     .sf-what-card strong { display: block; font-size: 1.1rem; margin-bottom: 10px; color: var(--ink); font-family: var(--font-display); font-weight: 600; }
     .sf-what-card p { font-family: var(--font-body); font-size: 0.92rem; color: var(--muted); line-height: 1.65; margin: 0 0 8px; }
     .sf-what-card p:last-child { margin-bottom: 0; }
     .sf-what-card.full {
-      grid-column: 1 / -1;
       background: var(--paper-warm) !important;
       border-color: var(--line) !important;
-      text-align: center; display: flex; flex-direction: column; align-items: center;
+      text-align: center;
     }
-    .sf-what-card.full p { max-width: 60ch; }
+    .sf-what-card.full p { max-width: 60ch; margin-left: auto; margin-right: auto; }
 
     /* ── KONTAKT ── */
     .sf-contact {
@@ -285,7 +297,6 @@
       .sf-hero-grid,
       .sf-eigene-inner,
       .sf-two-cards,
-      .sf-what-grid,
       .sf-contact-inner { grid-template-columns: 1fr; }
 
       .sf-hero-image {
@@ -293,14 +304,24 @@
         margin-bottom: 28px;
       }
       .sf-slots-grid { grid-template-columns: 1fr 1fr; }
-      .sf-what-card.full { grid-column: 1; }
       .sf-contact-img { min-height: 260px; max-height: 360px; }
+    }
+
+    @media (max-width: 700px) {
+      .sf-what-grid { columns: 1; }
     }
 
     @media (max-width: 600px) {
       .sf-hero { padding: 24px 0 40px; }
-      .sf-hero-image { min-height: 240px; max-height: 320px; }
-      .sf-sendestart { padding: 14px 16px; gap: 10px; }
+      .sf-hero-image { min-height: 360px; max-height: 460px; }
+      /* Banner unter das Bild statt darüber zu kleben – Bild bleibt sichtbar */
+      .sf-sendestart {
+        position: static;
+        margin-top: 14px;
+        border-radius: var(--radius-sm);
+        padding: 14px 16px;
+        gap: 10px;
+      }
       .sf-eigene-container { padding: 24px 20px; }
       .sf-eigene-wrap, .sf-talk-wrap,
       .sf-program-wrap, .sf-what-wrap,
@@ -460,10 +481,10 @@
           <div class="sf-price-box-inline">
             <span class="pbadge">Aktionspreis</span>
             <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:4px">
-              <span class="sf-price-strike">75 € / Stunde</span>
-              <span class="sf-price-big">25 € / Stunde</span>
+              <span class="sf-price-strike">300 € / Gesprächspaket</span>
+              <span class="sf-price-big">100 € / Gesprächspaket</span>
             </div>
-            <span class="sf-price-sub">Aktionspreis gilt bis 31. Dezember 2026
+            <span class="sf-price-sub">Aktionspreis gilt bis 31. Dezember 2026</span>
           </div>
         </div>
 

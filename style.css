@@ -394,7 +394,7 @@ p { font-size: 1rem; }
 .impuls-inner {
   width: min(1180px, calc(100% - 40px));
   margin: 0 auto;
-  padding: 72px 0;
+  padding: 56px 0;
   display: grid;
   grid-template-columns: 1.25fr 0.75fr;
   gap: 48px;
@@ -427,7 +427,7 @@ p { font-size: 1rem; }
 .programm {
   width: min(1180px, calc(100% - 40px));
   margin: 0 auto;
-  padding: 80px 0;
+  padding: 64px 0 16px;
   display: grid;
   grid-template-columns: 1fr 0.8fr 1fr;
   gap: 24px;
@@ -467,19 +467,18 @@ p { font-size: 1rem; }
 .prog-stream audio { width: 100%; margin: 6px 0 18px; }
 .prog-stream .now-playing { margin-top: auto; }
 
-/* Bild-Spalte */ 
-.prog-image { 
-  padding: 0; 
-  overflow: hidden; 
-  min-height: 300px; 
-  } 
-
-  .prog-image img { 
-    width: 100%; 
-    height: 100%; 
-    object-fit: cover; 
-    display: block; 
-  }
+/* Bild-Spalte */
+.prog-image {
+  padding: 0;
+  overflow: hidden;
+  min-height: 300px;
+}
+.prog-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
 
 /* Sendungen-Spalte */
 .prog-list {
@@ -527,18 +526,66 @@ p { font-size: 1rem; }
   color: var(--muted);
 }
 
-/* ── Themenwelten ── */
+/* ── Themenwelten – Karussell ── */
 .themen {
   width: min(1180px, calc(100% - 40px));
   margin: 0 auto;
-  padding: 96px 0 80px;
+  padding: 72px 0 64px;
 }
 .themen .eyebrow { margin-bottom: 26px; }
+
+.tw-carousel {
+  position: relative;
+}
+
 .tw-grid {
   display: grid;
-  grid-template-columns: repeat(3, 1fr);
+  grid-auto-flow: column;
+  grid-auto-columns: minmax(260px, 320px);
   gap: 20px;
+  overflow-x: auto;
+  scroll-snap-type: x mandatory;
+  scroll-padding-left: 4px;
+  padding-bottom: 6px;
+  margin-bottom: -6px;
+  /* Scrollbar dezent, aber sichtbar genug zur Orientierung */
+  scrollbar-width: thin;
+  scrollbar-color: var(--line) transparent;
 }
+.tw-grid::-webkit-scrollbar { height: 6px; }
+.tw-grid::-webkit-scrollbar-track { background: transparent; }
+.tw-grid::-webkit-scrollbar-thumb { background: var(--line); border-radius: 999px; }
+
+.tw-card {
+  scroll-snap-align: start;
+}
+
+.tw-nav {
+  display: none;
+  align-items: center;
+  justify-content: center;
+  width: 42px;
+  height: 42px;
+  border-radius: 50%;
+  border: 1px solid var(--line);
+  background: var(--paper);
+  color: var(--gold-deep);
+  cursor: pointer;
+  transition: background 0.2s, box-shadow 0.2s;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  z-index: 3;
+}
+.tw-nav:hover { background: rgba(168,148,92,0.1); box-shadow: var(--shadow); }
+.tw-nav svg { width: 18px; height: 18px; }
+.tw-nav-prev { left: -21px; }
+.tw-nav-next { right: -21px; }
+
+@media (min-width: 1240px) {
+  .tw-nav { display: flex; }
+}
+
 .tw-card {
   background: var(--paper);
   border: 1px solid var(--line);
@@ -590,7 +637,7 @@ p { font-size: 1rem; }
 .bottom-grid {
   width: min(1180px, calc(100% - 40px));
   margin: 0 auto;
-  padding: 80px 0 100px;
+  padding: 24px 0 80px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 24px;
@@ -1038,22 +1085,22 @@ section {
 @media (max-width: 760px) {
   .programm { grid-template-columns: 1fr; }
   .prog-image { grid-row: auto; min-height: 220px; }
-  .tw-grid { grid-template-columns: repeat(2, 1fr); }
+  .tw-grid { grid-auto-columns: minmax(240px, 78%); }
   .cards, .steps, .program-strip { grid-template-columns: 1fr; }
   .hero-inner { padding: 64px 0; }
   h1 { font-size: clamp(2.6rem, 9vw, 3.6rem); }
 }
 
-@media (max-width: 560px) { 
-  .hero { min-height: 440px; } 
-  .hero-inner { padding: 52px 0; } 
-  
-  /* Eigenes Hero-Bild fürs Smartphone */ 
-  .hero-bg { background-image: url('/image/hero-mobil.webp'); } 
-  .tw-grid { grid-template-columns: 1fr; } 
-  .people-grid { grid-template-columns: 1fr; } 
-  .prog-stream, .prog-list, .col-card { padding: 24px; } 
-  .impuls-inner { padding: 44px 0; } 
-  .sf-footer-inner { flex-direction: column; align-items: flex-start; } 
-  .sf-footer-nav { gap: 16px; } 
-  .ep-dur { display: none; } }
+@media (max-width: 560px) {
+  .hero { min-height: 440px; }
+  .hero-inner { padding: 52px 0; }
+  /* Eigenes Hero-Bild fürs Smartphone */
+  .hero-bg { background-image: url('/image/hero-mobil.webp'); }
+  .tw-grid { grid-auto-columns: minmax(220px, 86%); }
+  .people-grid { grid-template-columns: 1fr; }
+  .prog-stream, .prog-list, .col-card { padding: 24px; }
+  .impuls-inner { padding: 44px 0; }
+  .sf-footer-inner { flex-direction: column; align-items: flex-start; }
+  .sf-footer-nav { gap: 16px; }
+  .ep-dur { display: none; }
+}
