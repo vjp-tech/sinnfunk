@@ -122,7 +122,7 @@ p { font-size: 1rem; }
 .button:hover { background: var(--forest-soft); }
 
 .button.secondary {
-  background: transparent;
+  background: #a8945c;
   color: var(--ink);
   border: 1px solid var(--line);
 }
