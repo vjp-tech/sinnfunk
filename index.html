@@ -5,6 +5,13 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Sinnfunk – Stimmen, die erden</title>
   <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Hero-Bild – nur für die Startseite. Jede Seite hat ihren eigenen Hero. */
+    .hero-bg { background-image: url('image/hero-wald-radio.webp'); }   /* Desktop + Tablet */
+    @media (max-width: 560px) {
+      .hero-bg { background-image: url('image/hero-mobile.webp'); }     /* Smartphone */
+    }
+  </style>
   <link rel="icon" href="image/icon.webp" type="image/x-icon" />
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
@@ -20,9 +27,9 @@
       <section class="hero">
         <div class="hero-bg"></div>
         <div class="hero-inner">
-          <p class="eyebrow">Sinnfunk Webradio</p>
-          <h1>Stimmen,<br>die erden</h1>
-          <p>Ruhige Gespräche über Spiritualität, Energiearbeit, Meditation und ein Leben im Einklang mit der Natur. Kein Lärm, kein Algorithmus.</p>
+          <p class="eyebrow">Sinnfunk. Stimmen, die Erden</p>
+          <h1>Das Sprachradio für deine ganzheitliche Lebenspraxis</h1>
+          <p>Sinnfunk ist ein Raum im Internet für Spiritualität, Energiearbeit und ein Leben im Einklang mit der Natur.</p>
           <a class="hero-play" href="#player" id="hero-play-btn">
             <span class="hero-play-circle"></span>
             <span id="hero-play-label">Jetzt live hören</span>
@@ -34,25 +41,34 @@
       <div class="impuls">
         <div class="impuls-inner">
           <div>
-            <p class="eyebrow">Warum Sinnfunk?</p>
-            <h2>Spiritualität mit Haltung.</h2>
-            <p class="impuls-text">Ich möchte mit Sinnfunk ein Webradio aufbauen, das eine Heimat für geerdete Spiritualität ist. Wo dich Achtsamkeit, Seelenarbeit und Energetik erwarten — aber nicht Heilsversprechen, Weltverschwörungen und andere Aufregerthemen. Im Kern ist Sinnfunk ein Ort für Stimmen, die erden und nicht aufwühlen.</p>
+          <p class="eyebrow">Warum Sinnfunk?</p>
+<h2>Mein Impuls hinter Sinnfunk</h2>
+
+<p class="impuls-text">Eine ganzheitliche Lebenspraxis bedeutet für mich, geerdet zu sein, sich selbst gegenüber Mitgefühl zu entwickeln und die Werkzeuge zu besitzen, das eigene Leben bewusst zu gestalten. 
+  <b>Dazu braucht es auch digitale Räume der Ruhe.</b> Mein Webradio soll dieser Ort werden — für Stimmen, die Tiefe statt Aufregung bringen. 
+  Verschwörungserzählungen, Dogmatismus und künstliche erzeugte Empörung finden deshalb bei Sinnfunk kein Gehör.</p>
           </div>
           <div class="impuls-img" role="img" aria-label="Klangschale mit Olivenzweig"
-               style="background-image: url('image/Klangschale-Zweig.webp');"></div>
+               style="background-image: url('image/Impuls-Verena.webp');"></div>
         </div>
       </div>
 
       <!-- ── Programm: Stream | Bild | Sendungen ── -->
       <div class="programm" id="player">
 
-        <!-- Links: Live-Stream -->
-        <div class="prog-col prog-stream">
+        <!-- Links: Live-Stream, zentriert mit Visualizer -->
+        <div class="prog-col prog-stream" id="prog-stream">
           <p class="label">Live-Stream</p>
           <div class="prog-stream-head">
             <h3>Unser Stream</h3>
             <span class="live-badge">On Air</span>
           </div>
+
+          <div class="tw-visualizer" aria-hidden="true">
+            <span></span><span></span><span></span><span></span><span></span><span></span>
+            <span></span><span></span><span></span><span></span><span></span><span></span>
+          </div>
+
           <audio id="sf-stream" controls preload="none">
             <source src="https://radio.sinnfunk.live/listen/sinnfunk/radio.mp3" type="audio/mpeg" />
             Dein Browser unterstützt den Audioplayer leider nicht.
@@ -92,97 +108,175 @@
               <span class="next-time">Abend</span>
               <div>
                 <strong>Gespräche mit Verena</strong>
-                <span>Di, Fr &amp; So — Gäste aus der Welt der Spiritualität.</span>
+                <span>Di, Fr &amp; So — Gute Gespräche zur ganzheitlichen Lebenspraxis.</span>
               </div>
             </div>
           </div>
-          <a class="arrow-link" href="mitmachen.html">Zum ganzen Programm →</a>
+          <a class="arrow-link" href="mitmachen.html">Sei dabei! →</a>
         </div>
 
       </div>
 
-      <!-- ── Themenwelten ── -->
+      <!-- ── Themenwelten – Endlos-Karussell ── -->
       <div class="themen" id="themen">
         <p class="eyebrow">Themenwelten</p>
-        <div class="tw-carousel">
+        <div class="tw-carousel" id="tw-carousel">
           <button class="tw-nav tw-nav-prev" id="tw-prev" aria-label="Vorherige Themen" type="button">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
           </button>
-          <div class="tw-grid" id="tw-grid">
 
-          <article class="tw-card">
-            <div class="tw-img" style="background-image:url('image/steine-karte.webp');">
-              <span class="tw-badge">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.2"/></svg>
-              </span>
-            </div>
-            <div class="tw-body">
-              <h3>Spiritualität</h3>
-              <p>Vom Suchen, Staunen und Innehalten — jenseits von Dogma und Schublade.</p>
-            </div>
-          </article>
+          <div class="tw-track" id="tw-track">
 
-          <article class="tw-card">
-            <div class="tw-img" style="background-image:url('image/massage-karte.webp');">
-              <span class="tw-badge">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg>
-              </span>
-            </div>
-            <div class="tw-body">
-              <h3>Energiearbeit</h3>
-              <p>Was dich stärkt und wieder ins Gleichgewicht bringt. Praktiker erzählen aus ihrer Arbeit.</p>
-            </div>
-          </article>
+            <!-- Originalkarten -->
+            <article class="tw-card">
+              <div class="tw-img" style="background-image:url('image/steine-karte.webp');">
+                <span class="tw-badge">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.2"/></svg>
+                </span>
+              </div>
+              <div class="tw-body">
+                <h3>Spiritualität</h3>
+                <p>Vom Suchen, Staunen und Innehalten — jenseits von Dogma und Schublade.</p>
+              </div>
+            </article>
 
-          <article class="tw-card">
-            <div class="tw-img" style="background-image:url('image/yoga-karte.webp');">
-              <span class="tw-badge">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="5.5" r="2"/><path d="M5 21l3-7 4-2 4 2 3 7M8 11h8"/></svg>
-              </span>
-            </div>
-            <div class="tw-body">
-              <h3>Meditation &amp; Yoga</h3>
-              <p>Zur Ruhe kommen, im Atem ankommen. Geführte Einblicke für den Alltag.</p>
-            </div>
-          </article>
+            <article class="tw-card">
+              <div class="tw-img" style="background-image:url('image/massage-karte.webp');">
+                <span class="tw-badge">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg>
+                </span>
+              </div>
+              <div class="tw-body">
+                <h3>Energiearbeit</h3>
+                <p>Was dich stärkt und wieder ins Gleichgewicht bringt. Praktiker erzählen aus ihrer Arbeit.</p>
+              </div>
+            </article>
 
-          <article class="tw-card">
-            <div class="tw-img" style="background-image:url('image/kamille-karte.webp');">
-              <span class="tw-badge">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="2.5"/><path d="M12 2v6M12 16v6M2 12h6M16 12h6M5 5l4 4M15 15l4 4M19 5l-4 4M9 15l-4 4"/></svg>
-              </span>
-            </div>
-            <div class="tw-body">
-              <h3>Heilpraktik</h3>
-              <p>Naturheilkunde und ganzheitliche Begleitung — mit Offenheit, ohne Absolutheitsanspruch.</p>
-            </div>
-          </article>
+            <article class="tw-card">
+              <div class="tw-img" style="background-image:url('image/yoga-karte.webp');">
+                <span class="tw-badge">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="5.5" r="2"/><path d="M5 21l3-7 4-2 4 2 3 7M8 11h8"/></svg>
+                </span>
+              </div>
+              <div class="tw-body">
+                <h3>Meditation &amp; Yoga</h3>
+                <p>Zur Ruhe kommen, im Atem ankommen. Geführte Einblicke für den Alltag.</p>
+              </div>
+            </article>
 
-          <article class="tw-card">
-            <div class="tw-img" style="background-image:url('image/wald-karte.webp');">
-              <span class="tw-badge">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22V8M12 8L7 13M12 8l5 5M12 2C9 5 9 8 12 8s3-3 0-6z"/></svg>
-              </span>
-            </div>
-            <div class="tw-body">
-              <h3>Natur &amp; Kräuter</h3>
-              <p>Wildpflanzen, Jahreskreis, altes Wissen. Die Natur als Lehrerin — für alle, die ihr zuhören.</p>
-            </div>
-          </article>
+            <article class="tw-card">
+              <div class="tw-img" style="background-image:url('image/kamille-karte.webp');">
+                <span class="tw-badge">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="2.5"/><path d="M12 2v6M12 16v6M2 12h6M16 12h6M5 5l4 4M15 15l4 4M19 5l-4 4M9 15l-4 4"/></svg>
+                </span>
+              </div>
+              <div class="tw-body">
+                <h3>Heilpraktik</h3>
+                <p>Naturheilkunde und ganzheitliche Begleitung — mit Offenheit, ohne Absolutheitsanspruch.</p>
+              </div>
+            </article>
 
-          <article class="tw-card">
-            <div class="tw-img" style="background-image:url('image/berge-karte.webp');">
-              <span class="tw-badge">
-                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 20l6-12 4 7 2-3 6 8z"/></svg>
-              </span>
+            <article class="tw-card">
+              <div class="tw-img" style="background-image:url('image/wald-karte.webp');">
+                <span class="tw-badge">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22V8M12 8L7 13M12 8l5 5M12 2C9 5 9 8 12 8s3-3 0-6z"/></svg>
+                </span>
+              </div>
+              <div class="tw-body">
+                <h3>Natur &amp; Kräuter</h3>
+                <p>Wildpflanzen, Jahreskreis, altes Wissen. Die Natur als Lehrerin — für alle, die ihr zuhören.</p>
+              </div>
+            </article>
+
+            <article class="tw-card">
+              <div class="tw-img" style="background-image:url('image/berge-karte.webp');">
+                <span class="tw-badge">
+                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 20l6-12 4 7 2-3 6 8z"/></svg>
+                </span>
+              </div>
+              <div class="tw-body">
+                <h3>Achtsamkeit</h3>
+                <p>Bewusster leben, langsamer werden. Praktische Wege zu mehr Stille im Alltag.</p>
+              </div>
+            </article>
+
+            <!-- Duplikat der Karten für den nahtlosen Endlos-Loop (aria-hidden, damit Screenreader sie ignorieren) -->
+            <div aria-hidden="true" style="display:contents;">
+              <article class="tw-card">
+                <div class="tw-img" style="background-image:url('image/steine-karte.webp');">
+                  <span class="tw-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.2"/></svg>
+                  </span>
+                </div>
+                <div class="tw-body">
+                  <h3>Spiritualität</h3>
+                  <p>Vom Suchen, Staunen und Innehalten — jenseits von Dogma und Schublade.</p>
+                </div>
+              </article>
+
+              <article class="tw-card">
+                <div class="tw-img" style="background-image:url('image/massage-karte.webp');">
+                  <span class="tw-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg>
+                  </span>
+                </div>
+                <div class="tw-body">
+                  <h3>Energiearbeit</h3>
+                  <p>Was dich stärkt und wieder ins Gleichgewicht bringt. Praktiker erzählen aus ihrer Arbeit.</p>
+                </div>
+              </article>
+
+              <article class="tw-card">
+                <div class="tw-img" style="background-image:url('image/yoga-karte.webp');">
+                  <span class="tw-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="5.5" r="2"/><path d="M5 21l3-7 4-2 4 2 3 7M8 11h8"/></svg>
+                  </span>
+                </div>
+                <div class="tw-body">
+                  <h3>Meditation &amp; Yoga</h3>
+                  <p>Zur Ruhe kommen, im Atem ankommen. Geführte Einblicke für den Alltag.</p>
+                </div>
+              </article>
+
+              <article class="tw-card">
+                <div class="tw-img" style="background-image:url('image/kamille-karte.webp');">
+                  <span class="tw-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="2.5"/><path d="M12 2v6M12 16v6M2 12h6M16 12h6M5 5l4 4M15 15l4 4M19 5l-4 4M9 15l-4 4"/></svg>
+                  </span>
+                </div>
+                <div class="tw-body">
+                  <h3>Heilpraktik</h3>
+                  <p>Naturheilkunde und ganzheitliche Begleitung — mit Offenheit, ohne Absolutheitsanspruch.</p>
+                </div>
+              </article>
+
+              <article class="tw-card">
+                <div class="tw-img" style="background-image:url('image/wald-karte.webp');">
+                  <span class="tw-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22V8M12 8L7 13M12 8l5 5M12 2C9 5 9 8 12 8s3-3 0-6z"/></svg>
+                  </span>
+                </div>
+                <div class="tw-body">
+                  <h3>Natur &amp; Kräuter</h3>
+                  <p>Wildpflanzen, Jahreskreis, altes Wissen. Die Natur als Lehrerin — für alle, die ihr zuhören.</p>
+                </div>
+              </article>
+
+              <article class="tw-card">
+                <div class="tw-img" style="background-image:url('image/berge-karte.webp');">
+                  <span class="tw-badge">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 20l6-12 4 7 2-3 6 8z"/></svg>
+                  </span>
+                </div>
+                <div class="tw-body">
+                  <h3>Achtsamkeit</h3>
+                  <p>Bewusster leben, langsamer werden. Praktische Wege zu mehr Stille im Alltag.</p>
+                </div>
+              </article>
             </div>
-            <div class="tw-body">
-              <h3>Achtsamkeit</h3>
-              <p>Bewusster leben, langsamer werden. Praktische Wege zu mehr Stille im Alltag.</p>
-            </div>
-          </article>
 
           </div>
+
           <button class="tw-nav tw-nav-next" id="tw-next" aria-label="Weitere Themen" type="button">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
           </button>
@@ -228,7 +322,7 @@
             </span>
             <a href="kontakt.html">
               <strong>Kontakt</strong>
-              <span>Schreib uns direkt</span>
+              <span>Schreib Sinnfunk</span>
             </a>
           </div>
         </div>
@@ -236,8 +330,10 @@
         <!-- Über Sinnfunk -->
         <div class="col-card dark">
           <p class="label">Über Sinnfunk</p>
-          <p>Sinnfunk ist ein unabhängiges Webradio für geerdete Spiritualität. Achtsamkeit, Seelenarbeit und Energetik erwarten dich hier — aber keine Heilsversprechen und keine Aufregerthemen. Stimmen, die erden und nicht aufwühlen.</p>
-          <a class="arrow-link" href="mitmachen.html">Mehr über unsere Idee →</a>
+          <p>Sinnfunk ist ein unabhängiges Webradio für deine ganzheitliche Lebenspraxis. 
+            Sinnfunk bringt Astrologen, Energetiker, Kräuterpädagogen, Heilpraktiker, Achtsamkeitstrainer und viele andere Personen aus diesem Bereich an einem Ort zusammen.
+          <b>Das Sinnfunk-Ziel: Ein Sprachradio, das erdet.</b></p>
+          <a class="arrow-link" href="mitmachen.html">Sei dabei →</a>
         </div>
 
       </div>
@@ -269,6 +365,7 @@
     const heroBtn   = document.getElementById("hero-play-btn");
     const heroLabel = document.getElementById("hero-play-label");
     const stream    = document.getElementById("sf-stream");
+    const streamCard = document.getElementById("prog-stream");
 
     function setHeroLabel(text) {
       if (heroLabel) heroLabel.textContent = text;
@@ -297,24 +394,55 @@
       });
 
       // Button-Text mit dem echten Player-Zustand synchron halten
-      stream.addEventListener("playing", function () { setHeroLabel("Stream läuft – pausieren"); });
+      stream.addEventListener("playing", function () {
+        setHeroLabel("Stream läuft – pausieren");
+        if (streamCard) streamCard.classList.add("is-playing");
+      });
       stream.addEventListener("waiting", function () { setHeroLabel("Stream lädt …"); });
-      stream.addEventListener("pause",   function () { setHeroLabel("Jetzt live hören"); });
-      stream.addEventListener("error",   function () { setHeroLabel("Stream nicht erreichbar"); });
+      stream.addEventListener("pause",   function () {
+        setHeroLabel("Jetzt live hören");
+        if (streamCard) streamCard.classList.remove("is-playing");
+      });
+      stream.addEventListener("error",   function () {
+        setHeroLabel("Stream nicht erreichbar");
+        if (streamCard) streamCard.classList.remove("is-playing");
+      });
     }
 
-    // Themenwelten-Karussell: Pfeile scrollen um eine Kartenbreite
-    const twGrid = document.getElementById("tw-grid");
+    // Themenwelten-Karussell: Pfeile pausieren den Auto-Loop kurz und springen manuell
+    const twCarousel = document.getElementById("tw-carousel");
+    const twTrack = document.getElementById("tw-track");
     const twPrev = document.getElementById("tw-prev");
     const twNext = document.getElementById("tw-next");
-    if (twGrid && twPrev && twNext) {
-      function scrollByCard(dir) {
-        const card = twGrid.querySelector(".tw-card");
-        const step = card ? card.getBoundingClientRect().width + 20 : 300;
-        twGrid.scrollBy({ left: dir * step, behavior: "smooth" });
+
+    if (twCarousel && twTrack && twPrev && twNext) {
+      let resumeTimer = null;
+
+      function pauseThenResume() {
+        twCarousel.classList.add("tw-paused");
+        clearTimeout(resumeTimer);
+        resumeTimer = setTimeout(function () {
+          twCarousel.classList.remove("tw-paused");
+        }, 4000);
       }
-      twPrev.addEventListener("click", function () { scrollByCard(-1); });
-      twNext.addEventListener("click", function () { scrollByCard(1); });
+
+      function nudge(dir) {
+        pauseThenResume();
+        const card = twTrack.querySelector(".tw-card");
+        const step = card ? card.getBoundingClientRect().width + 20 : 320;
+        const style = getComputedStyle(twTrack);
+        const matrix = new DOMMatrixReadOnly(style.transform);
+        const current = matrix.m41; // aktuelle X-Verschiebung durch die Animation
+        twTrack.style.animationPlayState = "paused";
+        twTrack.style.transform = "translateX(" + (current - dir * step) + "px)";
+        // Nach der manuellen Verschiebung die Animation von dort fortsetzen lassen
+        setTimeout(function () {
+          twTrack.style.transition = "transform 0.4s ease";
+        }, 10);
+      }
+
+      twPrev.addEventListener("click", function () { nudge(-1); });
+      twNext.addEventListener("click", function () { nudge(1); });
     }
   </script>
 

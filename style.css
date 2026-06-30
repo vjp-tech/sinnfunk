@@ -427,7 +427,7 @@ p { font-size: 1rem; }
 .programm {
   width: min(1180px, calc(100% - 40px));
   margin: 0 auto;
-  padding: 64px 0 16px;
+  padding: 80px 0 32px;
   display: grid;
   grid-template-columns: 1fr 0.8fr 1fr;
   gap: 24px;
@@ -451,21 +451,67 @@ p { font-size: 1rem; }
   margin-bottom: 16px;
 }
 
-/* Stream-Spalte */
+/* Stream-Spalte – zentriert, mit Visualizer */
 .prog-stream {
   background: var(--paper);
   padding: 30px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
 }
 .prog-stream-head {
   display: flex;
-  justify-content: space-between;
+  flex-direction: column;
   align-items: center;
-  gap: 14px;
-  margin-bottom: 16px;
+  gap: 10px;
+  margin-bottom: 6px;
 }
 .prog-stream-head h3 { font-size: 1.55rem; margin-bottom: 0; }
-.prog-stream audio { width: 100%; margin: 6px 0 18px; }
-.prog-stream .now-playing { margin-top: auto; }
+
+/* Dekorative Wellenform – reagiert nicht auf echtes Audio, rein gestalterisch */
+.tw-visualizer {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  gap: 4px;
+  height: 44px;
+  margin: 14px 0 18px;
+}
+.tw-visualizer span {
+  display: block;
+  width: 4px;
+  border-radius: 999px;
+  background: var(--gold);
+  opacity: 0.75;
+  animation: tw-bar 1.2s ease-in-out infinite;
+}
+.tw-visualizer span:nth-child(1)  { height: 30%; animation-delay: -1.1s; }
+.tw-visualizer span:nth-child(2)  { height: 60%; animation-delay: -0.9s; }
+.tw-visualizer span:nth-child(3)  { height: 90%; animation-delay: -0.7s; }
+.tw-visualizer span:nth-child(4)  { height: 45%; animation-delay: -1.3s; }
+.tw-visualizer span:nth-child(5)  { height: 75%; animation-delay: -0.4s; }
+.tw-visualizer span:nth-child(6)  { height: 100%; animation-delay: -0.6s; }
+.tw-visualizer span:nth-child(7)  { height: 55%; animation-delay: -1.0s; }
+.tw-visualizer span:nth-child(8)  { height: 80%; animation-delay: -0.2s; }
+.tw-visualizer span:nth-child(9)  { height: 35%; animation-delay: -0.8s; }
+.tw-visualizer span:nth-child(10) { height: 65%; animation-delay: -1.2s; }
+.tw-visualizer span:nth-child(11) { height: 40%; animation-delay: -0.5s; }
+.tw-visualizer span:nth-child(12) { height: 70%; animation-delay: -0.3s; }
+
+@keyframes tw-bar {
+  0%, 100% { transform: scaleY(0.35); }
+  50%      { transform: scaleY(1); }
+}
+
+/* Pausiert die Animation, solange der Stream nicht abgespielt wird */
+.prog-stream:not(.is-playing) .tw-visualizer span {
+  animation-play-state: paused;
+  opacity: 0.35;
+}
+
+.prog-stream audio { width: 100%; max-width: 380px; margin: 6px 0 18px; }
+.prog-stream .now-playing { margin-top: auto; width: 100%; max-width: 380px; }
 
 /* Bild-Spalte */
 .prog-image {
@@ -526,38 +572,42 @@ p { font-size: 1rem; }
   color: var(--muted);
 }
 
-/* ── Themenwelten – Karussell ── */
+/* ── Themenwelten – Endlos-Karussell ── */
 .themen {
   width: min(1180px, calc(100% - 40px));
   margin: 0 auto;
-  padding: 72px 0 64px;
+  padding: 88px 0 80px;
 }
 .themen .eyebrow { margin-bottom: 26px; }
 
 .tw-carousel {
   position: relative;
+  overflow: hidden;
+  /* Sanftes Ausblenden an den Rändern, damit der Loop nicht hart abschneidet */
+  -webkit-mask-image: linear-gradient(to right, transparent 0, #000 40px, #000 calc(100% - 40px), transparent 100%);
+  mask-image: linear-gradient(to right, transparent 0, #000 40px, #000 calc(100% - 40px), transparent 100%);
 }
 
-.tw-grid {
-  display: grid;
-  grid-auto-flow: column;
-  grid-auto-columns: minmax(260px, 320px);
+.tw-track {
+  display: flex;
   gap: 20px;
-  overflow-x: auto;
-  scroll-snap-type: x mandatory;
-  scroll-padding-left: 4px;
-  padding-bottom: 6px;
-  margin-bottom: -6px;
-  /* Scrollbar dezent, aber sichtbar genug zur Orientierung */
-  scrollbar-width: thin;
-  scrollbar-color: var(--line) transparent;
+  width: max-content;
+  animation: tw-scroll 38s linear infinite;
 }
-.tw-grid::-webkit-scrollbar { height: 6px; }
-.tw-grid::-webkit-scrollbar-track { background: transparent; }
-.tw-grid::-webkit-scrollbar-thumb { background: var(--line); border-radius: 999px; }
+
+.tw-carousel:hover .tw-track,
+.tw-carousel.tw-paused .tw-track {
+  animation-play-state: paused;
+}
+
+@keyframes tw-scroll {
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); } /* Karten sind 1x dupliziert -> exakt die Hälfte */
+}
 
 .tw-card {
-  scroll-snap-align: start;
+  flex: 0 0 300px;
+  width: 300px;
 }
 
 .tw-nav {
@@ -637,7 +687,7 @@ p { font-size: 1rem; }
 .bottom-grid {
   width: min(1180px, calc(100% - 40px));
   margin: 0 auto;
-  padding: 24px 0 80px;
+  padding: 40px 0 88px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 24px;
@@ -1085,7 +1135,8 @@ section {
 @media (max-width: 760px) {
   .programm { grid-template-columns: 1fr; }
   .prog-image { grid-row: auto; min-height: 220px; }
-  .tw-grid { grid-auto-columns: minmax(240px, 78%); }
+  .tw-card { flex: 0 0 240px; width: 240px; }
+  .tw-track { animation-duration: 28s; }
   .cards, .steps, .program-strip { grid-template-columns: 1fr; }
   .hero-inner { padding: 64px 0; }
   h1 { font-size: clamp(2.6rem, 9vw, 3.6rem); }
@@ -1096,7 +1147,8 @@ section {
   .hero-inner { padding: 52px 0; }
   /* Eigenes Hero-Bild fürs Smartphone */
   .hero-bg { background-image: url('/image/hero-mobil.webp'); }
-  .tw-grid { grid-auto-columns: minmax(220px, 86%); }
+  .tw-card { flex: 0 0 210px; width: 210px; }
+  .tw-track { animation-duration: 22s; }
   .people-grid { grid-template-columns: 1fr; }
   .prog-stream, .prog-list, .col-card { padding: 24px; }
   .impuls-inner { padding: 44px 0; }
