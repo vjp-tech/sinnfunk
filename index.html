@@ -365,20 +365,25 @@
   </div>
 
   <script>
-    const playlist = [
-      { title: "Sinnfunk: Keine Werbung. Keine Wut.", host: "Sinnfunk" },
-      { title: "Ab August 2026 beginnt das reguläre Sendeprogramm", host: "Sinnfunk" },
-      { title: "Ein Webradio für gute Gespräche und ohne Lärm", host: "Sinnfunk" }
-    ];
-    let currentIndex = 0;
-    const titleEl = document.getElementById("current-title");
+const titleEl = document.getElementById("current-title");
     const hostEl  = document.getElementById("current-host");
-    function updateNowPlaying() {
-      currentIndex = (currentIndex + 1) % playlist.length;
-      titleEl.textContent = playlist[currentIndex].title;
-      hostEl.textContent  = playlist[currentIndex].host;
+
+    async function updateNowPlaying() {
+      try {
+        const res  = await fetch("https://radio.sinnfunk.live/api/nowplaying/sinnfunk");
+        const data = await res.json();
+        const song = data.now_playing && data.now_playing.song;
+        if (song) {
+          titleEl.textContent = song.title  || "Sinnfunk";
+          hostEl.textContent  = song.artist || "Sinnfunk";
+        }
+      } catch (err) {
+        console.error("Now Playing konnte nicht geladen werden:", err);
+      }
     }
-    setInterval(updateNowPlaying, 9000);
+
+    updateNowPlaying();
+    setInterval(updateNowPlaying, 15000);
 
     // "Jetzt live hören": Stream starten, Rückmeldung geben, zum Player scrollen
     const heroBtn   = document.getElementById("hero-play-btn");
