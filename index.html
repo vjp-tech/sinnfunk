@@ -370,7 +370,7 @@ const titleEl = document.getElementById("current-title");
 
     async function updateNowPlaying() {
       try {
-        const res  = await fetch("https://radio.sinnfunk.live/api/nowplaying/sinnfunk");
+        const res  = await fetch("https://radio.sinnfunk.live/api/nowplaying/sinnfunk?_=" + Date.now(), { cache: "no-store" });
         const data = await res.json();
         const song = data.now_playing && data.now_playing.song;
         if (song) {
