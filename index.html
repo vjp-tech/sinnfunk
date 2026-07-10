@@ -11,6 +11,54 @@
     @media (max-width: 560px) {
       .hero-bg { background-image: url('image/hero-mobile.webp'); }     /* Smartphone */
     }
+
+    /* Hinweis unter dem Hero-Text */
+    .hero-note { font-family: 'Inter', sans-serif; font-size: 0.82rem; color: rgba(255,255,255,0.75); margin: 10px 0 18px; max-width: 480px; }
+
+    /* Wochentag-Anzeige über den Sendungen */
+    .sendungen-tag { font-family: 'Inter', sans-serif; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: #8a7642; font-weight: 700; margin-bottom: 6px; }
+
+    /* Fußnote unter der Sendungsliste (Wiederholungs-Hinweis) */
+    .sendungen-fussnote { font-family: 'Inter', sans-serif; font-size: 0.76rem; font-style: italic; color: #8a7642; margin-top: 14px; }
+
+    /* Live-Stream-Spalte vertikal zentrieren statt oben ausgerichtet mit Leerraum unten */
+    .prog-stream { display: flex !important; flex-direction: column !important; justify-content: center !important; }
+    .prog-stream .now-playing { margin-top: 24px !important; }
+
+    /* Text-Overlay auf dem Mikrofon-Bild (unterer Bereich, weiß, mit Verlauf für Lesbarkeit) */
+    .prog-image-wrap { position: relative; height: 100%; }
+    .prog-image-overlay {
+      position: absolute; left: 0; right: 0; bottom: 0;
+      margin: 0; padding: 28px 20px 18px;
+      background: linear-gradient(to top, rgba(20,26,18,0.82) 10%, rgba(20,26,18,0));
+      color: #fff;
+      font-family: 'Inter', sans-serif;
+      font-size: 0.85rem;
+      line-height: 1.55;
+      text-align: left;
+    }
+
+    /* Statisches 3er-Raster für die aktuellen Sendungen (weiße Boxen) */
+    .ep-grid {
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+      max-width: 1100px; margin: 0 auto; padding: 0 24px;
+    }
+    .ep-box {
+      background: #fff; border: 1px solid rgba(123,94,69,0.14); border-radius: 16px;
+      padding: 22px 24px; text-align: left;
+    }
+    .ep-box-zeit {
+      display: inline-block; font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 700;
+      color: #3d5a3a; background: rgba(83,107,80,0.14); padding: 3px 9px; border-radius: 6px; margin-bottom: 9px;
+    }
+    .ep-box-titel { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 700; color: #2f302d; margin-bottom: 6px; }
+    .ep-box-text { font-family: 'Inter', sans-serif; font-size: 0.85rem; color: #6f7169; line-height: 1.55; }
+    @media (max-width: 900px) {
+      .ep-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+    @media (max-width: 560px) {
+      .ep-grid { grid-template-columns: 1fr; padding: 0 16px; }
+    }
   </style>
   <link rel="icon" href="image/icon.webp" type="image/x-icon" />
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -30,6 +78,7 @@
           <p class="eyebrow">Sinnfunk. Stimmen, die Erden</p>
           <h1>Das Sprachradio für deine ganzheitliche Lebenspraxis</h1>
           <p>Sinnfunk ist ein Raum im Internet für Spiritualität, Energiearbeit und ein Leben im Einklang mit der Natur.</p>
+          <p class="hero-note">Der reguläre Sendebetrieb beginnt im August 2026. Bis dahin hörst du im Stream Ausschnitte und Vorgeschmack.</p>
           <a class="hero-play" href="#player" id="hero-play-btn">
             <span class="hero-play-circle"></span>
             <span id="hero-play-label">Jetzt live hören</span>
@@ -82,41 +131,35 @@
 
         <!-- Mitte: Mikrofon-Bild -->
         <div class="prog-col prog-image">
-          <img src="image/mikrofon.webp" alt="Mikrofon im Studio" />
+          <div class="prog-image-wrap">
+            <img src="image/mikrofon.webp" alt="Mikrofon im Studio" />
+            <p class="prog-image-overlay">Jeden Abend läuft bei uns ein rund vierstündiger Sendeblock mit Gesprächen, Buchvorstellungen und Kräuterwissen — am nächsten Morgen wird er noch einmal wiederholt. Dazwischen hörst du meditative Musik.</p>
+          </div>
         </div>
 
         <!-- Rechts: Sendungen -->
         <div class="prog-col prog-list" id="sendungen">
           <p class="label">Sendungen</p>
-          <p class="prog-note">Der reguläre Sendebetrieb beginnt im August 2026. Bis dahin hörst du im Stream Ausschnitte und Vorgeschmack.</p>
-          <div class="next-list">
+          <p class="sendungen-tag" id="sendungen-tag">&nbsp;</p>
+          <div class="next-list" id="sendungen-liste">
             <div class="next-row">
-              <span class="next-time">Vorm.</span>
-              <div>
-                <strong>Buchvorstellung</strong>
-                <span>Jeden Mo &amp; Do — Autoren stellen ihre Bücher vor.</span>
-              </div>
-            </div>
-            <div class="next-row">
-              <span class="next-time">Nachm.</span>
-              <div>
-                <strong>Kräuter &amp; Natur</strong>
-                <span>Jeden Mi &amp; Sa — Heilkräuter, Wildpflanzen, Jahreskreis.</span>
-              </div>
-            </div>
-            <div class="next-row">
-              <span class="next-time">Abend</span>
-              <div>
-                <strong>Gespräche mit Verena</strong>
-                <span>Di, Fr &amp; So — Gute Gespräche zur ganzheitlichen Lebenspraxis.</span>
-              </div>
+              <span class="next-time">…</span>
+              <div><strong>Wird geladen …</strong></div>
             </div>
           </div>
-          <a class="arrow-link" href="mitmachen.html">Sei dabei! →</a>
+          <p class="sendungen-fussnote" id="sendungen-fussnote" style="display:none;">↻ Der Abend-Sendeblock wird morgen vormittag wiederholt.</p>
         </div>
 
       </div>
       <!-- Ende .programm -->
+
+      <!-- ── Aktuelle Sendungen – statisches Raster ── -->
+      <div class="ep-grid-wrap" style="max-width: 1100px; margin: 60px auto 0;">
+        <p class="eyebrow" style="padding: 0 24px;">Aktuelle Sendungen</p>
+        <div class="ep-grid" id="ep-grid">
+          <div class="ep-box"><p class="ep-box-text">Wird geladen …</p></div>
+        </div>
+      </div>
 
       <!-- ── Gesprächsteilnehmer der Woche ── -->
       <div class="gespraech-woche" style="max-width: 720px; margin: 60px auto; padding: 0 24px;">
@@ -470,6 +513,7 @@ const titleEl = document.getElementById("current-title");
     }
   </script>
 
+
   <!-- Neueste Sinnfunker live aus Supabase -->
   <script>
     (function () {
@@ -517,6 +561,131 @@ const titleEl = document.getElementById("current-title");
                     ${avatar}<span class="sfk-name">${esc(s.name)}</span>
                   </a>`;
         }).join('');
+      }
+
+      laden();
+    })();
+  </script>
+
+  <!-- Sendeplan (Vormittag/Abend, heutiger Wochentag) live aus Supabase -->
+  <script>
+    (function () {
+      const SB_URL  = 'https://mliatnfqgnctbxhbwhzp.supabase.co';
+      const SB_ANON = 'sb_publishable_KocEqg2UUL2trsGXb_kacA_yfY8DIP3';
+      const liste = document.getElementById('sendungen-liste');
+      const tagLabel = document.getElementById('sendungen-tag');
+      if (!liste || typeof supabase === 'undefined') return;
+
+      const db = supabase.createClient(SB_URL, SB_ANON);
+
+      const WOCHENTAGE = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'];
+      const WOCHENTAG_NAMEN = {
+        Mo: 'Montag', Di: 'Dienstag', Mi: 'Mittwoch', Do: 'Donnerstag',
+        Fr: 'Freitag', Sa: 'Samstag', So: 'Sonntag',
+      };
+
+      function heutigesKuerzel() {
+        const jsTag = new Date().getDay(); // 0 = So
+        return WOCHENTAGE[(jsTag + 6) % 7];
+      }
+      function vorherigerTag(k) {
+        const idx = WOCHENTAGE.indexOf(k);
+        return WOCHENTAGE[(idx + 6) % 7];
+      }
+      function pad(n) { return String(n).padStart(2, '0'); }
+      function zeitPlusMinuten(zeit, minuten) {
+        const teile = (zeit || '00:00').split(':').map(Number);
+        const h = teile[0], m = teile[1];
+        const gesamt = ((h * 60 + m + (minuten || 0)) % 1440 + 1440) % 1440;
+        return pad(Math.floor(gesamt / 60)) + ':' + pad(gesamt % 60);
+      }
+      function mitZeiten(eintraege, start) {
+        let cursor = start;
+        return eintraege.map(function (item) {
+          const s = cursor;
+          const e = zeitPlusMinuten(cursor, item.duration || 0);
+          cursor = e;
+          return Object.assign({}, item, { start: s, ende: e });
+        });
+      }
+      function esc(str) {
+        return String(str || '')
+          .replace(/&/g, '&amp;').replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+      }
+
+      function renderZeile(e) {
+        return '<div class="next-row"><span class="next-time">' + esc(e.start) + '–' + esc(e.ende) + '</span>' +
+               '<div><strong>' + esc(e.titel) + '</strong></div></div>';
+      }
+
+      let episoden = [];
+      const fussnote = document.getElementById('sendungen-fussnote');
+      const epGrid = document.getElementById('ep-grid');
+
+      function renderListe() {
+        if (!episoden.length) {
+          liste.innerHTML = '<p class="sfk-empty">Noch nichts eingetragen.</p>';
+          return;
+        }
+        liste.innerHTML = episoden.map(renderZeile).join('');
+      }
+
+      function renderEpGrid() {
+        if (!epGrid) return;
+        if (!episoden.length) {
+          epGrid.innerHTML = '<div class="ep-box"><p class="ep-box-text">Noch keine Sendung eingetragen.</p></div>';
+          return;
+        }
+        epGrid.innerHTML = episoden.map(function (e) {
+          return '<div class="ep-box">' +
+                   '<span class="ep-box-zeit">' + esc(e.start) + '–' + esc(e.ende) + ' Uhr</span>' +
+                   '<div class="ep-box-titel">' + esc(e.titel) + '</div>' +
+                   (e.beschreibung ? '<div class="ep-box-text">' + esc(e.beschreibung) + '</div>' : '') +
+                 '</div>';
+        }).join('');
+      }
+
+      async function laden() {
+        let sendezeiten = { vormittag: '08:00', abend: '19:00' };
+        try {
+          const r = await db.from('einstellungen').select('id, wert')
+            .in('id', ['sendezeit_vormittag_von', 'sendezeit_nacht_von']);
+          (r.data || []).forEach(function (e) {
+            if (e.id === 'sendezeit_vormittag_von') sendezeiten.vormittag = e.wert;
+            if (e.id === 'sendezeit_nacht_von') sendezeiten.abend = e.wert;
+          });
+        } catch (err) { /* Fallback-Zeiten bleiben bestehen */ }
+
+        const heute = heutigesKuerzel();
+        const gestern = vorherigerTag(heute);
+
+        if (tagLabel) tagLabel.textContent = 'Heute ist ' + WOCHENTAG_NAMEN[heute];
+
+        const r = await db.from('wochenprogramm_eintraege')
+          .select('wochentag, reihenfolge, episode:episode_id(title, duration, description)')
+          .in('wochentag', [heute, gestern])
+          .order('reihenfolge', { ascending: true });
+
+        if (r.error) {
+          liste.innerHTML = '<p class="sfk-empty">Sendeplan konnte gerade nicht geladen werden.</p>';
+          renderEpGrid();
+          return;
+        }
+
+        const eintraege = r.data || [];
+        const abendRoh = eintraege.filter(function (row) { return row.wochentag === heute; })
+          .map(function (row) { return { titel: row.episode ? row.episode.title : '', beschreibung: row.episode ? row.episode.description : '', duration: row.episode ? row.episode.duration : 0 }; });
+        const vormittagRoh = eintraege.filter(function (row) { return row.wochentag === gestern; })
+          .map(function (row) { return { titel: row.episode ? row.episode.title : '', beschreibung: row.episode ? row.episode.description : '', duration: row.episode ? row.episode.duration : 0 }; });
+
+        const abend = mitZeiten(abendRoh, sendezeiten.abend);
+        const vormittag = mitZeiten(vormittagRoh, sendezeiten.vormittag);
+
+        episoden = vormittag.concat(abend);
+        renderListe();
+        renderEpGrid();
+        if (fussnote) fussnote.style.display = abend.length ? 'block' : 'none';
       }
 
       laden();
