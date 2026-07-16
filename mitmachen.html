@@ -333,14 +333,14 @@
     }
 
     /* Beispiel-Videos zu den Gesprächspaketen: Vor Ort in Pöllau / über Zoom */
-    .sf-gw-examples { display: flex; gap: 24px; margin-top: 32px; }
+    .sf-gw-examples { display: flex; gap: 24px; margin-top: 32px; max-width: 100%; overflow: hidden; }
     .sf-gw-example-box { flex: 1; min-width: 0; box-sizing: border-box; background: var(--card-bg, #fff); border: 1px solid rgba(83,107,80,0.15); border-radius: var(--radius-sm, 12px); padding: 20px; }
     .sf-gw-example-box h4 { font-family: 'Cormorant Garamond', serif; margin: 0 0 4px; }
     .sf-gw-example-box .sf-gw-example-sub { font-family: Arial, sans-serif; font-size: 0.85rem; color: #6f7169; margin-bottom: 14px; }
     /* Melanie: Querformat-Video */
-    .sf-gw-example-video { position: relative; padding-top: 56.25%; border-radius: 10px; overflow: hidden; margin-bottom: 14px; }
+    .sf-gw-example-video { position: relative; padding-top: 56.25%; border-radius: 10px; overflow: hidden; margin-bottom: 14px; transform: translateZ(0); -webkit-transform: translateZ(0); }
     /* Michael: Hochformat-Video */
-    .sf-gw-example-video.is-portrait { padding-top: 177.78%; max-width: 260px; margin-left: auto; margin-right: auto; }
+    .sf-gw-example-video.is-portrait { padding-top: 0; aspect-ratio: 9 / 16; width: 100%; max-width: 260px; margin-left: auto; margin-right: auto; }
     .sf-gw-example-video iframe { border: 0 !important; position: absolute !important; top: 0 !important; left: 0 !important; height: 100% !important; width: 100% !important; }
     .sf-gw-example-note { font-family: Arial, sans-serif; font-size: 0.85rem; color: #55584e; line-height: 1.5; }
     @media (max-width: 700px) {
