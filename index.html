@@ -3,712 +3,676 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Sinnfunk – Stimmen, die erden</title>
+  <title>Sinnfunker werden – Sinnfunk</title>
+  <meta name="description" content="Bring deine Stimme ins Radio. Stell dich, dein Buch, dein Projekt vor – oder zeichne gemeinsam mit Verena ein Gespräch auf." />
   <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="image/icon.webp" type="image/x-icon" />
   <style>
-    /* Hero-Bild – nur für die Startseite. Jede Seite hat ihren eigenen Hero. */
-    .hero-bg { background-image: url('image/hero-wald-radio.webp'); }   /* Desktop + Tablet */
-    @media (max-width: 560px) {
-      .hero-bg { background-image: url('image/hero-mobile.webp'); }     /* Smartphone */
+
+    /* Diese Seite nutzt die gemeinsamen Tokens & Schriften aus style.css.
+       Hier liegt nur das seitenspezifische Layout – im neuen, flachen Stil. */
+
+    .sf-hero h1 { font-size: clamp(2.4rem, 5vw, 3.8rem); }
+
+    .sf-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
     }
 
-    /* Hinweis unter dem Hero-Text */
-    .hero-note { font-family: 'Inter', sans-serif; font-size: 0.82rem; color: rgba(255,255,255,0.75); margin: 10px 0 18px; max-width: 480px; }
+    .sf-icon-circle {
+      width: 56px; height: 56px; border-radius: 50%;
+      background: rgba(168,148,92,0.14);
+      display: grid; place-items: center;
+      color: var(--gold-deep); flex-shrink: 0;
+    }
+    .sf-icon-circle > svg { display:block; width:26px; height:26px; }
+    .sf-icon-circle.sm { width:44px; height:44px; }
+    .sf-icon-circle.sm > svg { width:20px; height:20px; }
+    .sf-ico { width:22px; height:22px; color:var(--gold-deep); flex-shrink:0; }
 
-    /* Gesprächsteilnehmer der Woche – Video im Hochformat links, Text rechts */
-    .gw-grid { display: flex; gap: 36px; align-items: flex-start; }
-    .gw-video { flex: 0 0 260px; }
-    .gw-video-inner { position: relative; padding-top: 177.78%; border-radius: 12px; overflow: hidden; border: 1px solid rgba(123,94,69,0.14); }
-    .gw-video-inner iframe { border: 0 !important; position: absolute !important; top: 0 !important; left: 0 !important; height: 100% !important; width: 100% !important; }
-    .gw-text { flex: 1; min-width: 240px; }
-    @media (max-width: 700px) {
-      .gw-grid { flex-direction: column; align-items: center; text-align: center; }
-      .gw-video { flex: 0 0 auto; width: 60%; max-width: 240px; margin: 0 auto; }
+    .sf-head-left { margin-bottom:28px; }
+    .sf-head-left > p.sf-lead {
+      color:var(--ink-soft); font-size:1.05rem; line-height:1.7;
+      max-width:70ch; margin:0;
     }
 
-    /* Wochentag-Anzeige über den Sendungen */
-    .sendungen-tag { font-family: 'Inter', sans-serif; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: #8a7642; font-weight: 700; margin-bottom: 6px; }
-
-    /* Fußnote unter der Sendungsliste (Wiederholungs-Hinweis) */
-    .sendungen-fussnote { font-family: 'Inter', sans-serif; font-size: 0.76rem; font-style: italic; color: #8a7642; margin-top: 14px; }
-
-    /* Live-Stream-Spalte vertikal zentrieren statt oben ausgerichtet mit Leerraum unten */
-    .prog-stream { display: flex !important; flex-direction: column !important; justify-content: center !important; }
-    .prog-stream .now-playing { margin-top: 24px !important; }
-
-    /* Text-Overlay auf dem Mikrofon-Bild (unterer Bereich, weiß, mit Verlauf für Lesbarkeit) */
-    .prog-image-wrap { position: relative; height: 100%; }
-    .prog-image-overlay {
-      position: absolute; left: 0; right: 0; bottom: 0;
-      margin: 0; padding: 28px 20px 18px;
-      background: linear-gradient(to top, rgba(20,26,18,0.82) 10%, rgba(20,26,18,0));
-      color: #fff;
-      font-family: 'Inter', sans-serif;
-      font-size: 0.85rem;
-      line-height: 1.55;
-      text-align: left;
+    .sf-check-list { list-style:none; padding:0; margin:0; display:flex; flex-direction:column; gap:10px; }
+    .sf-check-list li {
+      font-family:var(--font-body); font-size:0.93rem; color:var(--ink-soft);
+      padding-left:26px; position:relative; line-height:1.55;
+    }
+    .sf-check-list li::before {
+      content:"✓"; position:absolute; left:0;
+      color:var(--gold-deep); font-weight:700;
     }
 
-    /* Statisches 3er-Raster für die aktuellen Sendungen (weiße Boxen) */
-    .ep-grid {
+    /* ── HERO ── */
+    .sf-hero {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto; padding: 40px 0 64px;
+    }
+    .sf-hero-grid {
+      display: grid; grid-template-columns: 1.1fr 0.9fr;
+      gap: 48px; align-items: center;
+    }
+    .sf-hero-text > p.sf-lead-hero {
+      font-size: 1.12rem; color: var(--ink-soft); line-height: 1.72;
+      margin: 0 0 28px; max-width: 58ch;
+    }
+    .sf-hero-actions {
+      display: flex; flex-wrap: wrap; gap: 12px; align-items: center;
+    }
+    .sf-hero-image {
+      position: relative; border-radius: var(--radius); overflow: hidden;
+      min-height: 440px; border: 1px solid var(--line);
+    }
+    .sf-hero-image img {
+      width: 100%; height: 100%; object-fit: cover;
+      object-position: center top; display: block;
+    }
+    .sf-sendestart {
+      position: absolute; left: 16px; right: 16px; bottom: 16px;
+      background: rgba(53,61,46,0.92);
+      -webkit-backdrop-filter: blur(6px); backdrop-filter: blur(6px);
+      color: #f3efe4; border-radius: var(--radius-sm); padding: 16px 20px;
+      display: flex; align-items: center; gap: 14px;
+    }
+    .sf-sendestart .sf-ico { color:#d8c79a; width:24px; height:24px; }
+    .sf-sendestart strong { display:block; font-size:1.02rem; margin-bottom:2px; font-family:var(--font-body); }
+    .sf-sendestart span { font-family:var(--font-body); font-size:0.9rem; opacity:0.85; }
+
+    /* ── EIGENE INHALTE ── */
+    .sf-eigene-wrap {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto; padding: 0 0 72px;
+    }
+    .sf-eigene-container {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 40px;
+    }
+    .sf-eigene-inner {
+      display: grid; grid-template-columns: 1fr 1fr;
+      gap: 40px; align-items: start;
+    }
+    .sf-eigene-text h3 { margin-bottom: 14px; }
+    .sf-eigene-text > p {
+      font-family: var(--font-body); font-size: 0.97rem;
+      color: var(--ink-soft); line-height: 1.7; margin: 0 0 18px;
+    }
+    .sf-eigene-bonus {
+      margin-top: 22px; padding-top: 18px;
+      border-top: 1px solid var(--line);
+    }
+    .sf-bonus-label {
+      font-family: var(--font-body); font-size: 0.7rem;
+      font-weight: 600; text-transform: uppercase;
+      letter-spacing: 0.14em; color: var(--gold-deep);
+      margin-bottom: 8px; display: block;
+    }
+    .sf-bonus-price { display: flex; align-items: baseline; gap: 12px; }
+    .sf-bonus-price .price-free {
+      font-size: 1.9rem; font-weight: 600;
+      color: var(--gold-deep); line-height: 1;
+      font-family: var(--font-display);
+    }
+    .sf-bonus-sub {
+      font-family: var(--font-body); font-size: 0.88rem;
+      color: var(--muted); margin-top: 6px; display: block; line-height: 1.6;
+    }
+    .sf-eigene-box {
+      background: var(--paper-warm);
+      border: 1px solid var(--line);
+      border-radius: var(--radius); padding: 28px;
+    }
+    .sf-eigene-box .sf-icon-circle { margin-bottom: 18px; }
+    .sf-eigene-box h3 { font-size: 1.25rem; margin-bottom: 14px; }
+    .sf-eigene-box .sf-ablauf-note,
+    .sf-eigene-box__note {
+      margin-top: 18px; padding-top: 16px;
+      border-top: 1px solid var(--line);
+      font-family: var(--font-body); font-size: 0.88rem;
+      color: var(--ink-soft); line-height: 1.65;
+    }
+
+    /* ── GESPRÄCH ── */
+    .sf-talk-wrap {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto; padding: 0 0 72px;
+    }
+    .sf-two-cards {
       display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
-      max-width: 1100px; margin: 0 auto; padding: 0 24px;
+      margin-top: 28px;
     }
-    .ep-box {
-      background: #fff; border: 1px solid rgba(123,94,69,0.14); border-radius: 16px;
-      padding: 22px 24px; text-align: left;
+    .sf-info-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 32px;
+      display: flex; flex-direction: column;
     }
-    .ep-box-zeit {
-      display: inline-block; font-family: 'Inter', sans-serif; font-size: 0.72rem; font-weight: 700;
-      color: #3d5a3a; background: rgba(83,107,80,0.14); padding: 3px 9px; border-radius: 6px; margin-bottom: 9px;
+    .sf-info-card h3 { font-size: 1.35rem; margin-bottom: 10px; }
+    .sf-info-card > p {
+      font-family: var(--font-body); font-size: 0.97rem;
+      color: var(--ink-soft); line-height: 1.65; margin: 0 0 18px;
     }
-    .ep-box-titel { font-family: 'Cormorant Garamond', serif; font-size: 1.25rem; font-weight: 700; color: #2f302d; margin-bottom: 6px; }
-    .ep-box-text { font-family: 'Inter', sans-serif; font-size: 0.85rem; color: #6f7169; line-height: 1.55; }
-    @media (max-width: 900px) {
-      .ep-grid { grid-template-columns: repeat(2, 1fr); }
+
+    /* Olivgrüne Akzente – Gespräch kostenlos */
+    .sf-info-card .icon-green { background: rgba(84,102,63,0.16); }
+    .sf-info-card .icon-green svg { color: #54663f; }
+    .sf-free-tag {
+      display: inline-block; font-family: var(--font-body);
+      font-size: 0.72rem; font-weight: 700;
+      text-transform: uppercase; letter-spacing: 0.12em;
+      color: #41502f;
+      background: rgba(84,102,63,0.16);
+      border: 1px solid rgba(84,102,63,0.28);
+      padding: 7px 16px; border-radius: 999px; margin-top: auto;
     }
-    @media (max-width: 560px) {
-      .ep-grid { grid-template-columns: 1fr; padding: 0 16px; }
+
+    /* Gold-Akzente – Gespräch behalten */
+    .sf-info-card .icon-warm { background: rgba(168,148,92,0.18); }
+    .sf-info-card .icon-warm svg { color: var(--gold-deep); }
+    .sf-price-box-inline {
+      margin-top: auto;
+      border-radius: var(--radius-sm); padding: 18px 20px;
+      background: rgba(168,148,92,0.1);
+      border: 1px solid rgba(168,148,92,0.28);
+    }
+    .sf-price-box-inline .pbadge {
+      font-family: var(--font-body); font-size: 0.68rem;
+      font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;
+      color: #fff; background: var(--gold);
+      padding: 4px 12px; border-radius: 999px;
+      display: inline-block; margin-bottom: 10px;
+    }
+    .sf-price-strike {
+      text-decoration: line-through; color: var(--muted);
+      font-family: var(--font-body); font-size: 0.95rem;
+    }
+    .sf-price-big { font-size: 1.9rem; font-weight: 600; color: var(--gold-deep); line-height: 1; font-family: var(--font-display); }
+    .sf-price-sub {
+      font-family: var(--font-body); font-size: 0.88rem;
+      color: var(--muted); display: block; margin-top: 4px;
+    }
+    .sf-price-total {
+      font-family: var(--font-body); font-size: 0.9rem;
+      color: var(--ink-soft); margin-top: 10px; padding-top: 10px;
+      border-top: 1px solid rgba(168,148,92,0.22); line-height: 1.6;
+    }
+    .sf-social-note {
+      margin-top: 18px;
+      background: rgba(168,148,92,0.1);
+      border-left: 3px solid var(--gold);
+      border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+      padding: 12px 18px;
+      font-family: var(--font-body); font-size: 0.9rem;
+      color: var(--ink-soft); line-height: 1.65;
+    }
+
+    /* ── SENDEPLÄTZE ── */
+    .sf-program-wrap {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto; padding: 0 0 72px;
+    }
+    .sf-slots-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px; margin-top: 28px;
+    }
+    .sf-slot {
+      display: flex; align-items: center; gap: 12px;
+      padding: 16px 18px;
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      border-left: 3px solid var(--gold);
+    }
+    .sf-slot .sf-icon-circle.sm { flex-shrink: 0; }
+    .sf-slot strong { font-size: 0.92rem; display: block; color: var(--ink); font-family: var(--font-body); }
+    .sf-slot span { font-family: var(--font-body); font-size: 0.82rem; color: var(--muted); line-height: 1.4; }
+
+    /* ── REGELN ── */
+    .sf-what-wrap {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto; padding: 0 0 72px;
+    }
+    /* Modular dank CSS-Columns: jede Karte ist nur so hoch wie ihr Inhalt,
+       statt sich auf Grid-Zeilenhöhe zu strecken. */
+    .sf-what-grid {
+      columns: 2;
+      column-gap: 16px;
+      margin-top: 28px;
+    }
+    .sf-what-card {
+      padding: 28px;
+      border-radius: var(--radius);
+      break-inside: avoid;
+      margin-bottom: 16px;
+      display: inline-block;
+      width: 100%;
+    }
+    .sf-what-card .sf-icon-circle.sm { margin-bottom: 14px; }
+    .sf-what-card strong { display: block; font-size: 1.1rem; margin-bottom: 10px; color: var(--ink); font-family: var(--font-display); font-weight: 600; }
+    .sf-what-card p { font-family: var(--font-body); font-size: 0.92rem; color: var(--muted); line-height: 1.65; margin: 0 0 8px; }
+    .sf-what-card p:last-child { margin-bottom: 0; }
+    .sf-what-card.full {
+      background: var(--paper-warm) !important;
+      border-color: var(--line) !important;
+      text-align: center;
+    }
+    .sf-what-card.full p { max-width: 60ch; margin-left: auto; margin-right: auto; }
+
+    /* ── KONTAKT ── */
+    .sf-contact {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto; padding: 16px 0 96px;
+    }
+    .sf-contact-inner {
+      display: grid; grid-template-columns: 0.9fr 1.1fr;
+      gap: 56px; align-items: center;
+    }
+    .sf-contact-img {
+      border-radius: var(--radius); overflow: hidden;
+      min-height: 380px; border: 1px solid var(--line);
+    }
+    .sf-contact-img img { width:100%; height:100%; object-fit:cover; object-position:center top; display:block; }
+    .sf-contact-info > p.contact-intro {
+      font-family: var(--font-body); font-size: 1.05rem;
+      color: var(--ink-soft); line-height: 1.7; margin: 0 0 32px; max-width: 50ch;
+    }
+    .sf-contact-lines { display: flex; flex-direction: column; gap: 22px; }
+    .sf-contact-line { display: flex; align-items: center; gap: 16px; }
+    .sf-contact-line a { font-family: var(--font-display); font-size: 1.5rem; color: var(--ink); text-decoration: none; line-height: 1.2; }
+    .sf-contact-line a:hover { color: var(--gold-deep); }
+    .sf-contact-line small {
+      display: block; font-family: var(--font-body);
+      color: var(--muted); font-size: 0.92rem; margin-top: 2px;
+    }
+
+    /* ── RESPONSIVE ── */
+    @media (max-width: 980px) {
+      .sf-hero-grid,
+      .sf-eigene-inner,
+      .sf-two-cards,
+      .sf-contact-inner { grid-template-columns: 1fr; }
+
+      .sf-hero-image {
+        order: -1; min-height: 300px;
+        margin-bottom: 28px;
+      }
+      .sf-slots-grid { grid-template-columns: 1fr 1fr; }
+      .sf-contact-img { min-height: 260px; max-height: 360px; }
+    }
+
+    @media (max-width: 700px) {
+      .sf-what-grid { columns: 1; }
+    }
+
+    @media (max-width: 600px) {
+      .sf-hero { padding: 24px 0 40px; }
+      .sf-hero-image { min-height: 360px; max-height: 460px; }
+      /* Banner unter das Bild statt darüber zu kleben – Bild bleibt sichtbar */
+      .sf-sendestart {
+        position: static;
+        margin-top: 14px;
+        border-radius: var(--radius-sm);
+        padding: 14px 16px;
+        gap: 10px;
+      }
+      .sf-eigene-container { padding: 24px 20px; }
+      .sf-eigene-wrap, .sf-talk-wrap,
+      .sf-program-wrap, .sf-what-wrap,
+      .sf-contact { padding-bottom: 48px; }
+      .sf-info-card, .sf-what-card { padding: 24px 20px; }
+      .sf-slots-grid { grid-template-columns: 1fr; }
+      .sf-hero-actions { flex-direction: column; align-items: stretch; gap: 10px; }
+      .sf-hero-actions .button { justify-content: center; }
+    }
+
+    /* Beispiel-Videos zu den Gesprächspaketen: Vor Ort in Pöllau / über Zoom */
+    .sf-gw-examples { display: flex; gap: 24px; margin-top: 32px; }
+    .sf-gw-example-box { flex: 1; min-width: 0; box-sizing: border-box; background: var(--card-bg, #fff); border: 1px solid rgba(83,107,80,0.15); border-radius: var(--radius-sm, 12px); padding: 20px; }
+    .sf-gw-example-box h4 { font-family: 'Cormorant Garamond', serif; margin: 0 0 4px; }
+    .sf-gw-example-box .sf-gw-example-sub { font-family: Arial, sans-serif; font-size: 0.85rem; color: #6f7169; margin-bottom: 14px; }
+    /* Melanie: Querformat-Video */
+    .sf-gw-example-video { position: relative; padding-top: 56.25%; border-radius: 10px; overflow: hidden; margin-bottom: 14px; }
+    /* Michael: Hochformat-Video */
+    .sf-gw-example-video.is-portrait { padding-top: 177.78%; max-width: 260px; margin-left: auto; margin-right: auto; }
+    .sf-gw-example-video iframe { border: 0 !important; position: absolute !important; top: 0 !important; left: 0 !important; height: 100% !important; width: 100% !important; }
+    .sf-gw-example-note { font-family: Arial, sans-serif; font-size: 0.85rem; color: #55584e; line-height: 1.5; }
+    @media (max-width: 700px) {
+      .sf-gw-examples { flex-direction: column; }
     }
   </style>
-  <link rel="icon" href="image/icon.webp" type="image/x-icon" />
-  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 </head>
 <body>
-  <div class="page">
 
-    <div id="sf-nav"></div>
-    <script src="nav.js"></script>
+  <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false">
+    <symbol id="icon-heart" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 14c1.49-1.46 3-3.21 3-5.5A5.5 5.5 0 0 0 16.5 3c-1.76 0-3 .5-4.5 2-1.5-1.5-2.74-2-4.5-2A5.5 5.5 0 0 0 2 8.5c0 2.3 1.5 4.05 3 5.5l7 7Z"/></g></symbol>
+    <symbol id="icon-headphones" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 14h3a2 2 0 0 1 2 2v3a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-5a9 9 0 0 1 18 0v5a2 2 0 0 1-2 2h-1a2 2 0 0 1-2-2v-3a2 2 0 0 1 2-2h3"/></g></symbol>
+    <symbol id="icon-clock" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></g></symbol>
+    <symbol id="icon-users" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></g></symbol>
+    <symbol id="icon-mic" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><path d="M12 19v3"/></g></symbol>
+    <symbol id="icon-upload" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/><polyline points="17 8 12 3 7 8"/><line x1="12" y1="3" x2="12" y2="15"/></g></symbol>
+    <symbol id="icon-video" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m22 8-6 4 6 4V8z"/><rect x="2" y="6" width="14" height="12" rx="2"/></g></symbol>
+    <symbol id="icon-message" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M7.9 20A9 9 0 1 0 4 16.1L2 22Z"/></g></symbol>
+    <symbol id="icon-book" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M12 7v14"/><path d="M3 18a1 1 0 0 1-1-1V4a1 1 0 0 1 1-1h5a4 4 0 0 1 4 4 4 4 0 0 1 4-4h5a1 1 0 0 1 1 1v13a1 1 0 0 1-1 1h-6a3 3 0 0 0-3 3 3 3 0 0 0-3-3z"/></g></symbol>
+    <symbol id="icon-pin" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 4.4-8 12-8 12s-8-7.6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></g></symbol>
+    <symbol id="icon-leaf" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M11 20A7 7 0 0 1 9.8 6.1C15.5 5 17 4.48 19 2c1 2 2 4.18 2 8 0 5.5-4.78 10-10 10Z"/><path d="M2 21c0-3 1.85-5.36 5.08-6"/></g></symbol>
+    <symbol id="icon-shield" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M20 13c0 5-3.5 7.5-7.66 8.95a1 1 0 0 1-.67-.01C7.5 20.5 4 18 4 13V6a1 1 0 0 1 1-1c2 0 4.5-1.2 6.24-2.72a1.17 1.17 0 0 1 1.52 0C14.51 3.81 17 5 19 5a1 1 0 0 1 1 1Z"/><path d="m9 12 2 2 4-4"/></g></symbol>
+    <symbol id="icon-star" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M11.5 2.8a.5.5 0 0 1 1 0l2.3 4.6a.5.5 0 0 0 .4.3l5.1.7a.5.5 0 0 1 .3.9l-3.7 3.6a.5.5 0 0 0-.1.4l.9 5.1a.5.5 0 0 1-.8.6l-4.6-2.4a.5.5 0 0 0-.5 0L7.9 19.6a.5.5 0 0 1-.8-.6l.9-5.1a.5.5 0 0 0-.1-.4L4.2 9.9a.5.5 0 0 1 .3-.9l5.1-.7a.5.5 0 0 0 .4-.3Z"/></g></symbol>
+    <symbol id="icon-x" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></g></symbol>
+    <symbol id="icon-user" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M19 21v-2a4 4 0 0 0-4-4H9a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></g></symbol>
+    <symbol id="icon-scale" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="m16 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="m2 16 3-8 3 8c-.87.65-1.92 1-3 1s-2.13-.35-3-1Z"/><path d="M7 21h10"/><path d="M12 3v18"/><path d="M3 7h2c2 0 5-1 7-2 2 1 5 2 7 2h2"/></g></symbol>
+    <symbol id="icon-ad-off" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M3 3l18 18"/><path d="M7 7H4a1 1 0 0 0-1 1v11"/><path d="M9.5 9.5 12 4l5 11"/><path d="M20 20H9"/><path d="M16.5 16.5 15 13"/></g></symbol>
+    <symbol id="icon-calendar" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4"/><path d="M8 2v4"/><path d="M3 10h18"/></g></symbol>
+    <symbol id="icon-phone" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92Z"/></g></symbol>
+    <symbol id="icon-mail" viewBox="0 0 24 24"><g fill="none" stroke="currentColor" stroke-width="1.75" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></g></symbol>
+  </svg>
 
-    <main>
+<div class="page">
+  <div id="sf-nav"></div>
+  <script src="nav.js"></script>
 
-      <!-- ── Hero ── -->
-      <section class="hero">
-        <div class="hero-bg"></div>
-        <div class="hero-inner">
-          <p class="eyebrow">Sinnfunk. Stimmen, die Erden</p>
-          <h1>Das Sprachradio für deine ganzheitliche Lebenspraxis</h1>
-          <p>Sinnfunk ist ein Raum im Internet für Spiritualität, Energiearbeit und ein Leben im Einklang mit der Natur.</p>
-          <p class="hero-note">Der reguläre Sendebetrieb beginnt im August 2026. Bis dahin hörst du im Stream Ausschnitte und Vorgeschmack.</p>
-          <a class="hero-play" href="#player" id="hero-play-btn">
-            <span class="hero-play-circle"></span>
-            <span id="hero-play-label">Jetzt live hören</span>
-          </a>
-        </div>
-      </section>
+  <main>
 
-      <!-- ── Warum Sinnfunk? ── -->
-      <div class="impuls">
-        <div class="impuls-inner">
-          <div>
-          <p class="eyebrow">Warum Sinnfunk?</p>
-<h2>Mein Impuls hinter Sinnfunk</h2>
-
-<p class="impuls-text">Eine ganzheitliche Lebenspraxis bedeutet für mich, geerdet zu sein, sich selbst gegenüber Mitgefühl zu entwickeln und die Werkzeuge zu besitzen, das eigene Leben bewusst zu gestalten. 
-  <b>Dazu braucht es auch digitale Räume der Ruhe.</b> Mein Webradio soll dieser Ort werden — für Stimmen, die Tiefe statt Aufregung bringen. 
-  Verschwörungserzählungen, künstliche erzeugte Empörung, aber auch haltlose Heilsversprechen finden deshalb bei Sinnfunk kein Gehör.</p>
-          </div>
-          <div class="impuls-img" role="img" aria-label="Klangschale mit Olivenzweig"
-               style="background-image: url('image/Impuls-Verena.webp');"></div>
-        </div>
-      </div>
-
-      <!-- ── Programm: Stream | Bild | Sendungen ── -->
-      <div class="programm" id="player">
-
-        <!-- Links: Live-Stream, zentriert mit Visualizer -->
-        <div class="prog-col prog-stream" id="prog-stream">
-          <p class="label">Live-Stream</p>
-          <div class="prog-stream-head">
-            <h3>Unser Stream</h3>
-            <span class="live-badge">On Air</span>
-          </div>
-
-          <div class="tw-visualizer" aria-hidden="true">
-            <span></span><span></span><span></span><span></span><span></span><span></span>
-            <span></span><span></span><span></span><span></span><span></span><span></span>
-          </div>
-
-          <audio id="sf-stream" controls preload="none">
-            <source src="https://radio.sinnfunk.live/listen/sinnfunk/radio.mp3" type="audio/mpeg" />
-            Dein Browser unterstützt den Audioplayer leider nicht.
-          </audio>
-          <div class="now-playing" aria-live="polite">
-            <small>Jetzt läuft</small>
-            <strong id="current-title">Warum bei Sinnfunk mitmachen</strong>
-            <span id="current-host">Sinnfunk Webradio</span>
+    <!-- HERO -->
+    <section class="sf-hero">
+      <div class="sf-hero-grid">
+        <div class="sf-hero-text">
+          <p class="eyebrow">Mitmachen.</p>
+          <h1>Werde eine Stimme, die erdet!</h1>
+          <p class="sf-lead-hero">Du arbeitest mit Menschen — 
+            in Spiritualität, Energiearbeit, Naturheilkunde oder Achtsamkeit? Bei Sinnfunk bekommst du einen Ort für ruhige Gespräche statt lauter Selbstvermarktung.</p>
+          <div class="sf-hero-actions">
+            <a class="button" href="#eigene-inhalte">
+              Ich habe eigene Inhalte
+            </a>
+            <a class="button secondary" href="#gespraech">
+              Ich möchte ein Gespräch führen
+            </a>
           </div>
         </div>
-
-        <!-- Mitte: Mikrofon-Bild -->
-        <div class="prog-col prog-image">
-          <div class="prog-image-wrap">
-            <img src="image/mikrofon.webp" alt="Mikrofon im Studio" />
-            <p class="prog-image-overlay">Jeden Abend läuft bei uns ein rund vierstündiger Sendeblock mit Gesprächen, Buchvorstellungen und Kräuterwissen — am nächsten Morgen wird er noch einmal wiederholt. Dazwischen hörst du meditative Musik.</p>
-          </div>
-        </div>
-
-        <!-- Rechts: Sendungen -->
-        <div class="prog-col prog-list" id="sendungen">
-          <p class="label">Sendungen</p>
-          <p class="sendungen-tag" id="sendungen-tag">&nbsp;</p>
-          <div class="next-list" id="sendungen-liste">
-            <div class="next-row">
-              <span class="next-time">…</span>
-              <div><strong>Wird geladen …</strong></div>
+        <div class="sf-hero-image">
+          <img src="image/mikrofon-mitmachen.webp" alt="Sinnfunker werden" />
+          <div class="sf-sendestart">
+            <svg class="sf-ico"><use href="#icon-calendar"/></svg>
+            <div>
+              <strong>Sendestart: August 2026</strong>
+              <span>Ein Ort für deine Stimme.</span>
             </div>
           </div>
-          <p class="sendungen-fussnote" id="sendungen-fussnote" style="display:none;">↻ Der Abend-Sendeblock wird morgen vormittag wiederholt.</p>
-        </div>
-
-      </div>
-      <!-- Ende .programm -->
-
-      <!-- ── Aktuelle Sendungen – statisches Raster ── -->
-      <div class="ep-grid-wrap" style="max-width: 1100px; margin: 60px auto 0;">
-        <p class="eyebrow" style="padding: 0 24px;">Aktuelle Sendungen</p>
-        <div class="ep-grid" id="ep-grid">
-          <div class="ep-box"><p class="ep-box-text">Wird geladen …</p></div>
         </div>
       </div>
+    </section>
 
-      <!-- ── Gesprächsteilnehmer der Woche ── -->
-      <div class="gespraech-woche" style="max-width: 900px; margin: 60px auto; padding: 0 24px;">
-        <div class="gw-grid">
-          <div class="gw-video">
-            <div class="gw-video-inner">
-              <iframe src="https://player.mediadelivery.net/embed/695445/3766676f-8cb3-44ec-919d-4067bda33aae?autoplay=false&loop=false&muted=false&preload=true&responsive=true"
-               loading="lazy"
-               allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
-               allowfullscreen="true">
-              </iframe>
+    <!-- EIGENE INHALTE -->
+    <section class="sf-eigene-wrap" id="eigene-inhalte">
+      <div class="sf-eigene-container">
+        <p class="eyebrow">Eigene Inhalte hochladen</p>
+        <h2>Du produzierst – wir senden es.</h2>
+        <p style="font-family:Arial,sans-serif;font-size:1.02rem;color:#55584e;line-height:1.7;margin:0 0 28px;max-width:68ch;">
+          Du hast bereits fertige Aufnahmen, ein YouTube-Video oder einen eigenen Podcast? Erhöhe deine Reichweite über Sinnfunk. Auf YouTube, Spotify oder Facebook müssen Menschen gezielt nach dir suchen - 
+          auf Sinnfunk wirst du gespielt, egal wie viele Follower du hast. Das erlaubt dir, von einem vollkommen neuen Publikum gehört zu werden. </p>
+        <div class="sf-eigene-inner">
+          <div class="sf-eigene-text">
+            <h3>Was du hochladen kannst</h3>
+            <p>Ob du dich selbst und deinen Beruf vorstellst, ein Buch präsentierst oder deinem Podcast mehr Reichweite geben möchtest – bei Sinnfunk bekommst du einen echten Sendeplatz im Webradio.</p>
+            <ul class="sf-check-list">
+              <li>Stelle dich selbst, deinen Beruf oder deine Bücher vor</li>
+              <li>Reichweite für deinen eigenen Podcast erhöhen</li>
+              <li>Du bleibst Eigentümer aller Inhalte</li>
+              <li>Mindestens 3× im Webradio ausgestrahlt</li>
+              <li>Du wirst auf der Sinnfunk-Website &amp; in den sozialen Medien vorgestellt</li>
+            </ul>
+            <div class="sf-eigene-bonus">
+              <span class="sf-bonus-label">Mitmachen ist einfach</span>
+              <div class="sf-bonus-price">
+                <span class="price-free">Kostenlos</span>
+              </div>
+              <span class="sf-bonus-sub">Das Hochladen jeder eigens erstellten Episode ist gratis.</span>
             </div>
           </div>
-          <div class="gw-text">
-            <p class="eyebrow">Sinnfunk-Gesprächsteilnehmer der Woche</p>
-            <h2 style="font-family: 'Cormorant Garamond', serif; margin-bottom: 4px;">Michael Stingeder</h2>
-            <a href="https://www.stingeder.com/" target="_blank" rel="noopener" style="font-family: 'Inter', sans-serif; font-size: 0.85rem; color: #6f7169; text-decoration: underline; display: inline-block; margin-bottom: 14px;">stingeder.com</a>
-            <p style="font-family: 'Inter', sans-serif; color: #353d2e; line-height: 1.6; margin-bottom: 16px;">
-              Der Weg in die Selbstständigkeit wird gerne als einfach vermittelt. Die Wirklichkeit sieht anders aus. Ich spreche hier mit Michael Stingeder. Er ist Obmann der Fachgruppe für persönliche Dienstleister in Oberösterreich und Bundesobmann für persönliche Dienstleister. Er erzählt aus seiner persönlichen Erfahrung und aus seinen vielen Gesprächen mit Energetikern über den Weg in die Selbstständigkeit.
-            </p>
-            <p style="font-family: 'Inter', sans-serif; color: #353d2e; line-height: 1.6;">
-              Das vollständige Gespräch erscheint im August 2026.
+          <div class="sf-eigene-box">
+            <div class="sf-icon-circle">
+              <svg><use href="#icon-upload"/></svg>
+            </div>
+            <h3>So funktioniert es</h3>
+            <ul class="sf-check-list">
+              <li>Aufnahme fertigstellen &amp; in der Sinnfunk-WebApp hochladen</li>
+              <li>Sendeplatz wird zugeteilt – nach Eingang</li>
+              <li>Ankündigung im Programm</li>
+              <li>Episode läuft mindestens dreimal im Webradio</li>
+            </ul>
+            <p class="sf-eigene-box__note" style="margin-top:18px;padding-top:16px;border-top:1px solid rgba(83,107,80,0.15);font-family:Arial,sans-serif;font-size:0.88rem;color:#55584e;line-height:1.65;">
+              <strong>Qualität:</strong> Die Aufnahme muss gut hörbar sein – nicht zu leise, keine störenden Hintergrundgeräusche, verständliche Aussprache. Inhalte werden abgelehnt, wenn sie sich nicht an die Sinnfunk-Regeln halten.
             </p>
           </div>
         </div>
       </div>
+    </section>
 
-      <!-- ── Themenwelten – Endlos-Karussell ── -->
-      <div class="themen" id="themen">
-        <p class="eyebrow">Themenwelten</p>
-        <div class="tw-carousel" id="tw-carousel">
-          <button class="tw-nav tw-nav-prev" id="tw-prev" aria-label="Vorherige Themen" type="button">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="15 18 9 12 15 6"/></svg>
-          </button>
+    <!-- GESPRÄCH -->
+    <section class="sf-talk-wrap" id="gespraech">
+      <div class="sf-head-left">
+        <p class="eyebrow">Gespräch mit Verena aufnehmen</p>
+        <h2>Du hast etwas zu sagen? Verena stellt die Fragen.</h2>
+      </div>
+      <div class="sf-two-cards">
 
-          <div class="tw-track" id="tw-track">
+        <!-- Kostenlos -->
+        <div class="sf-info-card">
+          <div class="sf-icon-circle icon-green" style="margin-bottom:18px">
+            <svg><use href="#icon-message"/></svg>
+          </div>
+          <h3>Gespräch mit Verena – kostenlos</h3>
+          <p>Wir führen gemeinsam ein Gespräch, das im Sinnfunk-Webradio ausgestrahlt wird. Kein Aufwand für dich.</p>
+          <ul class="sf-check-list" style="margin-bottom:auto">
+            <li>Vorgespräch zur Vorbereitung</li>
+            <li>Verena erarbeitet Fragen und schickt sie dir vorab</li>
+            <li>Das Gespräch wird mindestens 3× im Webradio ausgestrahlt</li>
+            <li>Du wirst in den sozialen Medien &amp; auf der Sinnfunk-Website vorgestellt</li>
+            <li>InPöllau und über Zoom möglich</li>
+          </ul>
+          <span class="sf-free-tag" style="margin-top:22px">✓ Kostenlos</span>
+        </div>
 
-            <!-- Originalkarten -->
-            <article class="tw-card">
-              <div class="tw-img" style="background-image:url('image/steine-karte.webp');">
-                <span class="tw-badge">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.2"/></svg>
-                </span>
-              </div>
-              <div class="tw-body">
-                <h3>Spiritualität</h3>
-                <p>Vom Suchen, Staunen und Innehalten — jenseits von Dogma und Schublade.</p>
-              </div>
-            </article>
-
-            <article class="tw-card">
-              <div class="tw-img" style="background-image:url('image/massage-karte.webp');">
-                <span class="tw-badge">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg>
-                </span>
-              </div>
-              <div class="tw-body">
-                <h3>Energiearbeit</h3>
-                <p>Was dich stärkt und wieder ins Gleichgewicht bringt. Praktiker erzählen aus ihrer Arbeit.</p>
-              </div>
-            </article>
-
-            <article class="tw-card">
-              <div class="tw-img" style="background-image:url('image/yoga-karte.webp');">
-                <span class="tw-badge">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="5.5" r="2"/><path d="M5 21l3-7 4-2 4 2 3 7M8 11h8"/></svg>
-                </span>
-              </div>
-              <div class="tw-body">
-                <h3>Meditation &amp; Yoga</h3>
-                <p>Zur Ruhe kommen, im Atem ankommen. Geführte Einblicke für den Alltag.</p>
-              </div>
-            </article>
-
-            <article class="tw-card">
-              <div class="tw-img" style="background-image:url('image/kamille-karte.webp');">
-                <span class="tw-badge">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="2.5"/><path d="M12 2v6M12 16v6M2 12h6M16 12h6M5 5l4 4M15 15l4 4M19 5l-4 4M9 15l-4 4"/></svg>
-                </span>
-              </div>
-              <div class="tw-body">
-                <h3>Heilpraktik</h3>
-                <p>Naturheilkunde und ganzheitliche Begleitung — mit Offenheit, ohne Absolutheitsanspruch.</p>
-              </div>
-            </article>
-
-            <article class="tw-card">
-              <div class="tw-img" style="background-image:url('image/wald-karte.webp');">
-                <span class="tw-badge">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22V8M12 8L7 13M12 8l5 5M12 2C9 5 9 8 12 8s3-3 0-6z"/></svg>
-                </span>
-              </div>
-              <div class="tw-body">
-                <h3>Natur &amp; Kräuter</h3>
-                <p>Wildpflanzen, Jahreskreis, altes Wissen. Die Natur als Lehrerin — für alle, die ihr zuhören.</p>
-              </div>
-            </article>
-
-            <article class="tw-card">
-              <div class="tw-img" style="background-image:url('image/berge-karte.webp');">
-                <span class="tw-badge">
-                  <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 20l6-12 4 7 2-3 6 8z"/></svg>
-                </span>
-              </div>
-              <div class="tw-body">
-                <h3>Achtsamkeit</h3>
-                <p>Bewusster leben, langsamer werden. Praktische Wege zu mehr Stille im Alltag.</p>
-              </div>
-            </article>
-
-            <!-- Duplikat der Karten für den nahtlosen Endlos-Loop (aria-hidden, damit Screenreader sie ignorieren) -->
-            <div aria-hidden="true" style="display:contents;">
-              <article class="tw-card">
-                <div class="tw-img" style="background-image:url('image/steine-karte.webp');">
-                  <span class="tw-badge">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="9"/><circle cx="12" cy="12" r="3.2"/></svg>
-                  </span>
-                </div>
-                <div class="tw-body">
-                  <h3>Spiritualität</h3>
-                  <p>Vom Suchen, Staunen und Innehalten — jenseits von Dogma und Schublade.</p>
-                </div>
-              </article>
-
-              <article class="tw-card">
-                <div class="tw-img" style="background-image:url('image/massage-karte.webp');">
-                  <span class="tw-badge">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 21s-7-4.5-7-10a4 4 0 0 1 7-2.6A4 4 0 0 1 19 11c0 5.5-7 10-7 10z"/></svg>
-                  </span>
-                </div>
-                <div class="tw-body">
-                  <h3>Energiearbeit</h3>
-                  <p>Was dich stärkt und wieder ins Gleichgewicht bringt. Praktiker erzählen aus ihrer Arbeit.</p>
-                </div>
-              </article>
-
-              <article class="tw-card">
-                <div class="tw-img" style="background-image:url('image/yoga-karte.webp');">
-                  <span class="tw-badge">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="5.5" r="2"/><path d="M5 21l3-7 4-2 4 2 3 7M8 11h8"/></svg>
-                  </span>
-                </div>
-                <div class="tw-body">
-                  <h3>Meditation &amp; Yoga</h3>
-                  <p>Zur Ruhe kommen, im Atem ankommen. Geführte Einblicke für den Alltag.</p>
-                </div>
-              </article>
-
-              <article class="tw-card">
-                <div class="tw-img" style="background-image:url('image/kamille-karte.webp');">
-                  <span class="tw-badge">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><circle cx="12" cy="12" r="2.5"/><path d="M12 2v6M12 16v6M2 12h6M16 12h6M5 5l4 4M15 15l4 4M19 5l-4 4M9 15l-4 4"/></svg>
-                  </span>
-                </div>
-                <div class="tw-body">
-                  <h3>Heilpraktik</h3>
-                  <p>Naturheilkunde und ganzheitliche Begleitung — mit Offenheit, ohne Absolutheitsanspruch.</p>
-                </div>
-              </article>
-
-              <article class="tw-card">
-                <div class="tw-img" style="background-image:url('image/wald-karte.webp');">
-                  <span class="tw-badge">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M12 22V8M12 8L7 13M12 8l5 5M12 2C9 5 9 8 12 8s3-3 0-6z"/></svg>
-                  </span>
-                </div>
-                <div class="tw-body">
-                  <h3>Natur &amp; Kräuter</h3>
-                  <p>Wildpflanzen, Jahreskreis, altes Wissen. Die Natur als Lehrerin — für alle, die ihr zuhören.</p>
-                </div>
-              </article>
-
-              <article class="tw-card">
-                <div class="tw-img" style="background-image:url('image/berge-karte.webp');">
-                  <span class="tw-badge">
-                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"><path d="M3 20l6-12 4 7 2-3 6 8z"/></svg>
-                  </span>
-                </div>
-                <div class="tw-body">
-                  <h3>Achtsamkeit</h3>
-                  <p>Bewusster leben, langsamer werden. Praktische Wege zu mehr Stille im Alltag.</p>
-                </div>
-              </article>
+        <!-- Mit Aufnahme -->
+        <div class="sf-info-card">
+          <div class="sf-icon-circle icon-warm" style="margin-bottom:18px">
+            <svg><use href="#icon-video"/></svg>
+          </div>
+          <h3>Gespräch aufnehmen &amp; behalten</h3>
+          <p>Diese Aufnahme gehört dir – für deine Website und deine sozialen Medien. 
+            Zusätzlich zur Radioausstrahlung wird das Gespräch auch als <b>Video</b> aufgezeichnet.</p>
+          <ul class="sf-check-list" style="margin-bottom:22px">
+            <li>Vorgespräch zur Vorbereitung</li>
+            <li>Verena erarbeitet Fragen und schickt sie dir vorab</li>
+            <li>Professionelle Audio- &amp; Videoaufnahme</li>
+            <li>Audiodatei &amp; Videodatei gehören dir – frei verwendbar</li>
+            <li>Aufzeichnung bis zu 2 Stunden</li>
+            <li>In Pöllau und über Zoom möglich</li>
+          </ul>
+          <div class="sf-price-box-inline">
+            <span class="pbadge">Aktionspreis</span>
+            <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:4px">
+              <span class="sf-price-strike">150 € / Gesprächspaket</span>
+              <span class="sf-price-big">50 € / Gesprächspaket</span>
             </div>
-
-          </div>
-
-          <button class="tw-nav tw-nav-next" id="tw-next" aria-label="Weitere Themen" type="button">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="9 18 15 12 9 6"/></svg>
-          </button>
-        </div>
-      </div>
-
-      <!-- ── Untere Spalten ── -->
-      <div class="bottom-grid" id="neueste">
-
-        <!-- Neueste Sinnfunker (live aus Supabase) -->
-        <div class="col-card">
-          <p class="label">Neueste Sinnfunker</p>
-          <div id="neueste-sinnfunker">
-            <p class="sfk-loading">Wird geladen …</p>
-          </div>
-          <a class="arrow-link" href="community.html">Alle Sinnfunker ansehen →</a>
-        </div>
-
-        <!-- Verbinde dich -->
-        <div class="col-card">
-          <p class="label">Verbinde dich</p>
-          <div class="connect-row">
-            <span class="connect-icon">
-              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M18 2h-3a5 5 0 0 0-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 0 1 1-1h3z"/></svg>
-            </span>
-            <a href="https://www.facebook.com/profile.php?id=61590566336118&locale=de_DE" target="_blank" rel="noopener">
-              <strong>Facebook</strong>
-              <span>Neuigkeiten &amp; Austausch</span>
-            </a>
-          </div>
-          <div class="connect-row">
-            <span class="connect-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="2.5" y="2.5" width="19" height="19" rx="5"/><circle cx="12" cy="12" r="4.2"/><circle cx="17.5" cy="6.5" r="1.1" fill="currentColor" stroke="none"/></svg>
-            </span>
-            <a href="https://www.instagram.com/sinnfunk.webradio/" target="_blank" rel="noopener">
-              <strong>Instagram</strong>
-              <span>Eindrücke &amp; Impulse</span>
-            </a>
-          </div>
-          <div class="connect-row">
-            <span class="connect-icon">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m3 7 9 6 9-6"/></svg>
-            </span>
-            <a href="kontakt.html">
-              <strong>Kontakt</strong>
-              <span>Schreib Sinnfunk</span>
-            </a>
+            <span class="sf-price-sub">Aktionspreis gilt bis 31. Dezember 2026</span>
           </div>
         </div>
 
-        <!-- Über Sinnfunk -->
-        <div class="col-card dark">
-          <p class="label">Über Sinnfunk</p>
-          <p>Sinnfunk ist ein unabhängiges Webradio für deine ganzheitliche Lebenspraxis. 
-            Sinnfunk bringt Astrologen, Energetiker, Kräuterpädagogen, Heilpraktiker, Achtsamkeitstrainer und viele andere Personen aus diesem Bereich an einem Ort zusammen.
-          <b>Das Sinnfunk-Ziel: Ein Sprachradio, das erdet.</b></p>
-          <a class="arrow-link" href="mitmachen.html">Sei dabei →</a>
+        <!-- Externe Gesprächsaufnahme -->
+        <div class="sf-info-card">
+          <div class="sf-icon-circle icon-warm" style="margin-bottom:18px">
+            <svg><use href="#icon-users"/></svg>
+          </div>
+          <h3>Gesprächsaufnahme für Externe</h3>
+          <p>Du produzierst keine Inhalte für Sinnfunk, möchtest aber trotzdem ein Gespräch mit Verena aufnehmen – etwa um deine eigenen Produkte, zum Beispiel Nahrungsergänzungsmittel, zu vermarkten. Das Gespräch wird ausschließlich für dich aufgezeichnet und nicht bei Sinnfunk ausgestrahlt.</p>
+          <ul class="sf-check-list" style="margin-bottom:22px">
+            <li>Vorgespräch zur Vorbereitung</li>
+            <li>Verena erarbeitet Fragen und schickt sie dir vorab</li>
+            <li>Professionelle Audio- &amp; Videoaufnahme</li>
+            <li>Audiodatei &amp; Videodatei gehören dir – frei verwendbar</li>
+            <li>Aufzeichnung bis zu 2 Stunden</li>
+            <li>In Pöllau und über Zoom möglich</li>
+          </ul>
+          <div class="sf-price-box-inline">
+            <span class="pbadge">Aktionspreis</span>
+            <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:4px">
+              <span class="sf-price-strike">300 € / Gesprächspaket</span>
+              <span class="sf-price-big">100 € / Gesprächspaket</span>
+            </div>
+            <span class="sf-price-sub">Aktionspreis gilt bis 31. Dezember 2026, danach 300 € pro Paket</span>
+          </div>
         </div>
 
       </div>
+      <div class="sf-social-note">
+        Bei den ersten beiden Varianten wirst du zusätzlich in den sozialen Medien und auf der Sinnfunk-Website vorgestellt.
+      </div>
 
-    </main>
+      <div class="sf-gw-examples">
+        <div class="sf-gw-example-box">
+          <h4>Bei mir in Pöllau</h4>
+          <p class="sf-gw-example-sub">Video mit Melanie</p>
+          <div class="sf-gw-example-video">
+            <iframe src="https://player.mediadelivery.net/embed/695445/8a2e0f1d-08d1-4ded-a37b-84dc7ac5797a?autoplay=false&loop=false&muted=false&preload=true&responsive=true"
+             loading="lazy"
+             allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
+             allowfullscreen="true">
+            </iframe>
+          </div>
+          <p class="sf-gw-example-note">Das Video wird bei uns vor Ort aufgenommen und im Anschluss nachbearbeitet.</p>
+        </div>
+        <div class="sf-gw-example-box">
+          <h4>Über Zoom</h4>
+          <p class="sf-gw-example-sub">Video mit Michael</p>
+          <div class="sf-gw-example-video is-portrait">
+            <iframe src="https://player.mediadelivery.net/embed/695445/3766676f-8cb3-44ec-919d-4067bda33aae?autoplay=false&loop=false&muted=false&preload=true&responsive=true"
+             loading="lazy"
+             allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
+             allowfullscreen="true">
+            </iframe>
+          </div>
+          <p class="sf-gw-example-note">Das Gespräch findet über Zoom statt und wird im Anschluss nachbearbeitet.</p>
+        </div>
+      </div>
+    </section>
 
-    <div id="sf-footer"></div>
+    <!-- SENDEPLÄTZE -->
+    <section class="sf-program-wrap" id="programm">
+      <div class="sf-head-left">
+        <p class="eyebrow">Sendeprogramm</p>
+        <h2>Fixe Sendeplätze</h2>
+        <p class="sf-lead">Für bestimmte Inhalte wiederkehrende Sendeplätze.</p>
+      </div>
+      <div class="sf-slots-grid">
+        <div class="sf-slot"><span class="sf-icon-circle sm"><svg><use href="#icon-book"/></svg></span><div><strong>Autoren präsentieren ihre Bücher</strong><span>Stelle dein Buch vor.</span></div></div>
+        <div class="sf-slot"><span class="sf-icon-circle sm"><svg><use href="#icon-book"/></svg></span><div><strong>Achtsamkeit &amp; Meditation</strong><span>In dieser Einheit geht es um den großen Bereich der Achtsamkeit und der Meditation.</span></div></div>
+        <div class="sf-slot"><span class="sf-icon-circle sm"><svg><use href="#icon-pin"/></svg></span><div><strong>Podcast &amp; YouTube</strong><span>Präsentiere der Sinnfunk-Gemeinschaft deinen Podcast- oder YouTube-Kanal, indem du einige deiner Episoden auf Sinnfunk sendest.</span></div></div>
+        <div class="sf-slot"><span class="sf-icon-circle sm"><svg><use href="#icon-leaf"/></svg></span><div><strong>Kräuter &amp; Natur</strong><span>Kräuterpädagogen, Naturliebhaber und Permakulturbegeisterte finden hier ihren Sendeplatz./span></div></div>
+        <div class="sf-slot"><span class="sf-icon-circle sm"><svg><use href="#icon-shield"/></svg></span><div><strong>Die menschliche Psyche</strong><span>Psychotherapeuten und Psychologen berichten aus ihrem Erfahrungsschatz.</span></div></div>
+        <div class="sf-slot"><span class="sf-icon-circle sm"><svg><use href="#icon-shield"/></svg></span><div><strong>Energetik &amp; Energiearbeit</strong><span>Energetiker führen in ihr Arbeitsfeld ein.</span></div></div>
+        <div class="sf-slot"><span class="sf-icon-circle sm"><svg><use href="#icon-shield"/></svg></span><div><strong>Medialität</strong><span>Unterschiedlich medial begabte Menschen geben Einblicke in ihre Welt.</span></div></div>
+        <div class="sf-slot"><span class="sf-icon-circle sm"><svg><use href="#icon-star"/></svg></span><div><strong>Astrologie</strong><span>Astrologie, die in die Tiefe geht und dabei verankert bleibt.</span></div></div>
+        <div class="sf-slot"><span class="sf-icon-circle sm"><svg><use href="#icon-message"/></svg></span><div><strong>Gespräche mit Verena</strong><span>Ich führe in regelmäßigen Abschnitten Gespräche mit interessanten Menschen.</span></div></div>
+      </div>
+    </section>
+
+    <!-- REGELN -->
+    <section class="sf-what-wrap" id="regeln">
+      <div class="sf-head-left">
+        <p class="eyebrow">Was Sinnfunk ist – und was nicht</p>
+        <h2>Sinnfunk-Richtlinien</h2>
+        <p class="sf-lead">Ein Webradio unterliegt strengeren Auflagen als ein Podcast. Als Inhaberin bin ich rechtlich belangbar. 
+          Ich werde deshalb <b>jeden hochgeladenen Inhalt von einer KI überprüfen lassen.</b> Da KIs Fehler machen, werde ich jeden von der KI abgelehnten Inhalt noch einmal selbst nachprüfen.
+        Erleichtere mir bitte meinen Arbeitsalltag und lies dir die folgenden Regeln genau durch. Du kannst mich auch gerne kontaktieren, falls dir etwas unklar ist.</p>
+      </div>
+      <div class="sf-what-grid">
+        <div class="sf-what-card sf-card">
+          <div class="sf-icon-circle sm"><svg><use href="#icon-x"/></svg></div>
+          <strong>Kein Raum für Polarisierung</strong>
+          <p>Sinnfunk ist bewusst ein Ort abseits von Tagespolitik, Corona &amp; Impfung, Verschwörungstheorien und ähnlichen Reizthemen.</p>
+          <p>Bei Sinnfunk geht es um Inhalte, die <b>keine starken Gefühle</b> entfachen.</p>
+        </div>
+        <div class="sf-what-card sf-card">
+          <div class="sf-icon-circle sm"><svg><use href="#icon-mic"/></svg></div>
+          <strong>Sprache</strong>
+          <p><b>Einschränkung gendergerechte Sprache.</b> Ein "Liebe Hörer und Hörerinnen" am Anfang ist vollkommen in Ordung, 
+            aber um die Verständlichkeit zu wahren, bitte keine durchgängige Verwendung von Glottisschlag* - Pause im Wortinneren - oder Paarform.</p>
+            <p><b>Dialekte:</b> Du musst nicht Hochdeutsch sprechen. Ich selbst spreche mit einem österreichischen Einschlag. 
+              Oft ist die eigene Sprache sogar flüssiger, wenn im Dialekt gesprochen wird. Trotzdem sollte deine Aufnahme für Hörer im gesamten deutschsprachigen Raum verständlich sein.</p>
+        </div>
+        <div class="sf-what-card sf-card">
+          <div class="sf-icon-circle sm"><svg><use href="#icon-ad-off"/></svg></div>
+          <strong>Keine Fremdwerbung</strong>
+          <p>Du darfst dich selbst sowie deine eigenen Angebote vorstellen: Bücher, Seminare, Kurse, Beratungen oder auch eigene Nahrungsergänzungsmittel.</p>
+          <p><b>Keine Werbung für fremde Unternehmen, Produkte oder Dienstleistungen.</b> Die gesetzlichen Werbebeschränkungen - keine Werbung für Alkohol, Waffen, Pornografie und Ähnliches - gelten selbstverständlich.</p>
+        </div>
+        <div class="sf-what-card sf-card">
+          <div class="sf-icon-circle sm"><svg><use href="#icon-x"/></svg></div>
+          <strong>Musik</strong>
+             <p><b>Keine Musik</b> – außer einem kurzen Gong im Hintergrund oder einer kurze Einspielung von einigen Sekunden. 
+            Auf Sinnfunk wird zwar meditative Musik zwischen den Gesprächen gespielt, diese ist jedoch ki-generiert und ich habe den Lizenznachweis für diese Musik. 
+            Um meine Arbeit zu vereinfachen - ich muss alle Lizenzen für Musik nachweisen -, nehme ich deshalb keine Inhalte von Sinnfunkern an, bei denen im Hintergrund Musik gespielt wird. 
+            <b>Diese Regel kann sich in der Zukunft ändern.</b>Sinnfunk befindet sich im Aufbau.</p>
+        </div>
+        <div class="sf-what-card sf-card">
+          <div class="sf-icon-circle sm"><svg><use href="#icon-scale"/></svg></div>
+          <strong>Rechtliches</strong>
+          <p>Veröffentliche <b>keine verleumderischen oder rufschädigenden Aussagen über Personen oder Organisationen.</b></p>
+          <p>Bei medizinischen, psychologischen oder therapeutischen Themen <b>keine Heilsversprechen und keine unbelegten Behauptungen!</b></p>
+          <p>Informationen zu <b>Nahrungsergänzungsmittel</b> sind bei Sinnfunk aufgrund der strengen Auflagen in diesem Bereich ausgeschlossen.</p>
+      
+        </div>
+        <div class="sf-what-card sf-card">
+          <div class="sf-icon-circle sm"><svg><use href="#icon-headphones"/></svg></div>
+          <strong>Gut hörbare Qualität</strong>
+          <p>Inhalte müssen gut hörbar sein: <b>nicht zu leise, keine störenden Hintergrundgeräusche</b> und eine <b>verständliche Aussprache</b>.</p>
+        </div>
+      </div>
+    </section>
+
+    <!-- KONTAKT -->
+    <section class="sf-contact" id="kontakt">
+      <div class="sf-contact-inner">
+        <div class="sf-contact-img">
+          <img src="image/Portrait-Kontakt.webp" alt="Verena – Sinnfunk" />
+        </div>
+        <div class="sf-contact-info">
+          <p class="eyebrow">Kontakt</p>
+          <h2>Sprich mit mir</h2>
+          <p class="contact-intro">Du hast Fragen oder möchtest mitmachen? Anrufen ist <b>vormittags</b> möglich. Eine Nachricht kannst du <b>jederzeit</b> schreiben.</p>
+          <div class="sf-contact-lines">
+            <div class="sf-contact-line">
+              <span class="sf-icon-circle sm"><svg><use href="#icon-phone"/></svg></span>
+              <div>
+                <a href="tel:+436802223014">+43 680 222 3014</a>
+                <small>Anrufe vormittags</small>
+              </div>
+            </div>
+            <div class="sf-contact-line">
+              <span class="sf-icon-circle sm"><svg><use href="#icon-mail"/></svg></span>
+              <div>
+                <a href="mailto:servus@sinnfunk.live">servus@sinnfunk.live</a>
+                <small>Nachrichten jederzeit</small>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+<div id="sf-footer"></div>
     <script src="footer.js"></script>
 
-  </div>
-
-  <script>
-const titleEl = document.getElementById("current-title");
-    const hostEl  = document.getElementById("current-host");
-
-    async function updateNowPlaying() {
-      try {
-        const res  = await fetch("https://radio.sinnfunk.live/api/nowplaying/sinnfunk?_=" + Date.now(), { cache: "no-store" });
-        const data = await res.json();
-        const song = data.now_playing && data.now_playing.song;
-        if (song) {
-          titleEl.textContent = song.title  || "Sinnfunk";
-          hostEl.textContent  = song.artist || "Sinnfunk";
-        }
-      } catch (err) {
-        console.error("Now Playing konnte nicht geladen werden:", err);
-      }
-    }
-
-    updateNowPlaying();
-    setInterval(updateNowPlaying, 15000);
-
-    // "Jetzt live hören": Stream starten, Rückmeldung geben, zum Player scrollen
-    const heroBtn   = document.getElementById("hero-play-btn");
-    const heroLabel = document.getElementById("hero-play-label");
-    const stream    = document.getElementById("sf-stream");
-    const streamCard = document.getElementById("prog-stream");
-
-    function setHeroLabel(text) {
-      if (heroLabel) heroLabel.textContent = text;
-    }
-
-    if (heroBtn && stream) {
-      heroBtn.addEventListener("click", function (e) {
-        e.preventDefault();
-        const streamCol = document.querySelector(".prog-stream") || document.getElementById("player");
-        if (streamCol) streamCol.scrollIntoView({ behavior: "smooth", block: "start" });
-
-        if (stream.paused) {
-          setHeroLabel("Stream lädt …");
-          // Stream aktiv neu laden, damit preload="none" kein Hindernis ist
-          try { stream.load(); } catch (_) {}
-          const pr = stream.play();
-          if (pr && typeof pr.then === "function") {
-            pr.catch(function () {
-              // Wiedergabe blockiert oder Stream nicht erreichbar
-              setHeroLabel("Im Player unten starten ↓");
-            });
-          }
-        } else {
-          stream.pause();
-        }
-      });
-
-      // Button-Text mit dem echten Player-Zustand synchron halten
-      stream.addEventListener("playing", function () {
-        setHeroLabel("Stream läuft – pausieren");
-        if (streamCard) streamCard.classList.add("is-playing");
-      });
-      stream.addEventListener("waiting", function () { setHeroLabel("Stream lädt …"); });
-      stream.addEventListener("pause",   function () {
-        setHeroLabel("Jetzt live hören");
-        if (streamCard) streamCard.classList.remove("is-playing");
-      });
-      stream.addEventListener("error",   function () {
-        setHeroLabel("Stream nicht erreichbar");
-        if (streamCard) streamCard.classList.remove("is-playing");
-      });
-    }
-
-    // Themenwelten-Karussell: Pfeile pausieren den Auto-Loop kurz und springen manuell
-    const twCarousel = document.getElementById("tw-carousel");
-    const twTrack = document.getElementById("tw-track");
-    const twPrev = document.getElementById("tw-prev");
-    const twNext = document.getElementById("tw-next");
-
-    if (twCarousel && twTrack && twPrev && twNext) {
-      let resumeTimer = null;
-
-      function pauseThenResume() {
-        twCarousel.classList.add("tw-paused");
-        clearTimeout(resumeTimer);
-        resumeTimer = setTimeout(function () {
-          twCarousel.classList.remove("tw-paused");
-        }, 4000);
-      }
-
-      function nudge(dir) {
-        pauseThenResume();
-        const card = twTrack.querySelector(".tw-card");
-        const step = card ? card.getBoundingClientRect().width + 20 : 320;
-        const style = getComputedStyle(twTrack);
-        const matrix = new DOMMatrixReadOnly(style.transform);
-        const current = matrix.m41; // aktuelle X-Verschiebung durch die Animation
-        twTrack.style.animationPlayState = "paused";
-        twTrack.style.transform = "translateX(" + (current - dir * step) + "px)";
-        // Nach der manuellen Verschiebung die Animation von dort fortsetzen lassen
-        setTimeout(function () {
-          twTrack.style.transition = "transform 0.4s ease";
-        }, 10);
-      }
-
-      twPrev.addEventListener("click", function () { nudge(-1); });
-      twNext.addEventListener("click", function () { nudge(1); });
-    }
-  </script>
-
-
-  <!-- Neueste Sinnfunker live aus Supabase -->
-  <script>
-    (function () {
-      const SB_URL  = 'https://mliatnfqgnctbxhbwhzp.supabase.co';
-      const SB_ANON = 'sb_publishable_KocEqg2UUL2trsGXb_kacA_yfY8DIP3';
-      const box = document.getElementById('neueste-sinnfunker');
-      if (!box || typeof supabase === 'undefined') return;
-
-      const db = supabase.createClient(SB_URL, SB_ANON);
-
-      function esc(str) {
-        return String(str || '')
-          .replace(/&/g, '&amp;').replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-      }
-
-      async function laden() {
-        const cols = 'id, name, photo_url';
-        const filterStatus = ['aktiv', 'freigegeben'];
-        // Neueste zuerst: created_at, sonst id, sonst ohne Sortierung
-        for (const col of ['created_at', 'id']) {
-          const r = await db.from('sinnfunker').select(cols)
-            .in('status', filterStatus)
-            .order(col, { ascending: false })
-            .limit(5);
-          if (!r.error) { return render(r.data || []); }
-        }
-        const r = await db.from('sinnfunker').select(cols)
-          .in('status', filterStatus).limit(5);
-        if (!r.error) return render(r.data || []);
-        box.innerHTML = '<p class="sfk-empty">Konnte gerade nicht geladen werden.</p>';
-      }
-
-      function render(list) {
-        if (!list.length) {
-          box.innerHTML = '<p class="sfk-empty">Bald sind hier die ersten Sinnfunker zu sehen.</p>';
-          return;
-        }
-        box.innerHTML = list.map(s => {
-          const initial = s.name ? s.name.charAt(0).toUpperCase() : '?';
-          const avatar = s.photo_url
-            ? `<span class="sfk-avatar"><img src="${esc(s.photo_url)}" alt="${esc(s.name)}" /></span>`
-            : `<span class="sfk-avatar">${initial}</span>`;
-          return `<a class="sfk-row" href="community.html">
-                    ${avatar}<span class="sfk-name">${esc(s.name)}</span>
-                  </a>`;
-        }).join('');
-      }
-
-      laden();
-    })();
-  </script>
-
-  <!-- Sendeplan (Vormittag/Abend, heutiger Wochentag) live aus Supabase -->
-  <script>
-    (function () {
-      const SB_URL  = 'https://mliatnfqgnctbxhbwhzp.supabase.co';
-      const SB_ANON = 'sb_publishable_KocEqg2UUL2trsGXb_kacA_yfY8DIP3';
-      const liste = document.getElementById('sendungen-liste');
-      const tagLabel = document.getElementById('sendungen-tag');
-      if (!liste || typeof supabase === 'undefined') return;
-
-      const db = supabase.createClient(SB_URL, SB_ANON);
-
-      const WOCHENTAGE = ['Mo', 'Di', 'Mi', 'Do', 'Fr', 'Sa', 'So'];
-      const WOCHENTAG_NAMEN = {
-        Mo: 'Montag', Di: 'Dienstag', Mi: 'Mittwoch', Do: 'Donnerstag',
-        Fr: 'Freitag', Sa: 'Samstag', So: 'Sonntag',
-      };
-
-      function heutigesKuerzel() {
-        const jsTag = new Date().getDay(); // 0 = So
-        return WOCHENTAGE[(jsTag + 6) % 7];
-      }
-      function vorherigerTag(k) {
-        const idx = WOCHENTAGE.indexOf(k);
-        return WOCHENTAGE[(idx + 6) % 7];
-      }
-      function pad(n) { return String(n).padStart(2, '0'); }
-      function zeitPlusMinuten(zeit, minuten) {
-        const teile = (zeit || '00:00').split(':').map(Number);
-        const h = teile[0], m = teile[1];
-        const gesamt = ((h * 60 + m + (minuten || 0)) % 1440 + 1440) % 1440;
-        return pad(Math.floor(gesamt / 60)) + ':' + pad(gesamt % 60);
-      }
-      function mitZeiten(eintraege, start) {
-        let cursor = start;
-        return eintraege.map(function (item) {
-          const s = cursor;
-          const e = zeitPlusMinuten(cursor, item.duration || 0);
-          cursor = e;
-          return Object.assign({}, item, { start: s, ende: e });
-        });
-      }
-      function esc(str) {
-        return String(str || '')
-          .replace(/&/g, '&amp;').replace(/</g, '&lt;')
-          .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
-      }
-
-      function renderZeile(e) {
-        return '<div class="next-row"><span class="next-time">' + esc(e.start) + '–' + esc(e.ende) + '</span>' +
-               '<div><strong>' + esc(e.titel) + '</strong></div></div>';
-      }
-
-      let episoden = [];
-      const fussnote = document.getElementById('sendungen-fussnote');
-      const epGrid = document.getElementById('ep-grid');
-
-      function renderListe() {
-        if (!episoden.length) {
-          liste.innerHTML = '<p class="sfk-empty">Noch nichts eingetragen.</p>';
-          return;
-        }
-        liste.innerHTML = episoden.map(renderZeile).join('');
-      }
-
-      function renderEpGrid() {
-        if (!epGrid) return;
-        if (!episoden.length) {
-          epGrid.innerHTML = '<div class="ep-box"><p class="ep-box-text">Noch keine Sendung eingetragen.</p></div>';
-          return;
-        }
-        epGrid.innerHTML = episoden.map(function (e) {
-          return '<div class="ep-box">' +
-                   '<span class="ep-box-zeit">' + esc(e.start) + '–' + esc(e.ende) + ' Uhr</span>' +
-                   '<div class="ep-box-titel">' + esc(e.titel) + '</div>' +
-                   (e.beschreibung ? '<div class="ep-box-text">' + esc(e.beschreibung) + '</div>' : '') +
-                 '</div>';
-        }).join('');
-      }
-
-      async function laden() {
-        let sendezeiten = { vormittag: '08:00', abend: '19:00' };
-        try {
-          const r = await db.from('einstellungen').select('id, wert')
-            .in('id', ['sendezeit_vormittag_von', 'sendezeit_nacht_von']);
-          (r.data || []).forEach(function (e) {
-            if (e.id === 'sendezeit_vormittag_von') sendezeiten.vormittag = e.wert;
-            if (e.id === 'sendezeit_nacht_von') sendezeiten.abend = e.wert;
-          });
-        } catch (err) { /* Fallback-Zeiten bleiben bestehen */ }
-
-        const heute = heutigesKuerzel();
-        const gestern = vorherigerTag(heute);
-
-        if (tagLabel) tagLabel.textContent = 'Heute ist ' + WOCHENTAG_NAMEN[heute];
-
-        const r = await db.from('wochenprogramm_eintraege')
-          .select('wochentag, reihenfolge, episode:episode_id(title, duration, description)')
-          .in('wochentag', [heute, gestern])
-          .order('reihenfolge', { ascending: true });
-
-        if (r.error) {
-          liste.innerHTML = '<p class="sfk-empty">Sendeplan konnte gerade nicht geladen werden.</p>';
-          renderEpGrid();
-          return;
-        }
-
-        const eintraege = r.data || [];
-        const abendRoh = eintraege.filter(function (row) { return row.wochentag === heute; })
-          .map(function (row) { return { titel: row.episode ? row.episode.title : '', beschreibung: row.episode ? row.episode.description : '', duration: row.episode ? row.episode.duration : 0 }; });
-        const vormittagRoh = eintraege.filter(function (row) { return row.wochentag === gestern; })
-          .map(function (row) { return { titel: row.episode ? row.episode.title : '', beschreibung: row.episode ? row.episode.description : '', duration: row.episode ? row.episode.duration : 0 }; });
-
-        const abend = mitZeiten(abendRoh, sendezeiten.abend);
-        const vormittag = mitZeiten(vormittagRoh, sendezeiten.vormittag);
-
-        episoden = vormittag.concat(abend);
-        renderListe();
-        renderEpGrid();
-        if (fussnote) fussnote.style.display = abend.length ? 'block' : 'none';
-      }
-
-      laden();
-    })();
-  </script>
+</div>
 </body>
 </html>
