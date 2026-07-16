@@ -15,6 +15,17 @@
     /* Hinweis unter dem Hero-Text */
     .hero-note { font-family: 'Inter', sans-serif; font-size: 0.82rem; color: rgba(255,255,255,0.75); margin: 10px 0 18px; max-width: 480px; }
 
+    /* Gesprächsteilnehmer der Woche – Video im Hochformat links, Text rechts */
+    .gw-grid { display: flex; gap: 36px; align-items: flex-start; }
+    .gw-video { flex: 0 0 260px; }
+    .gw-video-inner { position: relative; padding-top: 177.78%; border-radius: 12px; overflow: hidden; border: 1px solid rgba(123,94,69,0.14); }
+    .gw-video-inner iframe { border: 0; position: absolute; top: 0; height: 100%; width: 100%; }
+    .gw-text { flex: 1; min-width: 240px; }
+    @media (max-width: 700px) {
+      .gw-grid { flex-direction: column; align-items: center; text-align: center; }
+      .gw-video { flex: 0 0 auto; width: 60%; max-width: 240px; margin: 0 auto; }
+    }
+
     /* Wochentag-Anzeige über den Sendungen */
     .sendungen-tag { font-family: 'Inter', sans-serif; font-size: 0.72rem; text-transform: uppercase; letter-spacing: 0.08em; color: #8a7642; font-weight: 700; margin-bottom: 6px; }
 
@@ -162,20 +173,28 @@
       </div>
 
       <!-- ── Gesprächsteilnehmer der Woche ── -->
-      <div class="gespraech-woche" style="max-width: 720px; margin: 60px auto; padding: 0 24px;">
-        <p class="eyebrow">Sinnfunk-Gesprächsteilnehmer der Woche</p>
-        <h2 style="font-family: 'Cormorant Garamond', serif; margin-bottom: 4px;">Melanie Reitgruber</h2>
-        <a href="https://melanie-reitgruber.at/" target="_blank" rel="noopener" style="font-family: 'Inter', sans-serif; font-size: 0.85rem; color: #6f7169; text-decoration: underline; display: inline-block; margin-bottom: 14px;">melanie-reitgruber.at</a>
-        <p style="font-family: 'Inter', sans-serif; color: #353d2e; line-height: 1.6; margin-bottom: 24px;">
-          Melanie Reitgruber ist die erste Sinnfunk-Gesprächsteilnehmerin. Höre hier die ersten 10 Minuten unseres Gesprächs. Das volle Gespräch gibt es ab August 2026 auf Sinnfunk.live zu hören.
-        </p>
-        <div style="position: relative; padding-top: 56.25%; border-radius: 12px; overflow: hidden; border: 1px solid rgba(123,94,69,0.14);">
-          <iframe src="https://player.mediadelivery.net/embed/695445/8a2e0f1d-08d1-4ded-a37b-84dc7ac5797a?autoplay=false&loop=false&muted=false&preload=true&responsive=true"
-           loading="lazy"
-           style="border:0;position:absolute;top:0;height:100%;width:100%;"
-           allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
-           allowfullscreen="true">
-          </iframe>
+      <div class="gespraech-woche" style="max-width: 900px; margin: 60px auto; padding: 0 24px;">
+        <div class="gw-grid">
+          <div class="gw-video">
+            <div class="gw-video-inner">
+              <iframe src="https://player.mediadelivery.net/embed/695445/3766676f-8cb3-44ec-919d-4067bda33aae?autoplay=false&loop=false&muted=false&preload=true&responsive=true"
+               loading="lazy"
+               allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
+               allowfullscreen="true">
+              </iframe>
+            </div>
+          </div>
+          <div class="gw-text">
+            <p class="eyebrow">Sinnfunk-Gesprächsteilnehmer der Woche</p>
+            <h2 style="font-family: 'Cormorant Garamond', serif; margin-bottom: 4px;">Michael Stingeder</h2>
+            <a href="https://www.stingeder.com/" target="_blank" rel="noopener" style="font-family: 'Inter', sans-serif; font-size: 0.85rem; color: #6f7169; text-decoration: underline; display: inline-block; margin-bottom: 14px;">stingeder.com</a>
+            <p style="font-family: 'Inter', sans-serif; color: #353d2e; line-height: 1.6; margin-bottom: 16px;">
+              Der Weg in die Selbstständigkeit wird gerne als einfach vermittelt. Die Wirklichkeit sieht anders aus. Ich spreche hier mit Michael Stingeder. Er ist Obmann der Fachgruppe für persönliche Dienstleister in Oberösterreich und Bundesobmann für persönliche Dienstleister. Er erzählt aus seiner persönlichen Erfahrung und aus seinen vielen Gesprächen mit Energetikern über den Weg in die Selbstständigkeit.
+            </p>
+            <p style="font-family: 'Inter', sans-serif; color: #353d2e; line-height: 1.6;">
+              Das vollständige Gespräch erscheint im August 2026.
+            </p>
+          </div>
         </div>
       </div>
 

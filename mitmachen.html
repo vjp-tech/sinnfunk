@@ -143,7 +143,7 @@
       margin: 0 auto; padding: 0 0 72px;
     }
     .sf-two-cards {
-      display: grid; grid-template-columns: 1fr 1fr; gap: 20px;
+      display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
       margin-top: 28px;
     }
     .sf-info-card {
@@ -331,6 +331,18 @@
       .sf-hero-actions { flex-direction: column; align-items: stretch; gap: 10px; }
       .sf-hero-actions .button { justify-content: center; }
     }
+
+    /* Beispiel-Videos zu den Gesprächspaketen: Vor Ort in Pöllau / über Zoom */
+    .sf-gw-examples { display: flex; gap: 24px; margin-top: 32px; }
+    .sf-gw-example-box { flex: 1; background: var(--card-bg, #fff); border: 1px solid rgba(83,107,80,0.15); border-radius: var(--radius-sm, 12px); padding: 20px; }
+    .sf-gw-example-box h4 { font-family: 'Cormorant Garamond', serif; margin: 0 0 4px; }
+    .sf-gw-example-box .sf-gw-example-sub { font-family: Arial, sans-serif; font-size: 0.85rem; color: #6f7169; margin-bottom: 14px; }
+    .sf-gw-example-video { position: relative; padding-top: 56.25%; border-radius: 10px; overflow: hidden; margin-bottom: 14px; }
+    .sf-gw-example-video iframe { border: 0; position: absolute; top: 0; height: 100%; width: 100%; }
+    .sf-gw-example-note { font-family: Arial, sans-serif; font-size: 0.85rem; color: #55584e; line-height: 1.5; }
+    @media (max-width: 700px) {
+      .sf-gw-examples { flex-direction: column; }
+    }
   </style>
 </head>
 <body>
@@ -491,9 +503,61 @@
           </div>
         </div>
 
+        <!-- Externe Gesprächsaufnahme -->
+        <div class="sf-info-card">
+          <div class="sf-icon-circle icon-warm" style="margin-bottom:18px">
+            <svg><use href="#icon-users"/></svg>
+          </div>
+          <h3>Gesprächsaufnahme für Externe</h3>
+          <p>Du produzierst keine Inhalte für Sinnfunk, möchtest aber trotzdem ein Gespräch mit Verena aufnehmen – etwa um deine eigenen Produkte, zum Beispiel Nahrungsergänzungsmittel, zu vermarkten. Das Gespräch wird ausschließlich für dich aufgezeichnet und nicht bei Sinnfunk ausgestrahlt.</p>
+          <ul class="sf-check-list" style="margin-bottom:22px">
+            <li>Vorgespräch zur Vorbereitung</li>
+            <li>Verena erarbeitet Fragen und schickt sie dir vorab</li>
+            <li>Professionelle Audio- &amp; Videoaufnahme</li>
+            <li>Audiodatei &amp; Videodatei gehören dir – frei verwendbar</li>
+            <li>Aufzeichnung bis zu 2 Stunden</li>
+            <li>In Pöllau und über Zoom möglich</li>
+          </ul>
+          <div class="sf-price-box-inline">
+            <span class="pbadge">Aktionspreis</span>
+            <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:4px">
+              <span class="sf-price-strike">300 € / Gesprächspaket</span>
+              <span class="sf-price-big">100 € / Gesprächspaket</span>
+            </div>
+            <span class="sf-price-sub">Aktionspreis gilt bis 31. Dezember 2026, danach 300 € pro Paket</span>
+          </div>
+        </div>
+
       </div>
       <div class="sf-social-note">
-        In beiden Fällen wirst du in den sozialen Medien und auf der Sinnfunk-Website vorgestellt.
+        Bei den ersten beiden Varianten wirst du zusätzlich in den sozialen Medien und auf der Sinnfunk-Website vorgestellt.
+      </div>
+
+      <div class="sf-gw-examples">
+        <div class="sf-gw-example-box">
+          <h4>Bei mir in Pöllau</h4>
+          <p class="sf-gw-example-sub">Video mit Melanie</p>
+          <div class="sf-gw-example-video">
+            <iframe src="https://player.mediadelivery.net/embed/695445/8a2e0f1d-08d1-4ded-a37b-84dc7ac5797a?autoplay=false&loop=false&muted=false&preload=true&responsive=true"
+             loading="lazy"
+             allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
+             allowfullscreen="true">
+            </iframe>
+          </div>
+          <p class="sf-gw-example-note">Das Video wird bei uns vor Ort aufgenommen und im Anschluss nachbearbeitet.</p>
+        </div>
+        <div class="sf-gw-example-box">
+          <h4>Über Zoom</h4>
+          <p class="sf-gw-example-sub">Video mit Michael</p>
+          <div class="sf-gw-example-video">
+            <iframe src="https://player.mediadelivery.net/embed/695445/3766676f-8cb3-44ec-919d-4067bda33aae?autoplay=false&loop=false&muted=false&preload=true&responsive=true"
+             loading="lazy"
+             allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;"
+             allowfullscreen="true">
+            </iframe>
+          </div>
+          <p class="sf-gw-example-note">Das Gespräch findet über Zoom statt und wird im Anschluss nachbearbeitet.</p>
+        </div>
       </div>
     </section>
 
@@ -509,7 +573,9 @@
         <div class="sf-slot"><span class="sf-icon-circle sm"><svg><use href="#icon-book"/></svg></span><div><strong>Achtsamkeit &amp; Meditation</strong><span>In dieser Einheit geht es um den großen Bereich der Achtsamkeit und der Meditation.</span></div></div>
         <div class="sf-slot"><span class="sf-icon-circle sm"><svg><use href="#icon-pin"/></svg></span><div><strong>Podcast &amp; YouTube</strong><span>Präsentiere der Sinnfunk-Gemeinschaft deinen Podcast- oder YouTube-Kanal, indem du einige deiner Episoden auf Sinnfunk sendest.</span></div></div>
         <div class="sf-slot"><span class="sf-icon-circle sm"><svg><use href="#icon-leaf"/></svg></span><div><strong>Kräuter &amp; Natur</strong><span>Kräuterpädagogen, Naturliebhaber und Permakulturbegeisterte finden hier ihren Sendeplatz./span></div></div>
+        <div class="sf-slot"><span class="sf-icon-circle sm"><svg><use href="#icon-shield"/></svg></span><div><strong>Die menschliche Psyche</strong><span>Psychotherapeuten und Psychologen berichten aus ihrem Erfahrungsschatz.</span></div></div>
         <div class="sf-slot"><span class="sf-icon-circle sm"><svg><use href="#icon-shield"/></svg></span><div><strong>Energetik &amp; Energiearbeit</strong><span>Energetiker führen in ihr Arbeitsfeld ein.</span></div></div>
+        <div class="sf-slot"><span class="sf-icon-circle sm"><svg><use href="#icon-shield"/></svg></span><div><strong>Medialität</strong><span>Unterschiedlich medial begabte Menschen geben Einblicke in ihre Welt.</span></div></div>
         <div class="sf-slot"><span class="sf-icon-circle sm"><svg><use href="#icon-star"/></svg></span><div><strong>Astrologie</strong><span>Astrologie, die in die Tiefe geht und dabei verankert bleibt.</span></div></div>
         <div class="sf-slot"><span class="sf-icon-circle sm"><svg><use href="#icon-message"/></svg></span><div><strong>Gespräche mit Verena</strong><span>Ich führe in regelmäßigen Abschnitten Gespräche mit interessanten Menschen.</span></div></div>
       </div>
@@ -542,10 +608,9 @@
         <div class="sf-what-card sf-card">
           <div class="sf-icon-circle sm"><svg><use href="#icon-ad-off"/></svg></div>
           <strong>Keine Fremdwerbung</strong>
-          <p>Du darfst dich selbst sowie deine eigenen Angebote vorstellen: Bücher, Seminare, Kurse oder Beratungen.</p>
+          <p>Du darfst dich selbst sowie deine eigenen Angebote vorstellen: Bücher, Seminare, Kurse, Beratungen oder auch eigene Nahrungsergänzungsmittel.</p>
           <p><b>Keine Werbung für fremde Unternehmen, Produkte oder Dienstleistungen.</b> Die gesetzlichen Werbebeschränkungen - keine Werbung für Alkohol, Waffen, Pornografie und Ähnliches - gelten selbstverständlich.</p>
         </div>
-         <div class="sf-what-grid">
         <div class="sf-what-card sf-card">
           <div class="sf-icon-circle sm"><svg><use href="#icon-x"/></svg></div>
           <strong>Musik</strong>
@@ -559,6 +624,7 @@
           <strong>Rechtliches</strong>
           <p>Veröffentliche <b>keine verleumderischen oder rufschädigenden Aussagen über Personen oder Organisationen.</b></p>
           <p>Bei medizinischen, psychologischen oder therapeutischen Themen <b>keine Heilsversprechen und keine unbelegten Behauptungen!</b></p>
+          <p>Informationen zu <b>Nahrungsergänzungsmittel</b> sind bei Sinnfunk aufgrund der strengen Auflagen in diesem Bereich ausgeschlossen.</p>
       
         </div>
         <div class="sf-what-card sf-card">
