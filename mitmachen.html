@@ -152,6 +152,7 @@
       border-radius: var(--radius);
       padding: 32px;
       display: flex; flex-direction: column;
+      min-width: 0;
     }
     .sf-info-card h3 { font-size: 1.35rem; margin-bottom: 10px; }
     .sf-info-card > p {
@@ -187,6 +188,10 @@
       color: #fff; background: var(--gold);
       padding: 4px 12px; border-radius: 999px;
       display: inline-block; margin-bottom: 10px;
+    }
+    .sf-price-row {
+      display: flex; align-items: baseline; flex-wrap: wrap;
+      gap: 4px 10px; margin-bottom: 4px;
     }
     .sf-price-strike {
       text-decoration: line-through; color: var(--muted);
@@ -475,7 +480,7 @@
             <li>Verena erarbeitet Fragen und schickt sie dir vorab</li>
             <li>Das Gespräch wird mindestens 3× im Webradio ausgestrahlt</li>
             <li>Du wirst in den sozialen Medien &amp; auf der Sinnfunk-Website vorgestellt</li>
-            <li>InPöllau und über Zoom möglich</li>
+            <li>In Pöllau und über Zoom möglich</li>
           </ul>
           <span class="sf-free-tag" style="margin-top:22px">✓ Kostenlos</span>
         </div>
@@ -498,7 +503,7 @@
           </ul>
           <div class="sf-price-box-inline">
             <span class="pbadge">Aktionspreis</span>
-            <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:4px">
+            <div class="sf-price-row">
               <span class="sf-price-strike">150 € / Gesprächspaket</span>
               <span class="sf-price-big">50 € / Gesprächspaket</span>
             </div>
@@ -523,7 +528,7 @@
           </ul>
           <div class="sf-price-box-inline">
             <span class="pbadge">Aktionspreis</span>
-            <div style="display:flex;align-items:baseline;gap:10px;margin-bottom:4px">
+            <div class="sf-price-row">
               <span class="sf-price-strike">300 € / Gesprächspaket</span>
               <span class="sf-price-big">100 € / Gesprächspaket</span>
             </div>
@@ -575,7 +580,7 @@
         <div class="sf-slot"><span class="sf-icon-circle sm"><svg><use href="#icon-book"/></svg></span><div><strong>Autoren präsentieren ihre Bücher</strong><span>Stelle dein Buch vor.</span></div></div>
         <div class="sf-slot"><span class="sf-icon-circle sm"><svg><use href="#icon-book"/></svg></span><div><strong>Achtsamkeit &amp; Meditation</strong><span>In dieser Einheit geht es um den großen Bereich der Achtsamkeit und der Meditation.</span></div></div>
         <div class="sf-slot"><span class="sf-icon-circle sm"><svg><use href="#icon-pin"/></svg></span><div><strong>Podcast &amp; YouTube</strong><span>Präsentiere der Sinnfunk-Gemeinschaft deinen Podcast- oder YouTube-Kanal, indem du einige deiner Episoden auf Sinnfunk sendest.</span></div></div>
-        <div class="sf-slot"><span class="sf-icon-circle sm"><svg><use href="#icon-leaf"/></svg></span><div><strong>Kräuter &amp; Natur</strong><span>Kräuterpädagogen, Naturliebhaber und Permakulturbegeisterte finden hier ihren Sendeplatz./span></div></div>
+        <div class="sf-slot"><span class="sf-icon-circle sm"><svg><use href="#icon-leaf"/></svg></span><div><strong>Kräuter &amp; Natur</strong><span>Kräuterpädagogen, Naturliebhaber und Permakulturbegeisterte finden hier ihren Sendeplatz.</span></div></div>
         <div class="sf-slot"><span class="sf-icon-circle sm"><svg><use href="#icon-shield"/></svg></span><div><strong>Die menschliche Psyche</strong><span>Psychotherapeuten und Psychologen berichten aus ihrem Erfahrungsschatz.</span></div></div>
         <div class="sf-slot"><span class="sf-icon-circle sm"><svg><use href="#icon-shield"/></svg></span><div><strong>Energetik &amp; Energiearbeit</strong><span>Energetiker führen in ihr Arbeitsfeld ein.</span></div></div>
         <div class="sf-slot"><span class="sf-icon-circle sm"><svg><use href="#icon-shield"/></svg></span><div><strong>Medialität</strong><span>Unterschiedlich medial begabte Menschen geben Einblicke in ihre Welt.</span></div></div>
@@ -617,10 +622,15 @@
         <div class="sf-what-card sf-card">
           <div class="sf-icon-circle sm"><svg><use href="#icon-x"/></svg></div>
           <strong>Musik</strong>
-             <p><b>Keine Musik</b> – außer einem kurzen Gong im Hintergrund oder einer kurze Einspielung von einigen Sekunden. 
-            Auf Sinnfunk wird zwar meditative Musik zwischen den Gesprächen gespielt, diese ist jedoch ki-generiert und ich habe den Lizenznachweis für diese Musik. 
-            Um meine Arbeit zu vereinfachen - ich muss alle Lizenzen für Musik nachweisen -, nehme ich deshalb keine Inhalte von Sinnfunkern an, bei denen im Hintergrund Musik gespielt wird. 
-            <b>Diese Regel kann sich in der Zukunft ändern.</b>Sinnfunk befindet sich im Aufbau.</p>
+             <p><b>Keine Musik!</b> – außer einem kurzen Gong im Hintergrund oder einer kurzen Einspielung von nicht mehr als 15 Sekunden. 
+            In den letzten Wochen durfte ich sehr viel über Musikrechte lernen. Kurz zusammengefasst: Ein Webradio gilt rechtlich als Radio. Es unterliegt in allen Bereichen, 
+            so auch im Bereich Musik, sehr strengen Auflagen. </p> 
+            <p>Gewöhnliche kommerzielle Lizenzen sind ungültig fürs Webradio.</p> 
+            <p>Lizenzfreie Musik – wie jene auf Pixabay – darf ebenfalls nicht verwendet werden.</p>
+            <p>KI-generierte Musik – selbst jene mit einer kommerziellen Lizenz – ist ebenfalls ausgeschlossen.</p>
+            <p>Ich persönlich verwende Musik mit CC-BY Lizenzierung.</p> 
+            <p>Es ist unmöglich für mich, Lizenzen von Sinnfunkern zu überprüfen. 
+              Sollte Musik ohne korrekte Lizenzierung abgespielt werden, muss ich mit hohen Strafen und einem Ausschluss von Webradioplattformen rechnen. <b>Inhalte, die den Musikregeln nicht entsprechen, werden deshalb abgelehnt.</b></p>
         </div>
         <div class="sf-what-card sf-card">
           <div class="sf-icon-circle sm"><svg><use href="#icon-scale"/></svg></div>
