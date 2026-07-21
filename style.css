@@ -1110,6 +1110,42 @@ section {
 .sf-social-link svg { width: 17px; height: 17px; fill: currentColor; }
 
 /* ============================================
+   ANLEITUNG-SEITE (Upload-Hilfe)
+   ============================================ */
+.upload-options {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 18px;
+  margin-bottom: 30px;
+}
+
+.button-big {
+  width: 100%;
+  justify-content: center;
+  text-align: center;
+  border-radius: var(--radius);
+  padding: 24px 22px;
+  font-size: 1.05rem;
+  line-height: 1.4;
+  min-height: 92px;
+  white-space: normal;
+}
+
+.anleitung-page .highlight-box { max-width: none; }
+
+.video-section { margin-top: 110px; scroll-margin-top: 110px; text-align: center; }
+.video-section h2 { margin-bottom: 22px; }
+
+.video-embed {
+  max-width: 760px;
+  margin: 0 auto;
+  border-radius: var(--radius);
+  overflow: hidden;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--line);
+}
+
+/* ============================================
    RESPONSIVE
    ============================================ */
 @media (max-width: 1040px) {
@@ -1130,6 +1166,7 @@ section {
   .bottom-grid { grid-template-columns: 1fr; }
   .cards, .steps, .program-strip { grid-template-columns: repeat(2, 1fr); }
   .people-grid { grid-template-columns: repeat(2, 1fr); }
+  .upload-options { grid-template-columns: 1fr; }
 }
 
 @media (max-width: 760px) {

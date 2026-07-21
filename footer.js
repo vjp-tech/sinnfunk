@@ -17,6 +17,7 @@ const sfFooterHTML = `
 
     <nav class="sf-footer-nav" aria-label="Footer-Navigation">
       <a href="kontakt.html">Kontakt</a>
+      <a href="anleitung.html">Anleitung</a>
       <a href="impressum.html">Impressum</a>
       <a href="datenschutz.html">Datenschutz</a>
       <span>© 2026 Sinnfunk</span>
