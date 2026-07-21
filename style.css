@@ -1145,6 +1145,8 @@ section {
   border: 1px solid var(--line);
 }
 
+.video-embed iframe { left: 0; }
+
 /* ============================================
    RESPONSIVE
    ============================================ */
