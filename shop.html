@@ -373,10 +373,15 @@
           <select id="shop-type" onchange="filterShop()">
             <option value="">Alle Produkte</option>
             <option value="Buch">Buch</option>
-            <option value="Meditation">Meditation</option>
-            <option value="Seminar">Seminar</option>
+            <option value="Online-Kurs">Online-Kurs</option>
             <option value="Beratung">Beratung</option>
+            <option value="Workshop">Workshop</option>
+            <option value="Seminar oder Kurs">Seminar oder Kurs</option>
+            <option value="Download">Download</option>
+            <option value="Coaching">Coaching</option>
+            <option value="Produkt">Produkt</option>
             <option value="Dienstleistung">Dienstleistung</option>
+            <option value="Sonstiges">Sonstiges</option>
           </select>
         </div>
         <div style="align-self:flex-end;">
@@ -457,8 +462,10 @@
 
   function karteHTML(p) {
     const typIcon = {
-      'Buch': '📖', 'Meditation': '◌', 'Seminar': '🎓',
-      'Beratung': '🤝', 'Dienstleistung': '⚙'
+      'Buch': '📖', 'Online-Kurs': '💻', 'Beratung': '🤝',
+      'Workshop': '🧘', 'Seminar oder Kurs': '🎓', 'Download': '⬇',
+      'Coaching': '🧭', 'Produkt': '📦', 'Dienstleistung': '⚙',
+      'Sonstiges': '✦'
     }[p.product_type] || '📦';
 
     const bild = p.image_url
@@ -483,7 +490,7 @@
           <a class="shop-card-btn"
              href="${esc(p.link_url || '#')}"
              target="_blank"
-             rel="noopener">Zum Shop →</a>
+             rel="noopener">Zum Produkt →</a>
         </div>
       </article>`;
   }
