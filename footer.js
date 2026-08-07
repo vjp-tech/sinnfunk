@@ -40,6 +40,21 @@ const sfFooterHTML = `
           <circle cx="17.5" cy="6.5" r="1.2"/>
         </svg>
       </a>
+      <a class="sf-social-link"
+         href="https://www.youtube.com/@sinnfunk.webradio"
+         target="_blank" rel="noopener" aria-label="Sinnfunk auf YouTube">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+          <path d="M23.5 6.19a3.02 3.02 0 0 0-2.12-2.14C19.51 3.5 12 3.5 12 3.5s-7.51 0-9.38.55A3.02 3.02 0 0 0 .5 6.19 31.6 31.6 0 0 0 0 12a31.6 31.6 0 0 0 .5 5.81 3.02 3.02 0 0 0 2.12 2.14c1.87.55 9.38.55 9.38.55s7.51 0 9.38-.55a3.02 3.02 0 0 0 2.12-2.14A31.6 31.6 0 0 0 24 12a31.6 31.6 0 0 0-.5-5.81ZM9.6 15.6V8.4L15.8 12l-6.2 3.6Z"/>
+        </svg>
+      </a>
+      <a class="sf-social-link"
+         href="https://t.me/sinnfunk"
+         target="_blank" rel="noopener" aria-label="Sinnfunk auf Telegram">
+        <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M22 2 11 13"/>
+          <path d="M22 2 15 22l-4-9-9-4 20-7z"/>
+        </svg>
+      </a>
     </div>
 
   </div>

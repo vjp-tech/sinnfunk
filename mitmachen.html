@@ -351,6 +351,59 @@
     @media (max-width: 700px) {
       .sf-gw-examples { flex-direction: column; }
     }
+
+    /* ── GESPRÄCH & LIVE: zweispaltig ── */
+    .sf-two-cards.pair { grid-template-columns: 1fr 1fr; align-items: start; }
+
+    /* ── LIVE-SENDUNGEN BADGE ── */
+    .sf-live-badge {
+      display: inline-flex; align-items: center; gap: 10px;
+      background: rgba(84,102,63,0.14);
+      border: 1px solid rgba(84,102,63,0.28);
+      color: #41502f;
+      border-radius: var(--radius-sm);
+      padding: 12px 18px;
+      font-family: var(--font-body); font-size: 0.88rem; line-height: 1.5;
+    }
+    .sf-live-badge strong { color: #354528; }
+
+    /* ── FAQ-AKKORDEON (Regeln fürs Hochladen) ── */
+    .sf-faq-list { display: flex; flex-direction: column; gap: 14px; margin-top: 28px; }
+    .sf-faq-item {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      overflow: hidden;
+    }
+    .sf-faq-item summary {
+      list-style: none;
+      cursor: pointer;
+      padding: 22px 28px;
+      display: flex; align-items: center; justify-content: space-between; gap: 16px;
+      font-family: var(--font-display); font-weight: 600;
+      font-size: 1.2rem; color: var(--ink);
+    }
+    .sf-faq-item summary::-webkit-details-marker { display: none; }
+    .sf-faq-item summary::after {
+      content: "+"; font-size: 1.7rem; line-height: 1;
+      color: var(--gold-deep); flex-shrink: 0;
+      font-family: var(--font-body);
+      transition: transform 0.2s ease;
+    }
+    .sf-faq-item[open] summary::after { transform: rotate(45deg); }
+    .sf-faq-item summary:focus-visible { outline: 2px solid var(--gold-deep); outline-offset: -2px; }
+    .sf-faq-body {
+      padding: 0 28px 26px;
+      font-family: var(--font-body); font-size: 0.95rem;
+      color: var(--ink-soft); line-height: 1.7;
+    }
+    .sf-faq-body p { margin: 0 0 10px; }
+    .sf-faq-body p:last-child { margin-bottom: 0; }
+
+    @media (max-width: 600px) {
+      .sf-faq-item summary { padding: 18px 20px; font-size: 1.05rem; }
+      .sf-faq-body { padding: 0 20px 22px; }
+    }
   </style>
 </head>
 <body>
@@ -390,24 +443,26 @@
         <div class="sf-hero-text">
           <p class="eyebrow">Mitmachen.</p>
           <h1>Werde eine Stimme, die erdet!</h1>
-          <p class="sf-lead-hero">Du arbeitest mit Menschen — 
-            in Spiritualität, Energiearbeit, Naturheilkunde oder Achtsamkeit? Bei Sinnfunk bekommst du einen Ort für ruhige Gespräche statt lauter Selbstvermarktung.</p>
+          <p class="sf-lead-hero">Als Webradiobetreiberin versuche ich mein Bestes, Mitwirkenden zu meiden, die haltlose Heilsversprechen anbieten, die Klienten in prekärer finanzieller Lage ausnutzen oder die anderweitig problematisch sind.</p>
+          <p class="sf-lead-hero">Ich versuche auch meinen eigenen Arbeitsaufwand gering zu halten, da ich bereits für Technik, Werbung, Kontaktaufnahme und Gesprächsführung verantwortlich bin.</p>
+          <p class="sf-lead-hero">Deshalb gibt es ab sofort mehrere Schritte, bis du mitmachen kannst. Ein Schritt ist immer ein Video-Gespräch über Zoom oder über WhatsApp-Video.</p>
           <div class="sf-hero-actions">
-            <a class="button" href="#eigene-inhalte">
-              Ich habe eigene Inhalte
+            <a class="button" href="#kontakt">
+              Kontakt
             </a>
-            <a class="button secondary" href="#gespraech">
-              Ich möchte ein Gespräch führen
+            <a class="button secondary" href="#eigene-inhalte">
+              Zwei Wege zum Mitmachen
             </a>
           </div>
         </div>
         <div class="sf-hero-image">
           <img src="image/mikrofon-mitmachen.webp" alt="Sinnfunker werden" />
           <div class="sf-sendestart">
-            <svg class="sf-ico"><use href="#icon-calendar"/></svg>
+            <a href="https://vradio.app/" target="_blank" rel="noopener noreferrer" style="flex-shrink:0;line-height:0;">
+              <img src="image/vradio.webp" alt="vRadio" style="height:38px;width:auto;display:block;border-radius:6px;" />
+            </a>
             <div>
-              <strong>Sendestart: August 2026</strong>
-              <span>Ein Ort für deine Stimme.</span>
+              <strong>Sinnfunk hören auf allen Webradioplattformen wie vRadio.</strong>
             </div>
           </div>
         </div>
@@ -417,9 +472,9 @@
     <!-- EIGENE INHALTE -->
     <section class="sf-eigene-wrap" id="eigene-inhalte">
       <div class="sf-eigene-container">
-        <p class="eyebrow">Eigene Inhalte hochladen</p>
+        <p class="eyebrow">1. Weg: Eigene Inhalte hochladen</p>
         <h2>Du produzierst – wir senden es.</h2>
-        <p style="font-family:Arial,sans-serif;font-size:1.02rem;color:#55584e;line-height:1.7;margin:0 0 28px;max-width:68ch;">
+        <p style="font-family:Arial,sans-serif;font-size:1.02rem;color:#55584e;line-height:1.7;margin:0 0 28px;max-width:none;">
           Du hast bereits fertige Aufnahmen, ein YouTube-Video oder einen eigenen Podcast? Erhöhe deine Reichweite über Sinnfunk. Auf YouTube, Spotify oder Facebook müssen Menschen gezielt nach dir suchen - 
           auf Sinnfunk wirst du gespielt, egal wie viele Follower du hast. Das erlaubt dir, von einem vollkommen neuen Publikum gehört zu werden. </p>
         <div class="sf-eigene-inner">
@@ -460,39 +515,82 @@
       </div>
     </section>
 
-    <!-- GESPRÄCH -->
+    <!-- REGELN FÜRS HOCHLADEN (FAQ) -->
+    <section class="sf-what-wrap" id="regeln">
+      <div class="sf-head-left">
+        <p class="eyebrow">Was Sinnfunk ist – und was nicht</p>
+        <h2>Regeln fürs Hochladen</h2>
+        <p class="sf-lead" style="max-width:none;">Ein Webradio unterliegt strengeren Auflagen als ein Podcast. Als Inhaberin bin ich rechtlich belangbar. 
+          Ich werde deshalb <b>jeden hochgeladenen Inhalt von einer KI überprüfen lassen.</b> Da KIs Fehler machen, werde ich jeden von der KI abgelehnten Inhalt noch einmal selbst nachprüfen.
+        Erleichtere mir bitte meinen Arbeitsalltag und lies dir die folgenden Regeln genau durch. Du kannst mich auch gerne kontaktieren, falls dir etwas unklar ist.</p>
+      </div>
+      <div class="sf-faq-list">
+        <details class="sf-faq-item">
+          <summary>Kein Raum für Polarisierung</summary>
+          <div class="sf-faq-body">
+            <p>Sinnfunk ist bewusst ein Ort abseits von Tagespolitik, Corona &amp; Impfung, Verschwörungstheorien und ähnlichen Reizthemen.</p>
+            <p>Bei Sinnfunk geht es um Inhalte, die <b>keine starken Gefühle</b> entfachen.</p>
+          </div>
+        </details>
+        <details class="sf-faq-item">
+          <summary>Sprache</summary>
+          <div class="sf-faq-body">
+            <p><b>Einschränkung gendergerechte Sprache.</b> Ein "Liebe Hörer und Hörerinnen" am Anfang ist vollkommen in Ordung, 
+              aber um die Verständlichkeit zu wahren, bitte keine durchgängige Verwendung von Glottisschlag* - Pause im Wortinneren - oder Paarform.</p>
+            <p><b>Dialekte:</b> Du musst nicht Hochdeutsch sprechen. Ich selbst spreche mit einem österreichischen Einschlag. 
+              Oft ist die eigene Sprache sogar flüssiger, wenn im Dialekt gesprochen wird. Trotzdem sollte deine Aufnahme für Hörer im gesamten deutschsprachigen Raum verständlich sein.</p>
+          </div>
+        </details>
+        <details class="sf-faq-item">
+          <summary>Keine Fremdwerbung</summary>
+          <div class="sf-faq-body">
+            <p>Du darfst dich selbst sowie deine eigenen Angebote vorstellen: Bücher, Seminare, Kurse, Beratungen oder Ähnliches.</p>
+            <p><b>Keine Werbung für fremde Unternehmen, Produkte oder Dienstleistungen.</b> Die gesetzlichen Werbebeschränkungen - keine Werbung für Alkohol, Waffen, Pornografie und Ähnliches - gelten selbstverständlich.</p>
+          </div>
+        </details>
+        <details class="sf-faq-item">
+          <summary>Musik</summary>
+          <div class="sf-faq-body">
+            <p><b>Keine Musik!</b> – außer einem kurzen Gong im Hintergrund oder einer kurzen Einspielung von nicht mehr als 15 Sekunden. 
+              In den letzten Wochen durfte ich sehr viel über Musikrechte lernen. Kurz zusammengefasst: Ein Webradio gilt rechtlich als Radio. Es unterliegt in allen Bereichen, 
+              so auch im Bereich Musik, sehr strengen Auflagen.</p>
+            <p>Gewöhnliche kommerzielle Lizenzen sind ungültig fürs Webradio.</p>
+            <p>Lizenzfreie Musik – wie jene auf Pixabay – darf ebenfalls nicht verwendet werden.</p>
+           </div>
+        </details>
+        <details class="sf-faq-item">
+          <summary>Rechtliches</summary>
+          <div class="sf-faq-body">
+            <p>Veröffentliche <b>keine verleumderischen oder rufschädigenden Aussagen über Personen oder Organisationen.</b></p>
+            <p>Bei medizinischen, psychologischen oder therapeutischen Themen <b>keine Heilsversprechen und keine unbelegten Behauptungen!</b></p>
+            <p>Informationen zu <b>Nahrungsergänzungsmittel</b> sind bei Sinnfunk aufgrund der strengen Auflagen in diesem Bereich ausgeschlossen.</p>
+          </div>
+        </details>
+        <details class="sf-faq-item">
+          <summary>Gut hörbare Qualität</summary>
+          <div class="sf-faq-body">
+            <p>Inhalte müssen gut hörbar sein: <b>nicht zu leise, keine störenden Hintergrundgeräusche</b> und eine <b>verständliche Aussprache</b>.</p>
+          </div>
+        </details>
+      </div>
+    </section>
+
+    <!-- GESPRÄCH & LIVE -->
     <section class="sf-talk-wrap" id="gespraech">
       <div class="sf-head-left">
-        <p class="eyebrow">Gespräch mit Verena aufnehmen</p>
+        <p class="eyebrow">2. Weg: Gespräch mit Verena aufnehmen</p>
         <h2>Du hast etwas zu sagen? Verena stellt die Fragen.</h2>
       </div>
-      <div class="sf-two-cards">
+      <div class="sf-two-cards pair">
 
-        <!-- Kostenlos -->
-        <div class="sf-info-card">
-          <div class="sf-icon-circle icon-green" style="margin-bottom:18px">
-            <svg><use href="#icon-message"/></svg>
-          </div>
-          <h3>Gespräch mit Verena – kostenlos</h3>
-          <p>Wir führen gemeinsam ein Gespräch, das im Sinnfunk-Webradio ausgestrahlt wird. Kein Aufwand für dich.</p>
-          <ul class="sf-check-list" style="margin-bottom:auto">
-            <li>Vorgespräch zur Vorbereitung</li>
-            <li>Verena erarbeitet Fragen und schickt sie dir vorab</li>
-            <li>Das Gespräch wird mindestens 3× im Webradio ausgestrahlt</li>
-            <li>Du wirst in den sozialen Medien &amp; auf der Sinnfunk-Website vorgestellt</li>
-            <li>In Pöllau und über Zoom möglich</li>
-          </ul>
-          <span class="sf-free-tag" style="margin-top:22px">✓ Kostenlos</span>
-        </div>
-
-        <!-- Mit Aufnahme -->
+        <!-- Gespräch aufnehmen & behalten -->
         <div class="sf-info-card">
           <div class="sf-icon-circle icon-warm" style="margin-bottom:18px">
             <svg><use href="#icon-video"/></svg>
           </div>
           <h3>Gespräch aufnehmen &amp; behalten</h3>
           <p>Diese Aufnahme gehört dir – für deine Website und deine sozialen Medien. 
-            Zusätzlich zur Radioausstrahlung wird das Gespräch auch als <b>Video</b> aufgezeichnet.</p>
+            Zusätzlich zur Radioausstrahlung wird das Gespräch auch als <b>Video</b> aufgezeichnet. Außerdem erscheint es auf dem Sinnfunk-YouTube-Kanal.</p>
           <ul class="sf-check-list" style="margin-bottom:22px">
             <li>Vorgespräch zur Vorbereitung</li>
             <li>Verena erarbeitet Fragen und schickt sie dir vorab</li>
@@ -502,43 +600,33 @@
             <li>In Pöllau und über Zoom möglich</li>
           </ul>
           <div class="sf-price-box-inline">
-            <span class="pbadge">Aktionspreis</span>
+            <span class="pbadge">Preis</span>
             <div class="sf-price-row">
-              <span class="sf-price-strike">150 € / Gesprächspaket</span>
               <span class="sf-price-big">50 € / Gesprächspaket</span>
             </div>
-            <span class="sf-price-sub">Aktionspreis gilt bis 31. Dezember 2026</span>
+            <span class="sf-price-sub">Gültig bis 31. Dezember 2026</span>
           </div>
         </div>
 
-        <!-- Externe Gesprächsaufnahme -->
-        <div class="sf-info-card">
+        <!-- Live-Sendungen -->
+        <div class="sf-info-card" id="live-sendungen">
           <div class="sf-icon-circle icon-warm" style="margin-bottom:18px">
-            <svg><use href="#icon-users"/></svg>
+            <svg><use href="#icon-phone"/></svg>
           </div>
-          <h3>Gesprächsaufnahme für Externe</h3>
-          <p>Du produzierst keine Inhalte für Sinnfunk, möchtest aber trotzdem ein Gespräch mit Verena aufnehmen – etwa um deine eigenen Produkte, zum Beispiel Nahrungsergänzungsmittel, zu vermarkten. Das Gespräch wird ausschließlich für dich aufgezeichnet und nicht bei Sinnfunk ausgestrahlt.</p>
-          <ul class="sf-check-list" style="margin-bottom:22px">
-            <li>Vorgespräch zur Vorbereitung</li>
-            <li>Verena erarbeitet Fragen und schickt sie dir vorab</li>
-            <li>Professionelle Audio- &amp; Videoaufnahme</li>
-            <li>Audiodatei &amp; Videodatei gehören dir – frei verwendbar</li>
-            <li>Aufzeichnung bis zu 2 Stunden</li>
-            <li>In Pöllau und über Zoom möglich</li>
-          </ul>
-          <div class="sf-price-box-inline">
-            <span class="pbadge">Aktionspreis</span>
-            <div class="sf-price-row">
-              <span class="sf-price-strike">300 € / Gesprächspaket</span>
-              <span class="sf-price-big">100 € / Gesprächspaket</span>
-            </div>
-            <span class="sf-price-sub">Aktionspreis gilt bis 31. Dezember 2026, danach 300 € pro Paket</span>
-          </div>
+          <h3>Live-Sendungen</h3>
+          <p>Live-Sendungen sind das nächste große Ziel bei Sinnfunk – ausgestrahlt über das Webradio und parallel auf YouTube-Live. 
+            Hörer können direkt bei der Sinnfunk-Hotline anrufen und am Gespräch teilnehmen.</p>
+          <p>Live-Sendungen sind ausschließlich für Gesprächsteilnehmer offen.</p>
+          <p>Live-Sendungen sind <b>kostenlos</b> für Mitwirkende.</p>
+          <span class="sf-live-badge" style="margin-top:22px">
+            <svg class="sf-ico"><use href="#icon-calendar"/></svg>
+            <span><strong>Start voraussichtlich: September 2026</strong></span>
+          </span>
         </div>
 
       </div>
       <div class="sf-social-note">
-        Bei den ersten beiden Varianten wirst du zusätzlich in den sozialen Medien und auf der Sinnfunk-Website vorgestellt.
+        Du wirst zusätzlich in den sozialen Medien und auf der Sinnfunk-Website vorgestellt.
       </div>
 
       <div class="sf-gw-examples" id="gespraech-videos">
@@ -587,64 +675,6 @@
         <div class="sf-slot"><span class="sf-icon-circle sm"><svg><use href="#icon-star"/></svg></span><div><strong>Astrologie</strong><span>Astrologie, die in die Tiefe geht und dabei verankert bleibt.</span></div></div>
         <div class="sf-slot"><span class="sf-icon-circle sm"><svg><use href="#icon-star"/></svg></span><div><strong>Sucht &amp; destruktive Gewohnheiten</strong><span>Alles rund um die Gewohnheiten, die wir nicht loslassen können.</span></div></div>
         <div class="sf-slot"><span class="sf-icon-circle sm"><svg><use href="#icon-message"/></svg></span><div><strong>Gespräche mit Verena</strong><span>Ich führe in regelmäßigen Abschnitten Gespräche mit interessanten Menschen.</span></div></div>
-      </div>
-    </section>
-
-    <!-- REGELN -->
-    <section class="sf-what-wrap" id="regeln">
-      <div class="sf-head-left">
-        <p class="eyebrow">Was Sinnfunk ist – und was nicht</p>
-        <h2>Sinnfunk-Richtlinien</h2>
-        <p class="sf-lead">Ein Webradio unterliegt strengeren Auflagen als ein Podcast. Als Inhaberin bin ich rechtlich belangbar. 
-          Ich werde deshalb <b>jeden hochgeladenen Inhalt von einer KI überprüfen lassen.</b> Da KIs Fehler machen, werde ich jeden von der KI abgelehnten Inhalt noch einmal selbst nachprüfen.
-        Erleichtere mir bitte meinen Arbeitsalltag und lies dir die folgenden Regeln genau durch. Du kannst mich auch gerne kontaktieren, falls dir etwas unklar ist.</p>
-      </div>
-      <div class="sf-what-grid">
-        <div class="sf-what-card sf-card">
-          <div class="sf-icon-circle sm"><svg><use href="#icon-x"/></svg></div>
-          <strong>Kein Raum für Polarisierung</strong>
-          <p>Sinnfunk ist bewusst ein Ort abseits von Tagespolitik, Corona &amp; Impfung, Verschwörungstheorien und ähnlichen Reizthemen.</p>
-          <p>Bei Sinnfunk geht es um Inhalte, die <b>keine starken Gefühle</b> entfachen.</p>
-        </div>
-        <div class="sf-what-card sf-card">
-          <div class="sf-icon-circle sm"><svg><use href="#icon-mic"/></svg></div>
-          <strong>Sprache</strong>
-          <p><b>Einschränkung gendergerechte Sprache.</b> Ein "Liebe Hörer und Hörerinnen" am Anfang ist vollkommen in Ordung, 
-            aber um die Verständlichkeit zu wahren, bitte keine durchgängige Verwendung von Glottisschlag* - Pause im Wortinneren - oder Paarform.</p>
-            <p><b>Dialekte:</b> Du musst nicht Hochdeutsch sprechen. Ich selbst spreche mit einem österreichischen Einschlag. 
-              Oft ist die eigene Sprache sogar flüssiger, wenn im Dialekt gesprochen wird. Trotzdem sollte deine Aufnahme für Hörer im gesamten deutschsprachigen Raum verständlich sein.</p>
-        </div>
-        <div class="sf-what-card sf-card">
-          <div class="sf-icon-circle sm"><svg><use href="#icon-ad-off"/></svg></div>
-          <strong>Keine Fremdwerbung</strong>
-          <p>Du darfst dich selbst sowie deine eigenen Angebote vorstellen: Bücher, Seminare, Kurse, Beratungen oder auch eigene Nahrungsergänzungsmittel.</p>
-          <p><b>Keine Werbung für fremde Unternehmen, Produkte oder Dienstleistungen.</b> Die gesetzlichen Werbebeschränkungen - keine Werbung für Alkohol, Waffen, Pornografie und Ähnliches - gelten selbstverständlich.</p>
-        </div>
-        <div class="sf-what-card sf-card">
-          <div class="sf-icon-circle sm"><svg><use href="#icon-x"/></svg></div>
-          <strong>Musik</strong>
-             <p><b>Keine Musik!</b> – außer einem kurzen Gong im Hintergrund oder einer kurzen Einspielung von nicht mehr als 15 Sekunden. 
-            In den letzten Wochen durfte ich sehr viel über Musikrechte lernen. Kurz zusammengefasst: Ein Webradio gilt rechtlich als Radio. Es unterliegt in allen Bereichen, 
-            so auch im Bereich Musik, sehr strengen Auflagen. </p> 
-            <p>Gewöhnliche kommerzielle Lizenzen sind ungültig fürs Webradio.</p> 
-            <p>Lizenzfreie Musik – wie jene auf Pixabay – darf ebenfalls nicht verwendet werden.</p>
-            <p>KI-generierte Musik – selbst jene mit einer kommerziellen Lizenz – ist ebenfalls ausgeschlossen.</p>
-            <p>Ich persönlich verwende Musik mit CC-BY Lizenzierung.</p> 
-            <p>Sollte Musik ohne korrekte Lizenzierung abgespielt werden, muss ich mit hohen Strafen und/oder einem Ausschluss von Webradioplattformen rechnen. <b>Inhalte, die den Musikregeln nicht entsprechen, werden deshalb abgelehnt.</b></p>
-        </div>
-        <div class="sf-what-card sf-card">
-          <div class="sf-icon-circle sm"><svg><use href="#icon-scale"/></svg></div>
-          <strong>Rechtliches</strong>
-          <p>Veröffentliche <b>keine verleumderischen oder rufschädigenden Aussagen über Personen oder Organisationen.</b></p>
-          <p>Bei medizinischen, psychologischen oder therapeutischen Themen <b>keine Heilsversprechen und keine unbelegten Behauptungen!</b></p>
-          <p>Informationen zu <b>Nahrungsergänzungsmittel</b> sind bei Sinnfunk aufgrund der strengen Auflagen in diesem Bereich ausgeschlossen.</p>
-      
-        </div>
-        <div class="sf-what-card sf-card">
-          <div class="sf-icon-circle sm"><svg><use href="#icon-headphones"/></svg></div>
-          <strong>Gut hörbare Qualität</strong>
-          <p>Inhalte müssen gut hörbar sein: <b>nicht zu leise, keine störenden Hintergrundgeräusche</b> und eine <b>verständliche Aussprache</b>.</p>
-        </div>
       </div>
     </section>
 

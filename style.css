@@ -1101,12 +1101,12 @@ section {
   place-items: center;
   width: 36px; height: 36px;
   border-radius: 10px;
-  border: 1px solid var(--line);
-  background: transparent;
-  color: var(--muted);
+  border: 1px solid rgba(168,148,92,0.35);
+  background: rgba(168,148,92,0.12);
+  color: var(--gold-deep);
   transition: background 0.2s, color 0.2s, border-color 0.2s;
 }
-.sf-social-link:hover { background: rgba(168,148,92,0.1); color: var(--gold-deep); border-color: rgba(168,148,92,0.4); }
+.sf-social-link:hover { background: rgba(168,148,92,0.24); color: var(--gold-deep); border-color: rgba(168,148,92,0.65); }
 .sf-social-link svg { width: 17px; height: 17px; fill: currentColor; }
 
 /* ============================================
