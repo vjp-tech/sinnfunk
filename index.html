@@ -26,9 +26,11 @@
       .gw-video { flex: 0 0 auto; width: 100%; max-width: 340px; margin: 0 auto; }
     }
 
-    /* Programm-Grid auf 2 Spalten anpassen */
-    .programm {
-      grid-template-columns: 1fr 1fr;
+    /* Programm-Grid: 2 Spalten ab Tablet, am Smartphone untereinander */
+    @media (min-width: 761px) {
+      .programm {
+        grid-template-columns: 1fr 1fr;
+      }
     }
 
     /* Live-Stream-Spalte vertikal zentrieren statt oben ausgerichtet mit Leerraum unten */
