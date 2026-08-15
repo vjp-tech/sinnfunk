@@ -37,26 +37,22 @@
     .prog-stream { display: flex !important; flex-direction: column !important; justify-content: center !important; }
     .prog-stream .now-playing { margin-top: 24px !important; }
 
-    /* Dauerprogramm-Liste rechts neben dem Player (ersetzt das Mikrofon-Bild) */
-    .prog-loop { background: var(--paper); padding: 30px; text-align: left; }
-    .prog-loop .label { margin-bottom: 14px; }
-    .prog-loop-head { display: flex; align-items: baseline; justify-content: space-between; gap: 12px; margin-bottom: 16px; }
-    .prog-loop-head h3 { font-family: var(--font-display); font-size: 1.55rem; line-height: 1.1; margin: 0; color: var(--ink); }
-    .loop-count { font-family: var(--font-body); font-size: 0.78rem; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
-    .loop-list { list-style: none; margin: 0; padding: 0 6px 0 0; overflow-y: auto; max-height: 340px; scrollbar-width: thin; scrollbar-color: var(--line) transparent; }
-    .loop-item { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; padding: 10px 0; border-bottom: 1px solid var(--line-soft); }
-    .loop-item:first-child { padding-top: 0; }
-    .loop-item:last-child { border-bottom: 0; padding-bottom: 0; }
-    .loop-main { flex: 1; min-width: 0; }   /* min-width:0 verhindert das Überlaufen langer Titel am Handy */
-    .loop-title { display: block; font-family: var(--font-body); font-weight: 600; font-size: 0.92rem; line-height: 1.35; color: var(--ink); }
-    .loop-sub { display: block; font-family: var(--font-body); font-size: 0.8rem; line-height: 1.35; color: var(--muted); margin-top: 2px; }
-    .loop-dauer { font-family: var(--font-body); font-size: 0.8rem; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
-    .loop-loading, .loop-empty { font-family: var(--font-body); color: var(--muted); padding: 8px 0; }
-    .loop-list::-webkit-scrollbar { width: 7px; }
-    .loop-list::-webkit-scrollbar-thumb { background: var(--line); border-radius: 4px; }
-    /* Am Smartphone volle Länge unter dem Player, ohne innere Scrollleiste */
-    @media (max-width: 760px) { .loop-list { max-height: none; overflow-y: visible; padding-right: 0; } }
-    @media (max-width: 560px) { .prog-loop { padding: 24px; } }
+    /* Live-Programm rechts neben dem Player: Als Nächstes + Zuletzt gelaufen */
+    .prog-live { background: var(--paper); padding: 30px; text-align: left; display: flex; flex-direction: column; }
+    .prog-live .label { margin-bottom: 18px; }
+    .live-heading { display: block; font-family: var(--font-body); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+    .live-next { padding-bottom: 18px; margin-bottom: 18px; border-bottom: 1px solid var(--line); }
+    .live-next .live-title { display: block; font-family: var(--font-display); font-size: 1.35rem; line-height: 1.15; color: var(--ink); }
+    .live-next .live-sub { display: block; font-family: var(--font-body); font-size: 0.85rem; color: var(--muted); margin-top: 4px; }
+    .live-list { list-style: none; margin: 0; padding: 0; }
+    .live-item { display: flex; align-items: baseline; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--line-soft); }
+    .live-item:last-child { border-bottom: 0; padding-bottom: 0; }
+    .live-time { font-family: var(--font-body); font-size: 0.8rem; color: var(--gold); white-space: nowrap; flex-shrink: 0; min-width: 40px; }
+    .live-main { flex: 1; min-width: 0; }   /* min-width:0 verhindert das Überlaufen langer Titel am Handy */
+    .live-item .live-title { display: block; font-family: var(--font-body); font-weight: 600; font-size: 0.9rem; line-height: 1.3; color: var(--ink); }
+    .live-item .live-sub { display: block; font-family: var(--font-body); font-size: 0.78rem; line-height: 1.3; color: var(--muted); margin-top: 1px; }
+    .live-loading, .live-empty { font-family: var(--font-body); color: var(--muted); padding: 6px 0; }
+    @media (max-width: 560px) { .prog-live { padding: 24px; } }
   </style>
   <link rel="icon" href="image/icon.webp" type="image/x-icon" />
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
@@ -127,16 +123,23 @@
           </div>
         </div>
 
-        <!-- Rechts: Dauerprogramm-Liste (ersetzt das Mikrofon-Bild) -->
-        <div class="prog-col prog-loop">
-          <p class="label">Dauerprogramm</p>
-          <div class="prog-loop-head">
-            <h3>Was läuft als nächstes</h3>
-            <span class="loop-count" id="sf-loop-count"></span>
+        <!-- Rechts: Live-Programm (Als Nächstes + Zuletzt gelaufen) -->
+        <div class="prog-col prog-live">
+          <p class="label">Programmverlauf</p>
+
+          <div class="live-next">
+            <span class="live-heading">Als Nächstes</span>
+            <div id="sf-next">
+              <span class="live-title">–</span>
+            </div>
           </div>
-          <ul class="loop-list" id="sf-loop-list">
-            <li class="loop-loading">Lädt …</li>
-          </ul>
+
+          <div class="live-past">
+            <span class="live-heading">Zuletzt gelaufen</span>
+            <ul class="live-list" id="sf-history">
+              <li class="live-loading">Lädt …</li>
+            </ul>
+          </div>
         </div>
 
       </div>
@@ -601,53 +604,66 @@
       laden();
     })();
   </script>
-  <!-- Dauerprogramm-Liste (Playlist "Alles") rechts neben dem Player -->
+  <!-- Live-Programm: Als Nächstes + Zuletzt gelaufen (aus der Now-Playing-Schnittstelle) -->
   <script>
   (function () {
-    // ▼▼▼ HIER deine echte Worker-Adresse einsetzen (ohne ?debug=1) ▼▼▼
-    const WORKER_URL = "https://azuracastloop.verenapolzhofer.workers.dev/";
-    // ▲▲▲
+    const NP_URL = "https://radio.sinnfunk.live/api/nowplaying/sinnfunk";
 
-    const listEl  = document.getElementById("sf-loop-list");
-    const countEl = document.getElementById("sf-loop-count");
-    if (!listEl) return;
+    const nextEl = document.getElementById("sf-next");
+    const histEl = document.getElementById("sf-history");
+    if (!nextEl || !histEl) return;
 
     function esc(s) {
       return String(s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;")
         .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
     }
 
-    async function ladeLoop() {
-      try {
-        const res  = await fetch(WORKER_URL, { cache: "no-store" });
-        const data = await res.json();
-        const alles = (data.nach_playlist && data.nach_playlist["Alles"]) || [];
+    function uhrzeit(ts) {
+      if (!ts) return "";
+      return new Date(ts * 1000).toLocaleTimeString("de-AT", { hour: "2-digit", minute: "2-digit" });
+    }
 
-        if (!alles.length) {
-          listEl.innerHTML = '<li class="loop-empty">Zurzeit keine Einträge.</li>';
-          if (countEl) countEl.textContent = "";
-          return;
+    async function ladeVerlauf() {
+      try {
+        const res  = await fetch(NP_URL, { cache: "no-store" });
+        const data = await res.json();
+
+        // Als Nächstes
+        const next = data.playing_next && data.playing_next.song;
+        if (next && (next.title || next.artist)) {
+          nextEl.innerHTML =
+            '<span class="live-title">' + esc(next.title || "–") + '</span>' +
+            (next.artist ? '<span class="live-sub">' + esc(next.artist) + '</span>' : '');
+        } else {
+          nextEl.innerHTML = '<span class="live-title">–</span>';
         }
 
-        listEl.innerHTML = alles.map(function (e) {
-          return '<li class="loop-item">' +
-              '<span class="loop-main">' +
-                '<span class="loop-title">' + esc(e.titel) + '</span>' +
-                '<span class="loop-sub">' + esc(e.kuenstler) + '</span>' +
+        // Zuletzt gelaufen
+        const hist = Array.isArray(data.song_history) ? data.song_history : [];
+        if (!hist.length) {
+          histEl.innerHTML = '<li class="live-empty">Noch keine Einträge.</li>';
+          return;
+        }
+        histEl.innerHTML = hist.map(function (h) {
+          const song = h.song || {};
+          return '<li class="live-item">' +
+              '<span class="live-time">' + esc(uhrzeit(h.played_at)) + '</span>' +
+              '<span class="live-main">' +
+                '<span class="live-title">' + esc(song.title || "–") + '</span>' +
+                (song.artist ? '<span class="live-sub">' + esc(song.artist) + '</span>' : '') +
               '</span>' +
-              '<span class="loop-dauer">' + esc(e.dauer) + '</span>' +
             '</li>';
         }).join("");
-
-        if (countEl) countEl.textContent = alles.length + " Sendungen";
       } catch (err) {
-        listEl.innerHTML = '<li class="loop-empty">Programm konnte nicht geladen werden.</li>';
-        console.error("Dauerprogramm:", err);
+        histEl.innerHTML = '<li class="live-empty">Verlauf konnte nicht geladen werden.</li>';
+        console.error("Programmverlauf:", err);
       }
     }
 
-    ladeLoop();
+    ladeVerlauf();
+    setInterval(ladeVerlauf, 20000);   // alle 20 Sekunden aktualisieren
   })();
   </script>
 </body>
 </html>
+
