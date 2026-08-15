@@ -44,6 +44,7 @@
     .live-item { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; padding: 11px 0; border-bottom: 1px solid var(--line-soft); }
     .live-item:first-child { padding-top: 0; }
     .live-item:last-child { border-bottom: 0; padding-bottom: 0; }
+    .live-time { font-family: var(--font-body); font-size: 0.8rem; color: var(--gold); white-space: nowrap; flex-shrink: 0; min-width: 44px; }
     .live-main { flex: 1; min-width: 0; }   /* min-width:0 verhindert das Überlaufen langer Titel am Handy */
     .live-title { display: block; font-family: var(--font-body); font-weight: 600; font-size: 0.92rem; line-height: 1.35; color: var(--ink); }
     .live-sub { display: block; font-family: var(--font-body); font-size: 0.8rem; line-height: 1.35; color: var(--muted); margin-top: 2px; }
@@ -596,7 +597,7 @@
   <script>
   (function () {
     // ▼▼▼ HIER deine Worker-Adresse einsetzen (ohne Zusatz am Ende) ▼▼▼
-    const WORKER_URL = "https://azuracastloop.verenapolzhofer.workers.dev/";
+    const WORKER_URL = "https://sinnfunk-loop.DEIN-SUBDOMAIN.workers.dev";
     // ▲▲▲
 
     const el = document.getElementById("sf-queue");
@@ -605,6 +606,11 @@
     function esc(s) {
       return String(s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;")
         .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
+    }
+
+    function uhrzeit(ts) {
+      if (!ts) return "";
+      return new Date(ts * 1000).toLocaleTimeString("de-AT", { hour: "2-digit", minute: "2-digit", timeZone: "Europe/Vienna" });
     }
 
     async function ladeWarteschlange() {
@@ -619,12 +625,13 @@
         }
 
         el.innerHTML = q.map(function (e) {
+          var t = uhrzeit(e.zeit_unix);
           return '<li class="live-item">' +
+              (t ? '<span class="live-time">' + esc(t) + '</span>' : '') +
               '<span class="live-main">' +
                 '<span class="live-title">' + esc(e.titel) + '</span>' +
                 (e.kuenstler ? '<span class="live-sub">' + esc(e.kuenstler) + '</span>' : '') +
               '</span>' +
-              (e.dauer ? '<span class="live-dauer">' + esc(e.dauer) + '</span>' : '') +
             '</li>';
         }).join("");
       } catch (err) {
