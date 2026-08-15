@@ -620,7 +620,7 @@
 
     function uhrzeit(ts) {
       if (!ts) return "";
-      return new Date(ts * 1000).toLocaleTimeString("de-AT", { hour: "2-digit", minute: "2-digit" });
+      return new Date(ts * 1000).toLocaleTimeString("de-AT", { hour: "2-digit", minute: "2-digit", timeZone: "Europe/Vienna" });
     }
 
     async function ladeVerlauf() {
