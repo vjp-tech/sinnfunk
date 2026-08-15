@@ -37,21 +37,20 @@
     .prog-stream { display: flex !important; flex-direction: column !important; justify-content: center !important; }
     .prog-stream .now-playing { margin-top: 24px !important; }
 
-    /* Live-Programm rechts neben dem Player: Als Nächstes + Zuletzt gelaufen */
+    /* Als Nächstes: kommende Titel aus der Warteschlange */
     .prog-live { background: var(--paper); padding: 30px; text-align: left; display: flex; flex-direction: column; }
-    .prog-live .label { margin-bottom: 18px; }
-    .live-heading { display: block; font-family: var(--font-body); font-size: 0.7rem; font-weight: 600; letter-spacing: 0.16em; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
-    .live-next { padding-bottom: 18px; margin-bottom: 18px; border-bottom: 1px solid var(--line); }
-    .live-next .live-title { display: block; font-family: var(--font-display); font-size: 1.35rem; line-height: 1.15; color: var(--ink); }
-    .live-next .live-sub { display: block; font-family: var(--font-body); font-size: 0.85rem; color: var(--muted); margin-top: 4px; }
+    .prog-live .label { margin-bottom: 16px; }
     .live-list { list-style: none; margin: 0; padding: 0; }
-    .live-item { display: flex; align-items: baseline; gap: 12px; padding: 9px 0; border-bottom: 1px solid var(--line-soft); }
+    .live-item { display: flex; align-items: baseline; justify-content: space-between; gap: 14px; padding: 11px 0; border-bottom: 1px solid var(--line-soft); }
+    .live-item:first-child { padding-top: 0; }
     .live-item:last-child { border-bottom: 0; padding-bottom: 0; }
-    .live-time { font-family: var(--font-body); font-size: 0.8rem; color: var(--gold); white-space: nowrap; flex-shrink: 0; min-width: 40px; }
     .live-main { flex: 1; min-width: 0; }   /* min-width:0 verhindert das Überlaufen langer Titel am Handy */
-    .live-item .live-title { display: block; font-family: var(--font-body); font-weight: 600; font-size: 0.9rem; line-height: 1.3; color: var(--ink); }
-    .live-item .live-sub { display: block; font-family: var(--font-body); font-size: 0.78rem; line-height: 1.3; color: var(--muted); margin-top: 1px; }
-    .live-loading, .live-empty { font-family: var(--font-body); color: var(--muted); padding: 6px 0; }
+    .live-title { display: block; font-family: var(--font-body); font-weight: 600; font-size: 0.92rem; line-height: 1.35; color: var(--ink); }
+    .live-sub { display: block; font-family: var(--font-body); font-size: 0.8rem; line-height: 1.35; color: var(--muted); margin-top: 2px; }
+    .live-dauer { font-family: var(--font-body); font-size: 0.8rem; color: var(--muted); white-space: nowrap; flex-shrink: 0; }
+    .live-loading, .live-empty { font-family: var(--font-body); color: var(--muted); padding: 8px 0; }
+    /* Der erste Eintrag läuft als Nächstes – etwas hervorgehoben */
+    .live-item:first-child .live-title { font-family: var(--font-display); font-size: 1.3rem; line-height: 1.15; }
     @media (max-width: 560px) { .prog-live { padding: 24px; } }
   </style>
   <link rel="icon" href="image/icon.webp" type="image/x-icon" />
@@ -123,23 +122,12 @@
           </div>
         </div>
 
-        <!-- Rechts: Live-Programm (Als Nächstes + Zuletzt gelaufen) -->
+        <!-- Rechts: Als Nächstes (kommende Titel aus der Warteschlange) -->
         <div class="prog-col prog-live">
-          <p class="label">Programmverlauf</p>
-
-          <div class="live-next">
-            <span class="live-heading">Als Nächstes</span>
-            <div id="sf-next">
-              <span class="live-title">–</span>
-            </div>
-          </div>
-
-          <div class="live-past">
-            <span class="live-heading">Zuletzt gelaufen</span>
-            <ul class="live-list" id="sf-history">
-              <li class="live-loading">Lädt …</li>
-            </ul>
-          </div>
+          <p class="label">Als Nächstes</p>
+          <ul class="live-list" id="sf-queue">
+            <li class="live-loading">Lädt …</li>
+          </ul>
         </div>
 
       </div>
@@ -604,64 +592,49 @@
       laden();
     })();
   </script>
-  <!-- Live-Programm: Als Nächstes + Zuletzt gelaufen (aus der Now-Playing-Schnittstelle) -->
+  <!-- Als Nächstes: kommende Titel aus der Warteschlange (über den Worker) -->
   <script>
   (function () {
-    const NP_URL = "https://radio.sinnfunk.live/api/nowplaying/sinnfunk";
+    // ▼▼▼ HIER deine Worker-Adresse einsetzen (ohne Zusatz am Ende) ▼▼▼
+    const WORKER_URL = "https://sinnfunk-loop.DEIN-SUBDOMAIN.workers.dev";
+    // ▲▲▲
 
-    const nextEl = document.getElementById("sf-next");
-    const histEl = document.getElementById("sf-history");
-    if (!nextEl || !histEl) return;
+    const el = document.getElementById("sf-queue");
+    if (!el) return;
 
     function esc(s) {
       return String(s || "").replace(/&/g, "&amp;").replace(/</g, "&lt;")
         .replace(/>/g, "&gt;").replace(/"/g, "&quot;");
     }
 
-    function uhrzeit(ts) {
-      if (!ts) return "";
-      return new Date(ts * 1000).toLocaleTimeString("de-AT", { hour: "2-digit", minute: "2-digit", timeZone: "Europe/Vienna" });
-    }
-
-    async function ladeVerlauf() {
+    async function ladeWarteschlange() {
       try {
-        const res  = await fetch(NP_URL, { cache: "no-store" });
+        const res  = await fetch(WORKER_URL + "?_=" + Date.now(), { cache: "no-store" });
         const data = await res.json();
+        const q = Array.isArray(data.warteschlange) ? data.warteschlange : [];
 
-        // Als Nächstes
-        const next = data.playing_next && data.playing_next.song;
-        if (next && (next.title || next.artist)) {
-          nextEl.innerHTML =
-            '<span class="live-title">' + esc(next.title || "–") + '</span>' +
-            (next.artist ? '<span class="live-sub">' + esc(next.artist) + '</span>' : '');
-        } else {
-          nextEl.innerHTML = '<span class="live-title">–</span>';
-        }
-
-        // Zuletzt gelaufen
-        const hist = Array.isArray(data.song_history) ? data.song_history : [];
-        if (!hist.length) {
-          histEl.innerHTML = '<li class="live-empty">Noch keine Einträge.</li>';
+        if (!q.length) {
+          el.innerHTML = '<li class="live-empty">Zurzeit nichts in der Warteschlange.</li>';
           return;
         }
-        histEl.innerHTML = hist.map(function (h) {
-          const song = h.song || {};
+
+        el.innerHTML = q.map(function (e) {
           return '<li class="live-item">' +
-              '<span class="live-time">' + esc(uhrzeit(h.played_at)) + '</span>' +
               '<span class="live-main">' +
-                '<span class="live-title">' + esc(song.title || "–") + '</span>' +
-                (song.artist ? '<span class="live-sub">' + esc(song.artist) + '</span>' : '') +
+                '<span class="live-title">' + esc(e.titel) + '</span>' +
+                (e.kuenstler ? '<span class="live-sub">' + esc(e.kuenstler) + '</span>' : '') +
               '</span>' +
+              (e.dauer ? '<span class="live-dauer">' + esc(e.dauer) + '</span>' : '') +
             '</li>';
         }).join("");
       } catch (err) {
-        histEl.innerHTML = '<li class="live-empty">Verlauf konnte nicht geladen werden.</li>';
-        console.error("Programmverlauf:", err);
+        el.innerHTML = '<li class="live-empty">Warteschlange konnte nicht geladen werden.</li>';
+        console.error("Warteschlange:", err);
       }
     }
 
-    ladeVerlauf();
-    setInterval(ladeVerlauf, 20000);   // alle 20 Sekunden aktualisieren
+    ladeWarteschlange();
+    setInterval(ladeWarteschlange, 20000);   // alle 20 Sekunden aktualisieren
   })();
   </script>
 </body>
