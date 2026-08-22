@@ -1,7 +1,7 @@
 // ============================================
-// SINNFUNK – Footer (hell, minimal)
-// Styling liegt in style.css (.sf-footer …).
-// Ausnahme: der "Vertrag kündigen"-Button hat seinen Stil hier unten,
+// SINNFUNK – Footer (drei Spalten, volle Breite)
+// Grundfarben/Links liegen in style.css (.sf-footer …).
+// Layout + "Vertrag kündigen"-Button werden hier unten gesetzt,
 // damit style.css dafür nicht angefasst werden muss.
 // ============================================
 
@@ -9,25 +9,64 @@ const sfFooterHTML = `
 <div class="sf-footer">
 
   <style>
-    /* "Vertrag kündigen"-Button im Footer – umrandet, kompakt */
-    .sf-kuend-row { padding: 6px 24px 2px; }
+    /* ── Footer über die volle Breite, drei Spalten ── */
+    .sf-footer .sf-footer-inner {
+      max-width: none;
+      width: 100%;
+      box-sizing: border-box;
+      display: grid;
+      grid-template-columns: 1fr auto 1fr;   /* links | mitte | rechts */
+      align-items: center;
+      gap: 30px;
+      padding: 28px clamp(24px, 5vw, 64px);
+    }
+    .sf-footer .logo             { justify-self: start; }   /* Logo + Titel links */
+    .sf-footer .sf-footer-social { justify-self: end;   }   /* Soziale Medien rechts */
+
+    /* Mittlere Spalte: Links + Button nebeneinander, zentriert */
+    .sf-footer .sf-footer-nav {
+      justify-self: center;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-wrap: wrap;
+      gap: 16px 18px;
+    }
+
+    /* "Vertrag kündigen"-Button – umrandet, kompakt */
     .sf-kuend-btn {
       display: inline-block;
       font-family: var(--font-body, 'Inter', sans-serif);
-      font-size: 0.9rem; font-weight: 500; letter-spacing: 0.01em;
+      font-size: 0.82rem; font-weight: 500; letter-spacing: 0.01em;
       color: inherit;                 /* übernimmt die Textfarbe des Footers */
       background: transparent;
-      padding: 11px 30px;
+      padding: 8px 20px;
       border: 1px solid currentColor; /* Umrandung in derselben Farbe */
-      border-radius: 8px;
+      border-radius: 7px;
       text-decoration: none;
+      white-space: nowrap;
       transition: background 0.15s ease;
     }
     .sf-kuend-btn:hover { background: rgba(128,128,128,0.12); }
+
+    /* Auf schmalen Bildschirmen: alles untereinander, zentriert */
+    @media (max-width: 760px) {
+      .sf-footer .sf-footer-inner {
+        grid-template-columns: 1fr;
+        justify-items: center;
+        text-align: center;
+        gap: 24px;
+        padding: 26px 22px;
+      }
+      .sf-footer .logo,
+      .sf-footer .sf-footer-nav,
+      .sf-footer .sf-footer-social { justify-self: center; }
+    }
   </style>
 
   <div class="sf-footer-inner">
 
+    <!-- Spalte 1: Logo + Titel -->
     <a class="logo" href="index.html" aria-label="Sinnfunk Startseite">
       <img src="image/icon.png" alt="Sinnfunk Logo" style="width:36px;height:36px;" />
       <span>
@@ -36,14 +75,17 @@ const sfFooterHTML = `
       </span>
     </a>
 
+    <!-- Spalte 2: Links + Vertrag kündigen -->
     <nav class="sf-footer-nav" aria-label="Footer-Navigation">
       <a href="kontakt.html">Kontakt</a>
       <a href="anleitung.html">Anleitung</a>
       <a href="impressum.html">Impressum</a>
       <a href="datenschutz.html">Datenschutz</a>
+      <a class="sf-kuend-btn" href="kuendigung.html">Vertrag kündigen</a>
       <span>© 2026 Sinnfunk</span>
     </nav>
 
+    <!-- Spalte 3: Soziale Medien -->
     <div class="sf-footer-social">
       <a class="sf-social-link"
          href="https://www.facebook.com/profile.php?id=61590566336118&locale=de_DE"
@@ -79,11 +121,6 @@ const sfFooterHTML = `
     </div>
 
   </div>
-
-  <div class="sf-kuend-row">
-    <a class="sf-kuend-btn" href="kuendigung.html">Vertrag kündigen</a>
-  </div>
-
 </div>
 `;
 
