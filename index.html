@@ -91,6 +91,37 @@
     }
     .plattform-btn:hover { background: rgba(246,241,232,0.14); border-color: rgba(246,241,232,0.9); }
     @media (max-width: 560px) { .plattformen { padding: 22px 18px; } }
+
+     /* Grüne Box "Sinnfunker des Tages" – nur sichtbar, wenn heute einer eingetragen ist */
+    .sdt-box {
+      background: #353d2e;            /* Sinnfunk-Waldgrün */
+      color: #f2ede2;
+      border-radius: 14px;
+      padding: 18px 20px;
+      margin-bottom: 20px;
+    }
+    .sdt-box .sdt-label {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.7rem; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em;
+      color: #b9c6a8; margin: 0 0 8px;
+    }
+    .sdt-box .sdt-heading {
+      font-family: 'Cormorant Garamond', serif;
+      font-size: 1.4rem; line-height: 1.15; margin: 0 0 6px; color: #ffffff;
+    }
+    .sdt-box .sdt-name {
+      font-family: 'Inter', sans-serif;
+      font-size: 1rem; font-weight: 600; margin: 0 0 2px; color: #f2ede2;
+    }
+    .sdt-box .sdt-thema {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.88rem; font-style: italic; color: #cdd6c0; margin: 2px 0 0;
+    }
+    .sdt-box .sdt-info {
+      font-family: 'Inter', sans-serif;
+      font-size: 0.82rem; line-height: 1.5; color: #cdd6c0; margin: 12px 0 0;
+      border-top: 1px solid rgba(255,255,255,0.15); padding-top: 10px;
+    }
     
   </style>
   <link rel="icon" href="image/icon.webp" type="image/x-icon" />
@@ -176,13 +207,26 @@
           </div>
         </div>
 
-        <!-- Rechts: Als Nächstes (kommende Titel aus der Warteschlange) -->
+            <!-- Rechts: Als Nächstes (kommende Titel aus der Warteschlange) -->
         <div class="prog-col prog-live">
+
+          <!-- Grüne Box: erscheint nur, wenn heute ein Sinnfunker des Tages eingetragen ist -->
+          <div class="sdt-box" id="sf-sdt" hidden>
+            <p class="sdt-label">Heute · 19:00 Uhr</p>
+            <h3 class="sdt-heading">Sinnfunker des Tages</h3>
+            <p class="sdt-name" id="sf-sdt-name"></p>
+            <p class="sdt-thema" id="sf-sdt-thema" hidden></p>
+            <p class="sdt-info">Um 19:00 Uhr unterbricht Sinnfunk das reguläre Programm für dieses Gespräch.</p>
+          </div>
+
           <p class="label">Als Nächstes</p>
           <ul class="live-list" id="sf-queue">
             <li class="live-loading">Lädt …</li>
           </ul>
         </div>
+
+      </div>
+      <!-- Ende .programm -->
 
       </div>
       <!-- Ende .programm -->
