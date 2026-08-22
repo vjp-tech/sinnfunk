@@ -54,42 +54,43 @@
     .live-item:first-child .live-title { font-family: var(--font-display); font-size: 1.3rem; line-height: 1.15; }
     @media (max-width: 560px) { .prog-live { padding: 24px; } }
 
-    /* Plattform-Leiste – im Stil des Footers (volle Breite, dunkel) */
+         /* Plattform-Leiste – warmes Braun, zentriert, im Website-Stil */
     .plattformen {
       box-sizing: border-box;
       width: 100%;
-      background: #efe8da;                 /* gleiche Farbe wie der Footer */
-      padding: 18px clamp(24px, 5vw, 64px);
+      background: #a8945c;                 /* warmes Braun */
+      padding: 24px clamp(20px, 5vw, 48px);
       margin: 0;
       display: flex;
-      align-items: center;
-      justify-content: center;      
-      flex-wrap: wrap;
-      gap: 14px 28px;
+      flex-direction: column;             /* Text oben, Buttons darunter */
+      align-items: center;                /* alles zentriert */
+      text-align: center;
+      gap: 14px;
     }
     .plattformen p {
       font-family: var(--font-body, 'Inter', sans-serif);
-      font-size: 0.92rem;
-      color: rgba(255,255,255,0.82);
+      font-size: 0.95rem;
+      color: #f6f1e8;                      /* Creme, wie der Seitenhintergrund */
       line-height: 1.5;
       margin: 0;
     }
-    .plattformen-logos { display: flex; align-items: center; flex-wrap: wrap; gap: 12px; }
+    .plattformen-logos {
+      display: flex; align-items: center; justify-content: center;
+      flex-wrap: wrap; gap: 12px;
+    }
     .plattform-btn {
       display: inline-block;
       font-family: var(--font-body, 'Inter', sans-serif);
       font-size: 0.85rem; font-weight: 500; letter-spacing: 0.01em;
-      padding: 8px 20px;
-      border: 1px solid rgba(255,255,255,0.5);
+      color: #f6f1e8; background: transparent;
+      padding: 8px 22px;
+      border: 1px solid rgba(246,241,232,0.55);   /* creme-farbene Umrandung */
       border-radius: 7px;
       text-decoration: none; white-space: nowrap;
       transition: background 0.15s ease, border-color 0.15s ease;
     }
-    .plattform-btn:hover { background: rgba(255,255,255,0.12); border-color: rgba(255,255,255,0.85); }
-    @media (max-width: 760px) {
-      .plattformen { flex-direction: column; text-align: center; gap: 14px; padding: 20px 22px; }
-      .plattformen-logos { justify-content: center; }
-    }
+    .plattform-btn:hover { background: rgba(246,241,232,0.14); border-color: rgba(246,241,232,0.9); }
+    @media (max-width: 560px) { .plattformen { padding: 22px 18px; } }
     
   </style>
   <link rel="icon" href="image/icon.webp" type="image/x-icon" />
@@ -121,6 +122,18 @@
       </section>
 
       </section>
+
+
+            <!-- ── Plattform-Leiste (im Stil des Footers) ── -->
+      <div class="plattformen">
+        <p>Du kannst Sinnfunk auch auf anderen Plattformen hören:</p>
+        <div class="plattformen-logos">
+          <a class="plattform-btn" href="https://www.vradio.app/" target="_blank" rel="noopener">vRadio</a>
+          <a class="plattform-btn" href="https://www.radio.at/" target="_blank" rel="noopener">radio.at</a>
+          <a class="plattform-btn" href="https://www.radio.de/" target="_blank" rel="noopener">radio.de</a>
+          <a class="plattform-btn" href="https://www.youtube.com/live/8dVF2rZL7Ec?si=6FAVDq2h2gyxFTWm" target="_blank" rel="noopener">YouTube-Live</a>
+        </div>
+      </div>
 
       <!-- ── Warum Sinnfunk? ── -->
       <div class="impuls">
@@ -174,16 +187,6 @@
       </div>
       <!-- Ende .programm -->
 
-            <!-- ── Plattform-Leiste (im Stil des Footers) ── -->
-      <div class="plattformen">
-        <p>Du kannst Sinnfunk auch auf anderen Plattformen hören:</p>
-        <div class="plattformen-logos">
-          <a class="plattform-btn" href="https://www.vradio.app/" target="_blank" rel="noopener">vRadio</a>
-          <a class="plattform-btn" href="https://www.radio.at/" target="_blank" rel="noopener">radio.at</a>
-          <a class="plattform-btn" href="https://www.radio.de/" target="_blank" rel="noopener">radio.de</a>
-          <a class="plattform-btn" href="https://www.youtube.com/live/8dVF2rZL7Ec?si=6FAVDq2h2gyxFTWm" target="_blank" rel="noopener">YouTube-Live</a>
-        </div>
-      </div>
       
 
       <!-- ── Meine Gesprächsteilnehmer der Woche ── -->
