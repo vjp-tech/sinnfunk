@@ -53,6 +53,29 @@
     /* Der erste Eintrag läuft als Nächstes – etwas hervorgehoben */
     .live-item:first-child .live-title { font-family: var(--font-display); font-size: 1.3rem; line-height: 1.15; }
     @media (max-width: 560px) { .prog-live { padding: 24px; } }
+
+    /* Plattform-Leiste unter dem Hero */
+    .plattformen {
+      max-width: 640px; margin: 34px auto 0; padding: 22px 26px;
+      background: var(--paper, #fbf7ee);
+      border: 1px solid var(--line-soft, rgba(123,94,69,0.16));
+      border-radius: 12px; text-align: center;
+    }
+    .plattformen p {
+      font-family: var(--font-body, 'Inter', sans-serif);
+      font-size: 0.9rem; color: var(--muted, #6f7169);
+      line-height: 1.5; margin: 0 0 16px;
+    }
+    .plattformen-logos { display: flex; align-items: center; justify-content: center; gap: 30px; flex-wrap: wrap; }
+    .plattformen-logos a { display: inline-flex; transition: opacity 0.2s ease, transform 0.2s ease; }
+    .plattformen-logos a:hover { opacity: 0.75; transform: translateY(-1px); }
+    .plattformen-logos img { height: 44px; width: auto; display: block; }
+    @media (max-width: 560px) {
+      .plattformen { margin: 26px 20px 0; padding: 20px; }
+      .plattformen-logos { gap: 22px; }
+      .plattformen-logos img { height: 38px; }
+    }
+    
   </style>
   <link rel="icon" href="image/icon.webp" type="image/x-icon" />
   <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
