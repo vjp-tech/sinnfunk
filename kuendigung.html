@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Vertrag kündigen – Sinnfunk</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="image/icon.webp" type="image/x-icon" />
+  <style>
+    /* ── Nur für die Kündigungsseite ── */
+    .kuend-head { max-width: 760px; margin: 60px auto 10px; padding: 0 24px; }
+    .kuend-head h1 { font-family: var(--font-display, 'Cormorant Garamond', serif); margin-bottom: 12px; }
+    .kuend-head p  { font-family: var(--font-body, 'Inter', sans-serif); color: var(--muted, #6f7169); line-height: 1.6; max-width: 620px; }
+
+    .kuend-wrap {
+      max-width: 760px;
+      margin: 24px auto 80px;
+      padding: 40px;
+      background: var(--paper, #fbf7ee);
+      border: 1px solid var(--line-soft, rgba(123,94,69,0.16));
+      border-radius: 12px;
+    }
+    @media (max-width: 560px) { .kuend-wrap { padding: 26px; } }
+
+    .kuend-field { margin-bottom: 22px; }
+    .kuend-field label {
+      display: block;
+      font-family: var(--font-body, 'Inter', sans-serif);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: var(--ink, #353d2e);
+      margin-bottom: 7px;
+    }
+    .kuend-field .hint {
+      display: block;
+      font-family: var(--font-body, 'Inter', sans-serif);
+      font-size: 0.8rem;
+      font-weight: 400;
+      color: var(--muted, #6f7169);
+      margin-bottom: 8px;
+    }
+    .kuend-field input[type="text"],
+    .kuend-field input[type="email"],
+    .kuend-field input[type="date"],
+    .kuend-field textarea {
+      width: 100%;
+      box-sizing: border-box;
+      font-family: var(--font-body, 'Inter', sans-serif);
+      font-size: 0.95rem;
+      color: var(--ink, #353d2e);
+      background: #fff;
+      border: 1px solid var(--line-soft, rgba(123,94,69,0.2));
+      border-radius: 6px;
+      padding: 12px 14px;
+    }
+    .kuend-field textarea { min-height: 90px; resize: vertical; }
+    .kuend-field input:focus,
+    .kuend-field textarea:focus { outline: none; border-color: var(--gold, #9a8757); }
+
+    /* Auswahl "Art der Kündigung" */
+    .kuend-radio { display: flex; gap: 10px; flex-wrap: wrap; }
+    .kuend-radio label {
+      flex: 1 1 200px;
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      font-weight: 400;
+      background: #fff;
+      border: 1px solid var(--line-soft, rgba(123,94,69,0.2));
+      border-radius: 6px;
+      padding: 14px;
+      cursor: pointer;
+      margin-bottom: 0;
+    }
+    .kuend-radio input { margin-top: 3px; }
+
+    /* Der gesetzliche Bestätigungsbutton */
+    .kuend-submit {
+      display: inline-block;
+      width: 100%;
+      font-family: var(--font-body, 'Inter', sans-serif);
+      font-size: 1.05rem;
+      font-weight: 600;
+      letter-spacing: 0.02em;
+      color: #fff;
+      background: var(--ink, #353d2e);
+      border: 1px solid var(--ink, #353d2e);
+      border-radius: 8px;
+      padding: 17px 24px;
+      cursor: pointer;
+      transition: background 0.2s ease;
+    }
+    .kuend-submit:hover { background: #2b3326; }
+    .kuend-submit:disabled { opacity: 0.6; cursor: default; }
+
+    .kuend-error {
+      font-family: var(--font-body, 'Inter', sans-serif);
+      font-size: 0.9rem;
+      color: #9c3b30;
+      margin: 4px 0 16px;
+    }
+
+    /* Bestätigungs-Ansicht nach dem Absenden */
+    #kuend-done { display: none; }
+    #kuend-done h2 { font-family: var(--font-display, 'Cormorant Garamond', serif); margin-bottom: 10px; }
+    #kuend-done p  { font-family: var(--font-body, 'Inter', sans-serif); color: var(--ink, #353d2e); line-height: 1.6; }
+    .kuend-summary {
+      font-family: var(--font-body, 'Inter', sans-serif);
+      font-size: 0.9rem;
+      color: var(--ink, #353d2e);
+      background: #fff;
+      border: 1px solid var(--line-soft, rgba(123,94,69,0.16));
+      border-radius: 8px;
+      padding: 20px 22px;
+      margin: 20px 0;
+      line-height: 1.7;
+    }
+    .kuend-summary strong { display: inline-block; min-width: 190px; color: var(--muted, #6f7169); font-weight: 600; }
+    .kuend-print {
+      font-family: var(--font-body, 'Inter', sans-serif);
+      font-size: 0.9rem;
+      color: var(--gold, #9a8757);
+      background: none;
+      border: none;
+      padding: 0;
+      cursor: pointer;
+      text-decoration: underline;
+    }
+  </style>
+</head>
+<body>
+  <div class="page">
+
+    <div id="sf-nav"></div>
+    <script src="nav.js"></script>
+
+    <main>
+
+      <div class="kuend-head">
+        <p class="eyebrow">Rechtliches</p>
+        <h1>Vertrag kündigen</h1>
+        <p>Hier kannst du einen mit Sinnfunk geschlossenen Vertrag kündigen. Fülle das Formular aus und
+          bestätige mit „Jetzt kündigen“. Du erhältst umgehend eine Bestätigung per E-Mail mit Datum
+          und Uhrzeit deiner Kündigung.</p>
+      </div>
+
+      <div class="kuend-wrap">
+
+        <!-- ══ Schritt 2: Bestätigungsseite mit Formular ══ -->
+        <form id="kuend-form" novalidate>
+
+          <div class="kuend-field">
+            <label>Art der Kündigung</label>
+            <div class="kuend-radio">
+              <label>
+                <input type="radio" name="art" value="Ordentliche Kündigung" checked />
+                <span>Ordentliche Kündigung<br><small style="color:var(--muted,#6f7169);">zum nächstmöglichen Zeitpunkt</small></span>
+              </label>
+              <label>
+                <input type="radio" name="art" value="Außerordentliche Kündigung" />
+                <span>Außerordentliche Kündigung<br><small style="color:var(--muted,#6f7169);">aus wichtigem Grund</small></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="kuend-field">
+            <label for="k-name">Vor- und Nachname *</label>
+            <input type="text" id="k-name" name="name" autocomplete="name" required />
+          </div>
+
+          <div class="kuend-field">
+            <label for="k-mail">E-Mail-Adresse *</label>
+            <span class="hint">An diese Adresse senden wir die Eingangsbestätigung.</span>
+            <input type="email" id="k-mail" name="email" autocomplete="email" required />
+          </div>
+
+          <div class="kuend-field">
+            <label for="k-vertrag">Kennzeichnung des Vertrags *</label>
+            <span class="hint">z. B. Rechnungs- oder Buchungsnummer, oder die bei der Buchung verwendete E-Mail-Adresse.</span>
+            <input type="text" id="k-vertrag" name="vertrag" required />
+          </div>
+
+          <div class="kuend-field">
+            <label for="k-datum">Kündigung zum (optional)</label>
+            <span class="hint">Ohne Angabe kündigen wir zum nächstmöglichen Zeitpunkt.</span>
+            <input type="date" id="k-datum" name="datum" />
+          </div>
+
+          <div class="kuend-field">
+            <label for="k-grund">Grund der Kündigung (optional)</label>
+            <textarea id="k-grund" name="grund"></textarea>
+          </div>
+
+          <p class="kuend-error" id="kuend-error" style="display:none;"></p>
+
+          <button type="submit" class="kuend-submit" id="kuend-submit">Jetzt kündigen</button>
+        </form>
+
+        <!-- ══ Ansicht nach dem Absenden ══ -->
+        <div id="kuend-done">
+          <h2>Deine Kündigung ist eingegangen.</h2>
+          <p>Wir haben deine Kündigung erhalten und dir eine Bestätigung per E-Mail geschickt.
+             Du kannst deine Angaben unten speichern oder ausdrucken.</p>
+          <div class="kuend-summary" id="kuend-summary"></div>
+          <button type="button" class="kuend-print" onclick="window.print()">Bestätigung speichern / drucken</button>
+        </div>
+
+      </div>
+
+    </main>
+
+    <div id="sf-footer"></div>
+    <script src="footer.js"></script>
+
+  </div>
+
+  <script>
+    (function () {
+      // ── Deine öffentlichen Supabase-Daten (identisch zur Startseite) ──
+      var SB_URL   = 'https://mliatnfqgnctbxhbwhzp.supabase.co';
+      var SB_ANON  = 'sb_publishable_KocEqg2UUL2trsGXb_kacA_yfY8DIP3';
+      var FUNKTION = 'send-kuendigung';   // ← diese Edge Function muss noch angelegt werden
+
+      var form    = document.getElementById('kuend-form');
+      var doneBox = document.getElementById('kuend-done');
+      var errBox  = document.getElementById('kuend-error');
+      var btn     = document.getElementById('kuend-submit');
+      var summary = document.getElementById('kuend-summary');
+
+      function zeigeFehler(text) {
+        errBox.textContent = text;
+        errBox.style.display = 'block';
+      }
+
+      function esc(s) {
+        return String(s || '').replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+      }
+
+      form.addEventListener('submit', async function (e) {
+        e.preventDefault();
+        errBox.style.display = 'none';
+
+        var art     = (form.querySelector('input[name="art"]:checked') || {}).value || '';
+        var name    = document.getElementById('k-name').value.trim();
+        var email   = document.getElementById('k-mail').value.trim();
+        var vertrag = document.getElementById('k-vertrag').value.trim();
+        var datum   = document.getElementById('k-datum').value;
+        var grund   = document.getElementById('k-grund').value.trim();
+
+        if (!name || !email || !vertrag) {
+          zeigeFehler('Bitte fülle Name, E-Mail-Adresse und die Kennzeichnung des Vertrags aus.');
+          return;
+        }
+        if (email.indexOf('@') < 1) {
+          zeigeFehler('Bitte gib eine gültige E-Mail-Adresse ein.');
+          return;
+        }
+
+        // Zeitpunkt der Absendung (Europe/Vienna)
+        var jetzt = new Date();
+        var zeitstempel = jetzt.toLocaleString('de-AT', { timeZone: 'Europe/Vienna', dateStyle: 'long', timeStyle: 'short' });
+
+        var payload = {
+          art: art,
+          name: name,
+          email: email,
+          vertrag: vertrag,
+          datum: datum || 'nächstmöglicher Zeitpunkt',
+          grund: grund || '(kein Grund angegeben)',
+          zeitstempel: zeitstempel
+        };
+
+        btn.disabled = true;
+        btn.textContent = 'Wird gesendet …';
+
+        try {
+          var res = await fetch(SB_URL + '/functions/v1/' + FUNKTION, {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json',
+              'Authorization': 'Bearer ' + SB_ANON,
+              'apikey': SB_ANON
+            },
+            body: JSON.stringify(payload)
+          });
+
+          if (!res.ok) throw new Error('Serverantwort ' + res.status);
+
+          // Erfolg: Formular ausblenden, Bestätigung zeigen
+          form.style.display = 'none';
+          summary.innerHTML =
+            '<div><strong>Art der Kündigung:</strong> ' + esc(payload.art) + '</div>' +
+            '<div><strong>Name:</strong> ' + esc(payload.name) + '</div>' +
+            '<div><strong>E-Mail:</strong> ' + esc(payload.email) + '</div>' +
+            '<div><strong>Vertrag:</strong> ' + esc(payload.vertrag) + '</div>' +
+            '<div><strong>Kündigung zum:</strong> ' + esc(payload.datum) + '</div>' +
+            '<div><strong>Grund:</strong> ' + esc(payload.grund) + '</div>' +
+            '<div><strong>Eingegangen am:</strong> ' + esc(payload.zeitstempel) + '</div>';
+          doneBox.style.display = 'block';
+          doneBox.scrollIntoView({ behavior: 'smooth', block: 'start' });
+
+        } catch (err) {
+          console.error('Kündigung:', err);
+          btn.disabled = false;
+          btn.textContent = 'Jetzt kündigen';
+          zeigeFehler('Deine Kündigung konnte gerade nicht übermittelt werden. ' +
+            'Bitte versuche es erneut oder schreibe uns direkt an servus@sinnfunk.live.');
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
