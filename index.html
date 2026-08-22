@@ -692,6 +692,41 @@
       laden();
     })();
   </script>
+  <!-- Sinnfunker des Tages: grüne Box, nur wenn heute (Wiener Zeit) einer eingetragen ist -->
+  <script>
+    (function () {
+      const SB_URL  = 'https://mliatnfqgnctbxhbwhzp.supabase.co';
+      const SB_ANON = 'sb_publishable_KocEqg2UUL2trsGXb_kacA_yfY8DIP3';
+      const box = document.getElementById('sf-sdt');
+      if (!box || typeof supabase === 'undefined') return;
+
+      const db = supabase.createClient(SB_URL, SB_ANON);
+
+      // Heutiges Datum in der Zeitzone Europe/Vienna als YYYY-MM-DD
+      const heute = new Date().toLocaleDateString('en-CA', { timeZone: 'Europe/Vienna' });
+
+      (async function laden() {
+        try {
+          const { data, error } = await db
+            .from('sinnfunker_des_tages')
+            .select('name, thema')
+            .eq('datum', heute)
+            .maybeSingle();
+
+          // Nichts eingetragen (oder Tabelle fehlt) → Box bleibt versteckt
+          if (error || !data || !data.name) return;
+
+          document.getElementById('sf-sdt-name').textContent = data.name;
+          const themaEl = document.getElementById('sf-sdt-thema');
+          if (data.thema) { themaEl.textContent = data.thema; themaEl.hidden = false; }
+          box.hidden = false;
+        } catch (e) {
+          console.error('Sinnfunker des Tages konnte nicht geladen werden:', e);
+        }
+      })();
+    })();
+  </script>
+
   <!-- Als Nächstes: kommende Titel aus der Warteschlange (über den Worker) -->
   <script>
   (function () {
@@ -745,4 +780,5 @@
   </script>
 </body>
 </html>
+
 
