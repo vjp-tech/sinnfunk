@@ -9,17 +9,21 @@ const sfFooterHTML = `
 <div class="sf-footer">
 
   <style>
-    /* Großer "Vertrag kündigen"-Button im Footer */
-    .sf-kuend-row { text-align: center; padding: 6px 24px 2px; }
+    /* "Vertrag kündigen"-Button im Footer – umrandet, kompakt */
+    .sf-kuend-row { padding: 6px 24px 2px; }
     .sf-kuend-btn {
       display: inline-block;
       font-family: var(--font-body, 'Inter', sans-serif);
-      font-size: 1rem; font-weight: 600; letter-spacing: 0.02em;
-      color: #fff; background: var(--ink, #353d2e);
-      padding: 14px 40px; border: 1px solid var(--ink, #353d2e);
-      border-radius: 8px; text-decoration: none; transition: background 0.2s ease;
+      font-size: 0.9rem; font-weight: 500; letter-spacing: 0.01em;
+      color: inherit;                 /* übernimmt die Textfarbe des Footers */
+      background: transparent;
+      padding: 11px 30px;
+      border: 1px solid currentColor; /* Umrandung in derselben Farbe */
+      border-radius: 8px;
+      text-decoration: none;
+      transition: background 0.15s ease;
     }
-    .sf-kuend-btn:hover { background: #2b3326; }
+    .sf-kuend-btn:hover { background: rgba(128,128,128,0.12); }
   </style>
 
   <div class="sf-footer-inner">
@@ -84,3 +88,4 @@ const sfFooterHTML = `
 `;
 
 document.getElementById('sf-footer').outerHTML = sfFooterHTML;
+
