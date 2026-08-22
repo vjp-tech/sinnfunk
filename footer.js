@@ -1,10 +1,27 @@
 // ============================================
 // SINNFUNK – Footer (hell, minimal)
 // Styling liegt in style.css (.sf-footer …).
+// Ausnahme: der "Vertrag kündigen"-Button hat seinen Stil hier unten,
+// damit style.css dafür nicht angefasst werden muss.
 // ============================================
 
 const sfFooterHTML = `
 <div class="sf-footer">
+
+  <style>
+    /* Großer "Vertrag kündigen"-Button im Footer */
+    .sf-kuend-row { text-align: center; padding: 6px 24px 2px; }
+    .sf-kuend-btn {
+      display: inline-block;
+      font-family: var(--font-body, 'Inter', sans-serif);
+      font-size: 1rem; font-weight: 600; letter-spacing: 0.02em;
+      color: #fff; background: var(--ink, #353d2e);
+      padding: 14px 40px; border: 1px solid var(--ink, #353d2e);
+      border-radius: 8px; text-decoration: none; transition: background 0.2s ease;
+    }
+    .sf-kuend-btn:hover { background: #2b3326; }
+  </style>
+
   <div class="sf-footer-inner">
 
     <a class="logo" href="index.html" aria-label="Sinnfunk Startseite">
@@ -58,6 +75,11 @@ const sfFooterHTML = `
     </div>
 
   </div>
+
+  <div class="sf-kuend-row">
+    <a class="sf-kuend-btn" href="kuendigung.html">Vertrag kündigen</a>
+  </div>
+
 </div>
 `;
 
