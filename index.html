@@ -137,6 +137,13 @@
       text-align: center;
       padding: 24px;
     }
+    /* Ohne diese Regel gewinnt das "display: flex/block" oben gegen das
+       hidden-Attribut, das das Script setzt – Platzhalter und echte
+       Anzeige würden sonst gleichzeitig sichtbar bleiben. */
+    .prog-ad-frame[hidden],
+    .prog-ad-platzhalter[hidden] {
+      display: none;
+    }
     .prog-ad-platzhalter-icon { font-size: 1.8rem; opacity: 0.6; }
     .prog-ad-platzhalter p {
       font-family: var(--font-body);
