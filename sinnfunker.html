@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sinnfunker – Sinnfunk</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="image/icon.webp" type="image/x-icon" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+
+    /* Nutzt die gemeinsamen Tokens aus style.css – nur seitenspezifisches Layout. */
+
+    .sf-profil-wrap {
+      width: min(980px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 0 0 80px;
+    }
+
+    .sf-zurueck {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 600;
+      color: var(--gold-deep);
+      text-decoration: none;
+      margin: 28px 0 22px;
+    }
+    .sf-zurueck:hover { text-decoration: underline; }
+
+    /* ── Zustände: Laden / Nicht gefunden ── */
+    .sf-loading, .sf-not-found {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      padding: 100px 24px;
+      color: var(--muted);
+      font-family: var(--font-body);
+      text-align: center;
+    }
+    .sf-spinner {
+      width: 40px; height: 40px;
+      border: 3px solid rgba(168,148,92,0.25);
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+    .sf-not-found h1 {
+      font-family: var(--font-display);
+      font-size: 1.8rem;
+      color: var(--ink);
+      font-weight: 600;
+    }
+
+    /* ── Profil-Header ── */
+    .sf-profil-hero {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 40px;
+      display: flex;
+      gap: 28px;
+      align-items: flex-start;
+      flex-wrap: wrap;
+    }
+    .sf-profil-avatar {
+      width: 128px; height: 128px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 3px solid rgba(168,148,92,0.3);
+      background: rgba(168,148,92,0.12);
+    }
+    .sf-profil-avatar-placeholder {
+      width: 128px; height: 128px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, rgba(168,148,92,0.6), rgba(53,61,46,0.5));
+      display: grid;
+      place-items: center;
+      font-size: 2.8rem;
+      color: #fff;
+      font-family: var(--font-display);
+    }
+    .sf-profil-meta { flex: 1; min-width: 240px; }
+    .sf-profil-category {
+      display: inline-block;
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      padding: 3px 12px;
+      border-radius: 999px;
+      margin-bottom: 10px;
+      background: rgba(168,148,92,0.18);
+      color: var(--gold-deep);
+    }
+    .sf-profil-name {
+      font-family: var(--font-display);
+      font-size: clamp(1.8rem, 4vw, 2.4rem);
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.2;
+      margin-bottom: 4px;
+    }
+    .sf-profil-subtitle {
+      font-family: var(--font-body);
+      font-size: 1rem;
+      color: var(--muted);
+      margin-bottom: 16px;
+    }
+    .sf-profil-bio {
+      font-family: var(--font-body);
+      font-size: 0.98rem;
+      line-height: 1.7;
+      color: var(--ink-soft);
+      margin-bottom: 18px;
+      white-space: pre-line;
+    }
+    .sf-profil-links {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+    .sf-social {
+      display: flex;
+      gap: 12px;
+      align-items: center;
+    }
+    .sf-social a {
+      width: 36px; height: 36px;
+      border-radius: 10px;
+      background: rgba(168,148,92,0.1);
+      border: 1px solid var(--line);
+      display: grid;
+      place-items: center;
+      font-size: 0.92rem;
+      color: var(--gold-deep);
+      text-decoration: none;
+      transition: background 0.2s;
+      flex-shrink: 0;
+    }
+    .sf-social a:hover { background: rgba(168,148,92,0.2); }
+    .sf-profil-website {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: var(--gold-deep);
+      font-weight: 600;
+      text-decoration: none;
+      border-bottom: 1px solid rgba(168,148,92,0.4);
+      padding-bottom: 1px;
+    }
+    .sf-profil-website:hover { border-color: var(--gold-deep); }
+
+    /* ── Abschnitte (Produkte / Episoden) ── */
+    .sf-abschnitt { margin-top: 48px; }
+    .sf-abschnitt-titel {
+      font-family: var(--font-display);
+      font-size: 1.5rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 20px;
+    }
+    .sf-leer {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: var(--muted);
+      padding: 20px 0;
+    }
+
+    /* ── Produkte ── */
+    .sf-produkte-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+    }
+    .sf-produkt-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 20px;
+      display: flex;
+      gap: 14px;
+    }
+    .sf-produkt-bild {
+      width: 64px; height: 64px;
+      border-radius: 9px;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 1px solid var(--line);
+    }
+    .sf-produkt-info { flex: 1; min-width: 0; }
+    .sf-produkt-typ {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+      color: var(--gold-deep);
+      margin-bottom: 4px;
+    }
+    .sf-produkt-titel {
+      font-family: var(--font-display);
+      font-size: 1.1rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 5px;
+    }
+    .sf-produkt-beschreibung {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 8px;
+    }
+    .sf-produkt-link {
+      font-family: var(--font-body);
+      font-size: 0.82rem;
+      font-weight: 600;
+      color: var(--gold-deep);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(168,148,92,0.4);
+    }
+    .sf-produkt-link:hover { border-color: var(--gold-deep); }
+    .sf-produkt-termin {
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 8px;
+    }
+
+    /* ── Episoden ── */
+    .sf-ep-list { display: flex; flex-direction: column; gap: 14px; }
+    .sf-ep-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      padding: 18px 22px;
+    }
+    .sf-ep-titel {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--ink);
+      margin-bottom: 4px;
+    }
+    .sf-ep-beschreibung {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.5;
+      margin-bottom: 10px;
+    }
+    .sf-ep-dauer {
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .sf-ep-audio { width: 100%; height: 38px; }
+
+    @media (max-width: 700px) {
+      .sf-profil-hero { padding: 28px 22px; }
+      .sf-produkte-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .sf-social {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div id="sf-nav"></div>
+  <script src="nav.js"></script>
+
+  <main>
+    <div class="sf-profil-wrap">
+
+      <a class="sf-zurueck" href="community.html">← Alle Sinnfunker</a>
+
+      <div id="sf-inhalt">
+        <div class="sf-loading">
+          <div class="sf-spinner"></div>
+          <p>Profil wird geladen …</p>
+        </div>
+      </div>
+
+    </div>
+  </main>
+
+  <div id="sf-footer"></div>
+  <script src="footer.js"></script>
+
+</div>
+
+<script>
+  const SUPABASE_URL  = 'https://mliatnfqgnctbxhbwhzp.supabase.co';
+  const SUPABASE_ANON = 'sb_publishable_KocEqg2UUL2trsGXb_kacA_yfY8DIP3';
+  const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+
+  const inhalt = document.getElementById('sf-inhalt');
+  const slug = new URLSearchParams(window.location.search).get('name');
+
+  async function ladeProfil() {
+    if (!slug) { zeigeNichtGefunden(); return; }
+
+    const { data: sf, error } = await db
+      .from('sinnfunker')
+      .select('id, name, subtitle, biography, photo_url, website, facebook, instagram, extra_link, category')
+      .eq('slug', slug)
+      .in('status', ['aktiv', 'freigegeben'])
+      .maybeSingle();
+
+    if (error || !sf) { zeigeNichtGefunden(); return; }
+
+    document.title = sf.name + ' – Sinnfunk';
+
+    const [{ data: produkte }, { data: episodenRoh }] = await Promise.all([
+      db.from('products')
+        .select('id, title, description, product_type, provider, link_url, image_url, event_date')
+        .eq('sinnfunker_id', sf.id)
+        .order('title'),
+      db.from('episodes')
+        .select('id, title, description, duration, audio_url')
+        .eq('sinnfunker_id', sf.id)
+        .eq('status', 'aktiv')
+        .order('title'),
+    ]);
+
+    renderProfil(sf, produkte || [], episodenRoh || []);
+  }
+
+  function renderProfil(sf, produkte, episoden) {
+    const initial = sf.name ? sf.name.charAt(0).toUpperCase() : '?';
+    const avatar = sf.photo_url
+      ? `<img class="sf-profil-avatar" src="${esc(sf.photo_url)}" alt="${esc(sf.name)}" />`
+      : `<div class="sf-profil-avatar-placeholder">${initial}</div>`;
+    const categoryBadge = sf.category
+      ? `<span class="sf-profil-category">${esc(sf.category)}</span>` : '';
+
+    const socials = [
+      sf.instagram  && `<a href="${esc(sf.instagram)}"  target="_blank" rel="noopener" title="Instagram">▣</a>`,
+      sf.facebook   && `<a href="${esc(sf.facebook)}"   target="_blank" rel="noopener" title="Facebook">f</a>`,
+      sf.extra_link && `<a href="${esc(sf.extra_link)}" target="_blank" rel="noopener" title="Weiterer Link">🔗</a>`,
+    ].filter(Boolean).join('');
+    const socialBlock = socials ? `<div class="sf-social">${socials}</div>` : '';
+
+    let websiteLink = '';
+    if (sf.website) {
+      try {
+        const hostname = new URL(sf.website).hostname;
+        websiteLink = `<a class="sf-profil-website" href="${esc(sf.website)}" target="_blank" rel="noopener">${hostname} →</a>`;
+      } catch (e) {
+        websiteLink = `<a class="sf-profil-website" href="${esc(sf.website)}" target="_blank" rel="noopener">Website →</a>`;
+      }
+    }
+
+    const produkteAbschnittHTML = produkte.length ? `
+      <div class="sf-abschnitt">
+        <div class="sf-abschnitt-titel">Produkte &amp; Angebote</div>
+        <div class="sf-produkte-grid">${produkte.map(produktHTML).join('')}</div>
+      </div>` : '';
+
+    const episodenHTML = episoden.length
+      ? `<div class="sf-ep-list">${episoden.map(episodeHTML).join('')}</div>`
+      : `<p class="sf-leer">Noch keine Episoden zum Nachhören.</p>`;
+
+    inhalt.innerHTML = `
+      <div class="sf-profil-hero">
+        ${avatar}
+        <div class="sf-profil-meta">
+          ${categoryBadge}
+          <div class="sf-profil-name">${esc(sf.name)}</div>
+          ${sf.subtitle ? `<div class="sf-profil-subtitle">${esc(sf.subtitle)}</div>` : ''}
+          ${sf.biography ? `<p class="sf-profil-bio">${esc(sf.biography)}</p>` : ''}
+          <div class="sf-profil-links">
+            ${socialBlock}
+            ${websiteLink}
+          </div>
+        </div>
+      </div>
+
+      ${produkteAbschnittHTML}
+
+      <div class="sf-abschnitt">
+        <div class="sf-abschnitt-titel">Episoden zum Nachhören</div>
+        ${episodenHTML}
+      </div>
+    `;
+  }
+
+  function produktHTML(p) {
+    const bild = p.image_url ? `<img class="sf-produkt-bild" src="${esc(p.image_url)}" alt="${esc(p.title)}" />` : '';
+    const termin = p.event_date
+      ? `<div class="sf-produkt-termin">📅 ${new Date(p.event_date).toLocaleDateString('de-AT')}</div>` : '';
+    return `
+      <div class="sf-produkt-card">
+        ${bild}
+        <div class="sf-produkt-info">
+          ${p.product_type ? `<div class="sf-produkt-typ">${esc(p.product_type)}</div>` : ''}
+          <div class="sf-produkt-titel">${esc(p.title)}</div>
+          ${p.description ? `<p class="sf-produkt-beschreibung">${esc(p.description)}</p>` : ''}
+          ${termin}
+          ${p.link_url ? `<a class="sf-produkt-link" href="${esc(p.link_url)}" target="_blank" rel="noopener">Ansehen →</a>` : ''}
+        </div>
+      </div>`;
+  }
+
+  function episodeHTML(ep) {
+    return `
+      <div class="sf-ep-card">
+        <div class="sf-ep-titel">${esc(ep.title)}</div>
+        ${ep.description ? `<p class="sf-ep-beschreibung">${esc(ep.description)}</p>` : ''}
+        ${ep.duration ? `<div class="sf-ep-dauer">${ep.duration} Min.</div>` : ''}
+        ${ep.audio_url ? `<audio class="sf-ep-audio" controls src="${esc(ep.audio_url)}"></audio>` : ''}
+      </div>`;
+  }
+
+  function zeigeNichtGefunden() {
+    inhalt.innerHTML = `
+      <div class="sf-not-found">
+        <h1>Diesen Sinnfunker gibt es nicht.</h1>
+        <p>Vielleicht ist der Link veraltet. <a href="community.html" style="color:var(--gold-deep);">Zurück zur Übersicht</a></p>
+      </div>`;
+  }
+
+  function esc(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  ladeProfil();
+</script>
+</body>
+</html>

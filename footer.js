@@ -77,7 +77,8 @@ const sfFooterHTML = `
 
     <!-- Spalte 2: Links + Vertrag kündigen -->
     <nav class="sf-footer-nav" aria-label="Footer-Navigation">
-      <a href="kontakt.html">Kontakt</a>
+    <a class="sf-kuend-btn" href="kontakt.html">Kontakt</a>
+      <a href="freunde.html">Freunde</a>
       <a href="anleitung.html">Anleitung</a>
       <a href="impressum.html">Impressum</a>
       <a href="datenschutz.html">Datenschutz</a>

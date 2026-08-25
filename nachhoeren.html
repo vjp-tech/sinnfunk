@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nachhören – Sinnfunk</title>
+  <link rel="stylesheet" href="style.css" />
+  <link rel="icon" href="image/icon.webp" type="image/x-icon" />
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <style>
+
+    /* Nutzt die gemeinsamen Tokens aus style.css – nur seitenspezifisches Layout. */
+
+    /* ── Suche ── */
+    .nh-search-wrap {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 0 0 44px;
+    }
+    .nh-search-box {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 30px;
+    }
+    .nh-search-row {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr auto;
+      gap: 14px;
+      align-items: end;
+    }
+    .nh-input-group { display: flex; flex-direction: column; gap: 6px; }
+    .nh-input-group label {
+      font-family: var(--font-body);
+      font-size: 0.72rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      color: var(--gold-deep);
+    }
+    .nh-input-group input {
+      padding: 12px 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      background: var(--paper-warm);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .nh-input-group input:focus { border-color: var(--gold); }
+    .nh-input-group select {
+      padding: 12px 16px;
+      border: 1px solid var(--line);
+      border-radius: var(--radius-sm);
+      background: var(--paper-warm);
+      font-family: var(--font-body);
+      font-size: 0.95rem;
+      color: var(--ink);
+      outline: none;
+      transition: border-color 0.2s;
+      width: 100%;
+      box-sizing: border-box;
+    }
+    .nh-input-group select:focus { border-color: var(--gold); }
+    .nh-results-count {
+      font-family: var(--font-body);
+      font-size: 0.88rem;
+      color: var(--muted);
+      margin-top: 14px;
+    }
+
+    /* ── Ergebnisse ── */
+    .nh-wrap {
+      width: min(1180px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 0 0 80px;
+    }
+    .nh-list {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 20px;
+    }
+    .nh-loading, .nh-empty {
+      grid-column: 1 / -1;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 16px;
+      padding: 80px 24px;
+      color: var(--muted);
+      font-family: var(--font-body);
+      text-align: center;
+    }
+    .nh-spinner {
+      width: 40px; height: 40px;
+      border: 3px solid rgba(168,148,92,0.25);
+      border-top-color: var(--gold);
+      border-radius: 50%;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin { to { transform: rotate(360deg); } }
+
+    .nh-card {
+      background: var(--paper);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 20px;
+      display: flex;
+      flex-direction: column;
+    }
+    .nh-card-byline {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      margin-bottom: 12px;
+    }
+    .nh-avatar {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      object-fit: cover;
+      flex-shrink: 0;
+      border: 2px solid rgba(168,148,92,0.3);
+      background: rgba(168,148,92,0.12);
+    }
+    .nh-avatar-placeholder {
+      width: 40px; height: 40px;
+      border-radius: 50%;
+      flex-shrink: 0;
+      background: linear-gradient(135deg, rgba(168,148,92,0.6), rgba(53,61,46,0.5));
+      display: grid;
+      place-items: center;
+      font-size: 0.9rem;
+      color: #fff;
+      font-family: var(--font-display);
+    }
+    .nh-card-sinnfunker {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      font-weight: 600;
+    }
+    .nh-card-sinnfunker a {
+      color: var(--gold-deep);
+      text-decoration: none;
+      border-bottom: 1px solid rgba(168,148,92,0.4);
+    }
+    .nh-card-sinnfunker a:hover { border-color: var(--gold-deep); }
+    .nh-card-title {
+      font-family: var(--font-display);
+      font-size: 1.15rem;
+      font-weight: 600;
+      color: var(--ink);
+      line-height: 1.3;
+      margin-bottom: 6px;
+    }
+    .nh-card-desc {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: var(--muted);
+      line-height: 1.55;
+      margin-bottom: 10px;
+      display: -webkit-box;
+      -webkit-line-clamp: 3;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
+    }
+    .nh-card-meta {
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-bottom: 10px;
+    }
+    .nh-keywords {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      margin-bottom: 12px;
+    }
+    .nh-keyword-tag {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 600;
+      padding: 3px 10px;
+      border-radius: 999px;
+      background: rgba(168,148,92,0.14);
+      color: var(--gold-deep);
+    }
+    .nh-audio { width: 100%; height: 36px; margin-top: auto; }
+
+    @media (max-width: 900px) {
+      .nh-list { grid-template-columns: repeat(3, 1fr); }
+      .nh-search-row { grid-template-columns: 1fr 1fr; }
+    }
+    @media (max-width: 700px) {
+      .nh-list { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 560px) {
+      .nh-search-row { grid-template-columns: 1fr; }
+      .nh-search-row .button { width: 100%; }
+    }
+  </style>
+</head>
+<body>
+<div class="page">
+
+  <div id="sf-nav"></div>
+  <script src="nav.js"></script>
+
+  <main>
+
+    <div class="page-hero">
+      <p class="eyebrow">Nachhören</p>
+      <h1>Alle Episoden zum Nachhören.</h1>
+      <p>Suche nach Sinnfunker, Episode oder Thema.</p>
+    </div>
+
+    <div class="nh-search-wrap">
+      <div class="nh-search-box">
+        <div class="nh-search-row">
+          <div class="nh-input-group">
+            <label for="nh-suche">Sinnfunker, Episode oder Thema</label>
+            <input type="text" id="nh-suche"
+              placeholder="z.B. Anna, Heilkräuter, Meditation …"
+              oninput="filterEpisoden()" />
+          </div>
+          <div class="nh-input-group">
+            <label for="nh-datum">Datum</label>
+            <input type="date" id="nh-datum" onchange="filterEpisoden()" />
+          </div>
+          <div class="nh-input-group">
+            <label for="nh-sortierung">Reihenfolge</label>
+            <select id="nh-sortierung" onchange="filterEpisoden()">
+              <option value="name">Alphabetisch (A–Z)</option>
+              <option value="datum-auf">Sendereihenfolge (älteste zuerst)</option>
+              <option value="datum-ab">Neueste zuerst</option>
+            </select>
+          </div>
+          <button class="button secondary" onclick="resetEpisoden()"
+            style="height:46px;">Zurücksetzen</button>
+        </div>
+        <p class="nh-results-count" id="nh-results-count">Wird geladen …</p>
+      </div>
+    </div>
+
+    <div class="nh-wrap">
+      <div class="nh-list" id="nh-list">
+        <div class="nh-loading">
+          <div class="nh-spinner"></div>
+          <p>Episoden werden geladen …</p>
+        </div>
+      </div>
+    </div>
+
+  </main>
+
+  <div id="sf-footer"></div>
+  <script src="footer.js"></script>
+
+</div>
+
+<script>
+  const SUPABASE_URL  = 'https://mliatnfqgnctbxhbwhzp.supabase.co';
+  const SUPABASE_ANON = 'sb_publishable_KocEqg2UUL2trsGXb_kacA_yfY8DIP3';
+  const db = supabase.createClient(SUPABASE_URL, SUPABASE_ANON);
+
+  let alleEpisoden = [];
+
+  async function ladeEpisoden() {
+    const { data, error } = await db
+      .from('episodes')
+      .select(`
+        id, title, description, duration, audio_url, submitted_at,
+        sinnfunker:sinnfunker_id ( name, slug, photo_url ),
+        episode_keywords ( keyword:keyword_id ( name ) )
+      `)
+      .eq('status', 'aktiv')
+      .order('title');
+
+    if (error) {
+      document.getElementById('nh-list').innerHTML =
+        `<div class="nh-empty"><p>Episoden konnten nicht geladen werden.</p></div>`;
+      return;
+    }
+
+    alleEpisoden = (data || []).map(ep => ({
+      ...ep,
+      keywords: (ep.episode_keywords || []).map(ek => ek.keyword?.name).filter(Boolean),
+    }));
+
+    // Sendereihenfolge (1. Episode, 2. Episode, …) nach Hochladedatum vergeben –
+    // bleibt fix, unabhängig von Suche/Sortierung in der Anzeige.
+    const chronologisch = [...alleEpisoden].sort((a, b) =>
+      new Date(a.submitted_at || 0) - new Date(b.submitted_at || 0));
+    chronologisch.forEach((ep, i) => { ep.nummer = i + 1; });
+
+    filterEpisoden();
+  }
+
+  function renderEpisoden(liste) {
+    const container = document.getElementById('nh-list');
+    const n = liste.length;
+    document.getElementById('nh-results-count').textContent =
+      n === 0 ? 'Keine Episoden gefunden.' :
+      n === 1 ? '1 Episode gefunden' : n + ' Episoden gefunden';
+
+    if (liste.length === 0) {
+      container.innerHTML = `<div class="nh-empty"><p>Keine Episoden gefunden.</p></div>`;
+      return;
+    }
+
+    container.innerHTML = liste.map(ep => {
+      const profilLink = ep.sinnfunker?.slug
+        ? `sinnfunker.html?name=${encodeURIComponent(ep.sinnfunker.slug)}` : null;
+      const sinnfunkerName = ep.sinnfunker?.name || '–';
+      const sinnfunkerHTML = profilLink
+        ? `<a href="${esc(profilLink)}">${esc(sinnfunkerName)}</a>`
+        : `<span>${esc(sinnfunkerName)}</span>`;
+
+      const initial = sinnfunkerName ? sinnfunkerName.charAt(0).toUpperCase() : '?';
+      const avatar = ep.sinnfunker?.photo_url
+        ? `<img class="nh-avatar" src="${esc(ep.sinnfunker.photo_url)}" alt="${esc(sinnfunkerName)}" />`
+        : `<div class="nh-avatar-placeholder">${initial}</div>`;
+
+      const keywordsHTML = ep.keywords.length
+        ? `<div class="nh-keywords">${ep.keywords.map(k => `<span class="nh-keyword-tag">${esc(k)}</span>`).join('')}</div>`
+        : '';
+
+      const metaTeile = [
+        `Episode ${ep.nummer}`,
+        ep.duration ? `${ep.duration} Min.` : null,
+        ep.submitted_at ? new Date(ep.submitted_at).toLocaleDateString('de-AT', { day: 'numeric', month: 'long', year: 'numeric' }) : null,
+      ].filter(Boolean);
+
+      return `
+        <div class="nh-card">
+          <div class="nh-card-byline">
+            ${avatar}
+            <span class="nh-card-sinnfunker">${sinnfunkerHTML}</span>
+          </div>
+          <div class="nh-card-title">${esc(ep.title)}</div>
+          ${ep.description ? `<p class="nh-card-desc">${esc(ep.description)}</p>` : ''}
+          <div class="nh-card-meta">${metaTeile.join(' · ')}</div>
+          ${keywordsHTML}
+          ${ep.audio_url ? `<audio class="nh-audio" controls preload="none" src="${esc(ep.audio_url)}"></audio>` : ''}
+        </div>`;
+    }).join('');
+  }
+
+  function filterEpisoden() {
+    const q      = document.getElementById('nh-suche').value.toLowerCase();
+    const datum  = document.getElementById('nh-datum').value; // YYYY-MM-DD
+    const sortierung = document.getElementById('nh-sortierung').value;
+
+    let gefiltert = alleEpisoden.filter(ep => {
+      if (q) {
+        const text = [ep.title, ep.description, ep.sinnfunker?.name, ...ep.keywords].join(' ').toLowerCase();
+        if (!text.includes(q)) return false;
+      }
+      if (datum && (!ep.submitted_at || ep.submitted_at.slice(0, 10) !== datum)) return false;
+      return true;
+    });
+
+    if (sortierung === 'datum-auf') {
+      gefiltert.sort((a, b) => new Date(a.submitted_at || 0) - new Date(b.submitted_at || 0));
+    } else if (sortierung === 'datum-ab') {
+      gefiltert.sort((a, b) => new Date(b.submitted_at || 0) - new Date(a.submitted_at || 0));
+    } else {
+      gefiltert.sort((a, b) => (a.title || '').localeCompare(b.title || ''));
+    }
+
+    renderEpisoden(gefiltert);
+  }
+
+  function resetEpisoden() {
+    document.getElementById('nh-suche').value = '';
+    document.getElementById('nh-datum').value = '';
+    document.getElementById('nh-sortierung').value = 'name';
+    filterEpisoden();
+  }
+
+  function esc(str) {
+    if (!str) return '';
+    return String(str)
+      .replace(/&/g,'&amp;').replace(/</g,'&lt;')
+      .replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+  }
+
+  ladeEpisoden();
+</script>
+</body>
+</html>

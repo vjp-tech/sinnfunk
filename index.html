@@ -12,8 +12,77 @@
       .hero-bg { background-image: url('image/hero-mobile.webp'); }     /* Smartphone */
     }
 
-    /* Hinweis unter dem Hero-Text */
-    .hero-note { font-family: 'Inter', sans-serif; font-size: 0.82rem; color: rgba(255,255,255,0.75); margin: 10px 0 18px; max-width: 480px; }
+    /* ── Neuer Hero-Player (ersetzt Text + Link, zeigt den Player aus dem Programm-Bereich) ── */
+    .hero .prog-stream {
+      background: #353d2e;          /* keine Papier-Box, Text liegt direkt auf dem Foto */
+      padding: 20px;
+      width: 100%;
+      max-width: 420px;
+      margin: 0;                    /* linksbündig statt zentriert */
+    }
+    @media (min-width: 761px) {
+      .hero .prog-stream { max-width: 480px; padding: 26px; }
+    }
+    @media (min-width: 1024px) {
+      .hero .prog-stream { max-width: 540px; }
+    }
+    /* Musik-Visualizer im Hero: wächst mit der Box mit (dickere Balken, mehr Abstand),
+       statt als kleines schmales Häufchen in der breiteren Box zu stehen */
+    .hero .prog-stream .tw-visualizer { gap: 6px; }
+    .hero .prog-stream .tw-visualizer span { width: 5px; }
+    @media (min-width: 761px) {
+      .hero .prog-stream .tw-visualizer { height: 54px; gap: 8px; margin: 18px 0 22px; }
+      .hero .prog-stream .tw-visualizer span { width: 6px; }
+    }
+    @media (min-width: 1024px) {
+      .hero .prog-stream .tw-visualizer { height: 62px; gap: 10px; }
+      .hero .prog-stream .tw-visualizer span { width: 7px; }
+    }
+    .hero-player-badge { margin-bottom: 14px; }
+    .hero-inner .hero-player-title {
+      font-family: var(--font-display);
+      color: #e8f4e6;
+      font-size: clamp(2rem, 5vw, 2.6rem);
+      max-width: none;
+      margin: 0 0 10px;
+    }
+    .hero-inner .hero-player-sub {
+      font-family: 'Inter', sans-serif;
+      color: rgba(243,239,228,0.82);
+      font-size: 0.98rem;
+      line-height: 1.5;
+      max-width: 100%;               /* wächst mit der Box mit, statt schmal zu bleiben */
+      margin: 0 auto 26px;
+    }
+    .hero-player-btn {
+      width: 92px; height: 92px;
+      border-radius: 50%;
+      background: var(--gold);
+      border: none;
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      margin: 0 auto;
+      transition: background 0.15s ease;
+    }
+    .hero-player-btn:hover { background: var(--gold-deep); }
+    .hero-player-btn svg { width: 34px; height: 34px; fill: #fff; }
+    .hero .prog-stream audio { display: none; }   /* nur der Button steuert die Wiedergabe, keine native Leiste nötig */
+    .hero .prog-stream .now-playing {
+      background: rgba(255,255,255,0.08);
+      margin-top: 22px;
+      width: 100%;
+      max-width: none;                /* überschreibt die 380px-Deckelung aus style.css (.prog-stream .now-playing) */
+      box-sizing: border-box;
+      text-align: center;             /* Titel/Interpret bleiben zentriert, auch wenn der Text umbricht */
+    }
+    .hero .prog-stream .now-playing small { color: var(--gold); }
+    .hero .prog-stream .now-playing strong { color: #f4f0e6; }
+    .hero .prog-stream .now-playing span { color: rgba(243,239,228,0.75); }
+    @media (max-width: 560px) {
+      .hero-player-btn { width: 80px; height: 80px; }
+      .hero-player-btn svg { width: 28px; height: 28px; }
+    }
 
     /* Gesprächsteilnehmer der Woche – Video im Hochformat links, Text rechts */
     .gw-grid { display: flex; gap: 36px; align-items: flex-start; }
@@ -26,16 +95,63 @@
       .gw-video { flex: 0 0 auto; width: 100%; max-width: 340px; margin: 0 auto; }
     }
 
-    /* Programm-Grid: 2 Spalten ab Tablet, am Smartphone untereinander */
+    /* Programm-Grid: links "Als Nächstes", rechts Werbung – Player ist oben im Hero */
+    /* Bento-Boxen: jede Karte behält ihre eigene Höhe (kein Strecken auf Gleichstand)
+       und beide werden zueinander mittig ausgerichtet, statt oben abgeschnitten zu wirken. */
+    .programm {
+      grid-template-columns: 1fr;
+      max-width: 980px;
+      align-items: center;
+    }
     @media (min-width: 761px) {
-      .programm {
-        grid-template-columns: 1fr 1fr;
-      }
+      .programm { grid-template-columns: 1.2fr 0.8fr; }
     }
 
-    /* Live-Stream-Spalte vertikal zentrieren statt oben ausgerichtet mit Leerraum unten */
-    .prog-stream { display: flex !important; flex-direction: column !important; justify-content: center !important; }
-    .prog-stream .now-playing { margin-top: 24px !important; }
+    /* Werbekarte rechts neben "Als Nächstes" */
+    .prog-ad {
+      background: var(--paper);
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+    }
+    .prog-ad .label { margin-bottom: 16px; }
+    .prog-ad-frame {
+      display: block;
+      border-radius: var(--radius-sm);
+      overflow: hidden;
+      border: 1px solid var(--line);
+    }
+    .prog-ad-frame img { display: block; width: 100%; height: auto; }
+    /* Platzhalter, solange keine Werbung freigegeben ist */
+    .prog-ad-platzhalter {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      min-height: 220px;
+      border-radius: var(--radius-sm);
+      border: 1px dashed var(--line);
+      background: var(--cream-2);
+      text-align: center;
+      padding: 24px;
+    }
+    .prog-ad-platzhalter-icon { font-size: 1.8rem; opacity: 0.6; }
+    .prog-ad-platzhalter p {
+      font-family: var(--font-body);
+      font-size: 0.85rem;
+      color: var(--muted);
+      margin: 0;
+      max-width: 220px;
+    }
+    .prog-ad-note {
+      font-family: var(--font-body);
+      font-size: 0.78rem;
+      color: var(--muted);
+      margin-top: 12px;
+      line-height: 1.5;
+    }
+    .prog-ad-note a { color: var(--gold-deep); text-decoration: underline; }
 
     /* Als Nächstes: kommende Titel aus der Warteschlange */
     .prog-live { background: var(--paper); padding: 30px; text-align: left; display: flex; flex-direction: column; }
@@ -139,19 +255,35 @@
       <section class="hero">
         <div class="hero-bg"></div>
         <div class="hero-inner">
-          <p class="eyebrow">Sinnfunk. Stimmen, die Erden</p>
-          <h1>Das Webradio für deine ganzheitliche Lebenspraxis</h1>
-          <p class="hero-note">Sinnfunk kann auf der Sinnfunk-Website und über die meisten Webradioplattformen - wie Tuneln, radio.at, radio.de,
-            myTurner, radioline.co und viele mehr - gehört werden.</p>
-          <div style="display:flex;align-items:center;gap:22px;flex-wrap:wrap;">
-            <a class="hero-play" href="#player" id="hero-play-btn">
-              <span class="hero-play-circle"></span>
-              <span id="hero-play-label">Jetzt live hören</span>
-            </a>
-          </div>
-        </div>
-      </section>
 
+          <!-- Player, aus dem Programm-Bereich nach oben in den Hero gerückt -->
+          <div class="prog-col prog-stream" id="prog-stream">
+            <span class="live-badge hero-player-badge">On Air</span>
+            <h1 class="hero-player-title">Sinnfunk Live</h1>
+            <p class="hero-player-sub">Das Webradio für deine ganzheitliche Lebenspraxis</p>
+
+            <div class="tw-visualizer" aria-hidden="true">
+              <span></span><span></span><span></span><span></span><span></span><span></span>
+              <span></span><span></span><span></span><span></span><span></span><span></span>
+            </div>
+
+            <button class="hero-player-btn" id="hero-play-btn" type="button" aria-label="Stream abspielen oder pausieren">
+              <svg id="hero-icon-play" viewBox="0 0 24 24"><path d="M8 5v14l11-7z"/></svg>
+              <svg id="hero-icon-pause" viewBox="0 0 24 24" hidden style="display:none;"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>
+            </button>
+
+            <audio id="sf-stream" preload="none">
+              <source src="https://radio.sinnfunk.live/listen/sinnfunk/radio.mp3" type="audio/mpeg" />
+              Dein Browser unterstützt den Audioplayer leider nicht.
+            </audio>
+            <div class="now-playing" aria-live="polite">
+              <small>Jetzt läuft</small>
+              <strong id="current-title">Warum bei Sinnfunk mitmachen</strong>
+              <span id="current-host">Sinnfunk Webradio</span>
+            </div>
+          </div>
+
+        </div>
       </section>
 
 
@@ -180,34 +312,9 @@
         </div>
       </div>
 
-      <!-- ── Programm: Stream | Bild ── -->
+      <!-- ── Programm: Als Nächstes (Player ist jetzt oben im Hero) ── -->
       <div class="programm" id="player">
 
-        <!-- Links: Live-Stream, zentriert mit Visualizer -->
-        <div class="prog-col prog-stream" id="prog-stream">
-          <p class="label">Live-Stream</p>
-          <div class="prog-stream-head">
-            <h3>Unser Stream</h3>
-            <span class="live-badge">On Air</span>
-          </div>
-
-          <div class="tw-visualizer" aria-hidden="true">
-            <span></span><span></span><span></span><span></span><span></span><span></span>
-            <span></span><span></span><span></span><span></span><span></span><span></span>
-          </div>
-
-          <audio id="sf-stream" controls preload="none">
-            <source src="https://radio.sinnfunk.live/listen/sinnfunk/radio.mp3" type="audio/mpeg" />
-            Dein Browser unterstützt den Audioplayer leider nicht.
-          </audio>
-          <div class="now-playing" aria-live="polite">
-            <small>Jetzt läuft</small>
-            <strong id="current-title">Warum bei Sinnfunk mitmachen</strong>
-            <span id="current-host">Sinnfunk Webradio</span>
-          </div>
-        </div>
-
-            <!-- Rechts: Als Nächstes (kommende Titel aus der Warteschlange) -->
         <div class="prog-col prog-live">
 
           <!-- Grüne Box: erscheint nur, wenn heute ein Sinnfunker des Tages eingetragen ist -->
@@ -225,13 +332,28 @@
           </ul>
         </div>
 
-      </div>
-      <!-- Ende .programm -->
+        <!-- Werbung: wird aus der Tabelle "werbung" geladen (von Sinnfunkern über die Upload-Webapp eingereicht, von dir freigegeben) -->
+        <div class="prog-col prog-ad" id="sf-werbung">
+          <p class="label">Anzeige</p>
+
+          <!-- Platzhalter, solange nichts freigegeben ist -->
+          <div class="prog-ad-platzhalter" id="sf-werbung-platzhalter">
+            <span class="prog-ad-platzhalter-icon">📣</span>
+            <p>Hier erscheint bald eine Werbeanzeige.</p>
+          </div>
+
+          <!-- Echte Anzeige, wird vom Script eingeblendet -->
+          <a class="prog-ad-frame" id="sf-werbung-link" href="#" target="_blank" rel="noopener sponsored" hidden>
+            <img id="sf-werbung-bild" src="" alt="" />
+          </a>
+
+          <p class="prog-ad-note">Du bist Sinnfunker und möchtest hier auf dein eigenes Angebot hinweisen? <a href="kontakt.html">Schreib uns</a>.</p>
+        </div>
 
       </div>
       <!-- Ende .programm -->
 
-      
+
 
       <!-- ── Meine Gesprächsteilnehmer der Woche ── -->
       <div class="gespraech-woche" style="max-width: 900px; margin: 60px auto; padding: 0 24px;">
@@ -555,50 +677,42 @@
     updateNowPlaying();
     setInterval(updateNowPlaying, 15000);
 
-    // "Jetzt live hören": Stream starten, Rückmeldung geben, zum Player scrollen
-    const heroBtn   = document.getElementById("hero-play-btn");
-    const heroLabel = document.getElementById("hero-play-label");
-    const stream    = document.getElementById("sf-stream");
+    // Play/Pause-Button im Hero: Icon wechselt zwischen Play- und Pause-Symbol
+    const heroBtn    = document.getElementById("hero-play-btn");
+    const iconPlay   = document.getElementById("hero-icon-play");
+    const iconPause  = document.getElementById("hero-icon-pause");
+    const stream     = document.getElementById("sf-stream");
     const streamCard = document.getElementById("prog-stream");
 
-    function setHeroLabel(text) {
-      if (heroLabel) heroLabel.textContent = text;
+    function zeigeAlsSpielend(spieltGerade) {
+      // hidden UND display werden gesetzt, damit nie beide Symbole gleichzeitig sichtbar sind
+      if (iconPlay)  { iconPlay.hidden  = spieltGerade;  iconPlay.style.display  = spieltGerade  ? 'none' : ''; }
+      if (iconPause) { iconPause.hidden = !spieltGerade; iconPause.style.display = !spieltGerade ? 'none' : ''; }
     }
 
     if (heroBtn && stream) {
-      heroBtn.addEventListener("click", function (e) {
-        e.preventDefault();
-        const streamCol = document.querySelector(".prog-stream") || document.getElementById("player");
-        if (streamCol) streamCol.scrollIntoView({ behavior: "smooth", block: "start" });
-
+      heroBtn.addEventListener("click", function () {
         if (stream.paused) {
-          setHeroLabel("Stream lädt …");
           // Stream aktiv neu laden, damit preload="none" kein Hindernis ist
           try { stream.load(); } catch (_) {}
           const pr = stream.play();
-          if (pr && typeof pr.then === "function") {
-            pr.catch(function () {
-              // Wiedergabe blockiert oder Stream nicht erreichbar
-              setHeroLabel("Im Player unten starten ↓");
-            });
-          }
+          if (pr && typeof pr.then === "function") { pr.catch(function () {}); }
         } else {
           stream.pause();
         }
       });
 
-      // Button-Text mit dem echten Player-Zustand synchron halten
+      // Icon mit dem echten Player-Zustand synchron halten
       stream.addEventListener("playing", function () {
-        setHeroLabel("Stream läuft – pausieren");
+        zeigeAlsSpielend(true);
         if (streamCard) streamCard.classList.add("is-playing");
       });
-      stream.addEventListener("waiting", function () { setHeroLabel("Stream lädt …"); });
-      stream.addEventListener("pause",   function () {
-        setHeroLabel("Jetzt live hören");
+      stream.addEventListener("pause", function () {
+        zeigeAlsSpielend(false);
         if (streamCard) streamCard.classList.remove("is-playing");
       });
-      stream.addEventListener("error",   function () {
-        setHeroLabel("Stream nicht erreichbar");
+      stream.addEventListener("error", function () {
+        zeigeAlsSpielend(false);
         if (streamCard) streamCard.classList.remove("is-playing");
       });
     }
@@ -722,6 +836,43 @@
           box.hidden = false;
         } catch (e) {
           console.error('Sinnfunker des Tages konnte nicht geladen werden:', e);
+        }
+      })();
+    })();
+  </script>
+
+  <!-- Werbung: zeigt die zuletzt freigegebene Anzeige aus der Tabelle "werbung" -->
+  <script>
+    (function () {
+      const SB_URL  = 'https://mliatnfqgnctbxhbwhzp.supabase.co';
+      const SB_ANON = 'sb_publishable_KocEqg2UUL2trsGXb_kacA_yfY8DIP3';
+      const platzhalter = document.getElementById('sf-werbung-platzhalter');
+      const link = document.getElementById('sf-werbung-link');
+      if (!link || typeof supabase === 'undefined') return;
+
+      const db = supabase.createClient(SB_URL, SB_ANON);
+
+      (async function laden() {
+        try {
+          const { data, error } = await db
+            .from('werbung')
+            .select('titel, link_url, image_url')
+            .eq('status', 'freigegeben')
+            .order('created_at', { ascending: false })
+            .limit(1)
+            .maybeSingle();
+
+          // Keine freigegebene Werbung vorhanden → Platzhalter bleibt stehen.
+          if (error || !data) return;
+
+          link.href = data.link_url;
+          const bild = document.getElementById('sf-werbung-bild');
+          bild.src = data.image_url;
+          bild.alt = data.titel || 'Werbung';
+          link.hidden = false;
+          if (platzhalter) platzhalter.hidden = true;
+        } catch (e) {
+          console.error('Werbung konnte nicht geladen werden:', e);
         }
       })();
     })();

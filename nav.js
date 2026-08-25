@@ -7,10 +7,9 @@
 const navLinks = [
   { href: 'index.html',     label: 'Start' },
   { href: 'mitmachen.html', label: 'Mitmachen' },
-  { href: 'community.html', label: 'Community' },
-  { href: 'freunde.html',   label: 'Freunde' },
+  { href: 'community.html', label: 'Sinnfunker' },
+  { href: 'nachhoeren.html', label: 'Nachhören' },
   { href: 'shop.html',      label: 'Shop' },
-  { href: 'kontakt.html',   label: 'Kontakt' },
 ];
 
 const linksHTML = navLinks.map(l => `<a href="${l.href}">${l.label}</a>`).join('');
