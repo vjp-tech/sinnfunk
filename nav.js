@@ -28,7 +28,7 @@ const sfNavHTML = `
     <nav aria-label="Hauptnavigation">${linksHTML}</nav>
 
     <div style="display:flex;align-items:center;gap:14px;justify-self:end;">
-      <a class="sf-cta" href="index.html#player">Live hören</a>
+          <a class="sf-cta" href="index.html#prog-stream">Live hören</a>
       <button class="sf-burger" id="sf-burger" aria-label="Menü öffnen" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
