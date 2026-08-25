@@ -100,7 +100,8 @@
        und beide werden zueinander mittig ausgerichtet, statt oben abgeschnitten zu wirken. */
     .programm {
       grid-template-columns: 1fr;
-      max-width: 980px;
+      max-width: 1180px;
+      gap: 48px;
       align-items: center;
     }
     @media (min-width: 761px) {
@@ -298,20 +299,6 @@
         </div>
       </div>
 
-      <!-- ── Warum Sinnfunk? ── -->
-      <div class="impuls">
-        <div class="impuls-inner">
-          <div>
-            <p class="eyebrow">Warum Sinnfunk?</p>
-            <h2>Mein Impuls hinter Sinnfunk</h2>
-            <p class="impuls-text">Sinnfunk vereint Astrologen, spirituell arbeitende Menschen, Energetiker, Heilpraktiker, Therapeuten, Kräuterpädagogen und viele andere aus dem Bereich der ganzheitlichen Lebenspraxis, 
-              die zeigen möchten: Ganzheitlichkeit kann seriös und geerdet sein. Wir verzichten bewusst auf Verschwörungstheorien und auf Aufregerthemen, die nur für mehr Engagement in sozialen Medien sorgen sollen.</p>
-          </div>
-          <div class="impuls-img" role="img" aria-label="Klangschale mit Olivenzweig"
-               style="background-image: url('image/Impuls-Verena.webp');"></div>
-        </div>
-      </div>
-
       <!-- ── Programm: Als Nächstes (Player ist jetzt oben im Hero) ── -->
       <div class="programm" id="player">
 
@@ -332,7 +319,7 @@
           </ul>
         </div>
 
-        <!-- Werbung: wird aus der Tabelle "werbung" geladen (von Sinnfunkern über die Upload-Webapp eingereicht, von dir freigegeben) -->
+        <!-- Werbung: wird aus der Tabelle "werbung" geladen, gesteuert über den Zeitraum (start_at/end_at), den du im Admin-Bereich "Werbung" der Upload-Webapp festlegst -->
         <div class="prog-col prog-ad" id="sf-werbung">
           <p class="label">Anzeige</p>
 
@@ -395,6 +382,21 @@
               Das vollständige Gespräch erscheint am Mittwoch, dem 19. August, um 19 Uhr auf Sinnfunk.
             </p>
           </div>
+        </div>
+      </div>
+
+      <!-- ── Warum Sinnfunk? ── -->
+      <div class="impuls">
+        <div class="impuls-inner">
+          <div>
+            <p class="eyebrow">Warum Sinnfunk?</p>
+            <h2>Mein Impuls hinter Sinnfunk</h2>
+            <p class="impuls-text">Sinnfunk vereint Astrologen, spirituell arbeitende Menschen, Energetiker, Heilpraktiker, Therapeuten, Kräuterpädagogen und viele andere aus dem Bereich der ganzheitlichen Lebenspraxis, 
+              die zeigen möchten: Ganzheitlichkeit kann seriös und geerdet sein. Wir verzichten bewusst auf Verschwörungstheorien und auf Aufregerthemen, die nur für mehr Engagement in sozialen Medien sorgen sollen.</p>
+              <p class="eyebrow">Liebe Grüße, Verena</p>
+            </div>
+          <div class="impuls-img" role="img" aria-label="Klangschale mit Olivenzweig"
+               style="background-image: url('image/Impuls-Verena.webp');"></div>
         </div>
       </div>
 
@@ -841,7 +843,7 @@
     })();
   </script>
 
-  <!-- Werbung: zeigt die zuletzt freigegebene Anzeige aus der Tabelle "werbung" -->
+  <!-- Werbung: zeigt die Anzeige aus der Tabelle "werbung", deren Zeitraum (start_at/end_at) gerade läuft -->
   <script>
     (function () {
       const SB_URL  = 'https://mliatnfqgnctbxhbwhzp.supabase.co';
@@ -854,11 +856,13 @@
 
       (async function laden() {
         try {
+          const nowIso = new Date().toISOString();
           const { data, error } = await db
             .from('werbung')
             .select('titel, link_url, image_url')
-            .eq('status', 'freigegeben')
-            .order('created_at', { ascending: false })
+            .lte('start_at', nowIso)
+            .gte('end_at', nowIso)
+            .order('start_at', { ascending: false })
             .limit(1)
             .maybeSingle();
 
