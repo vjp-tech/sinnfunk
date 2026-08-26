@@ -28,7 +28,7 @@ const sfNavHTML = `
     <nav aria-label="Hauptnavigation">${linksHTML}</nav>
 
     <div style="display:flex;align-items:center;gap:14px;justify-self:end;">
-          <a href="index.html#prog-stream" style="color:var(--gold-deep);font-weight:600;">Live hören</a>
+          <a href="index.html#player" style="color:var(--gold-deep);font-weight:600;">Live hören</a>
       <button class="sf-burger" id="sf-burger" aria-label="Menü öffnen" aria-expanded="false">
         <span></span><span></span><span></span>
       </button>
@@ -76,17 +76,3 @@ document.addEventListener('click', e => {
   }
 });
 
-// Live hören: auf der Index-Seite direkt Radio starten
-document.querySelectorAll('.sf-cta, .sf-mobile-nav a[href$="#prog-stream"]').forEach(link => {
-  link.addEventListener('click', e => {
-    const audio   = document.getElementById('sf-stream');
-    const playBtn = document.getElementById('hero-play-btn');
-    // Nur auf der Index-Seite, wo der Player existiert:
-    if (!audio || !playBtn) return;
-
-    e.preventDefault();
-    const player = document.getElementById('prog-stream');
-    if (player) player.scrollIntoView({ behavior: 'smooth', block: 'center' });
-    if (audio.paused) playBtn.click();
-  });
-});
