@@ -588,7 +588,7 @@
 
         <!-- Neueste Sinnfunker (live aus Supabase) -->
         <div class="col-card">
-          <p class="label">Neueste Sinnfunker</p>
+          <p class="label">Neue Sinnfunker</p>
           <div id="neueste-sinnfunker">
             <p class="sfk-loading">Wird geladen …</p>
           </div>
@@ -778,7 +778,7 @@
       }
 
       async function laden() {
-        const cols = 'id, name, photo_url';
+        const cols = 'id, slug, name, photo_url';
         const filterStatus = ['aktiv', 'freigegeben'];
         // Neueste zuerst: created_at, sonst id, sonst ohne Sortierung
         for (const col of ['created_at', 'id']) {
@@ -804,7 +804,8 @@
           const avatar = s.photo_url
             ? `<span class="sfk-avatar"><img src="${esc(s.photo_url)}" alt="${esc(s.name)}" /></span>`
             : `<span class="sfk-avatar">${initial}</span>`;
-          return `<a class="sfk-row" href="community.html">
+          const profilLink = s.slug ? `sinnfunker.html?name=${encodeURIComponent(s.slug)}` : 'community.html';
+          return `<a class="sfk-row" href="${esc(profilLink)}">
                     ${avatar}<span class="sfk-name">${esc(s.name)}</span>
                   </a>`;
         }).join('');
