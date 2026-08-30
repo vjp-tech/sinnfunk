@@ -108,7 +108,7 @@ p { font-size: 1rem; }
   align-items: center;
   gap: 10px;
   border: none;
-  border-radius: 999px;
+  border-radius: var(--radius-sm);   /* fast rechteckig, nur weiche Kanten – statt der früheren Pille (999px) */
   padding: 13px 26px;
   background: var(--forest);
   color: #f3efe4;
@@ -132,12 +132,13 @@ p { font-size: 1rem; }
   border-color: rgba(60, 52, 34, 0.28);
 }
 
+/* Ehemals goldene Buttons: jetzt im selben Dunkelgrün wie alle anderen Buttons */
 .button.gold {
-  background: var(--gold);
+  background: var(--forest);
   color: #fff;
 }
 
-.button.gold:hover { background: var(--gold-deep); }
+.button.gold:hover { background: var(--forest-soft); }
 
 /* Pfeil-Textlink */
 .arrow-link {
@@ -1148,7 +1149,7 @@ section {
   width: 100%;
   justify-content: center;
   text-align: center;
-  border-radius: var(--radius);
+  border-radius: var(--radius-sm);
   padding: 24px 22px;
   font-size: 1.05rem;
   line-height: 1.4;
