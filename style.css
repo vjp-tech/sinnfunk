@@ -738,10 +738,18 @@ p { font-size: 1rem; }
 }
 
 /* ── Untere Spalten ── */
+.intro-grid {
+  width: min(1180px, calc(100% - 40px));
+  margin: 0 auto;
+  padding: 0 0 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 24px;
+}
 .bottom-grid {
   width: min(1180px, calc(100% - 40px));
   margin: 0 auto;
-  padding: 40px 0 88px;
+  padding: 24px 0 88px;
   display: grid;
   grid-template-columns: 1fr 1fr 1fr;
   gap: 24px;
@@ -803,6 +811,7 @@ p { font-size: 1rem; }
   white-space: nowrap;
 }
 .col-card .arrow-link { margin-top: 18px; }
+.col-card .button { margin-top: 18px; align-self: flex-start; }
 
 /* Neueste Sinnfunker (live) */
 .sfk-row {
@@ -884,11 +893,23 @@ p { font-size: 1rem; }
 .col-card.dark .label { color: rgba(243,239,228,0.5); }
 .col-card.dark p {
   font-family: var(--font-body);
-  color: rgba(243,239,228,0.82);
+  color: #ffffff;
   font-size: 0.95rem;
   line-height: 1.65;
   margin-bottom: 22px;
 }
+.col-card.dark ul {
+  margin: 0 0 22px;
+  padding-left: 1.2em;
+}
+.col-card.dark li {
+  font-family: var(--font-body);
+  color: #ffffff;
+  font-size: 0.95rem;
+  line-height: 1.6;
+  margin-bottom: 10px;
+}
+.col-card.dark li:last-child { margin-bottom: 0; }
 .col-card.dark .arrow-link { color: #d8c79a; margin-top: auto; }
 .col-card.dark .arrow-link:hover { color: #f3efe4; }
 
@@ -1233,6 +1254,7 @@ section {
   .impuls-img { order: -1; height: 380px; }
   .danke-img { order: -1; height: 320px; }
 
+  .intro-grid { grid-template-columns: 1fr; }
   .bottom-grid { grid-template-columns: 1fr; }
   .cards, .steps, .program-strip { grid-template-columns: repeat(2, 1fr); }
   .people-grid { grid-template-columns: repeat(2, 1fr); }
