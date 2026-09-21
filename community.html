@@ -245,7 +245,7 @@
     const avatar = s.photo_url
       ? `<img class="sf-card-avatar" src="${esc(s.photo_url)}" alt="${esc(s.name)}" />`
       : `<div class="sf-card-avatar-placeholder">${initial}</div>`;
-    const profilLink = s.slug ? `sinnfunker.html?name=${encodeURIComponent(s.slug)}` : 'community.html';
+    const profilLink = s.slug ? `/${encodeURIComponent(s.slug)}` : 'community.html';
     const buttonText = s.name ? `Alles über ${esc(s.name)}` : 'Mehr Info';
     return `
       <article class="sf-card"

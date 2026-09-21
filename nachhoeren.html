@@ -313,7 +313,7 @@
 
     container.innerHTML = liste.map(ep => {
       const profilLink = ep.sinnfunker?.slug
-        ? `sinnfunker.html?name=${encodeURIComponent(ep.sinnfunker.slug)}` : null;
+        ? `/${encodeURIComponent(ep.sinnfunker.slug)}` : null;
       const sinnfunkerName = ep.sinnfunker?.name || '–';
       const sinnfunkerHTML = profilLink
         ? `<a href="${esc(profilLink)}">${esc(sinnfunkerName)}</a>`

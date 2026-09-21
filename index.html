@@ -368,6 +368,63 @@
 
 
 
+      <!-- ── Zum Nachhören: bis zu 3 Inhalte, gesteuert über die Upload-WebApp (Dashboard) ── -->
+      <style>
+        .nh-start { max-width: 1100px; margin: 56px auto 8px; padding: 0 24px; }
+        .nh-start-eyebrow { text-align: center; margin-bottom: 22px; }
+        .nh-start-grid { display: grid; gap: 20px; }
+        .nh-start-grid.nh-count-0,
+        .nh-start-grid.nh-count-1 { grid-template-columns: 1fr; }
+        .nh-start-grid.nh-count-2 { grid-template-columns: 1fr 1fr; }
+        .nh-start-grid.nh-count-3 { grid-template-columns: 1fr 1fr 1fr; }
+        .nh-start-box {
+          background: var(--paper-warm);
+          border: 1px solid var(--line);
+          border-radius: var(--radius);
+          box-shadow: var(--shadow);
+          padding: 22px 22px 24px;
+          display: flex; flex-direction: column;
+        }
+        .nh-start-kicker {
+          font-family: var(--font-body); text-transform: uppercase;
+          letter-spacing: 0.14em; font-size: 0.7rem; font-weight: 700;
+          color: var(--gold-deep); margin: 0 0 8px;
+        }
+        .nh-start-title {
+          font-family: var(--font-display); font-size: 1.5rem; line-height: 1.2;
+          color: var(--ink); margin: 0 0 4px;
+        }
+        .nh-start-name {
+          font-family: var(--font-body); font-size: 0.9rem; color: var(--muted); margin: 0 0 16px;
+        }
+        .nh-start-audio { width: 100%; margin-bottom: 18px; }
+        .nh-start-btns { display: flex; flex-wrap: wrap; gap: 10px; margin-top: auto; }
+        .nh-start-btns .button { font-size: 0.85rem; padding: 11px 18px; }
+        /* Platzhalter, solange nichts gewählt ist */
+        .nh-start-platzhalter {
+          align-items: center; justify-content: center; text-align: center;
+          min-height: 160px; color: var(--muted); border-style: dashed;
+        }
+        .nh-start-platzhalter .nh-start-ph-icon { font-size: 1.6rem; margin-bottom: 8px; opacity: 0.5; }
+        .nh-start-platzhalter p { font-family: var(--font-body); font-size: 0.92rem; margin: 0; }
+        /* Handy: Boxen immer untereinander */
+        @media (max-width: 640px) {
+          .nh-start-grid.nh-count-2,
+          .nh-start-grid.nh-count-3 { grid-template-columns: 1fr; }
+        }
+      </style>
+      <section class="nh-start" id="nh-start" aria-label="Sinnfunk zum Nachhören">
+        <p class="eyebrow nh-start-eyebrow">Sinnfunk zum Nachhören</p>
+        <div class="nh-start-grid nh-count-0" id="nh-start-grid">
+          <!-- Platzhalter, solange nichts ausgewählt ist (wird vom Script ersetzt, sobald Inhalte gewählt sind) -->
+          <div class="nh-start-box nh-start-platzhalter">
+            <span class="nh-start-ph-icon">▶</span>
+            <p>Bald gibt es hier etwas zum Nachhören.</p>
+          </div>
+        </div>
+      </section>
+
+
       <!-- ── Meine Gesprächsteilnehmer der Woche ── -->
       <div class="gespraech-woche" style="max-width: 900px; margin: 60px auto; padding: 0 24px;">
         <div class="gw-grid">
@@ -844,7 +901,7 @@
           const avatar = s.photo_url
             ? `<span class="sfk-avatar"><img src="${esc(s.photo_url)}" alt="${esc(s.name)}" /></span>`
             : `<span class="sfk-avatar">${initial}</span>`;
-          const profilLink = s.slug ? `sinnfunker.html?name=${encodeURIComponent(s.slug)}` : 'community.html';
+          const profilLink = s.slug ? `/${encodeURIComponent(s.slug)}` : 'community.html';
           return `<a class="sfk-row" href="${esc(profilLink)}">
                     ${avatar}<span class="sfk-name">${esc(s.name)}</span>
                   </a>`;
@@ -926,6 +983,60 @@
         }
       })();
     })();
+  </script>
+
+  <!-- Zum Nachhören: lädt die im Dashboard gewählten Episoden (0–3) und baut die Player-Boxen -->
+  <script>
+  (function () {
+    const SB_URL  = 'https://mliatnfqgnctbxhbwhzp.supabase.co';
+    const SB_ANON = 'sb_publishable_KocEqg2UUL2trsGXb_kacA_yfY8DIP3';
+    const grid = document.getElementById('nh-start-grid');
+    if (!grid || typeof supabase === 'undefined') return;
+
+    const db = supabase.createClient(SB_URL, SB_ANON);
+
+    function esc(s) {
+      return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;')
+        .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
+    }
+
+    (async function laden() {
+      try {
+        const { data, error } = await db
+          .from('startseite_nachhoeren')
+          .select('position, episode:episode_id ( title, description, audio_url, sinnfunker:sinnfunker_id ( name, slug ) )')
+          .order('position', { ascending: true });
+
+        // Tabelle fehlt oder Fehler -> Platzhalter bleibt stehen
+        if (error) return;
+
+        const eintraege = (data || []).filter(r => r.episode && r.episode.audio_url);
+        // Nichts gewählt -> Platzhalter bleibt stehen
+        if (!eintraege.length) return;
+
+        grid.className = 'nh-start-grid nh-count-' + eintraege.length;
+        grid.innerHTML = eintraege.map(function (r) {
+          const ep = r.episode;
+          const slug = ep.sinnfunker && ep.sinnfunker.slug;
+          const name = (ep.sinnfunker && ep.sinnfunker.name) || 'Sinnfunk';
+          const profil = slug ? '/' + encodeURIComponent(slug) : 'community.html';
+          return ''
+            + '<article class="nh-start-box">'
+            +   '<p class="nh-start-kicker">Nachhören</p>'
+            +   '<h3 class="nh-start-title">' + esc(ep.title || 'Ohne Titel') + '</h3>'
+            +   '<p class="nh-start-name">mit ' + esc(name) + '</p>'
+            +   '<audio class="nh-start-audio" controls preload="none" src="' + esc(ep.audio_url) + '"></audio>'
+            +   '<div class="nh-start-btns">'
+            +     '<a class="button" href="' + esc(profil) + '">Zur Sinnfunker-Seite</a>'
+            +     '<a class="button secondary" href="nachhoeren.html">Alle Folgen nachhören</a>'
+            +   '</div>'
+            + '</article>';
+        }).join('');
+      } catch (e) {
+        console.error('Nachhören-Startseite konnte nicht geladen werden:', e);
+      }
+    })();
+  })();
   </script>
 
   <!-- Als Nächstes: kommende Titel aus der Warteschlange (über den Worker) -->

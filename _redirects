@@ -1,0 +1,42 @@
+# Cloudflare Pages – Weiterleitungsregeln für sinnfunk.live
+#
+# WICHTIG für künftige Änderungen: Jede neue Datei, die direkt im Hauptordner der Website
+# liegt (also NICHT in einem Unterordner wie /image/), muss hier als eigene Zeile ergänzt
+# werden – und zwar VOR der allgemeinen Sinnfunker-Regel ganz unten im Text. Sonst wird sie
+# fälschlich als Sinnfunker-Profil behandelt. Dateien in Unterordnern (z. B. /image/foto.webp)
+# sind automatisch sicher und brauchen keinen Eintrag.
+
+/anleitung.html      /anleitung.html      200
+/anleitung           /anleitung.html      200
+/community.html      /community.html      200
+/community           /community.html      200
+/danke.html          /danke.html          200
+/danke               /danke.html          200
+/datenschutz.html    /datenschutz.html    200
+/datenschutz         /datenschutz.html    200
+/footer.js           /footer.js           200
+/freunde.html        /freunde.html        200
+/freunde             /freunde.html        200
+/impressum.html      /impressum.html      200
+/impressum           /impressum.html      200
+/index.html          /index.html          200
+/kontakt.html        /kontakt.html        200
+/kontakt             /kontakt.html        200
+/kuendigung.html     /kuendigung.html     200
+/kuendigung          /kuendigung.html     200
+/mitmachen.html      /mitmachen.html      200
+/mitmachen           /mitmachen.html      200
+/nachhoeren.html     /nachhoeren.html     200
+/nachhoeren          /nachhoeren.html     200
+/nav.js              /nav.js              200
+/shop.html           /shop.html           200
+/shop                /shop.html           200
+/sinnfunker.html     /sinnfunker.html     200
+/sinnfunker          /sinnfunker.html     200
+/style.css           /style.css           200
+/CNAME               /CNAME               200
+/image               /image               200
+
+# Ab hier: alles andere (ein einzelnes Wort direkt nach der Domain) wird als
+# Sinnfunker-Profil behandelt, z. B. sinnfunk.live/beatriceheissenberger
+/:slug                /sinnfunker.html?name=:slug   200
