@@ -901,7 +901,7 @@
           const avatar = s.photo_url
             ? `<span class="sfk-avatar"><img src="${esc(s.photo_url)}" alt="${esc(s.name)}" /></span>`
             : `<span class="sfk-avatar">${initial}</span>`;
-          const profilLink = s.slug ? `/${encodeURIComponent(s.slug)}` : 'community.html';
+          const profilLink = s.slug ? `sinnfunker.html?name=${encodeURIComponent(s.slug)}` : 'community.html';
           return `<a class="sfk-row" href="${esc(profilLink)}">
                     ${avatar}<span class="sfk-name">${esc(s.name)}</span>
                   </a>`;
@@ -1019,7 +1019,7 @@
           const ep = r.episode;
           const slug = ep.sinnfunker && ep.sinnfunker.slug;
           const name = (ep.sinnfunker && ep.sinnfunker.name) || 'Sinnfunk';
-          const profil = slug ? '/' + encodeURIComponent(slug) : 'community.html';
+          const profil = slug ? 'sinnfunker.html?name=' + encodeURIComponent(slug) : 'community.html';
           return ''
             + '<article class="nh-start-box">'
             +   '<p class="nh-start-kicker">Nachhören</p>'
