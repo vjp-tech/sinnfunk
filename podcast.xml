@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<rss version="2.0"
+  xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+  xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Sinnfunk</title>
+    <link>https://sinnfunk.live</link>
+    <atom:link href="https://sinnfunk.live/podcast.xml" rel="self" type="application/rss+xml"/>
+    <description><![CDATA[<p>Sinnfunk ist ein unabhängiges Webradio für Ganzheitlichkeit: geerdet, seriös und tiefgründig. Ein Ort, an dem Therapeuten, Energetiker, Kräuterexperten, Astrologen und viele andere ihr Wissen teilen.</p>]]></description>
+    <language>de</language>
+    <copyright>© 2026 Sinnfunk</copyright>
+    <itunes:author>Sinnfunk</itunes:author>
+    <itunes:owner>
+      <itunes:name>Sinnfunk</itunes:name>
+      <itunes:email>servus@sinnfunk.live</itunes:email>
+    </itunes:owner>
+    <itunes:image href="https://sinnfunk.b-cdn.net/podcast/cover_1791359381734.png"/>
+    <image><url>https://sinnfunk.b-cdn.net/podcast/cover_1791359381734.png</url><title>Sinnfunk</title><link>https://sinnfunk.live</link></image>
+    <itunes:category text="Society &amp; Culture"><itunes:category text="Relationships"/></itunes:category>
+    <itunes:explicit>false</itunes:explicit>
+    <itunes:type>episodic</itunes:type>
+
+    <item>
+      <title>Die Kraft der Wut</title>
+      <description><![CDATA[<p>Oft wütend? Keine Sorge, du bist nicht allein.</p><p>Die Wut gilt oft als etwas Bedrohliches, Zerstörerisches oder gar Verbotenes. Doch hinter dieser missverstandenen Energie liegt ein Schatz verborgen: der Schutz deiner Grenzen.</p><p>Dieses Buch lädt dich ein, die Wut aus einem völlig neuen Blickwinkel zu betrachten: aus einer esoterisch-energetischen Perspektive.</p>]]></description>
+      <link>https://sinnfunk.live</link>
+      <guid isPermaLink="false">7f68040a-a15a-460d-826a-5ccc65125e0b</guid>
+      <pubDate>Wed, 07 Oct 2026 07:50:33 GMT</pubDate>
+      <enclosure url="https://sinnfunk.b-cdn.net/episoden/589e02fc-3f9c-4307-a09d-63779f5d03f2/1783663460516_02_autorenstunde_wutbuch.mp3" length="64542990" type="audio/mpeg"/>
+      <itunes:duration>1620</itunes:duration>
+      <itunes:author>Verena Polzhofer</itunes:author>
+      
+      <itunes:explicit>false</itunes:explicit>
+      <itunes:episodeType>full</itunes:episodeType>
+    </item>
+  </channel>
+</rss>
