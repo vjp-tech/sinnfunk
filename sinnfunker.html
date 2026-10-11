@@ -235,42 +235,191 @@
       margin-bottom: 8px;
     }
 
-    /* ── Episoden ── */
-    .sf-ep-list { display: flex; flex-direction: column; gap: 14px; }
-    .sf-ep-card {
-      background: var(--paper);
-      border: 1px solid var(--line);
-      border-radius: var(--radius-sm);
-      padding: 18px 22px;
+    /* ── Episoden-Player ── */
+    .sf-player {
+      background: var(--forest);
+      color: var(--cream);
+      border-radius: var(--radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
     }
-    .sf-ep-titel {
+    .sf-player-kopf {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      padding: 30px 32px 22px;
+    }
+    .sf-player-bild,
+    .sf-player-bild-platzhalter {
+      width: 150px; height: 150px;
+      border-radius: var(--radius);
+      flex-shrink: 0;
+      object-fit: cover;
+      box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+    }
+    .sf-player-bild-platzhalter {
+      background: linear-gradient(135deg, rgba(168,148,92,0.8), rgba(53,61,46,0.6));
+      display: grid;
+      place-items: center;
+      font-family: var(--font-display);
+      font-size: 3.4rem;
+      color: #fff;
+    }
+    .sf-player-info { flex: 1; min-width: 0; }
+    .sf-player-label {
+      font-family: var(--font-body);
+      font-size: 0.7rem;
+      font-weight: 600;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: var(--gold);
+      margin-bottom: 8px;
+    }
+    .sf-player-titel {
+      font-family: var(--font-display);
+      font-size: 1.9rem;
+      font-weight: 600;
+      line-height: 1.15;
+      color: var(--cream);
+      margin-bottom: 6px;
+    }
+    .sf-player-name {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      color: rgba(246,241,232,0.65);
+    }
+
+    .sf-player-steuerung { padding: 0 32px 22px; }
+    .sf-player-balken {
+      --fortschritt: 0%;
+      -webkit-appearance: none;
+      appearance: none;
+      width: 100%;
+      height: 5px;
+      border-radius: 5px;
+      background: linear-gradient(to right, var(--gold) var(--fortschritt), rgba(246,241,232,0.25) var(--fortschritt));
+      cursor: pointer;
+      outline: none;
+      margin: 0;
+    }
+    .sf-player-balken::-webkit-slider-thumb {
+      -webkit-appearance: none;
+      width: 16px; height: 16px;
+      border-radius: 50%;
+      background: var(--cream);
+      border: 2px solid var(--gold);
+    }
+    .sf-player-balken::-moz-range-thumb {
+      width: 14px; height: 14px;
+      border-radius: 50%;
+      background: var(--cream);
+      border: 2px solid var(--gold);
+    }
+    .sf-player-zeiten {
+      display: flex;
+      justify-content: space-between;
+      font-family: var(--font-body);
+      font-size: 0.75rem;
+      color: rgba(246,241,232,0.6);
+      margin-top: 8px;
+      font-variant-numeric: tabular-nums;
+    }
+    .sf-player-knoepfe {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 22px;
+      margin-top: 8px;
+    }
+    .sf-player-knopf {
+      background: none;
+      border: none;
+      color: var(--cream);
+      cursor: pointer;
+      display: grid;
+      place-items: center;
+      padding: 6px;
+      border-radius: 50%;
+      position: relative;
+    }
+    .sf-player-knopf:hover { color: var(--gold); }
+    .sf-player-knopf svg { width: 28px; height: 28px; }
+    .sf-player-knopf span {
+      position: absolute;
+      bottom: -10px;
+      font-family: var(--font-body);
+      font-size: 0.62rem;
+      font-weight: 600;
+      color: rgba(246,241,232,0.6);
+    }
+    .sf-player-play {
+      width: 58px; height: 58px;
+      background: var(--gold);
+      color: #fff;
+    }
+    .sf-player-play:hover { background: var(--gold-deep); color: #fff; }
+    .sf-player-play svg { width: 26px; height: 26px; }
+
+    .sf-player-beschreibung {
+      font-family: var(--font-body);
+      font-size: 0.9rem;
+      line-height: 1.6;
+      color: rgba(246,241,232,0.8);
+      padding: 18px 32px 22px;
+      border-top: 1px solid rgba(246,241,232,0.12);
+    }
+    .sf-player-beschreibung:empty { display: none; }
+
+    .sf-player-liste {
+      list-style: none;
+      margin: 0;
+      padding: 6px 0;
+      background: rgba(0,0,0,0.14);
+      max-height: 380px;
+      overflow-y: auto;
+    }
+    .sf-player-eintrag {
+      display: flex;
+      align-items: center;
+      gap: 16px;
+      width: 100%;
+      background: none;
+      border: none;
+      text-align: left;
+      cursor: pointer;
+      padding: 14px 32px;
+      color: var(--cream);
+      font: inherit;
+    }
+    .sf-player-eintrag:hover { background: rgba(246,241,232,0.06); }
+    .sf-player-eintrag-text { flex: 1; min-width: 0; }
+    .sf-player-eintrag-titel {
       font-family: var(--font-display);
       font-size: 1.15rem;
       font-weight: 600;
-      color: var(--ink);
-      margin-bottom: 4px;
+      line-height: 1.25;
     }
-    .sf-ep-beschreibung {
-      font-family: var(--font-body);
-      font-size: 0.85rem;
-      color: var(--muted);
-      line-height: 1.5;
-      margin-bottom: 10px;
-    }
-    .sf-ep-dauer {
+    .sf-player-eintrag-datum,
+    .sf-player-eintrag-dauer {
       font-family: var(--font-body);
       font-size: 0.78rem;
-      color: var(--muted);
-      margin-bottom: 10px;
+      color: rgba(246,241,232,0.55);
     }
-    .sf-ep-audio { width: 100%; height: 38px; }
-    /* Ab 3 Episoden: zwei Spalten nebeneinander (übersichtlicher) */
-    .sf-ep-grid { display: grid; grid-template-columns: repeat(2, 1fr); align-items: start; }
+    .sf-player-eintrag-dauer { flex-shrink: 0; font-variant-numeric: tabular-nums; }
+    .sf-player-eintrag.aktiv { background: rgba(168,148,92,0.18); }
+    .sf-player-eintrag.aktiv .sf-player-eintrag-titel { color: var(--gold); }
 
     @media (max-width: 700px) {
       .sf-profil-hero { padding: 28px 22px; }
       .sf-produkte-grid { grid-template-columns: 1fr; }
-      .sf-ep-grid { grid-template-columns: 1fr; }
+    }
+    @media (max-width: 600px) {
+      .sf-player-kopf { gap: 16px; padding: 22px 20px 18px; }
+      .sf-player-bild, .sf-player-bild-platzhalter { width: 88px; height: 88px; font-size: 2.2rem; }
+      .sf-player-titel { font-size: 1.35rem; }
+      .sf-player-steuerung { padding: 0 20px 20px; }
+      .sf-player-beschreibung { padding: 16px 20px 18px; }
+      .sf-player-eintrag { padding: 12px 20px; }
     }
     @media (max-width: 560px) {
       .sf-social {
@@ -374,8 +523,9 @@
         <div class="sf-produkte-grid">${produkte.map(produktHTML).join('')}</div>
       </div>` : '';
 
-    const episodenHTML = episoden.length
-      ? `<div class="sf-ep-list${episoden.length > 2 ? ' sf-ep-grid' : ''}">${episoden.map(episodeHTML).join('')}</div>`
+    const mitAudio = episoden.filter(ep => ep.audio_url);
+    const episodenHTML = mitAudio.length
+      ? playerHTML(sf, mitAudio, initial)
       : `<p class="sf-leer">Noch keine Episoden zum Nachhören.</p>`;
 
     inhalt.innerHTML = `
@@ -400,6 +550,8 @@
         ${episodenHTML}
       </div>
     `;
+
+    if (mitAudio.length) startePlayer(sf, mitAudio);
   }
 
   function produktHTML(p) {
@@ -419,14 +571,119 @@
       </div>`;
   }
 
-  function episodeHTML(ep) {
+  /* ── Episoden-Player ── */
+  const ICON_PLAY  = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+  const ICON_PAUSE = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>';
+  const ICON_ZURUECK = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M11 6v12L2.5 12zM21 6v12l-8.5-6z"/></svg>';
+  const ICON_VOR     = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 6v12l8.5-6zM3 6v12l8.5-6z"/></svg>';
+  const SPRUNG = 15; // Sekunden pro Klick auf die Pfeiltasten
+
+  function playerHTML(sf, episoden, initial) {
+    const bild = sf.photo_url
+      ? `<img class="sf-player-bild" src="${esc(sf.photo_url)}" alt="${esc(sf.name)}" />`
+      : `<div class="sf-player-bild-platzhalter">${initial}</div>`;
+    const liste = episoden.map((ep, i) => `
+      <li>
+        <button class="sf-player-eintrag" data-index="${i}" type="button">
+          <div class="sf-player-eintrag-text">
+            <div class="sf-player-eintrag-titel">${esc(ep.title)}</div>
+            ${ep.submitted_at ? `<div class="sf-player-eintrag-datum">${new Date(ep.submitted_at).toLocaleDateString('de-AT')}</div>` : ''}
+          </div>
+          <div class="sf-player-eintrag-dauer">${ep.duration ? ep.duration + ' Min.' : ''}</div>
+        </button>
+      </li>`).join('');
     return `
-      <div class="sf-ep-card">
-        <div class="sf-ep-titel">${esc(ep.title)}</div>
-        ${ep.description ? `<p class="sf-ep-beschreibung">${esc(ep.description)}</p>` : ''}
-        ${ep.duration ? `<div class="sf-ep-dauer">${ep.duration} Min.</div>` : ''}
-        ${ep.audio_url ? `<audio class="sf-ep-audio" controls src="${esc(ep.audio_url)}"></audio>` : ''}
+      <div class="sf-player">
+        <div class="sf-player-kopf">
+          ${bild}
+          <div class="sf-player-info">
+            <div class="sf-player-label">Jetzt anhören</div>
+            <div class="sf-player-titel" id="sf-player-titel"></div>
+            <div class="sf-player-name">${esc(sf.name)}</div>
+          </div>
+        </div>
+        <div class="sf-player-steuerung">
+          <input class="sf-player-balken" id="sf-player-balken" type="range" min="0" max="1000" value="0" aria-label="Position in der Episode" />
+          <div class="sf-player-zeiten">
+            <span id="sf-player-jetzt">0:00</span>
+            <span id="sf-player-gesamt">0:00</span>
+          </div>
+          <div class="sf-player-knoepfe">
+            <button class="sf-player-knopf" id="sf-player-zurueck" type="button" aria-label="${SPRUNG} Sekunden zurück">${ICON_ZURUECK}<span>${SPRUNG}</span></button>
+            <button class="sf-player-knopf sf-player-play" id="sf-player-play" type="button" aria-label="Abspielen">${ICON_PLAY}</button>
+            <button class="sf-player-knopf" id="sf-player-vor" type="button" aria-label="${SPRUNG} Sekunden vor">${ICON_VOR}<span>${SPRUNG}</span></button>
+          </div>
+        </div>
+        <div class="sf-player-beschreibung" id="sf-player-beschreibung"></div>
+        <ul class="sf-player-liste">${liste}</ul>
+        <audio id="sf-player-audio" preload="metadata"></audio>
       </div>`;
+  }
+
+  function startePlayer(sf, episoden) {
+    const audio    = document.getElementById('sf-player-audio');
+    const titel    = document.getElementById('sf-player-titel');
+    const beschr   = document.getElementById('sf-player-beschreibung');
+    const balken   = document.getElementById('sf-player-balken');
+    const jetzt    = document.getElementById('sf-player-jetzt');
+    const gesamt   = document.getElementById('sf-player-gesamt');
+    const playBtn  = document.getElementById('sf-player-play');
+    const eintraege = document.querySelectorAll('.sf-player-eintrag');
+    let ziehen = false;
+
+    function zeit(sek) {
+      if (!isFinite(sek)) return '0:00';
+      sek = Math.floor(sek);
+      const h = Math.floor(sek / 3600), m = Math.floor((sek % 3600) / 60), s = sek % 60;
+      const ss = String(s).padStart(2, '0');
+      return h ? `${h}:${String(m).padStart(2, '0')}:${ss}` : `${m}:${ss}`;
+    }
+
+    function zeigeFortschritt() {
+      const prozent = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
+      if (!ziehen) balken.value = prozent * 10;
+      balken.style.setProperty('--fortschritt', prozent + '%');
+      jetzt.textContent = zeit(audio.currentTime);
+    }
+
+    function lade(i, abspielen) {
+      const ep = episoden[i];
+      audio.src = ep.audio_url;
+      titel.textContent = ep.title || '';
+      beschr.textContent = ep.description || '';
+      gesamt.textContent = ep.duration ? zeit(ep.duration * 60) : '0:00';
+      eintraege.forEach(e => e.classList.toggle('aktiv', Number(e.dataset.index) === i));
+      zeigeFortschritt();
+      if (abspielen) audio.play();
+    }
+
+    playBtn.addEventListener('click', () => audio.paused ? audio.play() : audio.pause());
+    document.getElementById('sf-player-zurueck').addEventListener('click', () => {
+      audio.currentTime = Math.max(0, audio.currentTime - SPRUNG);
+    });
+    document.getElementById('sf-player-vor').addEventListener('click', () => {
+      if (audio.duration) audio.currentTime = Math.min(audio.duration, audio.currentTime + SPRUNG);
+    });
+
+    balken.addEventListener('input', () => {
+      ziehen = true;
+      const prozent = balken.value / 10;
+      balken.style.setProperty('--fortschritt', prozent + '%');
+      if (audio.duration) jetzt.textContent = zeit(audio.duration * prozent / 100);
+    });
+    balken.addEventListener('change', () => {
+      if (audio.duration) audio.currentTime = audio.duration * balken.value / 1000;
+      ziehen = false;
+    });
+
+    audio.addEventListener('timeupdate', zeigeFortschritt);
+    audio.addEventListener('loadedmetadata', () => { gesamt.textContent = zeit(audio.duration); });
+    audio.addEventListener('play',  () => { playBtn.innerHTML = ICON_PAUSE; playBtn.setAttribute('aria-label', 'Pause'); });
+    audio.addEventListener('pause', () => { playBtn.innerHTML = ICON_PLAY;  playBtn.setAttribute('aria-label', 'Abspielen'); });
+
+    eintraege.forEach(e => e.addEventListener('click', () => lade(Number(e.dataset.index), true)));
+
+    lade(0, false);
   }
 
   function zeigeNichtGefunden() {
