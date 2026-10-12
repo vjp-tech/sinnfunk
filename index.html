@@ -324,6 +324,12 @@
           <a class="plattform-btn" href="https://www.radio.de/" target="_blank" rel="noopener">radio.de</a>
           <a class="plattform-btn" href="https://www.youtube.com/live/8dVF2rZL7Ec?si=6FAVDq2h2gyxFTWm" target="_blank" rel="noopener">YouTube-Live</a>
         </div>
+        <p>Oder als Podcast zum Nachhören:</p>
+        <div class="plattformen-logos">
+          <a class="plattform-btn" href="https://open.spotify.com/show/6oKazRhX7JWAdCcDWmDijG?si=d9925a4eafb44ae1" target="_blank" rel="noopener">Spotify</a>
+          <a class="plattform-btn" href="https://podcasts.apple.com/de/podcast/sinnfunk/id6820013959" target="_blank" rel="noopener">Apple Podcasts</a>
+          <a class="plattform-btn" href="https://www.podcast.de/podcast/3766481/sinnfunk" target="_blank" rel="noopener">podcast.de</a>
+        </div>
       </div>
 
       <!-- ── Programm: Als Nächstes (Player ist jetzt oben im Hero) ── -->
@@ -368,108 +374,135 @@
 
 
 
-      <!-- ── Zum Nachhören: bis zu 3 Inhalte, gesteuert über die Upload-WebApp (Dashboard) ── -->
-      <style>
-        .nh-start { max-width: 1100px; margin: 56px auto 8px; padding: 0 24px; }
-        .nh-start-eyebrow { text-align: center; margin-bottom: 22px; }
-        .nh-start-grid { display: grid; gap: 20px; }
-        .nh-start-grid.nh-count-0,
-        .nh-start-grid.nh-count-1 { grid-template-columns: 1fr; }
-        .nh-start-grid.nh-count-2 { grid-template-columns: 1fr 1fr; }
-        .nh-start-grid.nh-count-3 { grid-template-columns: 1fr 1fr 1fr; }
-        .nh-start-box {
-          background: var(--paper-warm);
-          border: 1px solid var(--line);
-          border-radius: var(--radius);
-          box-shadow: var(--shadow);
-          padding: 22px 22px 24px;
-          display: flex; flex-direction: column;
-        }
-        .nh-start-kicker {
-          font-family: var(--font-body); text-transform: uppercase;
-          letter-spacing: 0.14em; font-size: 0.7rem; font-weight: 700;
-          color: var(--gold-deep); margin: 0 0 8px;
-        }
-        .nh-start-title {
-          font-family: var(--font-display); font-size: 1.5rem; line-height: 1.2;
-          color: var(--ink); margin: 0 0 4px;
-        }
-        .nh-start-name {
-          font-family: var(--font-body); font-size: 0.9rem; color: var(--muted); margin: 0 0 16px;
-        }
-        .nh-start-audio { width: 100%; margin-bottom: 18px; }
-        .nh-start-btns { display: flex; flex-wrap: wrap; gap: 10px; margin-top: auto; }
-        .nh-start-btns .button { font-size: 0.85rem; padding: 11px 18px; }
-        /* Platzhalter, solange nichts gewählt ist */
-        .nh-start-platzhalter {
-          align-items: center; justify-content: center; text-align: center;
-          min-height: 160px; color: var(--muted); border-style: dashed;
-        }
-        .nh-start-platzhalter .nh-start-ph-icon { font-size: 1.6rem; margin-bottom: 8px; opacity: 0.5; }
-        .nh-start-platzhalter p { font-family: var(--font-body); font-size: 0.92rem; margin: 0; }
-        /* Handy: Boxen immer untereinander */
-        @media (max-width: 640px) {
-          .nh-start-grid.nh-count-2,
-          .nh-start-grid.nh-count-3 { grid-template-columns: 1fr; }
-        }
-      </style>
-      <section class="nh-start" id="nh-start" aria-label="Sinnfunk zum Nachhören">
-        <p class="eyebrow nh-start-eyebrow">Sinnfunk zum Nachhören</p>
-        <div class="nh-start-grid nh-count-0" id="nh-start-grid">
-          <!-- Platzhalter, solange nichts ausgewählt ist (wird vom Script ersetzt, sobald Inhalte gewählt sind) -->
-          <div class="nh-start-box nh-start-platzhalter">
-            <span class="nh-start-ph-icon">▶</span>
-            <p>Bald gibt es hier etwas zum Nachhören.</p>
-          </div>
-        </div>
-      </section>
-
-
-      <!-- ── Meine Gesprächsteilnehmer der Woche ── -->
-       <div class="gespraech-woche" style="max-width: 900px; margin: 60px auto; padding: 0 24px;">
-        <div class="gw-grid">
-          <div class="gw-video">
-            <div class="gw-video-inner" style="position:relative; padding-top:177.78%; max-width:340px; margin:0 auto;">
-              <iframe src="https://player.mediadelivery.net/embed/695445/752ec41f-7b48-4c78-8495-a2f26ed5e056?autoplay=false&loop=false&muted=false&preload=true&responsive=true"  loading="lazy" style="border:0;position:absolute;top:0;left:0;height:100%;width:100%;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;" allowfullscreen="true"></iframe>
-            </div>
-          </div>
-          <div class="gw-text">
-            <p class="eyebrow">Sinnfunk-Gesprächsteilnehmer der Woche</p>
-            <h2 style="font-family: 'Cormorant Garamond', serif; margin-bottom: 4px;">Sabine Haller-Bieringer</h2>
-            <a href="https://www.meinenergieraum.de/" target="_blank" rel="noopener" style="font-family: 'Inter', sans-serif; font-size: 0.85rem; color: 
-            #6f7169; text-decoration: underline; display: inline-block; margin-bottom: 14px;">meinenergieraum.at</a>
-            <p style="font-family: 'Inter', sans-serif; color: #353d2e; line-height: 1.6; margin-bottom: 16px;">
-              Sabine ist Energetikerin, Reiki-Lehrerin und Autorin. Sie begleitet vor allem Frauen auf ihrem Weg zur Selbstbestimmtheit. 
-            </p>
-            <a class="arrow-link" href="https://sinnfunk.live/sinnfunker.html?name=sabine-haller-bieringer">Die Episode zum Nachhören →</a>
-          </div>
-        </div>
-      </div>
-      
-
+      <!-- ── Gesprächsteilnehmerin der Woche ── -->
       <div class="gespraech-woche" style="max-width: 900px; margin: 60px auto; padding: 0 24px;">
         <div class="gw-grid">
           <div class="gw-video">
             <div class="gw-video-inner" style="position:relative; padding-top:177.78%; max-width:340px; margin:0 auto;">
-              <iframe src="https://player.mediadelivery.net/embed/695445/a239692b-264a-4694-af4f-f8dcdba11c3f?autoplay=false&loop=false&muted=false&preload=true&responsive=true"  loading="lazy" style="border:0;position:absolute;top:0;left:0;height:100%;width:100%;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;" allowfullscreen="true"></iframe>
+              <iframe src="https://player.mediadelivery.net/embed/695445/54f20252-4ddc-4101-81c9-9a6e313d437e?autoplay=false&loop=false&muted=false&preload=true&responsive=true" loading="lazy" style="border:0;position:absolute;top:0;left:0;height:100%;width:100%;" allow="accelerometer;gyroscope;autoplay;encrypted-media;picture-in-picture;fullscreen;" allowfullscreen="true"></iframe>
             </div>
           </div>
           <div class="gw-text">
-            <p class="eyebrow">Sinnfunk-Gesprächsteilnehmer der Woche</p>
-            <h2 style="font-family: 'Cormorant Garamond', serif; margin-bottom: 4px;">Dr. Almut Engler</h2>
-            <a href="https://lebenslustcoaching.at/" target="_blank" rel="noopener" style="font-family: 'Inter', sans-serif; font-size: 0.85rem; color: 
-            #6f7169; text-decoration: underline; display: inline-block; margin-bottom: 14px;">lebenslustcoaching.at</a>
+            <p class="eyebrow">Sinnfunk-Gesprächsteilnehmerin der Woche</p>
+            <h2 style="font-family: 'Cormorant Garamond', serif; margin-bottom: 4px;">Olga Maria Lebenbauer</h2>
+            <a href="https://olgalebenbauer.com/" target="_blank" rel="noopener" style="font-family: 'Inter', sans-serif; font-size: 0.85rem; color: #6f7169; text-decoration: underline; display: inline-block; margin-bottom: 14px;">olgalebenbauer.com</a>
             <p style="font-family: 'Inter', sans-serif; color: #353d2e; line-height: 1.6; margin-bottom: 16px;">
-              Almut ist Sexualcoach und Lachtrainerin. Ihr Zugang verbindet eine wissenschaftliche Ausbildung mit Tantra sowie ihrer früheren Tätigkeit als Clown. 
-              Sie arbeitet in der Nähe von Andritz als Lebenslustcoach.
+              Olga ist FNL-Kräuterexpertin und Cell-Re-Active-Trainerin. Mit mir hat sie sich über die Verwendungsmöglichkeiten der heimischen Wurzeln unterhalten.
+              Das Gespräch kannst du auf Olgas Sinnfunker-Seite, auf Spotify oder bei Apple Podcasts nachhören.
             </p>
-  
-            <a class="arrow-link" href="https://sinnfunk.live/sinnfunker.html?name=almut-engler">Die Episode zum Nachhören →</a>
+            <a class="arrow-link" href="https://sinnfunk.live/sinnfunker.html?name=olga-maria-lebenbauer">Zu Olgas Sinnfunker-Seite →</a>
+            <p class="gw-podcast-links" style="font-family: 'Inter', sans-serif; font-size: 0.85rem; color: #6f7169; margin-top: 12px;">
+              Auch auf
+              <a href="https://open.spotify.com/show/6oKazRhX7JWAdCcDWmDijG?si=d9925a4eafb44ae1" target="_blank" rel="noopener" style="color: #6f7169; text-decoration: underline;">Spotify</a>
+              und
+              <a href="https://podcasts.apple.com/de/podcast/sinnfunk/id6820013959" target="_blank" rel="noopener" style="color: #6f7169; text-decoration: underline;">Apple Podcasts</a>
+            </p>
           </div>
         </div>
       </div>
-      
-    
+
+
+      <!-- ── Thema des Monats: Player mit den im Dashboard (Upload-WebApp) gewählten Episoden ──
+           Überschrift, Beschreibung und Episoden werden im Dashboard festgelegt.
+           Der Text unten ist nur der Ersatz, falls die Datenbank nicht erreichbar ist. -->
+      <style>
+        .tm-start { max-width: 900px; margin: 60px auto 8px; padding: 0 24px; }
+        .tm-start-kopf { text-align: center; margin-bottom: 26px; }
+        .tm-start-kopf h2 { margin: 6px 0 10px; }
+        .tm-start-beschreibung {
+          font-family: var(--font-body); color: #353d2e; line-height: 1.6;
+          max-width: 680px; margin: 0 auto; white-space: pre-line;
+        }
+        .tm-start-beschreibung:empty { display: none; }
+        .tm-start-platzhalter {
+          text-align: center; color: var(--muted); font-family: var(--font-body);
+          border: 1px dashed var(--line); border-radius: var(--radius); padding: 40px 20px;
+        }
+
+        /* Player – gleiche Optik wie auf den Sinnfunker-Seiten */
+        .tm-player { background: var(--forest); color: var(--cream); border-radius: var(--radius); box-shadow: var(--shadow); overflow: hidden; }
+        .tm-player-kopf { display: flex; align-items: center; gap: 28px; padding: 30px 32px 22px; }
+        .tm-player-bild, .tm-player-bild-platzhalter {
+          width: 150px; height: 150px; border-radius: var(--radius); flex-shrink: 0;
+          object-fit: cover; box-shadow: 0 6px 20px rgba(0,0,0,0.25);
+        }
+        .tm-player-bild-platzhalter {
+          background: linear-gradient(135deg, rgba(168,148,92,0.8), rgba(53,61,46,0.6));
+          display: grid; place-items: center; font-family: var(--font-display); font-size: 3.4rem; color: #fff;
+        }
+        .tm-player-info { flex: 1; min-width: 0; }
+        .tm-player-label {
+          font-family: var(--font-body); font-size: 0.7rem; font-weight: 600; text-transform: uppercase;
+          letter-spacing: 0.12em; color: var(--gold); margin-bottom: 8px;
+        }
+        .tm-player-titel { font-family: var(--font-display); font-size: 1.9rem; font-weight: 600; line-height: 1.15; color: var(--cream); margin-bottom: 6px; }
+        .tm-player-name { font-family: var(--font-body); font-size: 0.9rem; color: rgba(246,241,232,0.65); }
+        .tm-player-name a { color: rgba(246,241,232,0.85); text-decoration: underline; }
+        .tm-player-name a:hover { color: var(--gold); }
+        .tm-player-beschreibung { font-family: var(--font-body); font-size: 0.9rem; line-height: 1.6; color: rgba(246,241,232,0.8); margin: 12px 0 0; }
+        .tm-player-beschreibung:empty { display: none; }
+        .tm-player-steuerung { padding: 0 32px 22px; }
+        .tm-player-balken {
+          --fortschritt: 0%; -webkit-appearance: none; appearance: none; width: 100%; height: 5px; border-radius: 5px;
+          background: linear-gradient(to right, var(--gold) var(--fortschritt), rgba(246,241,232,0.25) var(--fortschritt));
+          cursor: pointer; outline: none; margin: 0;
+        }
+        .tm-player-balken::-webkit-slider-thumb { -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%; background: var(--cream); border: 2px solid var(--gold); }
+        .tm-player-balken::-moz-range-thumb { width: 14px; height: 14px; border-radius: 50%; background: var(--cream); border: 2px solid var(--gold); }
+        .tm-player-zeiten {
+          display: flex; justify-content: space-between; font-family: var(--font-body); font-size: 0.75rem;
+          color: rgba(246,241,232,0.6); margin-top: 8px; font-variant-numeric: tabular-nums;
+        }
+        .tm-player-knoepfe { display: flex; align-items: center; justify-content: center; gap: 22px; margin-top: 8px; }
+        .tm-player-knopf { background: none; border: none; color: var(--cream); cursor: pointer; display: grid; place-items: center; padding: 6px; border-radius: 50%; position: relative; }
+        .tm-player-knopf:hover { color: var(--gold); }
+        .tm-player-knopf svg { width: 28px; height: 28px; }
+        .tm-player-knopf span { position: absolute; bottom: -10px; font-family: var(--font-body); font-size: 0.62rem; font-weight: 600; color: rgba(246,241,232,0.6); }
+        .tm-player-play { width: 58px; height: 58px; background: var(--gold); color: #fff; }
+        .tm-player-play:hover { background: var(--gold-deep); color: #fff; }
+        .tm-player-play svg { width: 26px; height: 26px; }
+        .tm-player-liste {
+          list-style: none; margin: 0; padding: 4px 32px 28px; display: flex; flex-direction: column; gap: 10px;
+          max-height: 420px; overflow-y: auto;
+        }
+        .tm-player-eintrag {
+          display: flex; align-items: center; gap: 16px; width: 100%; background: var(--paper);
+          border: 1.5px solid var(--forest); border-radius: var(--radius-sm); text-align: left; cursor: pointer;
+          padding: 12px 18px; color: var(--ink); font: inherit; transition: background 0.15s, box-shadow 0.15s;
+        }
+        .tm-player-eintrag:hover { background: var(--paper-warm); box-shadow: var(--shadow); }
+        .tm-player-eintrag-nr {
+          width: 34px; height: 34px; flex-shrink: 0; border-radius: 50%; border: 1.5px solid var(--forest); color: var(--forest);
+          display: grid; place-items: center; font-family: var(--font-body); font-size: 0.85rem; font-weight: 600;
+        }
+        .tm-player-eintrag-text { flex: 1; min-width: 0; }
+        .tm-player-eintrag-titel { font-family: var(--font-display); font-size: 1.15rem; font-weight: 600; line-height: 1.25; color: var(--ink); }
+        .tm-player-eintrag-name, .tm-player-eintrag-dauer { font-family: var(--font-body); font-size: 0.78rem; color: var(--muted); }
+        .tm-player-eintrag-dauer { flex-shrink: 0; font-variant-numeric: tabular-nums; }
+        .tm-player-eintrag.aktiv { border-color: var(--gold); box-shadow: 0 0 0 1px var(--gold); }
+        .tm-player-eintrag.aktiv .tm-player-eintrag-nr { background: var(--gold); border-color: var(--gold); color: #fff; }
+        .tm-start-mehr { text-align: center; margin-top: 18px; }
+        @media (max-width: 600px) {
+          .tm-player-kopf { gap: 16px; padding: 22px 20px 18px; align-items: flex-start; }
+          .tm-player-bild, .tm-player-bild-platzhalter { width: 88px; height: 88px; font-size: 2.2rem; }
+          .tm-player-titel { font-size: 1.35rem; }
+          .tm-player-steuerung { padding: 0 20px 20px; }
+          .tm-player-liste { padding: 4px 14px 20px; }
+          .tm-player-eintrag { padding: 10px 12px; gap: 12px; }
+        }
+      </style>
+      <section class="tm-start" id="tm-start" aria-label="Thema des Monats">
+        <div class="tm-start-kopf">
+          <p class="eyebrow">Sinnfunk zum Nachhören</p>
+          <h2 id="tm-start-ueberschrift">Thema des Monats Oktober und November: Die Kraft des Denkens und seine Grenzen</h2>
+          <p class="tm-start-beschreibung" id="tm-start-beschreibung"></p>
+        </div>
+        <div id="tm-start-player">
+          <div class="tm-start-platzhalter">Bald gibt es hier etwas zum Nachhören.</div>
+        </div>
+        <p class="tm-start-mehr"><a class="arrow-link" href="nachhoeren.html">Alle Folgen nachhören →</a></p>
+      </section>
+
 
       <!-- ── Themenwelten – Endlos-Karussell ── -->
       <div class="themen" id="themen">
@@ -1006,57 +1039,173 @@
     })();
   </script>
 
-  <!-- Zum Nachhören: lädt die im Dashboard gewählten Episoden (0–3) und baut die Player-Boxen -->
+  <!-- Thema des Monats: lädt Überschrift, Beschreibung und die im Dashboard gewählten Episoden und baut daraus den Player -->
   <script>
   (function () {
     const SB_URL  = 'https://mliatnfqgnctbxhbwhzp.supabase.co';
     const SB_ANON = 'sb_publishable_KocEqg2UUL2trsGXb_kacA_yfY8DIP3';
-    const grid = document.getElementById('nh-start-grid');
-    if (!grid || typeof supabase === 'undefined') return;
+    const box = document.getElementById('tm-start-player');
+    if (!box || typeof supabase === 'undefined') return;
 
     const db = supabase.createClient(SB_URL, SB_ANON);
+
+    const ICON_PLAY    = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>';
+    const ICON_PAUSE   = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M6 5h4v14H6zM14 5h4v14h-4z"/></svg>';
+    const ICON_ZURUECK = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M11 6v12L2.5 12zM21 6v12l-8.5-6z"/></svg>';
+    const ICON_VOR     = '<svg viewBox="0 0 24 24" fill="currentColor"><path d="M13 6v12l8.5-6zM3 6v12l8.5-6z"/></svg>';
+    const SPRUNG = 15; // Sekunden pro Klick auf die Pfeiltasten
 
     function esc(s) {
       return String(s || '').replace(/&/g, '&amp;').replace(/</g, '&lt;')
         .replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     }
 
-    (async function laden() {
+    function zeit(sek) {
+      if (!isFinite(sek)) return '0:00';
+      sek = Math.floor(sek);
+      const h = Math.floor(sek / 3600), m = Math.floor((sek % 3600) / 60), s = sek % 60;
+      const ss = String(s).padStart(2, '0');
+      return h ? h + ':' + String(m).padStart(2, '0') + ':' + ss : m + ':' + ss;
+    }
+
+    // Überschrift + Beschreibung des Themenmonats
+    (async function ladeThema() {
+      try {
+        const { data, error } = await db.from('startseite_themenmonat')
+          .select('ueberschrift, beschreibung').eq('id', 1).maybeSingle();
+        if (error || !data) return;   // Ersatztext im HTML bleibt stehen
+        if (data.ueberschrift) document.getElementById('tm-start-ueberschrift').textContent = data.ueberschrift;
+        document.getElementById('tm-start-beschreibung').textContent = data.beschreibung || '';
+      } catch (e) {
+        console.error('Themenmonat konnte nicht geladen werden:', e);
+      }
+    })();
+
+    // Episoden des Themenmonats
+    (async function ladeEpisoden() {
       try {
         const { data, error } = await db
           .from('startseite_nachhoeren')
-          .select('position, episode:episode_id ( title, description, audio_url, sinnfunker:sinnfunker_id ( name, slug ) )')
+          .select('position, episode:episode_id ( title, description, audio_url, duration, sinnfunker:sinnfunker_id ( name, slug, photo_url ) )')
           .order('position', { ascending: true });
-
-        // Tabelle fehlt oder Fehler -> Platzhalter bleibt stehen
         if (error) return;
 
-        const eintraege = (data || []).filter(r => r.episode && r.episode.audio_url);
-        // Nichts gewählt -> Platzhalter bleibt stehen
-        if (!eintraege.length) return;
+        const episoden = (data || []).map(r => r.episode).filter(ep => ep && ep.audio_url);
+        if (!episoden.length) return;   // Platzhalter bleibt stehen
 
-        grid.className = 'nh-start-grid nh-count-' + eintraege.length;
-        grid.innerHTML = eintraege.map(function (r) {
-          const ep = r.episode;
-          const slug = ep.sinnfunker && ep.sinnfunker.slug;
-          const name = (ep.sinnfunker && ep.sinnfunker.name) || 'Sinnfunk';
-          const profil = slug ? 'sinnfunker.html?name=' + encodeURIComponent(slug) : 'community.html';
+        const liste = episoden.map(function (ep, i) {
+          const name = ep.sinnfunker && ep.sinnfunker.name;
           return ''
-            + '<article class="nh-start-box">'
-            +   '<p class="nh-start-kicker">Nachhören</p>'
-            +   '<h3 class="nh-start-title">' + esc(ep.title || 'Ohne Titel') + '</h3>'
-            +   '<p class="nh-start-name">mit ' + esc(name) + '</p>'
-            +   '<audio class="nh-start-audio" controls preload="none" src="' + esc(ep.audio_url) + '"></audio>'
-            +   '<div class="nh-start-btns">'
-            +     '<a class="button" href="' + esc(profil) + '">Zur Sinnfunker-Seite</a>'
-            +     '<a class="button secondary" href="nachhoeren.html">Alle Folgen nachhören</a>'
+            + '<li><button class="tm-player-eintrag" data-index="' + i + '" type="button">'
+            +   '<div class="tm-player-eintrag-nr">' + (i + 1) + '</div>'
+            +   '<div class="tm-player-eintrag-text">'
+            +     '<div class="tm-player-eintrag-titel">' + esc(ep.title || 'Ohne Titel') + '</div>'
+            +     (name ? '<div class="tm-player-eintrag-name">mit ' + esc(name) + '</div>' : '')
             +   '</div>'
-            + '</article>';
+            +   '<div class="tm-player-eintrag-dauer">' + (ep.duration ? ep.duration + ' Min.' : '') + '</div>'
+            + '</button></li>';
         }).join('');
+
+        box.innerHTML = ''
+          + '<div class="tm-player">'
+          +   '<div class="tm-player-kopf">'
+          +     '<div id="tm-player-bildplatz"></div>'
+          +     '<div class="tm-player-info">'
+          +       '<div class="tm-player-label">Jetzt anhören</div>'
+          +       '<div class="tm-player-titel" id="tm-player-titel"></div>'
+          +       '<div class="tm-player-name" id="tm-player-name"></div>'
+          +       '<p class="tm-player-beschreibung" id="tm-player-beschreibung"></p>'
+          +     '</div>'
+          +   '</div>'
+          +   '<div class="tm-player-steuerung">'
+          +     '<input class="tm-player-balken" id="tm-player-balken" type="range" min="0" max="1000" value="0" aria-label="Position in der Episode" />'
+          +     '<div class="tm-player-zeiten"><span id="tm-player-jetzt">0:00</span><span id="tm-player-gesamt">0:00</span></div>'
+          +     '<div class="tm-player-knoepfe">'
+          +       '<button class="tm-player-knopf" id="tm-player-zurueck" type="button" aria-label="' + SPRUNG + ' Sekunden zurück">' + ICON_ZURUECK + '<span>' + SPRUNG + '</span></button>'
+          +       '<button class="tm-player-knopf tm-player-play" id="tm-player-play" type="button" aria-label="Abspielen">' + ICON_PLAY + '</button>'
+          +       '<button class="tm-player-knopf" id="tm-player-vor" type="button" aria-label="' + SPRUNG + ' Sekunden vor">' + ICON_VOR + '<span>' + SPRUNG + '</span></button>'
+          +     '</div>'
+          +   '</div>'
+          +   (episoden.length > 1 ? '<ul class="tm-player-liste">' + liste + '</ul>' : '')
+          +   '<audio id="tm-player-audio" preload="metadata"></audio>'
+          + '</div>';
+
+        startePlayer(episoden);
       } catch (e) {
-        console.error('Nachhören-Startseite konnte nicht geladen werden:', e);
+        console.error('Themenmonat-Player konnte nicht geladen werden:', e);
       }
     })();
+
+    function startePlayer(episoden) {
+      const audio    = document.getElementById('tm-player-audio');
+      const bildplatz = document.getElementById('tm-player-bildplatz');
+      const titel    = document.getElementById('tm-player-titel');
+      const nameEl   = document.getElementById('tm-player-name');
+      const beschr   = document.getElementById('tm-player-beschreibung');
+      const balken   = document.getElementById('tm-player-balken');
+      const jetzt    = document.getElementById('tm-player-jetzt');
+      const gesamt   = document.getElementById('tm-player-gesamt');
+      const playBtn  = document.getElementById('tm-player-play');
+      const eintraege = document.querySelectorAll('.tm-player-eintrag');
+      let ziehen = false;
+
+      function zeigeFortschritt() {
+        const prozent = audio.duration ? (audio.currentTime / audio.duration) * 100 : 0;
+        if (!ziehen) balken.value = prozent * 10;
+        balken.style.setProperty('--fortschritt', prozent + '%');
+        jetzt.textContent = zeit(audio.currentTime);
+      }
+
+      function lade(i, abspielen) {
+        const ep = episoden[i];
+        const sf = ep.sinnfunker || {};
+        audio.src = ep.audio_url;
+        titel.textContent = ep.title || '';
+        beschr.textContent = ep.description || '';
+        bildplatz.innerHTML = sf.photo_url
+          ? '<img class="tm-player-bild" src="' + esc(sf.photo_url) + '" alt="' + esc(sf.name) + '" />'
+          : '<div class="tm-player-bild-platzhalter">' + esc((sf.name || 'S').charAt(0)) + '</div>';
+        nameEl.innerHTML = sf.name
+          ? (sf.slug
+              ? 'mit <a href="sinnfunker.html?name=' + encodeURIComponent(sf.slug) + '">' + esc(sf.name) + '</a>'
+              : 'mit ' + esc(sf.name))
+          : '';
+        gesamt.textContent = ep.duration ? zeit(ep.duration * 60) : '0:00';
+        eintraege.forEach(e => e.classList.toggle('aktiv', Number(e.dataset.index) === i));
+        zeigeFortschritt();
+        if (abspielen) audio.play();
+      }
+
+      playBtn.addEventListener('click', () => audio.paused ? audio.play() : audio.pause());
+      document.getElementById('tm-player-zurueck').addEventListener('click', () => {
+        audio.currentTime = Math.max(0, audio.currentTime - SPRUNG);
+      });
+      document.getElementById('tm-player-vor').addEventListener('click', () => {
+        if (audio.duration) audio.currentTime = Math.min(audio.duration, audio.currentTime + SPRUNG);
+      });
+      balken.addEventListener('input', () => {
+        ziehen = true;
+        const prozent = balken.value / 10;
+        balken.style.setProperty('--fortschritt', prozent + '%');
+        if (audio.duration) jetzt.textContent = zeit(audio.duration * prozent / 100);
+      });
+      balken.addEventListener('change', () => {
+        if (audio.duration) audio.currentTime = audio.duration * balken.value / 1000;
+        ziehen = false;
+      });
+      audio.addEventListener('timeupdate', zeigeFortschritt);
+      audio.addEventListener('loadedmetadata', () => { gesamt.textContent = zeit(audio.duration); });
+      audio.addEventListener('play',  () => { playBtn.innerHTML = ICON_PAUSE; playBtn.setAttribute('aria-label', 'Pause'); });
+      audio.addEventListener('pause', () => { playBtn.innerHTML = ICON_PLAY;  playBtn.setAttribute('aria-label', 'Abspielen'); });
+      // Nach dem Ende einer Episode automatisch die nächste spielen
+      audio.addEventListener('ended', () => {
+        const aktiv = [...eintraege].findIndex(e => e.classList.contains('aktiv'));
+        if (aktiv > -1 && aktiv < episoden.length - 1) lade(aktiv + 1, true);
+      });
+      eintraege.forEach(e => e.addEventListener('click', () => lade(Number(e.dataset.index), true)));
+
+      lade(0, false);
+    }
   })();
   </script>
 
